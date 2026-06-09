@@ -1,0 +1,165 @@
+<div class="page-wrapper overflow-hidden" [ngClass]="{ 'toggled': activeSidebar }">
+  <app-sidebar/>
+
+  <main class="page-content bg-gray-50 dark:bg-slate-800 ">
+    <app-topbar (toggleClass)="toggleClass()"/>
+
+    <div class="container-fluid relative px-3 ">
+      <div class="layout-specing">
+
+
+
+        <div class="grid lg:grid-cols-12 grid-cols-12 mt-6 gap-6">
+
+          <div class="xl:col-span-6 lg:col-span-12 xl:col-span-12 col-span-12">
+            <div class="relative overflow-hidden rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 bg-white dark:bg-slate-900">
+              <div class="p-6 flex items-center justify-between border-b border-gray-100 dark:border-gray-800">
+                <h6 class="text-lg font-semibold">Mes Contrats</h6>
+
+                <a [routerLink]="[]" class="btn btn-link font-normal text-slate-400 hover:text-green-600 after:bg-green-600 transition duration-500">Voir contrats <i class="mdi mdi-arrow-right ms-1"></i></a>
+              </div>
+              <div class="flex justify-end">
+                <button type="button" routerLink="/add-contrat" class="btn m-4  bg-green-600 hover:bg-green-700 border-green-600 hover:border-green-700 text-white rounded-md px-6 py-2">
+                  + Ajouter Contrat
+                </button>
+              </div>
+
+
+              <div class="relative overflow-x-auto block w-full xl:max-h-[284px] max-h-[350px]" data-simplebar>
+                <table class="w-full text-start">
+                  <thead class="text-base">
+                  <tr>
+                    <th class="text-start font-semibold text-[15px] px-4 py-3 min-w-[140px]">Titre</th>
+                    <th class="text-start font-semibold text-[15px] px-4 py-3 min-w-[140px]">Bien</th>
+                    <th class="text-start font-semibold text-[15px] px-4 py-3 min-w-[120px]">Date début</th>
+                    <th class="text-start font-semibold text-[15px] px-4 py-3 min-w-[120px]">Date fin</th>
+                    <th class="text-start font-semibold text-[15px] px-4 py-3 min-w-[120px]">Loyer</th>
+                    <th class="text-start font-semibold text-[15px] px-4 py-3 min-w-[120px]">Caution</th>
+                    <th class="text-end font-semibold text-[15px] px-4 py-3 min-w-[120px]">Statut</th>
+                  </tr>
+                  </thead>
+
+                  <tbody>
+                  <tr *ngFor="let contrat of contrats">
+
+                    <!-- Titre -->
+                    <td class="text-start border-t border-gray-100 dark:border-gray-800 px-4 py-3">
+                      <div class="flex items-center gap-3">
+                  <span class="flex justify-center items-center rounded-md size-10 min-w-[40px] bg-slate-50 dark:bg-slate-800 shadow-sm shadow-gray-100 dark:shadow-gray-700 text-green-600">
+                    <i class="mdi mdi-file-document-outline text-[20px]"></i>
+                  </span>
+                        <span class="font-semibold text-slate-800 dark:text-white">{{ contrat.titre }}</span>
+                      </div>
+                    </td>
+
+                    <!-- Bien -->
+                    <td class="text-start border-t border-gray-100 dark:border-gray-800 px-4 py-3">
+                      <div class="flex items-center gap-2">
+                        <i class="mdi mdi-home-outline text-green-600 text-[20px]"></i>
+                        <span class="text-slate-400">{{ contrat.bien?.titre || 'N/A' }}</span>
+                      </div>
+                    </td>
+
+                    <!-- Date début -->
+                    <td class="text-start border-t border-gray-100 dark:border-gray-800 px-4 py-3">
+                      <div class="flex items-center gap-2">
+                        <i class="mdi mdi-calendar-outline text-slate-400"></i>
+                        <span class="text-slate-400">{{ contrat.dateDebut | date:'dd/MM/yyyy' }}</span>
+                      </div>
+                    </td>
+
+                    <!-- Date fin -->
+                    <td class="text-start border-t border-gray-100 dark:border-gray-800 px-4 py-3">
+                      <div class="flex items-center gap-2">
+                        <i class="mdi mdi-calendar-outline text-slate-400"></i>
+                        <span class="text-slate-400">{{ contrat.dateFin | date:'dd/MM/yyyy' }}</span>
+                      </div>
+                    </td>
+
+                    <!-- Loyer -->
+                    <td class="text-start border-t border-gray-100 dark:border-gray-800 px-4 py-3">
+                <span class="font-semibold text-slate-800 dark:text-white">
+                  {{ contrat.montantLoyer }} <span class="text-slate-400 font-normal text-sm">TND/mois</span>
+                </span>
+                    </td>
+
+                    <!-- Caution -->
+                    <td class="text-start border-t border-gray-100 dark:border-gray-800 px-4 py-3">
+                      <span class="text-slate-400">{{ contrat.caution }} TND</span>
+                    </td>
+
+                    <!-- Statut -->
+                    <td class="text-end border-t border-gray-100 dark:border-gray-800 px-4 py-3">
+                <span *ngIf="contrat.statut === 'EN_COURS'"
+                      class="bg-emerald-600/10 dark:bg-emerald-600/20 border border-emerald-600/10 dark:border-emerald-600/20 text-emerald-600 text-[13px] font-medium px-2.5 py-0.5 rounded">
+                  Signé
+                </span>
+<!--                      <span *ngIf="isBientotExpire(contrat.dateFin)"-->
+<!--                            class="bg-orange-600/10 dark:bg-emerald-600/20 border border-emerald-600/10 dark:border-emerald-600/20 text-orange-600 text-[13px] font-medium px-2.5 py-0.5 rounded">-->
+<!--                          Bientot Expiré-->
+<!--                        </span>-->
+                      <span *ngIf="contrat.statut === 'EN_ATTENTE'"
+                            class="bg-amber-600/10 dark:bg-amber-600/20 border border-amber-600/10 dark:border-amber-600/20 text-amber-600 text-[13px] font-medium px-2.5 py-0.5 rounded">
+                  En attente
+                </span>
+                      <span *ngIf="contrat.statut === 'TERMINE'"
+                            class="bg-red-600/10 dark:bg-red-600/20 border border-red-600/10 dark:border-red-600/20 text-red-600 text-[13px] font-medium px-2.5 py-0.5 rounded">
+                  Terminé
+                </span>
+                    </td>
+
+                  </tr>
+
+                  <!-- Aucun contrat -->
+                  <tr  *ngIf="contrats?.length === 0" >
+                    <td colspan="7" class="text-center py-8 text-slate-400">
+                      <i class="mdi mdi-file-document-outline text-[40px] block mb-2"></i>
+                      Aucun contrat trouvé
+                    </td>
+                  </tr>
+
+                  </tbody>
+                </table>              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="grid md:grid-cols-12 grid-cols-1 mt-6">
+          <div class="md:col-span-12 text-center">
+            <nav>
+              <ul class="inline-flex items-center -space-x-px">
+                <li>
+                  <a [routerLink]="[]" (click)="$event.preventDefault()" class="size-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 bg-white dark:bg-slate-900 hover:text-white shadow-xs shadow-gray-200 dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">
+                    <i class="mdi mdi-chevron-left text-[20px]"></i>
+                  </a>
+                </li>
+                <li>
+                  <a [routerLink]="[]" (click)="$event.preventDefault()" class="size-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 hover:text-white bg-white dark:bg-slate-900 shadow-xs shadow-gray-200 dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">1</a>
+                </li>
+                <li>
+                  <a [routerLink]="[]" (click)="$event.preventDefault()" class="size-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 hover:text-white bg-white dark:bg-slate-900 shadow-xs shadow-gray-200 dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">2</a>
+                </li>
+                <li>
+                  <a [routerLink]="[]" (click)="$event.preventDefault()" aria-current="page" class="z-10 size-10 inline-flex justify-center items-center mx-1 rounded-full text-white bg-green-600 shadow-xs shadow-gray-200 dark:shadow-gray-700">3</a>
+                </li>
+                <li>
+                  <a [routerLink]="[]" (click)="$event.preventDefault()" class="size-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 hover:text-white bg-white dark:bg-slate-900 shadow-xs shadow-gray-200 dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">4</a>
+                </li>
+                <li>
+                  <a [routerLink]="[]" (click)="$event.preventDefault()" class="size-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 bg-white dark:bg-slate-900 hover:text-white shadow-xs shadow-gray-200 dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">
+                    <i class="mdi mdi-chevron-right text-[20px]"></i>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <app-footer-admin/>
+  </main>
+</div>

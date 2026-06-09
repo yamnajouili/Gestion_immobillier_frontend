@@ -1,0 +1,661 @@
+<app-navbar />
+
+<div class="bg-gray-50 dark:bg-slate-900 min-h-screen">
+  <!-- Header avec bienvenue -->
+  <div class="relative bg-gradient-to-r from-green-600 pt-18 pb-20">
+    <div class="container relative">
+      <div class="grid grid-cols-1">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+          <div class="text-center md:text-left">
+            <h1 class="text-2xl md:text-3xl font-bold text-white mb-2">
+              Bonjour, {{ userr.nom }} 👋
+            </h1>
+            <p class="text-white/80">
+              Bienvenue dans votre espace personnel. Voici ce qui se passe aujourd'hui.
+            </p>
+            <p class="text-white/60 text-sm mt-2">
+              <i class="uil uil-map-marker"></i> {{ userAdresse }}
+            </p>
+          </div>
+          <div class="flex gap-3">
+            <button class="bg-white/10 hover:bg-white/20 text-white px-5 py-2 rounded-lg transition-all duration-300 flex items-center gap-2">
+              <i class="uil uil-plus-circle"></i>
+              Demander une visite
+            </button>
+            <button (click)="setActiveTab('settings')" class="bg-white text-green-600 hover:bg-gray-100 px-5 py-2 rounded-lg transition-all duration-300 flex items-center gap-2">
+              <i class="uil uil-edit"></i>
+              Modifier profil
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="p-5 mt-1 pb-16">
+    <!-- Navigation Tabs - UNIQUEMENT LES ONGLETS CLIENT -->
+    <div class="bg-white ml-30 mr-30 dark:bg-slate-800 rounded-xl shadow-md mb-8">
+      <div class="border-b border-gray-200 dark:border-gray-700">
+        <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="dashboard-tabs">
+          <!-- Aperçu -->
+          <li class="me-2">
+            <button (click)="setActiveTab('overview')"
+                    [class]="activeTab === 'overview' ? 'text-green-600 border-green-600' : 'text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300 border-transparent'"
+                    class="inline-flex items-center justify-center p-4 border-b-2 rounded-t-lg gap-2 transition-all duration-300">
+              <i class="uil uil-dashboard"></i>
+              Aperçu
+            </button>
+          </li>
+
+          <!-- Mes favoris -->
+          <li class="me-2">
+            <button (click)="setActiveTab('favorites')"
+                    [class]="activeTab === 'favorites' ? 'text-green-600 border-green-600' : 'text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300 border-transparent'"
+                    class="inline-flex items-center justify-center p-4 border-b-2 rounded-t-lg gap-2 transition-all duration-300">
+              <i class="uil uil-heart"></i>
+              Mes favoris
+              <span *ngIf="user.favoris?.length" class="bg-red-500 text-white text-xs rounded-full px-2 py-0.5 ml-2">{{ user.favoris?.length }}</span>
+            </button>
+          </li>
+
+          <!-- Mes visites -->
+          <li class="me-2">
+            <button (click)="setActiveTab('visits')"
+                    [class]="activeTab === 'visits' ? 'text-green-600 border-green-600' : 'text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300 border-transparent'"
+                    class="inline-flex items-center justify-center p-4 border-b-2 rounded-t-lg gap-2 transition-all duration-300">
+              <i class="uil uil-calendar-alt"></i>
+              Mes visites
+              <span *ngIf="user.visites?.length" class="bg-green-500 text-white text-xs rounded-full px-2 py-0.5 ml-2">{{ user.visites?.length }}</span>
+            </button>
+          </li>
+
+          <!-- Mes contrats -->
+          <li class="me-2">
+            <button (click)="setActiveTab('contracts')"
+                    [class]="activeTab === 'contracts' ? 'text-green-600 border-green-600' : 'text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300 border-transparent'"
+                    class="inline-flex items-center justify-center p-4 border-b-2 rounded-t-lg gap-2 transition-all duration-300">
+              <i class="uil uil-file-contract"></i>
+              Mes contrats
+              <span *ngIf="user.contrats?.length" class="bg-blue-500 text-white text-xs rounded-full px-2 py-0.5 ml-2">{{ user.contrats?.length }}</span>
+            </button>
+          </li>
+
+          <!-- Messages -->
+          <li class="me-2">
+            <button (click)="setActiveTab('messages')"
+                    [class]="activeTab === 'messages' ? 'text-green-600 border-green-600' : 'text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300 border-transparent'"
+                    class="inline-flex items-center justify-center p-4 border-b-2 rounded-t-lg gap-2 transition-all duration-300">
+              <i class="uil uil-envelope"></i>
+              Messages
+              <span class="bg-red-500 text-white text-xs rounded-full px-2 py-0.5 ml-2">4</span>
+            </button>
+          </li>
+
+          <!-- Paramètres -->
+          <li class="me-2">
+            <button (click)="setActiveTab('settings')"
+                    [class]="activeTab === 'settings' ? 'text-green-600 border-green-600' : 'text-gray-500 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300 border-transparent'"
+                    class="inline-flex items-center justify-center p-4 border-b-2 rounded-t-lg gap-2 transition-all duration-300">
+              <i class="uil uil-setting"></i>
+              Paramètres
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Contenu Aperçu (Dashboard principal) -->
+    <div *ngIf="activeTab === 'overview'">
+      <!-- Statistiques -->
+      <div class="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6 mb-8">
+        <div *ngFor="let stat of stats"
+             class="bg-white dark:bg-slate-800 rounded-xl shadow-md p-6 hover:shadow-lg transition-all duration-300">
+          <div class="flex items-center justify-between mb-4">
+            <div [class]="'w-12 h-12 rounded-lg flex items-center justify-center ' + stat.color">
+              <i [class]="stat.icon + ' text-white text-xl'"></i>
+            </div>
+            <span class="text-green-600 text-sm font-semibold bg-green-100 dark:bg-green-900/30 px-2 py-1 rounded">
+              {{ stat.change }}
+            </span>
+          </div>
+          <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-1">{{ stat.value }}</h3>
+          <p class="text-gray-600 dark:text-gray-400">{{ stat.label }}</p>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-6">
+        <!-- Propriétés recommandées -->
+        <div class="lg:col-span-2">
+          <div class="bg-white dark:bg-slate-800 rounded-xl shadow-md overflow-hidden">
+            <div class="p-6 border-b border-gray-200 dark:border-gray-700">
+              <div class="flex justify-between items-center">
+                <h3 class="text-lg font-semibold text-slate-900 dark:text-white">
+                  Propriétés recommandées pour vous
+                </h3>
+                <button (click)="setActiveTab('favorites')"
+                        class="text-green-600 hover:text-green-700 text-sm font-medium transition-all duration-300">
+                  Voir tout <i class="uil uil-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+            <div class="divide-y divide-gray-200 dark:divide-gray-700">
+              <div *ngFor="let property of recentProperties.slice(0,3)"
+                   class="p-6 hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-all duration-300 cursor-pointer">
+                <div class="flex gap-4">
+                  <img [src]="property.image" [alt]="property.title"
+                       class="w-20 h-20 rounded-lg object-cover">
+                  <div class="flex-1">
+                    <div class="flex justify-between items-start mb-2">
+                      <div>
+                        <h4 class="font-semibold text-slate-900 dark:text-white mb-1">
+                          {{ property.title }}
+                        </h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-1">
+                          <i class="uil uil-map-marker"></i> {{ property.location }}
+                        </p>
+                      </div>
+                      <button (click)="toggleFavorite(property.id, $event)"
+                              class="transition-all duration-300 hover:scale-110">
+
+                        <i [ngClass]="isFavorite(property.id)
+              ? 'uil uil-heart-alt text-red-500 text-xl'
+              : 'uil uil-heart text-gray-400 text-xl'">
+                        </i>
+
+                      </button>
+                    </div>
+                    <div class="flex justify-between items-center mt-3">
+                      <span class="text-lg font-bold text-green-600">{{ property.price }}</span>
+                      <button (click)="openVisitModal(property)"
+                              class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded-lg text-sm transition-all duration-300">
+                        Demander visite
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>          </div>
+        </div>
+
+        <!-- Activités et Messages -->
+        <div class="space-y-6">
+          <!-- Activités récentes -->
+          <div class="bg-white dark:bg-slate-800 rounded-xl shadow-md">
+            <div class="p-6 border-b border-gray-200 dark:border-gray-700">
+              <h3 class="text-lg font-semibold text-slate-900 dark:text-white">
+                Activités récentes
+              </h3>
+            </div>
+            <div class="divide-y divide-gray-200 dark:divide-gray-700">
+              <div *ngFor="let activity of recentActivities"
+                   class="p-4 hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-all duration-300">
+                <div class="flex gap-3">
+                  <div [class]="'w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ' + activity.color">
+                    <i [class]="activity.icon"></i>
+                  </div>
+                  <div class="flex-1">
+                    <p class="text-sm text-slate-900 dark:text-white">
+                      <span class="font-semibold">{{ activity.action }}</span>
+                      <span class="text-gray-600 dark:text-gray-400"> "{{ activity.property }}"</span>
+                    </p>
+                    <p class="text-xs text-gray-500 dark:text-gray-500 mt-1">{{ activity.time }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Messages récents -->
+          <div class="bg-white dark:bg-slate-800 rounded-xl shadow-md">
+            <div class="p-6 border-b border-gray-200 dark:border-gray-700">
+              <div class="flex justify-between items-center">
+                <h3 class="text-lg font-semibold text-slate-900 dark:text-white">
+                  Messages récents
+                </h3>
+                <button (click)="setActiveTab('messages')"
+                        class="text-green-600 hover:text-green-700 text-sm transition-all duration-300">
+                  Voir tous
+                </button>
+              </div>
+            </div>
+            <div class="divide-y divide-gray-200 dark:divide-gray-700">
+              <div *ngFor="let message of messages.slice(0,3)"
+                   [class]="'p-4 hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-all duration-300 cursor-pointer ' + (message.unread ? 'bg-green-50 dark:bg-green-900/10' : '')">
+                <div class="flex gap-3">
+                  <img [src]="message.avatar" [alt]="message.name"
+                       class="w-10 h-10 rounded-full object-cover">
+                  <div class="flex-1">
+                    <div class="flex justify-between items-start mb-1">
+                      <h4 class="font-semibold text-slate-900 dark:text-white text-sm">
+                        {{ message.name }}
+                        <span *ngIf="message.unread"
+                              class="inline-block w-2 h-2 bg-green-600 rounded-full ml-2"></span>
+                      </h4>
+                      <span class="text-xs text-gray-500">{{ message.time }}</span>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 line-clamp-1">
+                      {{ message.message }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contenu Mes favoris -->
+    <div *ngIf="activeTab === 'favorites'">
+      <div class="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 mt-8 gap-[30px]">
+        <div *ngFor="let item of propertylist" class="group rounded-xl bg-white dark:bg-slate-900 shadow-sm hover:shadow-xl overflow-hidden ease-in-out duration-500">
+          <div class="relative">
+            <img [src]="item.image" alt="">
+            <div class="absolute top-4 end-4">
+              <a [routerLink]="[]" class=" dark:bg-slate-900 rounded-full text-slate-100 focus:text-red-600 hover:text-red-600">
+                <i class="mdi mdi-heart text-[20px]"></i>
+              </a>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="pb-6">
+              <a [routerLink]="'/property-detail'" class="text-lg hover:text-green-600 font-medium">{{item.name}}</a>
+            </div>
+            <ul class="py-6 border-y border-slate-100 dark:border-gray-800 flex items-center list-none">
+              <li class="flex items-center me-4">
+                <i class="uil uil-compress-arrows text-2xl me-2 text-green-600"></i>
+                <span>{{item.sqf}}</span>
+              </li>
+              <li class="flex items-center me-4">
+                <i class="uil uil-bed-double text-2xl me-2 text-green-600"></i>
+                <span>{{item.beds}}</span>
+              </li>
+              <li class="flex items-center">
+                <i class="uil uil-bath text-2xl me-2 text-green-600"></i>
+                <span>{{item.baths}}</span>
+              </li>
+            </ul>
+            <ul class="pt-6 flex justify-between items-center list-none">
+              <li>
+                <span class="text-slate-400">Prix</span>
+                <p class="text-lg font-medium">{{item.price}}</p>
+              </li>
+              <li>
+                <span class="text-slate-400">Note</span>
+                <ul class="text-lg font-medium text-amber-400 list-none">
+                  <li class="inline mx-0.5"><i class="mdi mdi-star"></i></li>
+                  <li class="inline mx-0.5"><i class="mdi mdi-star"></i></li>
+                  <li class="inline mx-0.5"><i class="mdi mdi-star"></i></li>
+                  <li class="inline mx-0.5"><i class="mdi mdi-star"></i></li>
+                  <li class="inline mx-0.5"><i class="mdi mdi-star"></i></li>
+                  <li class="inline text-black dark:text-white">5.0(30)</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contenu Mes visites -->
+    <div *ngIf="activeTab === 'visits'" class="bg-white dark:bg-slate-800 rounded-xl shadow-md p-6">
+      <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-6">Mes visites planifiées</h2>
+      <div *ngIf="user.visites && user.visites.length > 0; else noVisits">
+        <div class="space-y-4">
+          <div *ngFor="let visite of user.visites" class="border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:shadow-md transition-all">
+            <div class="flex justify-between items-start">
+              <div>
+                <h3 class="font-semibold text-slate-900 dark:text-white">{{ visite.propertyName || 'Propriété' }}</h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                  <i class="uil uil-calendar-alt"></i> {{ visite.dateVisite | date:'dd/MM/yyyy' }} à {{ visite.heureVisite }}
+                </p>
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                  <i class="uil uil-map-marker"></i> {{ visite.adresse || 'Adresse non spécifiée' }}
+                </p>
+              </div>
+              <span class="px-3 py-1 rounded-full text-sm" [class]="visite.status === 'CONFIRMEE' ? 'bg-green-100 text-green-600' : 'bg-yellow-100 text-yellow-600'">
+                {{ visite.status || 'En attente' }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #noVisits>
+        <div class="text-center py-12">
+          <i class="uil uil-calendar-slash text-6xl text-gray-400 mb-4"></i>
+          <p class="text-gray-500">Vous n'avez aucune visite planifiée</p>
+          <button class="mt-4 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg" (click)="openVisitModalDefault()" >
+            Demander une visite
+          </button>
+        </div>
+
+      </ng-template>
+    </div>
+
+
+
+
+    <!-- Contenu Mes contrats -->
+    <div *ngIf="activeTab === 'contracts'" class="bg-white dark:bg-slate-800 rounded-xl shadow-md p-6">
+      <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-6">Mes contrats</h2>
+      <div *ngIf="user.contrats && user.contrats.length > 0; else noContracts">
+        <div class="relative overflow-x-auto">
+          <table class="w-full text-sm text-left">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-slate-700">
+            <tr>
+              <th class="px-6 py-3">Type</th>
+              <th class="px-6 py-3">Propriété</th>
+              <th class="px-6 py-3">Date signature</th>
+              <th class="px-6 py-3">Montant</th>
+              <th class="px-6 py-3">Statut</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let contrat of user.contrats" class="border-b dark:border-gray-700">
+              <td class="px-6 py-4">{{ contrat.type || 'Contrat' }}</td>
+              <td class="px-6 py-4">{{ contrat.propertyName || 'Propriété' }}</td>
+              <td class="px-6 py-4">{{ contrat.dateSignature | date:'dd/MM/yyyy' }}</td>
+              <td class="px-6 py-4 font-semibold text-green-600">{{ contrat.montant || 'À définir' }}</td>
+              <td class="px-6 py-4">
+                  <span class="px-2 py-1 rounded-full text-xs" [class]="contrat.status === 'ACTIF' ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-600'">
+                    {{ contrat.status || 'En cours' }}
+                  </span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <ng-template #noContracts>
+        <div class="text-center py-12">
+          <i class="uil uil-file-contract-slash text-6xl text-gray-400 mb-4"></i>
+          <p class="text-gray-500">Vous n'avez aucun contrat actif</p>
+        </div>
+      </ng-template>
+    </div>
+
+    <!-- Contenu Messages -->
+    <div *ngIf="activeTab === 'messages'" class="bg-white dark:bg-slate-800 rounded-xl shadow-md overflow-hidden">
+      <!-- ... contenu messages inchangé ... -->
+      <div class="grid lg:grid-cols-3 h-[600px]">
+        <div class="border-r border-gray-200 dark:border-gray-700 overflow-y-auto">
+          <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+            <div class="relative">
+              <i class="uil uil-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+              <input type="text" placeholder="Rechercher..."
+                     class="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-slate-700 focus:outline-none focus:border-green-500">
+            </div>
+          </div>
+          <div class="divide-y divide-gray-200 dark:divide-gray-700">
+            <div *ngFor="let message of messages"
+                 class="p-4 hover:bg-gray-50 dark:hover:bg-slate-700/50 cursor-pointer transition-all duration-300"
+                 [class]="message.unread ? 'bg-green-50 dark:bg-green-900/10' : ''">
+              <div class="flex gap-3">
+                <img [src]="message.avatar" [alt]="message.name" class="w-12 h-12 rounded-full object-cover">
+                <div class="flex-1">
+                  <div class="flex justify-between items-start mb-1">
+                    <h4 class="font-semibold text-slate-900 dark:text-white">{{ message.name }}</h4>
+                    <span class="text-xs text-gray-500">{{ message.time }}</span>
+                  </div>
+                  <p class="text-sm text-gray-600 dark:text-gray-400 line-clamp-1">{{ message.message }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lg:col-span-2 flex flex-col">
+          <div class="flex-1 overflow-y-auto p-6">
+            <div class="text-center text-gray-500 mt-20">
+              <i class="uil uil-envelope-open text-5xl mb-3"></i>
+              <p>Sélectionnez une conversation pour commencer</p>
+            </div>
+          </div>
+          <div class="p-4 border-t border-gray-200 dark:border-gray-700">
+            <div class="flex gap-2">
+              <input type="text" placeholder="Écrivez votre message..."
+                     class="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-slate-700 focus:outline-none focus:border-green-500">
+              <button class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg">Envoyer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contenu Paramètres -->
+    <div *ngIf="activeTab === 'settings'" class="bg-white dark:bg-slate-800 rounded-xl shadow-md p-6">
+      <!-- ... contenu paramètres inchangé ... -->
+      <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-6">Paramètres du compte</h2>
+      <div class="grid lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-2">
+          <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-4">Informations personnelles</h3>
+          <form class="space-y-4">
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium mb-2">Nom complet</label>
+                <input type="text" [value]="userNom" class="w-full px-4 py-2 border rounded-lg bg-gray-50 dark:bg-slate-700">
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-2">Email</label>
+                <input type="email" [value]="userEmail" class="w-full px-4 py-2 border rounded-lg bg-gray-50 dark:bg-slate-700">
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-2">Téléphone</label>
+                <input type="tel" [value]="userTelephone" class="w-full px-4 py-2 border rounded-lg bg-gray-50 dark:bg-slate-700">
+              </div>
+              <div>
+                <label class="block text-sm font-medium mb-2">Adresse</label>
+                <input type="text" [value]="userAdresse" class="w-full px-4 py-2 border rounded-lg bg-gray-50 dark:bg-slate-700">
+              </div>
+            </div>
+            <button class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg">Mettre à jour</button>
+          </form>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold mb-4">Photo de profil</h3>
+          <div class="text-center">
+            <img [src]="userAvatar" [alt]="userNom" class="w-32 h-32 rounded-full object-cover mx-auto mb-4 border-4 shadow-lg">
+            <button class="bg-gray-100 dark:bg-slate-700 px-4 py-2 rounded-lg text-sm">Changer la photo</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal Demande de visite -->
+  <div *ngIf="showVisitModal" class="modal-overlay" (click)="closeVisitModal()">
+    <div class="modal-container bg-white dark:bg-slate-800 rounded-2xl shadow-2xl" (click)="$event.stopPropagation()">
+
+      <!-- En-tête modal -->
+      <div class="flex justify-between items-center p-5 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
+            <i class="uil uil-calendar-alt text-green-600 text-xl"></i>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white">Demande de visite</h3>
+            <p class="text-sm text-gray-500 dark:text-gray-400">Remplissez ce formulaire</p>
+          </div>
+        </div>
+        <button (click)="closeVisitModal()" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+          <i class="uil uil-times text-2xl"></i>
+        </button>
+      </div>
+
+      <!-- Progression -->
+      <div class="bg-gray-50 dark:bg-slate-900/50 px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex items-center justify-between">
+          <div *ngFor="let step of steps; let i = index" class="flex flex-col items-center flex-1">
+            <div [class]="getStepClass(i)" class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-300">
+              {{ i + 1 }}
+            </div>
+            <span class="text-xs mt-1 text-gray-500 dark:text-gray-400 hidden sm:block">{{ step }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulaire -->
+      <div class="p-6">
+
+        <!-- Étape 1: Informations personnelles -->
+        <div *ngIf="currentStep === 0" class="space-y-5">
+          <h4 class="text-lg font-semibold text-gray-900 dark:text-white">Vos coordonnées</h4>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Nom complet <span class="text-red-500">*</span>
+            </label>
+            <div class="relative">
+              <i class="uil uil-user absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+              <input type="text" [(ngModel)]="userr.nom" name="nom"
+                     class="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-slate-700 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                     placeholder="Jean Dupont">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Email <span class="text-red-500">*</span>
+            </label>
+            <div class="relative">
+              <i class="uil uil-envelope absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+              <input type="email" [(ngModel)]="userr.email" name="email"
+                     class="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-slate-700 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                     placeholder="jean@exemple.com">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Téléphone <span class="text-red-500">*</span>
+            </label>
+            <div class="relative">
+              <i class="uil uil-phone absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+              <input type="tel" [(ngModel)]="userr.telephone" name="telephone"
+                     class="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-slate-700 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                     placeholder="+225 07 XX XX XX XX">
+            </div>
+          </div>
+        </div>
+
+        <!-- Étape 2: Propriété sélectionnée -->
+        <div *ngIf="currentStep === 1" class="space-y-5">
+          <h4 class="text-lg font-semibold text-gray-900 dark:text-white">Propriété à visiter</h4>
+
+          <div *ngIf="selectedPropertyForVisit" class="bg-gray-50 dark:bg-slate-700 rounded-xl p-4 flex gap-4">
+            <img [src]="selectedPropertyForVisit.image" [alt]="selectedPropertyForVisit.title"
+                 class="w-20 h-20 rounded-lg object-cover">
+            <div class="flex-1">
+              <h5 class="font-semibold text-gray-900 dark:text-white">{{ selectedPropertyForVisit.title }}</h5>
+              <p class="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-1 mt-1">
+                <i class="uil uil-map-marker"></i> {{ selectedPropertyForVisit.location }}
+              </p>
+              <p class="text-lg font-bold text-green-600 mt-1">{{ selectedPropertyForVisit.price }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Étape 3: Planning -->
+        <div *ngIf="currentStep === 2" class="space-y-5">
+          <h4 class="text-lg font-semibold text-gray-900 dark:text-white">Choisissez votre créneau</h4>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Date souhaitée <span class="text-red-500">*</span>
+            </label>
+            <div class="relative">
+              <i class="uil uil-calendar-alt absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+              <input type="date" [(ngModel)]="visitFormData.dateProposee" name="dateProposee" [min]="minDate"
+                     class="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-slate-700 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Heure souhaitée <span class="text-red-500">*</span>
+            </label>
+            <div class="relative">
+              <i class="uil uil-clock absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+              <select [(ngModel)]="visitFormData.heureProposee" name="heureProposee"
+                      class="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-slate-700 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all">
+                <option value="">Sélectionnez une heure</option>
+                <option value="09:00">09:00 - Matin</option>
+                <option value="10:00">10:00 - Matin</option>
+                <option value="11:00">11:00 - Matin</option>
+                <option value="14:00">14:00 - Après-midi</option>
+                <option value="15:00">15:00 - Après-midi</option>
+                <option value="16:00">16:00 - Après-midi</option>
+                <option value="17:00">17:00 - Fin d'après-midi</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Commentaire (optionnel)
+            </label>
+            <textarea [(ngModel)]="visitFormData.commentaire" name="commentaire" rows="3"
+                      class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-slate-700 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                      placeholder="Ajoutez une information complémentaire..."></textarea>
+          </div>
+        </div>
+
+        <!-- Étape 4: Confirmation -->
+        <div *ngIf="currentStep === 3" class="space-y-5">
+          <h4 class="text-lg font-semibold text-gray-900 dark:text-white">Confirmation</h4>
+
+          <div class="bg-green-50 dark:bg-green-900/20 rounded-xl p-5 text-center">
+            <i class="uil uil-check-circle text-5xl text-green-600 mb-3"></i>
+            <p class="text-gray-700 dark:text-gray-300">
+              Votre demande de visite sera envoyée à notre équipe.
+              Vous recevrez une confirmation par email sous 24h.
+            </p>
+          </div>
+
+          <div class="space-y-3">
+            <div class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-slate-700 rounded-xl">
+              <i class="uil uil-info-circle text-green-600 mt-0.5"></i>
+              <div class="text-sm text-gray-600 dark:text-gray-400">
+                <p class="font-medium text-gray-900 dark:text-white">Récapitulatif :</p>
+                <p>👤 {{ userr.nom }}</p>
+                <p>📧 {{ userr.email }}</p>
+                <p>📅 {{ visitFormData.dateProposee }} à {{ visitFormData.heureProposee }}</p>
+                <p>🏠 {{ selectedPropertyForVisit?.title }}</p>
+              </div>
+            </div>
+
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" [(ngModel)]="visitFormData.acceptTerms" name="acceptTerms"
+                     class="mt-1 w-5 h-5 text-green-600 rounded border-gray-300 focus:ring-green-500">
+              <span class="text-sm text-gray-600 dark:text-gray-400">
+                J'accepte que mes informations soient utilisées pour traiter ma demande de visite
+                <span class="text-red-500">*</span>
+              </span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Boutons navigation -->
+      <div class="flex justify-between gap-3 p-6 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-slate-900/30">
+        <button *ngIf="currentStep > 0" type="button" (click)="prevStep()"
+                class="px-6 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 transition-all">
+          <i class="uil uil-angle-left"></i> Retour
+        </button>
+
+        <button *ngIf="currentStep < 3" type="button" (click)="nextStep()"
+                class="ml-auto px-6 py-2.5 rounded-xl bg-green-600 hover:bg-green-700 text-white transition-all flex items-center gap-2">
+          Suivant <i class="uil uil-angle-right"></i>
+        </button>
+
+        <button *ngIf="currentStep === 3" type="button" (click)="submitVisitRequest()"
+                class="ml-auto px-6 py-2.5 rounded-xl bg-green-600 hover:bg-green-700 text-white transition-all flex items-center gap-2">
+          <i class="uil uil-check-circle"></i> Confirmer la visite
+        </button>
+
+        <button type="button" (click)="closeVisitModal()"
+                class="px-6 py-2.5 rounded-xl border border-red-300 text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all">
+          Annuler
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

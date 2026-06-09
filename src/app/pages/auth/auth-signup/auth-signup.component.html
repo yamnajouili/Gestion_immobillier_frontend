@@ -1,0 +1,288 @@
+
+<section class="md:h-screen py-10 flex items-center relative overflow-hidden">
+  <div class="absolute inset-0 image-wrap z-1 bg-[url('/assets/images/bg/01.jpg')] bg-no-repeat bg-center bg-cover"></div>
+  <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black z-2"></div>
+  <div class="container relative z-3">
+    <div class="flex justify-center">
+      <div class="max-w-[950px] w-full m-auto p-6 bg-white dark:bg-slate-900 shadow-2xl rounded-2xl">
+        <a routerLink="/"><img src="assets/images/logo-icon-64.png" class="mx-auto h-12 w-12" alt=""></a>
+        <h5 class="my-4 text-2xl font-bold text-center text-slate-900 dark:text-white">Créer un compte</h5>
+
+        <!-- Question : Vous êtes client ou propriétaire ? -->
+        <div *ngIf="showQuestion" class="text-center mb-6">
+          <p class="text-gray-600 dark:text-gray-300 mb-3 text-lg">Vous êtes ?</p>
+          <div class="grid grid-cols-2 gap-4 max-w-md mx-auto">
+            <button type="button" (click)="showClientFormMethod()"
+                    class="py-3 px-4 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 bg-green-600 text-white shadow-md hover:bg-green-700">
+              <i class="uil uil-user text-lg"></i> Client
+            </button>
+            <button type="button" (click)="showProprietaireFormMethod()"
+                    class="py-3 px-4 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 hover:bg-green-50 dark:hover:bg-green-900/20">
+              <i class="uil uil-estate text-lg"></i> Propriétaire
+            </button>
+          </div>
+        </div>
+
+        <!-- Formulaire Client -->
+        <div *ngIf="showClientForm">
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3">
+              <!-- Colonne 1 -->
+              <div>
+                <label class="font-semibold text-slate-700 dark:text-gray-300 text-sm block mb-1">Nom complet <span class="text-red-500">*</span></label>
+                <div class="relative">
+                  <i class="uil uil-user absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                  <input type="text" [(ngModel)]="client.nom" name="nom" required
+                         class="form-input border !border-gray-200 dark:!border-gray-800 w-full pl-9 pr-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all"
+                         placeholder="Jean Dupont">
+                </div>
+              </div>
+
+              <!-- Colonne 2 -->
+              <div>
+                <label class="font-semibold text-slate-700 dark:text-gray-300 text-sm block mb-1">Téléphone <span class="text-red-500">*</span></label>
+                <div class="relative">
+                  <i class="uil uil-phone absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                  <input type="tel" [(ngModel)]="client.telephone" name="telephone" required
+                         class="form-input border !border-gray-200 dark:!border-gray-800 w-full pl-9 pr-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all"
+                         placeholder="+225 07 XX XX XX XX">
+                </div>
+              </div>
+
+              <!-- Colonne 1 -->
+              <div>
+                <label class="font-semibold text-slate-700 dark:text-gray-300 text-sm block mb-1">Poste <span class="text-red-500">*</span></label>
+                <div class="relative">
+                  <i class="uil uil-briefcase absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                  <input type="text" [(ngModel)]="client.poste" name="poste" required
+                         class="form-input border !border-gray-200 dark:!border-gray-800 w-full pl-9 pr-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all"
+                         placeholder="Directeur, Agent commercial">
+                </div>
+              </div>
+
+              <!-- Colonne 2 -->
+              <div>
+                <label class="font-semibold text-slate-700 dark:text-gray-300 text-sm block mb-1">Email <span class="text-red-500">*</span></label>
+                <div class="relative">
+                  <i class="uil uil-envelope absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                  <input type="email" [(ngModel)]="client.email" name="email" required
+                         class="form-input border !border-gray-200 dark:!border-gray-800 w-full pl-9 pr-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all"
+                         placeholder="nom@exemple.com">
+                </div>
+              </div>
+
+              <!-- Colonne 1 - Mot de passe -->
+              <div>
+                <label class="font-semibold text-slate-700 dark:text-gray-300 text-sm block mb-1">Mot de passe <span class="text-red-500">*</span></label>
+                <div class="relative">
+                  <i class="uil uil-lock absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                  <input type="password" [(ngModel)]="client.password" name="password" required minlength="6"
+                         class="form-input border !border-gray-200 dark:!border-gray-800 w-full pl-9 pr-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all"
+                         placeholder="Minimum 6 caractères">
+                </div>
+              </div>
+
+              <!-- Colonne 2 - Confirmer Mot de passe -->
+              <div>
+                <label class="font-semibold text-slate-700 dark:text-gray-300 text-sm block mb-1">Confirmer mot de passe <span class="text-red-500">*</span></label>
+                <div class="relative">
+                  <i class="uil uil-lock absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                  <input type="password" [(ngModel)]="client.confirmPassword" name="confirmPassword" required
+                         class="form-input border !border-gray-200 dark:!border-gray-800 w-full pl-9 pr-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all"
+                         placeholder="Confirmer votre mot de passe">
+                </div>
+                <!-- Message d'erreur si mots de passe différents -->
+                <div *ngIf="client.password !== client.confirmPassword && client.confirmPassword"
+                     class="text-red-500 text-xs mt-1">
+                  Les mots de passe ne correspondent pas
+                </div>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2 mt-5 pt-2">
+              <input type="checkbox" name="acceptTerms" required
+                     class="w-3.5 h-3.5 rounded border-gray-300 text-green-600 focus:ring-green-500">
+              <label class="text-xs text-slate-600 dark:text-gray-400">
+                J'accepte les <a href="#" class="text-green-600 font-semibold">conditions générales</a>
+              </label>
+            </div>
+
+            <div class="mt-4 space-y-3">
+              <div class="w-1/2 m-auto">
+                <button type="submit"
+                        [disabled]="client.password !== client.confirmPassword"
+                        class="w-full bg-green-600 text-white font-semibold py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 shadow-lg text-sm"
+                        [class]="client.password === client.confirmPassword && client.password ? 'bg-green-600 hover:bg-green-700 text-white' : 'bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 cursor-not-allowed'" (click)="register()">
+                  <i class="uil uil-user-plus text-base"></i> Créer mon compte Client
+                </button>
+              </div>
+              <div class="text-center mt-4">
+                <button type="button" (click)="backToQuestion()" class="text-green-600 hover:text-green-700 text-xs font-semibold">← Retour</button>
+                <span class="text-slate-500 dark:text-gray-400 mx-2 text-xs">|</span>
+                <a routerLink="/auth-login" class="text-green-600 font-semibold text-xs">Se connecter</a>
+              </div>
+            </div>
+
+        </div>
+
+        <!-- Formulaire Propriétaire -->
+        <div *ngIf="showProprietaireForm">
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3">
+              <!-- Colonne 1 -->
+              <div>
+                <label class="font-semibold text-slate-700 dark:text-gray-300 text-sm block mb-1">Nom complet <span class="text-red-500">*</span></label>
+                <div class="relative">
+                  <i class="uil uil-user absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                  <input type="text" [(ngModel)]="proprietaire.nom" name="nom" required
+                         class="form-input border !border-gray-200 dark:!border-gray-800 w-full pl-9 pr-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all"
+                         placeholder="Jean Dupont">
+                </div>
+              </div>
+
+              <!-- Colonne 2 -->
+              <div>
+                <label class="font-semibold text-slate-700 dark:text-gray-300 text-sm block mb-1">Téléphone <span class="text-red-500">*</span></label>
+                <div class="relative">
+                  <i class="uil uil-phone absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                  <input type="tel" [(ngModel)]="proprietaire.telephone" name="telephone" required
+                         class="form-input border !border-gray-200 dark:!border-gray-800 w-full pl-9 pr-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all"
+                         placeholder="+225 07 XX XX XX XX">
+                </div>
+              </div>
+
+              <!-- Colonne 1 -->
+              <div>
+                <label class="font-semibold text-slate-700 dark:text-gray-300 text-sm block mb-1">Poste <span class="text-red-500">*</span></label>
+                <div class="relative">
+                  <i class="uil uil-briefcase absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                  <input type="text" [(ngModel)]="proprietaire.poste" name="poste" required
+                         class="form-input border !border-gray-200 dark:!border-gray-800 w-full pl-9 pr-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all"
+                         placeholder="Directeur, Agent commercial">
+                </div>
+              </div>
+
+              <!-- Colonne 2 -->
+              <div>
+                <label class="font-semibold text-slate-700 dark:text-gray-300 text-sm block mb-1">Email <span class="text-red-500">*</span></label>
+                <div class="relative">
+                  <i class="uil uil-envelope absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                  <input type="email" [(ngModel)]="proprietaire.email" name="email" required
+                         class="form-input border !border-gray-200 dark:!border-gray-800 w-full pl-9 pr-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all"
+                         placeholder="nom@exemple.com">
+                </div>
+              </div>
+
+              <!-- Colonne 1 - Type propriétaire -->
+              <div>
+                <label class="font-semibold text-slate-700 dark:text-gray-300 text-sm block mb-1">Type de propriétaire</label>
+                <div class="relative">
+                  <i class="uil uil-tag absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                  <select [(ngModel)]="proprietaire.typeProprietaire" name="typeProprietaire"
+                          class="form-input border !border-gray-200 dark:!border-gray-800 w-full pl-9 pr-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:border-green-500 bg-white dark:bg-slate-800">
+                    <option value="">Sélectionner</option>
+                    <option value="Particulier">Particulier</option>
+                    <option value="Professionnel">Agence immobilière</option>
+
+                  </select>
+                </div>
+              </div>
+
+              <!-- Colonne 2 - Nom de l'agence -->
+              <div>
+                <label class="font-semibold text-slate-700 dark:text-gray-300 text-sm block mb-1">Nom de l'agence</label>
+                <div class="relative">
+                  <i class="uil uil-estate absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                  <input type="text" [(ngModel)]="proprietaire.nomAgence" name="nomAgence"
+                         class="form-input border !border-gray-200 dark:!border-gray-800 w-full pl-9 pr-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:border-green-500"
+                         placeholder="Nom de votre agence">
+                </div>
+              </div>
+
+              <!-- Colonne 1 - Adresse professionnelle -->
+              <div>
+                <label class="font-semibold text-slate-700 dark:text-gray-300 text-sm block mb-1">Adresse professionnelle</label>
+                <div class="relative">
+                  <i class="uil uil-map-marker absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                  <input type="text" [(ngModel)]="proprietaire.adresseProfessionnelle" name="adresseProfessionnelle"
+                         class="form-input border !border-gray-200 dark:!border-gray-800 w-full pl-9 pr-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:border-green-500"
+                         placeholder="Adresse de votre entreprise">
+                </div>
+              </div>
+
+              <!-- Colonne 2 - Numéro SIRET -->
+              <div>
+                <label class="font-semibold text-slate-700 dark:text-gray-300 text-sm block mb-1">Numéro SIRET</label>
+                <div class="relative">
+                  <i class="uil uil-file-alt absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                  <input type="text" [(ngModel)]="proprietaire.numeroSiret" name="numeroSiret"
+                         class="form-input border !border-gray-200 dark:!border-gray-800 w-full pl-9 pr-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:border-green-500"
+                         placeholder="XXX XXX XXX XXXXX">
+                </div>
+              </div>
+
+              <!-- Colonne 1 - Mot de passe (DERNIER) -->
+              <div>
+                <label class="font-semibold text-slate-700 dark:text-gray-300 text-sm block mb-1">Mot de passe <span class="text-red-500">*</span></label>
+                <div class="relative">
+                  <i class="uil uil-lock absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                  <input type="password" [(ngModel)]="proprietaire.password" name="password" required minlength="6"
+                         class="form-input border !border-gray-200 dark:!border-gray-800 w-full pl-9 pr-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all"
+                         placeholder="Minimum 6 caractères">
+                </div>
+              </div>
+
+              <!-- Colonne 2 - Confirmer mot de passe (DERNIER) -->
+              <div>
+                <label class="font-semibold text-slate-700 dark:text-gray-300 text-sm block mb-1">Confirmer mot de passe <span class="text-red-500">*</span></label>
+                <div class="relative">
+                  <i class="uil uil-lock absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                  <input type="password" [(ngModel)]="proprietaire.confirmPassword" name="confirmPassword" required
+                         class="form-input border !border-gray-200 dark:!border-gray-800 w-full pl-9 pr-3 py-2 text-sm border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all"
+                         placeholder="Confirmer votre mot de passe">
+                </div>
+                <!-- Message d'erreur -->
+                <div *ngIf="proprietaire.password !== proprietaire.confirmPassword && proprietaire.confirmPassword"
+                     class="text-red-500 text-xs mt-1">
+                  Les mots de passe ne correspondent pas
+                </div>
+              </div>
+            </div>
+
+            <!-- Checkbox -->
+            <div class="flex items-center gap-2 mt-5 pt-2">
+              <input type="checkbox"  name="acceptTerms" required
+                     class="w-3.5 h-3.5 rounded border-gray-300 text-green-600 focus:ring-green-500">
+              <label class="text-xs text-slate-600 dark:text-gray-400">
+                J'accepte les <a href="#" class="text-green-600 font-semibold">conditions générales</a>
+              </label>
+            </div>
+
+            <!-- Boutons -->
+            <div class="mt-4 space-y-3">
+              <div class="w-1/2 m-auto">
+                <button type="submit"
+                        [disabled]="proprietaire.password !== proprietaire.confirmPassword"
+                        class="w-full bg-green-600 text-white font-semibold py-2.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 shadow-lg text-sm"
+                        [class]="proprietaire.password === proprietaire.confirmPassword && proprietaire.password ? 'bg-green-600 hover:bg-green-700 text-white' : 'bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 cursor-not-allowed'" (click)="registerProprietaires()">
+                  <i class="uil uil-user-plus text-base"></i> Créer mon compte Propriétaire
+                </button>
+              </div>
+              <div class="text-center mt-4">
+                <button type="button" (click)="backToQuestion()" class="text-green-600 hover:text-green-700 text-xs font-semibold">← Retour</button>
+                <span class="text-slate-500 dark:text-gray-400 mx-2 text-xs">|</span>
+                <a routerLink="/auth-login" class="text-green-600 font-semibold text-xs">Se connecter</a>
+              </div>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="fixed bottom-3 end-3 z-10">
+  <a routerLink="/" class="back-button bg-green-600 hover:bg-green-700 text-white p-2.5 rounded-full shadow-lg transition-all duration-300 inline-flex items-center justify-center">
+    <i class="uil uil-arrow-left text-base"></i>
+  </a>
+</div>

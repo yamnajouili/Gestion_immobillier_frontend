@@ -1,0 +1,122 @@
+<div class="page-wrapper overflow-hidden" [ngClass]="{ 'toggled': activeSidebar }">
+  <app-sidebar/>
+
+  <main class="page-content bg-gray-50 dark:bg-slate-800 ">
+    <app-topbar (toggleClass)="toggleClass()"/>
+
+    <div class="container-fluid relative px-3 ">
+      <div class="layout-specing">
+
+
+
+        <div class="grid lg:grid-cols-12 grid-cols-12 mt-6 gap-6">
+
+          <div class="xl:col-span-6 lg:col-span-12 xl:col-span-12 col-span-12">
+            <div class="relative overflow-hidden rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 bg-white dark:bg-slate-900">
+              <div class="p-6 flex items-center justify-between border-b border-gray-100 dark:border-gray-800">
+                <h6 class="text-lg font-semibold">Mes Biens</h6>
+
+                <a [routerLink]="[]" class="btn btn-link font-normal text-slate-400 hover:text-green-600 after:bg-green-600 transition duration-500">Voir biens <i class="mdi mdi-arrow-right ms-1"></i></a>
+              </div>
+              <div class="flex justify-end">
+                <button type="button" routerLink="/add-property" class="btn m-4  bg-green-600 hover:bg-green-700 border-green-600 hover:border-green-700 text-white rounded-md px-6 py-2">
+                  + Ajouter Bien
+                </button>
+              </div>
+
+
+              <div class="relative overflow-x-auto block w-full xl:max-h-[284px] max-h-[350px]" data-simplebar>
+                <table class="w-full text-start">
+                  <thead class="text-base">
+                  <tr>
+                    <th class="text-start font-semibold text-[15px] px-4 py-3"></th>
+                    <th class="text-start font-semibold text-[15px] px-4 py-3 min-w-[140px]">Titre</th>
+                    <th class="text-start font-semibold text-[15px] px-4 py-3 min-w-[120px]">Description</th>
+                    <th class="text-start font-semibold text-[15px] px-4 py-3">Prix</th>
+                    <th class="text-start font-semibold text-[15px] px-4 py-3">Surface</th>
+                    <th class="text-start font-semibold text-[15px] px-4 py-3 min-w-[40px]">Type</th>
+                    <th class="text-start font-semibold text-[15px] px-4 py-3">Adresse</th>
+                    <th class="text-start font-semibold text-[15px] px-4 py-3">Ville</th>
+                    <th class="text-end font-semibold text-[15px] px-4 py-3 min-w-[70px]">Status</th>
+                  </tr>
+                  </thead>
+
+                  <tbody>
+                  <tr *ngFor="let bien of biens">
+                    <th class="text-start border-t border-gray-100 dark:border-gray-800 px-4 py-3 font-semibold">
+                      <div class="relative md:shrink-0">
+                        <img *ngIf="bien.images?.length" [src]="bien.images[0].url" class="object-cover size-12 min-w-[48px] rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700" alt="">
+                      </div>
+                    </th>
+                    <td class="text-start border-t border-gray-100 dark:border-gray-800 px-4 py-3">
+                      <span class="text-slate-400">{{bien.titre}}</span>
+                    </td>
+                    <th class="text-start border-t border-gray-100 dark:border-gray-800 px-4 py-3 font-semibold">{{bien.description}}</th>
+                    <td class="text-start border-t border-gray-100 dark:border-gray-800 px-4 py-3">
+                      <span class="text-slate-400">{{bien.prix}}</span>
+                    </td>
+                    <th class="text-start border-t border-gray-100 dark:border-gray-800 px-4 py-3 font-semibold">{{bien.surface}}</th>
+                    <td class="text-start border-t border-gray-100 dark:border-gray-800 px-4 py-3">
+                      <span class="text-slate-400">{{bien.type}}</span>
+                    </td>
+                    <th class="text-start border-t border-gray-100 dark:border-gray-800 px-4 py-3 font-semibold">{{bien.adresse}}</th>
+                    <td class="text-start border-t border-gray-100 dark:border-gray-800 px-4 py-3">
+                      <span class="text-slate-400">{{bien.ville}}</span>
+                    </td>
+                    <ng-container *ngIf="bien.disponible == true; else elseTemplate">
+                      <td class="text-end border-t border-gray-100 dark:border-gray-800 px-4 py-3">
+                        <span class="bg-emerald-600/10 dark:bg-emerald-600/20 border border-emerald-600/10 dark:border-emerald-600/20 text-emerald-600 text-[15px] font-medium px-2.5 py-0.5 rounded h-5 ms-1">Disponible</span>
+                      </td>
+                    </ng-container>
+                    <ng-template #elseTemplate>
+                      <td class="text-end border-t border-gray-100 dark:border-gray-800 px-4 py-3">
+                        <span class="bg-red-600/10 dark:bg-red-600/20 border border-red-600/10 dark:border-red-600/20 text-red-600 text-[15px] font-medium px-2.5 py-0.5 rounded h-5 ms-1">Indisponible</span>
+                      </td>
+                    </ng-template>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="grid md:grid-cols-12 grid-cols-1 mt-6">
+          <div class="md:col-span-12 text-center">
+            <nav>
+              <ul class="inline-flex items-center -space-x-px">
+                <li>
+                  <a [routerLink]="[]" (click)="$event.preventDefault()" class="size-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 bg-white dark:bg-slate-900 hover:text-white shadow-xs shadow-gray-200 dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">
+                    <i class="mdi mdi-chevron-left text-[20px]"></i>
+                  </a>
+                </li>
+                <li>
+                  <a [routerLink]="[]" (click)="$event.preventDefault()" class="size-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 hover:text-white bg-white dark:bg-slate-900 shadow-xs shadow-gray-200 dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">1</a>
+                </li>
+                <li>
+                  <a [routerLink]="[]" (click)="$event.preventDefault()" class="size-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 hover:text-white bg-white dark:bg-slate-900 shadow-xs shadow-gray-200 dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">2</a>
+                </li>
+                <li>
+                  <a [routerLink]="[]" (click)="$event.preventDefault()" aria-current="page" class="z-10 size-10 inline-flex justify-center items-center mx-1 rounded-full text-white bg-green-600 shadow-xs shadow-gray-200 dark:shadow-gray-700">3</a>
+                </li>
+                <li>
+                  <a [routerLink]="[]" (click)="$event.preventDefault()" class="size-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 hover:text-white bg-white dark:bg-slate-900 shadow-xs shadow-gray-200 dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">4</a>
+                </li>
+                <li>
+                  <a [routerLink]="[]" (click)="$event.preventDefault()" class="size-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 bg-white dark:bg-slate-900 hover:text-white shadow-xs shadow-gray-200 dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">
+                    <i class="mdi mdi-chevron-right text-[20px]"></i>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <app-footer-admin/>
+  </main>
+</div>

@@ -1,0 +1,885 @@
+<!--<div class="page-wrapper toggled overflow-hidden"-->
+<!--     [ngClass]="{ 'toggled': activeSidebar }">-->
+
+<!--  <app-sidebar/>-->
+
+<!--  <main class="page-content bg-gray-50 dark:bg-slate-800">-->
+
+<!--    <app-topbar (toggleClass)="toggleClass()"/>-->
+
+<!--    <div class="container-fluid relative px-3">-->
+
+<!--      <div class="layout-specing">-->
+
+<!--        &lt;!&ndash; HEADER &ndash;&gt;-->
+<!--        <div class="md:flex justify-between items-center">-->
+
+<!--          <h5 class="text-lg font-semibold">-->
+<!--            Ajouter Contrat-->
+<!--          </h5>-->
+
+<!--          <ul class="tracking-[0.5px] inline-block sm:mt-0 mt-3">-->
+
+<!--            <li class="inline-block capitalize text-[16px] font-medium duration-500 dark:text-white/70 hover:text-green-600">-->
+<!--              <a [routerLink]="'/'">-->
+<!--                Hously-->
+<!--              </a>-->
+<!--            </li>-->
+
+<!--            <li class="inline-block text-base text-slate-950 dark:text-white/70 mx-0.5">-->
+<!--              <i class="mdi mdi-chevron-right align-middle"></i>-->
+<!--            </li>-->
+
+<!--            <li class="inline-block capitalize text-[16px] font-medium text-green-600 dark:text-white">-->
+<!--              Ajouter Contrat-->
+<!--            </li>-->
+
+<!--          </ul>-->
+
+<!--        </div>-->
+
+<!--        <div class="container relative">-->
+
+<!--          <div class="grid md:grid-cols-2 grid-cols-1 gap-6 mt-6">-->
+
+<!--            &lt;!&ndash; LEFT CARD &ndash;&gt;-->
+<!--            <div class="rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 p-6 bg-white dark:bg-slate-900 h-fit">-->
+
+<!--              <div class="text-center">-->
+
+<!--                <div class="w-24 h-24 rounded-full bg-green-100 dark:bg-green-900/20 flex items-center justify-center mx-auto mb-4">-->
+<!--                  <i class="mdi mdi-file-document-outline text-green-600 text-5xl"></i>-->
+<!--                </div>-->
+
+<!--                <h4 class="text-xl font-semibold mb-2">-->
+<!--                  Nouveau Contrat-->
+<!--                </h4>-->
+
+<!--                <p class="text-slate-400">-->
+<!--                  Ajoutez un contrat de location-->
+<!--                  rapidement et facilement.-->
+<!--                </p>-->
+
+<!--              </div>-->
+
+<!--            </div>-->
+
+<!--            &lt;!&ndash; RIGHT FORM &ndash;&gt;-->
+<!--            <div class="rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 p-4 mb-4 bg-white dark:bg-slate-900 h-fit">-->
+
+<!--              &lt;!&ndash; STEPS &ndash;&gt;-->
+<!--              <div class="flex justify-between mb-4 border-b border-gray-300 pb-4">-->
+
+<!--                <div class="text-center flex-1">-->
+
+<!--                  <div-->
+<!--                    class="w-8 h-8 rounded-full mx-auto flex items-center justify-center"-->
+<!--                    [ngClass]="{-->
+<!--                      'bg-green-600 text-white': etape >= 1,-->
+<!--                      'bg-gray-200 text-gray-600': etape < 1-->
+<!--                    }">-->
+
+<!--                    1-->
+
+<!--                  </div>-->
+
+<!--                  <span class="text-xs mt-1 block">-->
+<!--                    Informations-->
+<!--                  </span>-->
+
+<!--                </div>-->
+
+<!--                <div class="text-center flex-1">-->
+
+<!--                  <div-->
+<!--                    class="w-8 h-8 rounded-full mx-auto flex items-center justify-center"-->
+<!--                    [ngClass]="{-->
+<!--                      'bg-green-600 text-white': etape >= 2,-->
+<!--                      'bg-gray-200 text-gray-600': etape < 2-->
+<!--                    }">-->
+
+<!--                    2-->
+
+<!--                  </div>-->
+
+<!--                  <span class="text-xs mt-1 block">-->
+<!--                    Montants-->
+<!--                  </span>-->
+
+<!--                </div>-->
+
+<!--                <div class="text-center flex-1">-->
+
+<!--                  <div-->
+<!--                    class="w-8 h-8 rounded-full mx-auto flex items-center justify-center"-->
+<!--                    [ngClass]="{-->
+<!--                      'bg-green-600 text-white': etape >= 3,-->
+<!--                      'bg-gray-200 text-gray-600': etape < 3-->
+<!--                    }">-->
+
+<!--                    3-->
+
+<!--                  </div>-->
+
+<!--                  <span class="text-xs mt-1 block">-->
+<!--                    Dates-->
+<!--                  </span>-->
+
+<!--                </div>-->
+
+<!--                <div class="text-center flex-1">-->
+
+<!--                  <div-->
+<!--                    class="w-8 h-8 rounded-full mx-auto flex items-center justify-center"-->
+<!--                    [ngClass]="{-->
+<!--                      'bg-green-600 text-white': etape >= 4,-->
+<!--                      'bg-gray-200 text-gray-600': etape < 4-->
+<!--                    }">-->
+
+<!--                    4-->
+
+<!--                  </div>-->
+
+<!--                  <span class="text-xs mt-1 block">-->
+<!--                    Confirmation-->
+<!--                  </span>-->
+
+<!--                </div>-->
+
+<!--              </div>-->
+
+<!--              &lt;!&ndash; FORM &ndash;&gt;-->
+<!--              <form>-->
+
+<!--                &lt;!&ndash; STEP 1 &ndash;&gt;-->
+<!--                <div *ngIf="etape === 1">-->
+
+<!--                  <div class="grid grid-cols-12 gap-5">-->
+
+<!--                    <div class="col-span-12">-->
+
+<!--                      <label class="font-medium">-->
+<!--                        Titre-->
+<!--                      </label>-->
+
+<!--                      <input-->
+<!--                        type="text"-->
+<!--                        class="form-input border !border-gray-200 dark:!border-gray-800 mt-2 w-full"-->
+<!--                        placeholder="Ex: Contrat appartement Lac 2"-->
+<!--                        [(ngModel)]="contrat.titre"-->
+<!--                        name="titre">-->
+
+<!--                    </div>-->
+
+<!--                    <div class="md:col-span-6 col-span-12">-->
+
+<!--                      <label class="font-medium">-->
+<!--                        Bien-->
+<!--                      </label>-->
+
+<!--                      <select-->
+<!--                        class="form-select form-input border !border-gray-200 dark:!border-gray-800 mt-2 w-full"-->
+<!--                        [(ngModel)]="contrat.bienId"-->
+<!--                        name="bienId">-->
+
+<!--                        <option value="">-->
+<!--                          Sélectionner-->
+<!--                        </option>-->
+
+<!--                        <option-->
+<!--                          *ngFor="let bien of biens"-->
+<!--                          [value]="bien.id">-->
+
+<!--                          {{ bien.titre }}-->
+
+<!--                        </option>-->
+
+<!--                      </select>-->
+
+<!--                    </div>-->
+
+<!--                    <div class="md:col-span-6 col-span-12">-->
+
+<!--                      <label class="font-medium">-->
+<!--                        Client ID-->
+<!--                      </label>-->
+
+<!--                      <input-->
+<!--                        type="number"-->
+<!--                        class="form-input border !border-gray-200 dark:!border-gray-800 mt-2 w-full"-->
+<!--                        [(ngModel)]="contrat.clientId"-->
+<!--                        name="clientId">-->
+
+<!--                    </div>-->
+
+<!--                    <div class="col-span-12">-->
+
+<!--                      <label class="font-medium">-->
+<!--                        Propriétaire ID-->
+<!--                      </label>-->
+
+<!--                      <input-->
+<!--                        type="number"-->
+<!--                        class="form-input border !border-gray-200 dark:!border-gray-800 mt-2 w-full"-->
+<!--                        [(ngModel)]="contrat.proprietaireId"-->
+<!--                        name="proprietaireId">-->
+
+<!--                    </div>-->
+
+<!--                  </div>-->
+
+<!--                </div>-->
+
+<!--                &lt;!&ndash; STEP 2 &ndash;&gt;-->
+<!--                <div *ngIf="etape === 2">-->
+
+<!--                  <div class="grid grid-cols-12 gap-5">-->
+
+<!--                    <div class="md:col-span-6 col-span-12">-->
+
+<!--                      <label class="font-medium">-->
+<!--                        Montant Loyer-->
+<!--                      </label>-->
+
+<!--                      <input-->
+<!--                        type="number"-->
+<!--                        class="form-input border !border-gray-200 dark:!border-gray-800 mt-2 w-full"-->
+<!--                        [(ngModel)]="contrat.montantLoyer"-->
+<!--                        name="montantLoyer">-->
+
+<!--                    </div>-->
+
+<!--                    <div class="md:col-span-6 col-span-12">-->
+
+<!--                      <label class="font-medium">-->
+<!--                        Caution-->
+<!--                      </label>-->
+
+<!--                      <input-->
+<!--                        type="number"-->
+<!--                        class="form-input border !border-gray-200 dark:!border-gray-800 mt-2 w-full"-->
+<!--                        [(ngModel)]="contrat.caution"-->
+<!--                        name="caution">-->
+
+<!--                    </div>-->
+
+<!--                  </div>-->
+
+<!--                </div>-->
+
+<!--                &lt;!&ndash; STEP 3 &ndash;&gt;-->
+<!--                <div *ngIf="etape === 3">-->
+
+<!--                  <div class="grid grid-cols-12 gap-5">-->
+
+<!--                    <div class="md:col-span-6 col-span-12">-->
+
+<!--                      <label class="font-medium">-->
+<!--                        Date début-->
+<!--                      </label>-->
+
+<!--                      <input-->
+<!--                        type="date"-->
+<!--                        class="form-input border !border-gray-200 dark:!border-gray-800 mt-2 w-full"-->
+<!--                        [(ngModel)]="contrat.dateDebut"-->
+<!--                        name="dateDebut">-->
+
+<!--                    </div>-->
+
+<!--                    <div class="md:col-span-6 col-span-12">-->
+
+<!--                      <label class="font-medium">-->
+<!--                        Date fin-->
+<!--                      </label>-->
+
+<!--                      <input-->
+<!--                        type="date"-->
+<!--                        class="form-input border !border-gray-200 dark:!border-gray-800 mt-2 w-full"-->
+<!--                        [(ngModel)]="contrat.dateFin"-->
+<!--                        name="dateFin">-->
+
+<!--                    </div>-->
+
+<!--                    <div class="col-span-12">-->
+
+<!--                      <label class="font-medium">-->
+<!--                        Statut-->
+<!--                      </label>-->
+
+<!--                      <select-->
+<!--                        class="form-select form-input border !border-gray-200 dark:!border-gray-800 mt-2 w-full"-->
+<!--                        [(ngModel)]="contrat.statut"-->
+<!--                        name="statut">-->
+
+<!--                        <option value="EN_ATTENTE">-->
+<!--                          En attente-->
+<!--                        </option>-->
+
+<!--                        <option value="EN_COURS">-->
+<!--                          En cours-->
+<!--                        </option>-->
+
+<!--                        <option value="TERMINE">-->
+<!--                          Terminé-->
+<!--                        </option>-->
+
+<!--                      </select>-->
+
+<!--                    </div>-->
+
+<!--                  </div>-->
+
+<!--                </div>-->
+
+<!--                &lt;!&ndash; STEP 4 &ndash;&gt;-->
+<!--                <div *ngIf="etape === 4">-->
+
+<!--                  <div class="text-center py-2">-->
+
+<!--                    <i class="mdi mdi-check-circle text-6xl text-green-600 mb-3"></i>-->
+
+<!--                    <h3 class="text-xl font-semibold mb-2">-->
+<!--                      Confirmation-->
+<!--                    </h3>-->
+
+<!--                    <p class="text-gray-500 mb-4">-->
+<!--                      Vérifiez les informations avant validation.-->
+<!--                    </p>-->
+
+<!--                    <div class="bg-gray-50 dark:bg-slate-800 p-4 rounded-lg text-left space-y-2">-->
+
+<!--                      <p>-->
+<!--                        <strong>Titre :</strong>-->
+<!--                        {{ contrat.titre }}-->
+<!--                      </p>-->
+
+<!--                      <p>-->
+<!--                        <strong>Loyer :</strong>-->
+<!--                        {{ contrat.montantLoyer }} TND-->
+<!--                      </p>-->
+
+<!--                      <p>-->
+<!--                        <strong>Caution :</strong>-->
+<!--                        {{ contrat.caution }} TND-->
+<!--                      </p>-->
+
+<!--                      <p>-->
+<!--                        <strong>Date début :</strong>-->
+<!--                        {{ contrat.dateDebut }}-->
+<!--                      </p>-->
+
+<!--                      <p>-->
+<!--                        <strong>Date fin :</strong>-->
+<!--                        {{ contrat.dateFin }}-->
+<!--                      </p>-->
+
+<!--                      <p>-->
+<!--                        <strong>Statut :</strong>-->
+<!--                        {{ contrat.statut }}-->
+<!--                      </p>-->
+
+<!--                    </div>-->
+
+<!--                  </div>-->
+
+<!--                </div>-->
+
+<!--                &lt;!&ndash; BUTTONS &ndash;&gt;-->
+<!--                <div class="flex justify-between mt-3 pt-3 border-t border-gray-300">-->
+
+<!--                  <button-->
+<!--                    type="button"-->
+<!--                    *ngIf="etape > 1"-->
+<!--                    (click)="prevStep()"-->
+<!--                    class="btn bg-gray-500 hover:bg-gray-600 text-white rounded-md px-6 py-2">-->
+
+<!--                    ← Précédent-->
+
+<!--                  </button>-->
+
+<!--                  <div class="flex-grow"></div>-->
+
+<!--                  <button-->
+<!--                    type="button"-->
+<!--                    *ngIf="etape < 4"-->
+<!--                    (click)="nextStep()"-->
+<!--                    class="btn bg-green-600 hover:bg-green-700 text-white rounded-md px-6 py-2">-->
+
+<!--                    Suivant →-->
+
+<!--                  </button>-->
+
+<!--                  <button-->
+<!--                    type="submit"-->
+<!--                    *ngIf="etape === 4"-->
+<!--                    [disabled]="isLoading"-->
+
+<!--                    class="btn bg-green-600 hover:bg-green-700 text-white rounded-md px-6 py-2">-->
+
+<!--                    Ajouter Contrat-->
+
+<!--                  </button>-->
+
+<!--                </div>-->
+
+<!--              </form>-->
+
+<!--            </div>-->
+
+<!--          </div>-->
+
+<!--        </div>-->
+
+<!--      </div>-->
+
+<!--    </div>-->
+
+<!--    <app-footer-admin/>-->
+
+<!--  </main>-->
+
+<!--</div>-->
+<div class="page-wrapper toggled overflow-hidden"
+     [ngClass]="{ 'toggled': activeSidebar }">
+
+  <app-sidebar/>
+
+  <main class="page-content bg-gray-50 dark:bg-slate-800">
+
+    <app-topbar (toggleClass)="toggleClass()"/>
+
+    <div class="container-fluid relative px-3">
+
+      <div class="layout-specing">
+
+        <!-- HEADER -->
+        <div class="md:flex justify-between items-center">
+
+          <h5 class="text-lg font-semibold">
+            Ajouter Contrat
+          </h5>
+
+          <ul class="tracking-[0.5px] inline-block sm:mt-0 mt-3">
+
+            <li class="inline-block capitalize text-[16px] font-medium duration-500 dark:text-white/70 hover:text-green-600">
+              <a [routerLink]="'/'">
+                Hously
+              </a>
+            </li>
+
+            <li class="inline-block text-base text-slate-950 dark:text-white/70 mx-0.5">
+              <i class="mdi mdi-chevron-right align-middle"></i>
+            </li>
+
+            <li class="inline-block capitalize text-[16px] font-medium text-green-600 dark:text-white">
+              Ajouter Contrat
+            </li>
+
+          </ul>
+
+        </div>
+
+        <div class="container relative">
+
+          <div class="grid md:grid-cols-2 grid-cols-1 gap-6 mt-6">
+
+            <!-- LEFT CARD -->
+            <div class="rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 p-6 bg-white dark:bg-slate-900 h-fit">
+
+              <div class="text-center">
+
+                <div class="w-24 h-24 rounded-full bg-green-100 dark:bg-green-900/20 flex items-center justify-center mx-auto mb-4">
+                  <i class="mdi mdi-file-document-outline text-green-600 text-5xl"></i>
+                </div>
+
+                <h4 class="text-xl font-semibold mb-2">
+                  Nouveau Contrat
+                </h4>
+
+                <p class="text-slate-400">
+                  Ajoutez un contrat de location
+                  rapidement et facilement.
+                </p>
+
+                <div class="mt-4 p-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg inline-block">
+                  <i class="mdi mdi-email-outline text-blue-600 text-sm"></i>
+                  <span class="text-xs text-blue-600 dark:text-blue-400 ml-1">
+                    Un email sera envoyé au client
+                  </span>
+                </div>
+
+              </div>
+
+            </div>
+
+            <!-- RIGHT FORM -->
+            <div class="rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 p-3 mb-2 bg-white dark:bg-slate-900">
+
+              <!-- STEPS -->
+              <div class="flex justify-between mb-3 border-b border-gray-300 pb-3">
+
+                <div class="text-center flex-1">
+                  <div class="w-8 h-8 rounded-full mx-auto flex items-center justify-center"
+                       [ngClass]="{
+                         'bg-green-600 text-white': etape >= 1,
+                         'bg-gray-200 text-gray-600': etape < 1
+                       }">
+                    1
+                  </div>
+                  <span class="text-xs mt-1 block">Informations</span>
+                </div>
+
+                <div class="text-center flex-1">
+                  <div class="w-8 h-8 rounded-full mx-auto flex items-center justify-center"
+                       [ngClass]="{
+                         'bg-green-600 text-white': etape >= 2,
+                         'bg-gray-200 text-gray-600': etape < 2
+                       }">
+                    2
+                  </div>
+                  <span class="text-xs mt-1 block">Montants</span>
+                </div>
+
+                <div class="text-center flex-1">
+                  <div class="w-8 h-8 rounded-full mx-auto flex items-center justify-center"
+                       [ngClass]="{
+                         'bg-green-600 text-white': etape >= 3,
+                         'bg-gray-200 text-gray-600': etape < 3
+                       }">
+                    3
+                  </div>
+                  <span class="text-xs mt-1 block">Dates</span>
+                </div>
+
+                <div class="text-center flex-1">
+                  <div class="w-8 h-8 rounded-full mx-auto flex items-center justify-center"
+                       [ngClass]="{
+                         'bg-green-600 text-white': etape >= 4,
+                         'bg-gray-200 text-gray-600': etape < 4
+                       }">
+                    4
+                  </div>
+                  <span class="text-xs mt-1 block">Confirmation</span>
+                </div>
+
+              </div>
+
+              <!-- FORM -->
+              <form (ngSubmit)="submit()">
+
+                <!-- STEP 1 - Informations -->
+                <div *ngIf="etape === 1">
+
+                  <div class="grid grid-cols-12 gap-5">
+
+                    <div class="col-span-12">
+
+                      <label class="font-medium">
+                        Titre du contrat
+                      </label>
+
+                      <input
+                        type="text"
+                        class="form-input border !border-gray-200 dark:!border-gray-800 mt-2 w-full"
+                        placeholder="Ex: Contrat appartement Lac 2"
+                        [(ngModel)]="contrat.titre"
+                        name="titre"
+                        required>
+
+                    </div>
+
+                    <div class="col-span-12">
+
+                      <label class="font-medium">
+                        Bien immobilier
+                      </label>
+
+                      <select
+                        class="form-select form-input border !border-gray-200 dark:!border-gray-800 mt-2 w-full"
+                        [(ngModel)]="contrat.bienId"
+                        name="bienId"
+                        required>
+
+                        <option value="">
+                          Sélectionner un bien
+                        </option>
+
+                        <option
+                          *ngFor="let bien of biens"
+                          [value]="bien.id">
+
+                          {{ bien.titre }} - {{ bien.adresse }}
+
+                        </option>
+
+                      </select>
+
+                    </div>
+
+                    <div class="col-span-12">
+
+                      <label class="font-medium">
+                        Email du client
+                      </label>
+
+                      <input
+                        type="email"
+                        class="form-input border !border-gray-200 dark:!border-gray-800 mt-2 w-full"
+                        placeholder="client@exemple.com"
+                        [(ngModel)]="contrat.clientEmail"
+                        name="clientEmail"
+                        required>
+
+                      <p class="text-xs text-gray-500 mt-1">
+                        Un email avec les détails du contrat sera envoyé à cette adresse
+                      </p>
+
+                    </div>
+
+
+
+                  </div>
+
+                </div>
+
+                <!-- STEP 2 - Montants -->
+                <div *ngIf="etape === 2">
+
+                  <div class="grid grid-cols-12 gap-5">
+
+                    <div class="md:col-span-6 col-span-12">
+
+                      <label class="font-medium">
+                        Montant Loyer (TND)
+                      </label>
+
+                      <input
+                        type="number"
+                        class="form-input border !border-gray-200 dark:!border-gray-800 mt-2 w-full"
+                        [(ngModel)]="contrat.montantLoyer"
+                        name="montantLoyer"
+                        placeholder="1200"
+                        required>
+
+                    </div>
+
+                    <div class="md:col-span-6 col-span-12">
+
+                      <label class="font-medium">
+                        Caution (TND)
+                      </label>
+
+                      <input
+                        type="number"
+                        class="form-input border !border-gray-200 dark:!border-gray-800 mt-2 w-full"
+                        [(ngModel)]="contrat.caution"
+                        name="caution"
+                        placeholder="2400"
+                        required>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <!-- STEP 3 - Dates -->
+                <div *ngIf="etape === 3">
+
+                  <div class="grid grid-cols-12 gap-5">
+
+                    <div class="md:col-span-6 col-span-12">
+
+                      <label class="font-medium">
+                        Date de début
+                      </label>
+
+                      <input
+                        type="date"
+                        class="form-input border !border-gray-200 dark:!border-gray-800 mt-2 w-full"
+                        [(ngModel)]="contrat.dateDebut"
+                        name="dateDebut"
+                        required>
+
+                    </div>
+
+                    <div class="md:col-span-6 col-span-12">
+
+                      <label class="font-medium">
+                        Date de fin
+                      </label>
+
+                      <input
+                        type="date"
+                        class="form-input border !border-gray-200 dark:!border-gray-800 mt-2 w-full"
+                        [(ngModel)]="contrat.dateFin"
+                        name="dateFin"
+                        required>
+
+                    </div>
+
+                    <div class="col-span-12">
+
+                      <label class="font-medium">
+                        Statut
+                      </label>
+
+                      <select
+                        class="form-select form-input border !border-gray-200 dark:!border-gray-800 mt-2 w-full"
+                        [(ngModel)]="contrat.statut"
+                        name="statut">
+
+                        <option value="EN_ATTENTE">
+                          En attente
+                        </option>
+
+                        <option value="EN_COURS">
+                          En cours
+                        </option>
+
+                        <option value="TERMINE">
+                          Terminé
+                        </option>
+
+                      </select>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <!-- STEP 4 - Confirmation -->
+                <div *ngIf="etape === 4">
+
+                  <div class="text-center py-1">
+
+                    <i class="mdi mdi-check-circle text-3xl text-green-600 mb-1"></i>
+
+                    <h3 class="text-xl font-semibold mb-1">
+                      Confirmation
+                    </h3>
+
+                    <p class="text-gray-500 mb-3">
+                      Vérifiez les informations avant validation.
+                    </p>
+
+                    <div class="bg-gray-50 dark:bg-slate-800 p-2 rounded-lg text-left space-y-1">
+
+                      <p class="flex justify-between items-center ">
+                        <strong class="text-gray-600">Titre :</strong>
+                        <span>{{ contrat.titre }}</span>
+                      </p>
+
+                      <p class="flex justify-between items-center ">
+                        <strong class="text-gray-600">Bien :</strong>
+                        <span>{{ (contrat.bienId)  || '-' }}</span>
+                      </p>
+
+                      <p class="flex justify-between items-center ">
+                        <strong class="text-gray-600">Email client :</strong>
+                        <span class="text-blue-600">{{ contrat.clientEmail }}</span>
+                      </p>
+
+
+                      <p class="flex justify-between items-center ">
+                        <strong class="text-gray-600">Loyer :</strong>
+                        <span class="font-semibold text-green-600">{{ contrat.montantLoyer }} TND</span>
+                      </p>
+
+                      <p class="flex justify-between items-center ">
+                        <strong class="text-gray-600">Caution :</strong>
+                        <span>{{ contrat.caution }} TND</span>
+                      </p>
+
+                      <p class="flex justify-between items-center ">
+                        <strong class="text-gray-600">Date début :</strong>
+                        <span>{{ contrat.dateDebut | date:'dd/MM/yyyy' }}</span>
+                      </p>
+
+                      <p class="flex justify-between items-center ">
+                        <strong class="text-gray-600">Date fin :</strong>
+                        <span>{{ contrat.dateFin | date:'dd/MM/yyyy' }}</span>
+                      </p>
+
+                      <p class="flex justify-between items-center">
+                        <strong class="text-gray-600">Statut :</strong>
+                        <span class="px-2 py-1 rounded-full text-xs"
+                              [ngClass]="{
+                                'bg-yellow-100 text-yellow-700': contrat.statut === 'EN_ATTENTE',
+                                'bg-green-100 text-green-700': contrat.statut === 'EN_COURS',
+                                'bg-gray-100 text-gray-700': contrat.statut === 'TERMINE'
+                              }">
+                          {{ contrat.statut  || '-' }}
+                        </span>
+                      </p>
+
+                    </div>
+
+<!--                    <div class="mt-4 p-2 bg-green-50 dark:bg-green-900/20 rounded-lg">-->
+<!--                      <i class="mdi mdi-email-send text-green-600"></i>-->
+<!--                      <span class="text-sm text-green-600 dark:text-green-400 ml-2">-->
+<!--                        Un email sera envoyé à {{ contrat.clientEmail }}-->
+<!--                      </span>-->
+<!--                    </div>-->
+
+                  </div>
+
+                </div>
+
+                <!-- BUTTONS -->
+                <div class="flex justify-between mt-2 pt-2 border-t border-gray-300">
+
+                  <button
+                    type="button"
+                    *ngIf="etape > 1"
+                    (click)="prevStep()"
+                    class="btn bg-gray-500 hover:bg-gray-600 text-white rounded-md px-5 py-2 transition duration-300">
+
+                    ← Précédent
+
+                  </button>
+
+                  <div class="flex-grow"></div>
+
+                  <button
+                    type="button"
+                    *ngIf="etape < 4"
+                    (click)="nextStep()"
+                    class="btn bg-green-600 hover:bg-green-700 text-white rounded-md px-6 py-2 transition duration-300">
+
+                    Suivant →
+
+                  </button>
+
+                  <button
+                    type="submit"
+                    *ngIf="etape === 4"
+                    [disabled]="isLoading"
+                    class="btn bg-green-600 hover:bg-green-700 text-white rounded-md px-6 py-2 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
+
+                    <i class="mdi mdi-check-circle mr-1" *ngIf="!isLoading"></i>
+                    <i class="mdi mdi-loading mdi-spin mr-1" *ngIf="isLoading"></i>
+                    {{ isLoading ? 'Création en cours...' : 'Ajouter Contrat' }}
+
+                  </button>
+
+                </div>
+
+              </form>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <app-footer-admin/>
+
+  </main>
+
+</div>

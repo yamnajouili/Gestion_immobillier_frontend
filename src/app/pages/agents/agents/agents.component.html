@@ -1,0 +1,44 @@
+<app-navbar [childMessage]="'true'" [navLight]="true"/>
+
+<section class="relative table w-full py-32 lg:py-36 bg-[url('/assets/images/bg/01.jpg')] bg-no-repeat bg-center bg-cover">
+    <div class="absolute inset-0 bg-slate-900/80"></div>
+    <div class="container relative">
+        <div class="grid grid-cols-1 text-center mt-10">
+            <h3 class="md:text-4xl text-3xl md:leading-normal leading-normal font-medium text-white">Agents / Brokers</h3>
+        </div>
+    </div>
+</section>
+<div class="relative">
+    <div class="shape overflow-hidden z-1 text-white dark:text-slate-900">
+        <svg viewBox="0 0 2880 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="currentColor"></path>
+        </svg>
+    </div>
+</div>
+
+<section class="relative lg:py-24 py-16">
+    <div class="container relative">
+        <div class="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-[30px]">
+            <div *ngFor="let item of agentData" class="group text-center">
+                <div class="relative inline-block mx-auto size-52 !rounded-full overflow-hidden">
+                    <img [src]="item.image" class="" alt="">
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black size-52 !rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out"></div>
+
+                    <ul class="list-none absolute start-0 end-0 -bottom-20 group-hover:bottom-5 transition-all duration-500 ease-in-out">
+                        <li class="inline mx-0.5"><a [routerLink]="[]" class="btn btn-icon btn-sm !rounded-full border border-green-600 bg-green-600 hover:border-green-600 hover:bg-green-600 text-white"><i data-feather="facebook" class="size-4"></i></a></li>
+                        <li class="inline mx-0.5"><a [routerLink]="[]" class="btn btn-icon btn-sm !rounded-full border border-green-600 bg-green-600 hover:border-green-600 hover:bg-green-600 text-white"><i data-feather="instagram" class="size-4"></i></a></li>
+                        <li class="inline mx-0.5"><a [routerLink]="[]" class="btn btn-icon btn-sm !rounded-full border border-green-600 bg-green-600 hover:border-green-600 hover:bg-green-600 text-white"><i data-feather="linkedin" class="size-4"></i></a></li>
+                    </ul>
+                </div>
+
+                <div class="content mt-3">
+                    <a [routerLink]="'/agent-profile'" class="text-xl font-medium hover:text-green-600 transition-all duration-500 ease-in-out">Jack John</a>
+                    <p class="text-slate-400">Property Broker</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   <app-get-in-touch/>
+</section>
+<app-footer/>

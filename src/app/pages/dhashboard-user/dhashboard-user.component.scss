@@ -1,0 +1,109 @@
+//// Styles supplémentaires pour le dashboard
+//.line-clamp-1 {
+//  display: -webkit-box;
+//  -webkit-line-clamp: 1;
+//  -webkit-box-orient: vertical;
+//  overflow: hidden;
+//}
+//
+//// Animations personnalisées
+//@keyframes fadeIn {
+//  from {
+//    opacity: 0;
+//    transform: translateY(10px);
+//  }
+//  to {
+//    opacity: 1;
+//    transform: translateY(0);
+//  }
+//}
+//
+//// Appliquer l'animation aux éléments du dashboard
+//.bg-white, .bg-dark {
+//  animation: fadeIn 0.5s ease-out;
+//}
+//
+//// Scrollbar personnalisée
+//::-webkit-scrollbar {
+//  width: 8px;
+//  height: 8px;
+//}
+//
+//::-webkit-scrollbar-track {
+//  background: #f1f1f1;
+//  border-radius: 10px;
+//}
+//
+//::-webkit-scrollbar-thumb {
+//  background: #c1c1c1;
+//  border-radius: 10px;
+//  transition: background 0.3s ease;
+//
+//  &:hover {
+//    background: #a8a8a8;
+//  }
+//}
+//
+//// Dark mode scrollbar
+//:host-context(.dark) {
+//  ::-webkit-scrollbar-track {
+//    background: #1e293b;
+//  }
+//
+//  ::-webkit-scrollbar-thumb {
+//    background: #475569;
+//
+//    &:hover {
+//      background: #64748b;
+//    }
+//  }
+//}
+//
+//// Effets de hover améliorés
+//.hover-lift {
+//  transition: transform 0.3s ease, box-shadow 0.3s ease;
+//
+//  &:hover {
+//    transform: translateY(-5px);
+//    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+//  }
+//}
+//
+//// Style pour les boutons
+//.btn-icon {
+//  transition: all 0.3s ease;
+//
+//  &:hover {
+//    transform: scale(1.1);
+//  }
+//}
+//
+//// Responsive table
+//@media (max-width: 768px) {
+//  .responsive-table {
+//    display: block;
+//    overflow-x: auto;
+//    white-space: nowrap;
+//  }
+//}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-container {
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 1rem;
+}

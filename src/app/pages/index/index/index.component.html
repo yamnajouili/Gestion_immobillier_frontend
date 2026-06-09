@@ -1,0 +1,200 @@
+<app-navbar></app-navbar>
+
+<section class="relative mt-20">
+    <div class="container-fluid md:mx-4 mx-2">
+        <div class="relative pt-40 pb-52 table w-full rounded-2xl shadow-md overflow-hidden bg-[url('/assets/images/bg/01.jpg')] bg-no-repeat bg-center bg-cover" id="home">
+            <div class="absolute inset-0 bg-slate-900/60"></div>
+
+            <div class="container relative">
+                <div class="grid grid-cols-1">
+                    <div class="md:text-start text-center">
+                        <h1 class="font-bold text-white lg:leading-normal leading-normal text-4xl lg:text-5xl mb-6">Nous vous aiderons à trouver <br> votre  <span class="text-green-600">magnifique </span> maison</h1>
+                        <p class="text-white/70 text-xl max-w-xl">Une excellente plateforme pour acheter, vendre et louer vos biens immobiliers en toute simplicité, sans aucun frais de commission.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="relative md:pb-24 pb-16">
+    <div class="container relative">
+        <div class="grid grid-cols-1 justify-center">
+            <div class="relative -mt-32">
+                <div class="grid grid-cols-1">
+                    <ul class="inline-block sm:w-fit w-full flex-wrap justify-center text-center p-4 bg-white dark:bg-slate-900 rounded-t-xl border-b border-gray-200 dark:border-gray-800" id="myTab" data-tabs-toggle="#StarterContent" role="tablist">
+                        <li role="presentation" class="inline-block">
+                            <button class="px-6 py-2 text-base font-medium rounded-md w-full hover:text-green-600 transition-all duration-500 ease-in-out" id="buy-home-tab" (click)="formTab(1)" [ngClass]="activeindex === 1 ? 'text-white bg-green-600 hover:text-white' : '' ">Acheter</button>
+                        </li>
+                        <li role="presentation" class="inline-block">
+                            <button class="px-6 py-2 text-base font-medium rounded-md w-full hover:text-green-600 transition-all duration-500 ease-in-out" [ngClass]="activeindex === 2 ? 'text-white bg-green-600 hover:text-white' : '' " (click)="formTab(2)" >Vendre</button>
+                        </li>
+                        <li role="presentation" class="inline-block">
+                            <button class="px-6 py-2 text-base font-medium rounded-md w-full hover:text-green-600 transition-all duration-500 ease-in-out" [ngClass]="activeindex === 3 ? 'text-white bg-green-600 hover:text-white' : '' "  (click)="formTab(3)">Louer</button>
+                        </li>
+                    </ul>
+
+                    <div id="StarterContent" class="p-6 bg-white dark:bg-slate-900 rounded-ss-none rounded-se-none md:rounded-se-xl rounded-xl shadow-md shadow-gyay-200 dark:shadow-gray-700">
+
+                        <div [ngClass]="activeindex===1 ? '' : 'hidden' " id="buy-home" role="tabpanel" aria-labelledby="buy-home-tab">
+                            <form action="#">
+                                <div class="registration-form text-dark text-start">
+                                    <div class="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 lg:gap-0 gap-6">
+                                        <div>
+                                            <label class="form-label font-medium text-slate-900 dark:text-white">Rechercher : <span class="text-red-600">*</span></label>
+                                            <div class="filter-search-form relative filter-border mt-2">
+                                                <i class="uil uil-search icons"></i>
+                                                <input name="name" type="text" id="job-keyword" class="form-input filter-input-box !bg-gray-50 dark:!bg-slate-800 border-0" placeholder="Recherchez vos mots-clés">
+                                            </div>
+                                        </div>
+
+
+                                        <div>
+                                            <label for="buy-properties" class="form-label font-medium text-slate-900 dark:text-white">Sélectionnez catégories:</label>
+                                            <div class="filter-search-form relative filter-border mt-2">
+                                                <i class="uil uil-estate icons"></i>
+                                                <ng-select class="form-input w-full filter-input-box !bg-gray-50 h-[60px] dark:!bg-slate-800 border-0 focus:ring-0 ps-10" [items]="property" bindLabel="name" bindValue="id" placeholder="maison">
+                                                </ng-select>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <label for="buy-min-price" class="form-label font-medium text-slate-900 dark:text-white">Prix Min:</label>
+                                            <div class="filter-search-form relative filter-border mt-2">
+                                                <i class="uil uil-usd-circle icons"></i>
+                                                <ng-select class="form-input w-full filter-input-box !bg-gray-50 h-[60px] dark:!bg-slate-800 border-0 focus:ring-0 ps-10" [items]="minPrice" bindLabel="name" bindValue="id" placeholder="500">
+                                                </ng-select>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <label for="buy-max-price" class="form-label font-medium text-slate-900 dark:text-white">Prix Max :</label>
+                                            <div class="filter-search-form relative mt-2">
+                                                <i class="uil uil-usd-circle icons"></i>
+                                                <ng-select class="form-input w-full filter-input-box !bg-gray-50 h-[60px] dark:!bg-slate-800 border-0 focus:ring-0 ps-10" [items]="maxPrice" bindLabel="name" bindValue="id" placeholder="6000">
+                                                </ng-select>
+                                            </div>
+                                        </div>
+
+                                        <div class="lg:mt-6">
+                                            <input type="submit" id="search-buy" name="search" class="btn bg-green-600 hover:bg-green-700 border-green-600 hover:border-green-700 text-white searchbtn submit-btn w-full !h-12 rounded" value="Rechercher">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div [ngClass]="activeindex===2 ? '' : 'hidden' " id="sell-home" role="tabpanel" aria-labelledby="sell-home-tab">
+                            <form action="#">
+                                <div class="registration-form text-dark ltr:text-start rtl:text-end">
+                                    <div class="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 lg:gap-0 gap-6">
+                                        <div>
+                                            <label class="form-label font-medium text-slate-900 dark:text-white"> rechercher: <span class="text-red-600">*</span></label>
+                                            <div class="filter-search-form relative filter-border mt-2">
+                                                <i class="uil uil-search icons"></i>
+                                                <input name="name" type="text" id="job-keyword" class="form-input filter-input-box !bg-gray-50 dark:!bg-slate-800 border-0" placeholder="Recherchez vos mots-clés">
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <label for="buy-properties" class="form-label font-medium text-slate-900 dark:text-white">Select Categories:</label>
+                                            <div class="filter-search-form relative filter-border mt-2">
+                                                <i class="uil uil-estate icons"></i>
+                                                <ng-select class="form-input w-full filter-input-box !bg-gray-50 h-[60px] dark:!bg-slate-800 border-0 focus:ring-0 ps-10" [items]="property" bindLabel="name" bindValue="id" placeholder="maison">
+                                                </ng-select>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <label for="buy-min-price" class="form-label font-medium text-slate-900 dark:text-white">Min Price :</label>
+                                            <div class="filter-search-form relative filter-border mt-2">
+                                                <i class="uil uil-usd-circle icons"></i>
+                                                <ng-select class="form-input w-full filter-input-box !bg-gray-50 h-[60px] dark:!bg-slate-800 border-0 focus:ring-0 ps-10" [items]="minPrice" bindLabel="name" bindValue="id" placeholder="500">
+                                                </ng-select>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <label for="buy-max-price" class="form-label font-medium text-slate-900 dark:text-white">Max Price :</label>
+                                            <div class="filter-search-form relative mt-2">
+                                                <i class="uil uil-usd-circle icons"></i>
+                                                <ng-select class="form-input w-full filter-input-box !bg-gray-50 h-[60px] dark:!bg-slate-800 border-0 focus:ring-0 ps-10" [items]="maxPrice" bindLabel="name" bindValue="id" placeholder="6000">
+                                                </ng-select>
+                                            </div>
+                                        </div>
+
+                                        <div class="lg:mt-6">
+                                            <input type="submit" id="search-sell" name="search" class="btn bg-green-600 hover:bg-green-700 border-green-600 hover:border-green-700 text-white searchbtn submit-btn w-full !h-12 rounded" value="Search">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div [ngClass]="activeindex=== 3? '' : 'hidden' " id="rent-home" role="tabpanel" aria-labelledby="rent-home-tab">
+                            <form action="#">
+                                <div class="registration-form text-dark ltr:text-start rtl:text-end">
+                                    <div class="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 lg:gap-0 gap-6">
+                                        <div>
+                                            <label class="form-label font-medium text-slate-900 dark:text-white">Search : <span class="text-red-600">*</span></label>
+                                            <div class="filter-search-form relative filter-border mt-2">
+                                                <i class="uil uil-search icons"></i>
+                                                <input name="name" type="text" id="job-keyword" class="form-input filter-input-box !bg-gray-50 dark:!bg-slate-800 border-0" placeholder="Search your keaywords">
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <label for="buy-properties" class="form-label font-medium text-slate-900 dark:text-white">Select Categories:</label>
+                                            <div class="filter-search-form relative filter-border mt-2">
+                                                <i class="uil uil-estate icons"></i>
+                                                <ng-select class="form-input w-full filter-input-box !bg-gray-50 h-[60px] dark:!bg-slate-800 border-0 focus:ring-0 ps-10" [items]="property" bindLabel="name" bindValue="id" placeholder="House">
+                                                </ng-select>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <label for="buy-min-price" class="form-label font-medium text-slate-900 dark:text-white">Min Price :</label>
+                                            <div class="filter-search-form relative filter-border mt-2">
+                                                <i class="uil uil-usd-circle icons"></i>
+                                                <ng-select class="form-input w-full filter-input-box !bg-gray-50 h-[60px] dark:!bg-slate-800 border-0 focus:ring-0 ps-10" [items]="minPrice" bindLabel="name" bindValue="id" placeholder="500">
+                                                </ng-select>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <label for="buy-max-price" class="form-label font-medium text-slate-900 dark:text-white">Max Price :</label>
+                                            <div class="filter-search-form relative mt-2">
+                                                <i class="uil uil-usd-circle icons"></i>
+                                                <ng-select class="form-input w-full filter-input-box !bg-gray-50 h-[60px] dark:!bg-slate-800 border-0 focus:ring-0 ps-10" [items]="maxPrice" bindLabel="name" bindValue="id" placeholder="6000">
+                                                </ng-select>
+                                            </div>
+                                        </div>
+
+                                        <div class="lg:mt-6">
+                                            <input type="submit" id="search-rent" name="search" class="btn bg-green-600 hover:bg-green-700 border-green-600 hover:border-green-700 text-white searchbtn submit-btn w-full !h-12 rounded" value="Search">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+  <app-about></app-about>
+
+    <app-features></app-features>
+
+    <app-properties></app-properties>
+
+    <app-clients></app-clients>
+
+    <app-get-in-touch></app-get-in-touch>
+
+</section>
+<app-footer></app-footer>
+<app-switcher></app-switcher>

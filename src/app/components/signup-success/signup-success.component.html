@@ -1,0 +1,31 @@
+<section class="relative h-screen flex justify-center items-center bg-slate-50 dark:bg-slate-800">
+  <div class="container">
+    <div class="md:flex justify-center">
+      <div class="lg:w-2/5">
+        <div class="relative overflow-hidden rounded-md bg-white dark:bg-slate-900 shadow-sm dark:shadow-gray-800">
+          <div class="px-6 py-12 bg-green-600 text-center">
+            <i class="mdi mdi-check-circle-outline text-white text-8xl"></i>
+            <h5 class="text-white text-xl tracking-wide uppercase font-semibold mt-2">Succès</h5>
+          </div>
+
+          <div class="px-6 py-12 text-center">
+            <p class="text-black font-semibold text-xl dark:text-white">Félicitations ! 🎉</p>
+            <p class="text-slate-400 mt-4">
+              Votre compte propriétaire a été créé avec succès.<br>
+              Vous pouvez dès maintenant publier vos biens immobiliers et gérer votre espace professionnel.
+            </p>
+
+            <div class="mt-6">
+              <a [routerLink]="'/dhashboard-pro'" class="btn bg-green-600 hover:bg-green-700 border-green-600 hover:border-green-700 text-white rounded-md">Commencer</a>
+            </div>
+          </div>
+
+          <div class="text-center p-6 border-t border-gray-100 dark:border-gray-700">
+            <p class="mb-0 text-slate-400 font-medium">© {{date}} Hously. Design avec <i class="mdi mdi-heart text-red-600"></i> par <a href="https://shreethemes.in/" target="_blank" class="text-reset">Shreethemes</a>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<app-back-to-home/>
