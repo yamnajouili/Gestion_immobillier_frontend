@@ -1,167 +1,714 @@
 <div class="page-wrapper toggled" [ngClass]="{ 'toggled': activeSidebar }">
-   <app-sidebar/>
 
-    <main class="page-content bg-gray-50 dark:bg-slate-800">
-        <app-topbar (toggleClass)="toggleClass()"/>
+  <!-- CLIENT -->
+  <app-sidebaruser
+    *ngIf="user?.role === 'CLIENT'">
+  </app-sidebaruser>
 
-        <div class="container-fluid relative px-3">
-            <div class="layout-specing">
-                <div class="grid grid-cols-1">
-                    <div class="profile-banner relative text-transparent rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 overflow-hidden">
-                        <input id="pro-banner" name="profile-banner" type="file" class="hidden" onchange="loadFile(event)">
-                        <div class="relative shrink-0">
-                            <img  [src]="'/assets/images/bg.jpg'"  class="h-80 w-full object-cover" id="profile-banner" alt="">
-                            <div class="absolute inset-0 bg-slate-900/70"></div>
-                            <label class="absolute inset-0 cursor-pointer" for="pro-banner"></label>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="grid md:grid-cols-12 grid-cols-1 gap-6 mt-6">
-                    <div class="xl:col-span-3 lg:col-span-4 md:col-span-4">
-                        <div class="p-6 relative rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 bg-white dark:bg-slate-900">
-                            <div class="profile-pic text-center">
-                                <input id="pro-img" name="profile-image" type="file" class="hidden" onchange="loadFile(event)" />
-                                <div>
-                                    <div class="relative size-24 mx-auto">
-                                        <img [src]="'/assets/images/client/07.jpg'" class="rounded-full shadow-sm shadow-gray-200 dark:shadow-gray-700 ring-4 ring-slate-50 dark:ring-slate-800" id="profile-image" alt="">
-                                        <label class="absolute inset-0 cursor-pointer" for="pro-img"></label>
-                                    </div>
+  <!-- PROPRIETAIRE -->
+  <app-sidebar
+    *ngIf="user?.role === 'PROPRIETAIRE'">
+  </app-sidebar>
 
-                                    <div class="mt-4">
-                                        <h5 class="text-lg font-semibold">Calvin Carlo</h5>
-                                        <p class="text-slate-400">calvin&#64;hotmail.com</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="xl:col-span-9 lg:col-span-8 md:col-span-8">
-                        <div class="grid grid-cols-1 gap-6">
-                            <div class="p-6 relative rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 bg-white dark:bg-slate-900">
-                                <h5 class="text-lg font-semibold mb-4">Personal Detail :</h5>
-                                <form>
-                                    <div class="grid lg:grid-cols-2 grid-cols-1 gap-5">
-                                        <div>
-                                            <label class="form-label font-medium">First Name : <span class="text-red-600">*</span></label>
-                                            <div class="form-icon relative mt-2">
-                                                <i data-feather="user" class="size-4 absolute top-3 start-4"></i>
-                                                <input type="text" class="form-input !ps-12 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border !border-gray-200 focus:!border-green-600 dark:!border-gray-800 dark:focus:!border-green-600 focus:ring-0" placeholder="First Name:" id="firstname" name="name" required="">
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <label class="form-label font-medium">Last Name : <span class="text-red-600">*</span></label>
-                                            <div class="form-icon relative mt-2">
-                                                <i data-feather="user-check" class="size-4 absolute top-3 start-4"></i>
-                                                <input type="text" class="form-input !ps-12 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border !border-gray-200 focus:!border-green-600 dark:!border-gray-800 dark:focus:!border-green-600 focus:ring-0" placeholder="Last Name:" id="lastname" name="name" required="">
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <label class="form-label font-medium">Your Email : <span class="text-red-600">*</span></label>
-                                            <div class="form-icon relative mt-2">
-                                                <i data-feather="mail" class="size-4 absolute top-3 start-4"></i>
-                                                <input type="email" class="form-input !ps-12 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border !border-gray-200 focus:!border-green-600 dark:!border-gray-800 dark:focus:!border-green-600 focus:ring-0" placeholder="Email" name="email" required="">
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <label class="form-label font-medium">Occupation : </label>
-                                            <div class="form-icon relative mt-2">
-                                                <i data-feather="bookmark" class="size-4 absolute top-3 start-4"></i>
-                                                <input name="name" id="occupation" type="text" class="form-input !ps-12 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border !border-gray-200 focus:!border-green-600 dark:!border-gray-800 dark:focus:!border-green-600 focus:ring-0" placeholder="Occupation :">
-                                            </div>
-                                        </div>
-                                    </div>
+  <main class="page-content bg-gray-50 dark:bg-slate-800">
 
-                                    <div class="grid grid-cols-1">
-                                        <div class="mt-5">
-                                            <label class="form-label font-medium">Description : </label>
-                                            <div class="form-icon relative mt-2">
-                                                <i data-feather="message-circle" class="size-4 absolute top-3 start-4"></i>
-                                                <textarea name="comments" id="comments" class="form-input border !border-gray-200 dark:!border-gray-800 !ps-11 w-full py-2 px-3 h-28 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-green-600 dark:border-gray-800 dark:focus:border-green-600 focus:ring-0" placeholder="Message :"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
+    <app-topbar
+      (toggleClass)="toggleClass()">
+    </app-topbar>
 
-                                    <input type="submit" id="submit" name="send" class="btn bg-green-600 hover:bg-green-700 border-green-600 hover:border-green-700 text-white rounded-md mt-5" value="Save Changes">
-                                </form>
-                            </div>
 
-                            <div class="p-6 relative rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 bg-white dark:bg-slate-900">
-                                <div class="grid lg:grid-cols-2 grid-cols-1 gap-6">
-                                    <div>
-                                        <h5 class="text-lg font-semibold mb-4">Contact Info :</h5>
+    <div class="container-fluid relative px-3">
 
-                                        <form>
-                                            <div class="grid grid-cols-1 gap-5">
-                                                <div>
-                                                    <label class="form-label font-medium">Phone No. :</label>
-                                                    <div class="form-icon relative mt-2">
-                                                        <i data-feather="phone" class="size-4 absolute top-3 start-4"></i>
-                                                        <input name="number" id="number" type="number" class="form-input !ps-12 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border !border-gray-200 focus:!border-green-600 dark:!border-gray-800 dark:focus:!border-green-600 focus:ring-0" placeholder="Phone :">
-                                                    </div>
-                                                </div>
+      <div class="layout-specing">
 
-                                                <div>
-                                                    <label class="form-label font-medium">Website :</label>
-                                                    <div class="form-icon relative mt-2">
-                                                        <i data-feather="globe" class="size-4 absolute top-3 start-4"></i>
-                                                        <input name="url" id="url" type="url" class="form-input !ps-12 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border !border-gray-200 focus:!border-green-600 dark:!border-gray-800 dark:focus:!border-green-600 focus:ring-0" placeholder="Url :">
-                                                    </div>
-                                                </div>
-                                            </div>
 
-                                            <button class="btn bg-green-600 hover:bg-green-700 border-green-600 hover:border-green-700 text-white rounded-md mt-5">Add</button>
-                                        </form>
-                                    </div>
+        <!-- ===================================== -->
+        <!-- BANNIERE -->
+        <!-- ===================================== -->
 
-                                    <div>
-                                        <h5 class="text-lg font-semibold mb-4">Change password :</h5>
-                                        <form>
-                                            <div class="grid grid-cols-1 gap-5">
-                                                <div>
-                                                    <label class="form-label font-medium">Old password :</label>
-                                                    <div class="form-icon relative mt-2">
-                                                        <i data-feather="key" class="size-4 absolute top-3 start-4"></i>
-                                                        <input type="password" class="form-input !ps-12 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border !border-gray-200 focus:!border-green-600 dark:!border-gray-800 dark:focus:!border-green-600 focus:ring-0" placeholder="Old password" required="">
-                                                    </div>
-                                                </div>
+        <div class="grid grid-cols-1">
 
-                                                <div>
-                                                    <label class="form-label font-medium">New password :</label>
-                                                    <div class="form-icon relative mt-2">
-                                                        <i data-feather="key" class="size-4 absolute top-3 start-4"></i>
-                                                        <input type="password" class="form-input !ps-12 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border !border-gray-200 focus:!border-green-600 dark:!border-gray-800 dark:focus:!border-green-600 focus:ring-0" placeholder="New password" required="">
-                                                    </div>
-                                                </div>
+          <div
+            class="profile-banner relative text-transparent rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 overflow-hidden">
 
-                                                <div>
-                                                    <label class="form-label font-medium">Re-type New password :</label>
-                                                    <div class="form-icon relative mt-2">
-                                                        <i data-feather="key" class="size-4 absolute top-3 start-4"></i>
-                                                        <input type="password" class="form-input !ps-12 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border !border-gray-200 focus:!border-green-600 dark:!border-gray-800 dark:focus:!border-green-600 focus:ring-0" placeholder="Re-type New password" required="">
-                                                    </div>
-                                                </div>
-                                            </div>
+            <div class="relative shrink-0">
 
-                                            <button class="btn bg-green-600 hover:bg-green-700 border-green-600 hover:border-green-700 text-white rounded-md mt-5">Save password</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+              <img
+                [src]="'/assets/images/bg.jpg'"
+                class="h-80 w-full object-cover"
+                alt="">
 
-                            <div class="p-6 relative rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 bg-white dark:bg-slate-900">
-                                <h5 class="text-lg font-semibold mb-4 text-red-600">Delete Account :</h5>
+              <div
+                class="absolute inset-0 bg-slate-900/70">
+              </div>
 
-                                <p class="text-slate-400 mb-4">Do you want to delete the account? Please press below "Delete" button</p>
-
-                                <a [routerLink]="[]" (click)="$event.preventDefault()" class="btn bg-red-600 hover:bg-red-700 border-red-600 hover:border-red-700 text-white rounded-md">Delete</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
+
+          </div>
+
         </div>
-     <app-footer-admin/>
-    </main>
+
+
+        <!-- ===================================== -->
+        <!-- PROFIL -->
+        <!-- ===================================== -->
+
+        <div
+          *ngIf="user"
+          class="grid md:grid-cols-12 grid-cols-1 gap-6 mt-6">
+
+
+          <!-- ================================= -->
+          <!-- CARTE GAUCHE -->
+          <!-- ================================= -->
+
+          <div
+            class="xl:col-span-3 lg:col-span-4 md:col-span-4">
+
+            <div
+              class="p-6 relative rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 bg-white dark:bg-slate-900">
+
+
+              <div class="profile-pic text-center">
+
+                <div class="relative size-24 mx-auto">
+
+                  <img
+                    [src]="'/assets/images/client/07.jpg'"
+                    class="rounded-full shadow-sm shadow-gray-200 dark:shadow-gray-700 ring-4 ring-slate-50 dark:ring-slate-800"
+                    alt="">
+
+                </div>
+
+
+                <div class="mt-4">
+
+                  <h5 class="text-lg font-semibold">
+
+                    {{ user.nom }}
+
+                  </h5>
+
+
+                  <p class="text-slate-400">
+
+                    {{ user.email }}
+
+                  </p>
+
+
+                  <span
+                    *ngIf="user.role === 'CLIENT'"
+                    class="inline-block mt-3 px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-600">
+
+                    Client
+
+                  </span>
+
+
+                  <span
+                    *ngIf="user.role === 'PROPRIETAIRE'"
+                    class="inline-block mt-3 px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-600">
+
+                    Propriétaire
+
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <!-- INFORMATIONS -->
+
+              <div
+                class="border-t border-gray-100 dark:border-gray-700 mt-6 pt-5">
+
+
+                <!-- TELEPHONE -->
+
+                <div class="flex items-center mb-4">
+
+                  <i
+                    class="mdi mdi-phone-outline text-xl text-green-600 me-3">
+                  </i>
+
+                  <div>
+
+                    <h6 class="font-medium">
+                      Téléphone
+                    </h6>
+
+                    <p class="text-slate-400 text-sm">
+
+                      {{ user.telephone || 'Non renseigné' }}
+
+                    </p>
+
+                  </div>
+
+                </div>
+
+
+                <!-- POSTE -->
+
+                <div class="flex items-center mb-4">
+
+                  <i
+                    class="mdi mdi-briefcase-outline text-xl text-green-600 me-3">
+                  </i>
+
+                  <div>
+
+                    <h6 class="font-medium">
+                      Poste
+                    </h6>
+
+                    <p class="text-slate-400 text-sm">
+
+                      {{ user.poste || 'Non renseigné' }}
+
+                    </p>
+
+                  </div>
+
+                </div>
+
+
+                <!-- AGENCE -->
+
+                <div
+                  *ngIf="user.role === 'PROPRIETAIRE'"
+                  class="flex items-center">
+
+                  <i
+                    class="mdi mdi-office-building-outline text-xl text-green-600 me-3">
+                  </i>
+
+                  <div>
+
+                    <h6 class="font-medium">
+                      Agence
+                    </h6>
+
+                    <p class="text-slate-400 text-sm">
+
+                      {{ user.nomAgence || 'Non renseignée' }}
+
+                    </p>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- ================================= -->
+          <!-- PARTIE DROITE -->
+          <!-- ================================= -->
+
+          <div
+            class="xl:col-span-9 lg:col-span-8 md:col-span-8">
+
+            <div class="grid grid-cols-1 gap-6">
+
+
+              <!-- ================================= -->
+              <!-- MODIFIER PROFIL -->
+              <!-- ================================= -->
+
+              <div
+                class="p-6 relative rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 bg-white dark:bg-slate-900">
+
+
+                <h5 class="text-lg font-semibold mb-4">
+
+                  Informations personnelles
+
+                </h5>
+
+
+                <!-- SUCCESS -->
+
+                <div
+                  *ngIf="successProfile"
+                  class="mb-4 p-3 bg-green-100 text-green-700 rounded-md">
+
+                  {{ successProfile }}
+
+                </div>
+
+
+                <!-- ERROR -->
+
+                <div
+                  *ngIf="errorProfile"
+                  class="mb-4 p-3 bg-red-100 text-red-700 rounded-md">
+
+                  {{ errorProfile }}
+
+                </div>
+
+
+                <form
+                  (ngSubmit)="updateProfile()">
+
+
+                  <div
+                    class="grid lg:grid-cols-2 grid-cols-1 gap-5">
+
+
+                    <!-- NOM -->
+
+                    <div>
+
+                      <label
+                        class="form-label font-medium">
+
+                        Nom :
+
+                        <span class="text-red-600">
+                          *
+                        </span>
+
+                      </label>
+
+
+                      <div
+                        class="form-icon relative mt-2">
+
+                        <i
+                          class="mdi mdi-account-outline absolute top-3 start-4">
+                        </i>
+
+                        <input
+                          type="text"
+                          name="nom"
+                          [(ngModel)]="user.nom"
+                          required
+                          class="form-input !ps-12 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border !border-gray-200 focus:!border-green-600 dark:!border-gray-800 dark:focus:!border-green-600 focus:ring-0"
+                          placeholder="Nom">
+
+                      </div>
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div>
+
+                      <label
+                        class="form-label font-medium">
+
+                        Email :
+
+                      </label>
+
+
+                      <div
+                        class="form-icon relative mt-2">
+
+                        <i
+                          class="mdi mdi-email-outline absolute top-3 start-4">
+                        </i>
+
+                        <input
+                          type="email"
+                          name="email"
+                          [(ngModel)]="user.email"
+                          readonly
+                          class="form-input !ps-12 w-full py-2 px-3 h-10 bg-gray-100 dark:bg-slate-800 dark:text-slate-400 rounded outline-none border !border-gray-200 dark:!border-gray-800">
+
+                      </div>
+
+                    </div>
+
+
+                    <!-- TELEPHONE -->
+
+                    <div>
+
+                      <label
+                        class="form-label font-medium">
+
+                        Téléphone :
+
+                      </label>
+
+
+                      <div
+                        class="form-icon relative mt-2">
+
+                        <i
+                          class="mdi mdi-phone-outline absolute top-3 start-4">
+                        </i>
+
+                        <input
+                          type="text"
+                          name="telephone"
+                          [(ngModel)]="user.telephone"
+                          class="form-input !ps-12 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border !border-gray-200 focus:!border-green-600 dark:!border-gray-800 dark:focus:!border-green-600 focus:ring-0"
+                          placeholder="Téléphone">
+
+                      </div>
+
+                    </div>
+
+
+                    <!-- POSTE -->
+
+                    <div>
+
+                      <label
+                        class="form-label font-medium">
+
+                        Poste :
+
+                      </label>
+
+
+                      <div
+                        class="form-icon relative mt-2">
+
+                        <i
+                          class="mdi mdi-briefcase-outline absolute top-3 start-4">
+                        </i>
+
+                        <input
+                          type="text"
+                          name="poste"
+                          [(ngModel)]="user.poste"
+                          class="form-input !ps-12 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border !border-gray-200 focus:!border-green-600 dark:!border-gray-800 dark:focus:!border-green-600 focus:ring-0"
+                          placeholder="Poste">
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+
+                  <!-- ================================= -->
+                  <!-- PROPRIETAIRE UNIQUEMENT -->
+                  <!-- ================================= -->
+
+                  <div
+                    *ngIf="user.role === 'PROPRIETAIRE'"
+                    class="mt-6">
+
+
+                    <h5
+                      class="text-lg font-semibold mb-4 pt-5 border-t border-gray-100 dark:border-gray-700">
+
+                      Informations professionnelles
+
+                    </h5>
+
+
+                    <div
+                      class="grid lg:grid-cols-2 grid-cols-1 gap-5">
+
+
+                      <!-- TYPE -->
+
+                      <div>
+
+                        <label
+                          class="form-label font-medium">
+
+                          Type de propriétaire :
+
+                        </label>
+
+                        <input
+                          type="text"
+                          name="typeProprietaire"
+                          [(ngModel)]="user.typeProprietaire"
+                          class="form-input w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border !border-gray-200 focus:!border-green-600 dark:!border-gray-800"
+                          placeholder="Type de propriétaire">
+
+                      </div>
+
+
+                      <!-- AGENCE -->
+
+                      <div>
+
+                        <label
+                          class="form-label font-medium">
+
+                          Nom de l'agence :
+
+                        </label>
+
+                        <input
+                          type="text"
+                          name="nomAgence"
+                          [(ngModel)]="user.nomAgence"
+                          class="form-input w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border !border-gray-200 focus:!border-green-600 dark:!border-gray-800"
+                          placeholder="Nom de l'agence">
+
+                      </div>
+
+
+                      <!-- ADRESSE -->
+
+                      <div>
+
+                        <label
+                          class="form-label font-medium">
+
+                          Adresse professionnelle :
+
+                        </label>
+
+                        <input
+                          type="text"
+                          name="adresseProfessionnelle"
+                          [(ngModel)]="user.adresseProfessionnelle"
+                          class="form-input w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border !border-gray-200 focus:!border-green-600 dark:!border-gray-800"
+                          placeholder="Adresse professionnelle">
+
+                      </div>
+
+
+                      <!-- SIRET -->
+
+                      <div>
+
+                        <label
+                          class="form-label font-medium">
+
+                          Numéro SIRET :
+
+                        </label>
+
+                        <input
+                          type="text"
+                          name="numeroSiret"
+                          [(ngModel)]="user.numeroSiret"
+                          class="form-input w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border !border-gray-200 focus:!border-green-600 dark:!border-gray-800"
+                          placeholder="Numéro SIRET">
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+
+                  <!-- BOUTON PROFIL -->
+
+                  <button
+                    type="submit"
+                    [disabled]="loadingProfile"
+                    class="btn bg-green-600 hover:bg-green-700 border-green-600 hover:border-green-700 text-white rounded-md mt-5">
+
+                    <i
+                      class="mdi mdi-content-save-outline me-1">
+                    </i>
+
+                    {{
+                    loadingProfile
+                      ? 'Enregistrement...'
+                      : 'Enregistrer les modifications'
+                    }}
+
+                  </button>
+
+                </form>
+
+              </div>
+
+
+              <!-- ================================= -->
+              <!-- MOT DE PASSE -->
+              <!-- ================================= -->
+
+              <div
+                class="p-6 relative rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 bg-white dark:bg-slate-900">
+
+
+                <h5
+                  class="text-lg font-semibold mb-4">
+
+                  Modifier le mot de passe
+
+                </h5>
+
+
+                <!-- SUCCESS PASSWORD -->
+
+                <div
+                  *ngIf="successPassword"
+                  class="mb-4 p-3 bg-green-100 text-green-700 rounded-md">
+
+                  {{ successPassword }}
+
+                </div>
+
+
+                <!-- ERROR PASSWORD -->
+
+                <div
+                  *ngIf="errorPassword"
+                  class="mb-4 p-3 bg-red-100 text-red-700 rounded-md">
+
+                  {{ errorPassword }}
+
+                </div>
+
+
+                <form
+                  (ngSubmit)="changePassword()">
+
+
+                  <div
+                    class="grid lg:grid-cols-3 grid-cols-1 gap-5">
+
+
+                    <!-- MOT DE PASSE ACTUEL -->
+
+                    <div>
+
+                      <label
+                        class="form-label font-medium">
+
+                        Mot de passe actuel :
+
+                      </label>
+
+
+                      <div
+                        class="form-icon relative mt-2">
+
+                        <i
+                          class="mdi mdi-key-outline absolute top-3 start-4">
+                        </i>
+
+                        <input
+                          type="password"
+                          name="currentPassword"
+                          [(ngModel)]="passwordData.currentPassword"
+                          required
+                          class="form-input !ps-12 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border !border-gray-200 focus:!border-green-600 dark:!border-gray-800 dark:focus:!border-green-600 focus:ring-0"
+                          placeholder="Mot de passe actuel">
+
+                      </div>
+
+                    </div>
+
+
+                    <!-- NOUVEAU -->
+
+                    <div>
+
+                      <label
+                        class="form-label font-medium">
+
+                        Nouveau mot de passe :
+
+                      </label>
+
+
+                      <div
+                        class="form-icon relative mt-2">
+
+                        <i
+                          class="mdi mdi-key-outline absolute top-3 start-4">
+                        </i>
+
+                        <input
+                          type="password"
+                          name="newPassword"
+                          [(ngModel)]="passwordData.newPassword"
+                          required
+                          class="form-input !ps-12 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border !border-gray-200 focus:!border-green-600 dark:!border-gray-800 dark:focus:!border-green-600 focus:ring-0"
+                          placeholder="Nouveau mot de passe">
+
+                      </div>
+
+                    </div>
+
+
+                    <!-- CONFIRMATION -->
+
+                    <div>
+
+                      <label
+                        class="form-label font-medium">
+
+                        Confirmer le mot de passe :
+
+                      </label>
+
+
+                      <div
+                        class="form-icon relative mt-2">
+
+                        <i
+                          class="mdi mdi-key-check-outline absolute top-3 start-4">
+                        </i>
+
+                        <input
+                          type="password"
+                          name="confirmationPassword"
+                          [(ngModel)]="passwordData.confirmationPassword"
+                          required
+                          class="form-input !ps-12 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border !border-gray-200 focus:!border-green-600 dark:!border-gray-800 dark:focus:!border-green-600 focus:ring-0"
+                          placeholder="Confirmer le mot de passe">
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+
+                  <!-- BOUTON PASSWORD -->
+
+                  <button
+                    type="submit"
+                    [disabled]="loadingPassword"
+                    class="btn bg-green-600 hover:bg-green-700 border-green-600 hover:border-green-700 text-white rounded-md mt-5">
+
+                    <i
+                      class="mdi mdi-lock-reset me-1">
+                    </i>
+
+                    {{
+                    loadingPassword
+                      ? 'Modification...'
+                      : 'Modifier le mot de passe'
+                    }}
+
+                  </button>
+
+                </form>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <app-footer-admin/>
+
+  </main>
+
 </div>

@@ -51,10 +51,24 @@ import {AllContractsComponent} from './pages/all-contracts/all-contracts.compone
 import {AddContratComponent} from './pages/add-contrat/add-contrat.component';
 import {ProfileComponent} from './pages/profile/profile.component';
 import {ProfileSettingComponent} from './pages/profile-setting/profile-setting.component';
+import {ChatComponent} from './pages/chat/chat.component';
+import {LesBiensComponent} from './pages/les-biens/les-biens.component';
+import {RecommandationComponent} from './pages/recommandation/recommandation.component';
+import {MescontratComponent} from './pages/mescontrat/mescontrat.component';
+import {DetailContratComponent} from './pages/detail-contrat/detail-contrat.component';
+import {ProprietairefavorisComponent} from './pages/proprietairefavoris/proprietairefavoris.component';
+import {PropertyeditComponent} from './pages/propertyedit/propertyedit.component';
 
 export const routes: Routes = [
-  {'path':'profile', component:ProfileComponent},
-  {'path':'profile-setting', component:ProfileSettingComponent},
+    {'path':'edit-property/:id', component:PropertyeditComponent},
+    {'path':'proprietaire-favoris', component:ProprietairefavorisComponent},
+    {'path':'contrat-detail/:id', component:DetailContratComponent},
+    {'path':'mes-contrat', component:MescontratComponent},
+    {'path':'recommandation', component:RecommandationComponent},
+    {'path':'biens', component:LesBiensComponent},
+    {'path':'chat', component:ChatComponent},
+    {'path':'profile', component:ProfileComponent},
+    {'path':'profile-setting', component:ProfileSettingComponent},
     {'path':'add-contrat', component:AddContratComponent},
     {'path':'all-contracts', component:AllContractsComponent},
     {'path':'contrat/signer/:id', component:SignecontratComponent},
@@ -84,7 +98,7 @@ export const routes: Routes = [
     {'path':'list-sidebar', component:ListSidebarComponent},
     {'path':'list-map', component:ListMapComponent},
     {'path':'property-detail', component:PropertyDetailComponent},
-    {'path':'property-detail-two', component:PropertyDetailTwoComponent},
+    {'path':'property-detail-two/:id', component:PropertyDetailTwoComponent},
     {'path':'aboutus', component:AboutusComponent},
     {'path':'features', component:FeaturesComponent},
     {'path':'pricing', component:PricingComponent},

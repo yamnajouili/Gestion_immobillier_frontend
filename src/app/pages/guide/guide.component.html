@@ -1,579 +1,1418 @@
 <app-navbar></app-navbar>
 
-<!-- Hero Section -->
+<!-- ===================================================== -->
+<!-- HERO -->
+<!-- ===================================================== -->
 <section class="relative mt-20">
   <div class="container-fluid md:mx-4 mx-2">
+
     <div
-      class="relative pt-40 pb-56 table w-full rounded-3xl shadow-lg overflow-hidden bg-[url('/assets/images/bg/01.jpg')] bg-no-repeat bg-center bg-cover"
-      id="home"
-    >
+      class="relative pt-40 pb-56 table w-full rounded-3xl shadow-lg
+             overflow-hidden bg-[url('/assets/images/bg/01.jpg')]
+             bg-no-repeat bg-center bg-cover"
+      id="home">
+
       <div class="absolute inset-0 bg-slate-900/70"></div>
 
       <div class="container relative z-1">
+
         <div class="grid grid-cols-1 text-center">
+
           <span
-            class="inline-block mx-auto text-sm font-semibold tracking-wider uppercase bg-green-600/20 text-green-400 px-4 py-2 rounded-full backdrop-blur-sm"
-          >
-            Guide Immobilier
+            class="inline-block mx-auto text-sm font-semibold tracking-wider uppercase
+                   bg-green-600/20 text-green-400 px-4 py-2 rounded-full backdrop-blur-sm">
+            Guide de la plateforme
           </span>
 
           <h1
-            class="font-bold text-white lg:leading-normal leading-normal text-4xl lg:text-6xl mt-6 mb-6"
-          >
-            Guide professionnel <br />
-            pour <span class="text-green-500">réussir</span> votre projet
+            class="font-bold text-white lg:leading-normal leading-normal
+                   text-4xl lg:text-6xl mt-6 mb-6">
+
+            Trouvez votre futur bien
+            <br>
+
+            plus
+            <span class="text-green-500">
+              simplement
+            </span>
+
           </h1>
 
           <p class="text-white/70 text-lg md:text-xl max-w-3xl mx-auto">
-            Tout ce que vous devez savoir pour acheter, vendre, louer et
-            finaliser votre contrat immobilier en toute sérénité.
+
+            Découvrez comment rechercher un bien, enregistrer vos préférences,
+            obtenir des recommandations personnalisées, contacter un propriétaire
+            et gérer vos contrats depuis notre plateforme.
+
           </p>
 
           <div class="mt-8 flex flex-wrap justify-center gap-4">
+
             <a
-              href="#achat"
-              class="btn bg-green-600 hover:bg-green-700 text-white rounded-md px-6 py-3"
-            >
-              Commencer le guide
+              href="#recherche"
+              class="btn bg-green-600 hover:bg-green-700 text-white
+                     rounded-md px-6 py-3">
+
+              Découvrir le guide
+
             </a>
+
             <a
-              href="#contrat"
-              class="btn bg-white/10 hover:bg-white/20 text-white border border-white/20 rounded-md px-6 py-3"
-            >
-              Documents juridiques
+              href="#ia"
+              class="btn bg-white/10 hover:bg-white/20 text-white
+                     border border-white/20 rounded-md px-6 py-3">
+
+              Recommandations IA
+
             </a>
+
           </div>
+
         </div>
+
       </div>
+
     </div>
+
   </div>
 </section>
 
-<!-- Navigation rapide -->
+
+<!-- ===================================================== -->
+<!-- NAVIGATION RAPIDE -->
+<!-- ===================================================== -->
 <section class="relative md:pb-16 pb-10">
+
   <div class="container relative">
+
     <div class="grid grid-cols-1 justify-center">
+
       <div class="relative -mt-20 z-10">
-        <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-md p-4 border border-gray-100 dark:border-gray-800">
-          <ul
-            class="flex flex-wrap justify-center gap-3 text-center"
-          >
+
+        <div
+          class="bg-white dark:bg-slate-900 rounded-2xl shadow-md
+                 p-4 border border-gray-100 dark:border-gray-800">
+
+          <ul class="flex flex-wrap justify-center gap-3 text-center">
+
             <li>
               <a
-                href="#achat"
-                class="px-5 py-2.5 text-sm font-medium rounded-full bg-green-50 dark:bg-slate-800 hover:bg-green-600 hover:text-white transition-all duration-300"
-              >
-                Acheter
+                href="#recherche"
+                class="px-5 py-2.5 text-sm font-medium rounded-full
+                       bg-green-50 dark:bg-slate-800
+                       hover:bg-green-600 hover:text-white
+                       transition-all duration-300">
+                Trouver un bien
               </a>
             </li>
+
             <li>
               <a
-                href="#vente"
-                class="px-5 py-2.5 text-sm font-medium rounded-full bg-green-50 dark:bg-slate-800 hover:bg-green-600 hover:text-white transition-all duration-300"
-              >
-                Vendre
+                href="#ia"
+                class="px-5 py-2.5 text-sm font-medium rounded-full
+                       bg-green-50 dark:bg-slate-800
+                       hover:bg-green-600 hover:text-white
+                       transition-all duration-300">
+                Recommandations IA
               </a>
             </li>
+
             <li>
               <a
-                href="#location"
-                class="px-5 py-2.5 text-sm font-medium rounded-full bg-green-50 dark:bg-slate-800 hover:bg-green-600 hover:text-white transition-all duration-300"
-              >
-                Louer
+                href="#favoris"
+                class="px-5 py-2.5 text-sm font-medium rounded-full
+                       bg-green-50 dark:bg-slate-800
+                       hover:bg-green-600 hover:text-white
+                       transition-all duration-300">
+                Favoris
               </a>
             </li>
+
             <li>
               <a
-                href="#financement"
-                class="px-5 py-2.5 text-sm font-medium rounded-full bg-green-50 dark:bg-slate-800 hover:bg-green-600 hover:text-white transition-all duration-300"
-              >
-                Financement
+                href="#communication"
+                class="px-5 py-2.5 text-sm font-medium rounded-full
+                       bg-green-50 dark:bg-slate-800
+                       hover:bg-green-600 hover:text-white
+                       transition-all duration-300">
+                Messagerie
               </a>
             </li>
+
             <li>
               <a
                 href="#contrat"
-                class="px-5 py-2.5 text-sm font-medium rounded-full bg-green-50 dark:bg-slate-800 hover:bg-green-600 hover:text-white transition-all duration-300"
-              >
-                Contrat & Documents
+                class="px-5 py-2.5 text-sm font-medium rounded-full
+                       bg-green-50 dark:bg-slate-800
+                       hover:bg-green-600 hover:text-white
+                       transition-all duration-300">
+                Contrats
               </a>
             </li>
+
+            <li>
+              <a
+                href="#proprietaire"
+                class="px-5 py-2.5 text-sm font-medium rounded-full
+                       bg-green-50 dark:bg-slate-800
+                       hover:bg-green-600 hover:text-white
+                       transition-all duration-300">
+                Espace propriétaire
+              </a>
+            </li>
+
           </ul>
+
         </div>
+
       </div>
+
     </div>
+
   </div>
+
 </section>
 
-<!-- Achat -->
-<section id="achat" class="relative md:pb-24 pb-16">
+
+<!-- ===================================================== -->
+<!-- 1 - TROUVER UN BIEN -->
+<!-- ===================================================== -->
+<section id="recherche" class="relative md:pb-24 pb-16">
+
   <div class="container">
+
     <div class="grid lg:grid-cols-12 gap-[30px] items-center">
+
       <div class="lg:col-span-7">
-        <span class="text-green-600 font-semibold text-sm uppercase tracking-wider bg-green-100 dark:bg-green-900/30 px-3 py-1 rounded-full">
+
+        <span
+          class="text-green-600 font-semibold text-sm uppercase tracking-wider
+                 bg-green-100 dark:bg-green-900/30
+                 px-3 py-1 rounded-full">
           Étape 1
         </span>
-        <h2 class="text-3xl md:text-4xl font-semibold text-slate-900 dark:text-white mt-4 mb-4">
-          Acheter votre bien immobilier
+
+        <h2
+          class="text-3xl md:text-4xl font-semibold
+                 text-slate-900 dark:text-white mt-4 mb-4">
+
+          Trouvez le bien qui vous correspond
+
         </h2>
+
         <p class="text-slate-400 mb-8 max-w-2xl">
-          L’achat d’un bien immobilier est une étape importante. Préparez votre
-          projet avec méthode pour éviter les mauvaises surprises et prendre une
-          décision éclairée.
+
+          Parcourez les biens disponibles sur la plateforme et consultez
+          facilement leurs principales caractéristiques : prix, surface,
+          type, localisation, description et photos.
+
         </p>
+
 
         <div class="grid md:grid-cols-2 gap-5">
-          <div class="p-5 rounded-xl bg-white dark:bg-slate-900 shadow-sm shadow-gray-200 dark:shadow-gray-700">
-            <div class="flex items-start gap-3">
-              <div class="size-10 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
-                <i class="uil uil-wallet text-green-600 text-xl"></i>
-              </div>
-              <div>
-                <h5 class="font-semibold text-lg">Définir votre budget</h5>
-                <p class="text-slate-400 text-sm mt-2">Évaluez vos revenus, votre apport et votre capacité d’emprunt.</p>
-              </div>
-            </div>
-          </div>
 
-          <div class="p-5 rounded-xl bg-white dark:bg-slate-900 shadow-sm shadow-gray-200 dark:shadow-gray-700">
+          <!-- RECHERCHE -->
+          <div
+            class="p-5 rounded-xl bg-white dark:bg-slate-900
+                   shadow-sm shadow-gray-200 dark:shadow-gray-700">
+
             <div class="flex items-start gap-3">
-              <div class="size-10 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+
+              <div
+                class="size-10 rounded-lg bg-green-100
+                       dark:bg-green-900/30
+                       flex items-center justify-center">
+
                 <i class="uil uil-search text-green-600 text-xl"></i>
+
               </div>
+
               <div>
-                <h5 class="font-semibold text-lg">Rechercher un bien</h5>
-                <p class="text-slate-400 text-sm mt-2">Comparez les annonces selon vos critères et votre zone.</p>
+
+                <h5 class="font-semibold text-lg">
+                  Rechercher un bien
+                </h5>
+
+                <p class="text-slate-400 text-sm mt-2">
+                  Explorez les propriétés disponibles sur la plateforme.
+                </p>
+
               </div>
+
             </div>
+
           </div>
 
-          <div class="p-5 rounded-xl bg-white dark:bg-slate-900 shadow-sm shadow-gray-200 dark:shadow-gray-700">
+
+          <!-- DETAIL -->
+          <div
+            class="p-5 rounded-xl bg-white dark:bg-slate-900
+                   shadow-sm shadow-gray-200 dark:shadow-gray-700">
+
             <div class="flex items-start gap-3">
-              <div class="size-10 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
-                <i class="uil uil-home text-green-600 text-xl"></i>
+
+              <div
+                class="size-10 rounded-lg bg-green-100
+                       dark:bg-green-900/30
+                       flex items-center justify-center">
+
+                <i class="uil uil-estate text-green-600 text-xl"></i>
+
               </div>
+
               <div>
-                <h5 class="font-semibold text-lg">Visiter les biens</h5>
-                <p class="text-slate-400 text-sm mt-2">Analysez l’état du bien, l’emplacement et le voisinage.</p>
+
+                <h5 class="font-semibold text-lg">
+                  Consulter les détails
+                </h5>
+
+                <p class="text-slate-400 text-sm mt-2">
+                  Consultez les photos, le prix, la surface,
+                  la localisation et la description du bien.
+                </p>
+
               </div>
+
             </div>
+
           </div>
 
-          <div class="p-5 rounded-xl bg-white dark:bg-slate-900 shadow-sm shadow-gray-200 dark:shadow-gray-700">
+
+          <!-- FAVORIS -->
+          <div
+            class="p-5 rounded-xl bg-white dark:bg-slate-900
+                   shadow-sm shadow-gray-200 dark:shadow-gray-700">
+
             <div class="flex items-start gap-3">
-              <div class="size-10 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
-                <i class="uil uil-file-contract text-green-600 text-xl"></i>
+
+              <div
+                class="size-10 rounded-lg bg-green-100
+                       dark:bg-green-900/30
+                       flex items-center justify-center">
+
+                <i class="uil uil-heart text-green-600 text-xl"></i>
+
               </div>
+
               <div>
-                <h5 class="font-semibold text-lg">Faire une offre</h5>
-                <p class="text-slate-400 text-sm mt-2">Négociez le prix et préparez le dossier d’achat.</p>
+
+                <h5 class="font-semibold text-lg">
+                  Ajouter aux favoris
+                </h5>
+
+                <p class="text-slate-400 text-sm mt-2">
+                  Enregistrez les biens qui vous intéressent
+                  pour les retrouver facilement.
+                </p>
+
               </div>
+
             </div>
+
           </div>
+
+
+          <!-- CONTACT -->
+          <div
+            class="p-5 rounded-xl bg-white dark:bg-slate-900
+                   shadow-sm shadow-gray-200 dark:shadow-gray-700">
+
+            <div class="flex items-start gap-3">
+
+              <div
+                class="size-10 rounded-lg bg-green-100
+                       dark:bg-green-900/30
+                       flex items-center justify-center">
+
+                <i class="uil uil-comment-alt-message text-green-600 text-xl"></i>
+
+              </div>
+
+              <div>
+
+                <h5 class="font-semibold text-lg">
+                  Contacter le propriétaire
+                </h5>
+
+                <p class="text-slate-400 text-sm mt-2">
+                  Échangez directement avec le propriétaire
+                  lorsqu'un bien vous intéresse.
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
         </div>
+
       </div>
 
+
+      <!-- CONSEIL -->
       <div class="lg:col-span-5">
-        <div class="rounded-2xl bg-green-50 dark:bg-green-900/20 p-8 shadow-md border border-green-100 dark:border-green-900/20">
+
+        <div
+          class="rounded-2xl bg-green-50 dark:bg-green-900/20
+                 p-8 shadow-md border border-green-100
+                 dark:border-green-900/20">
+
           <div class="text-center">
-            <div class="size-20 rounded-full bg-white dark:bg-slate-800 flex items-center justify-center mx-auto shadow-md">
-              <i class="uil uil-estate text-5xl text-green-600"></i>
+
+            <div
+              class="size-20 rounded-full bg-white dark:bg-slate-800
+                     flex items-center justify-center mx-auto shadow-md">
+
+              <i class="uil uil-search-alt text-5xl text-green-600"></i>
+
             </div>
-            <h3 class="text-2xl font-semibold mt-6 mb-3">Conseil d'expert</h3>
+
+            <h3 class="text-2xl font-semibold mt-6 mb-3">
+              Une recherche simplifiée
+            </h3>
+
             <p class="text-slate-400">
-              Prévoyez entre <strong>7% et 10%</strong> du prix d’achat pour les
-              frais annexes : notaire, enregistrement, dossier bancaire et
-              formalités administratives.
+
+              Consultez plusieurs biens, ajoutez vos préférés à vos favoris
+              et utilisez vos préférences pour obtenir des recommandations
+              adaptées à votre recherche.
+
             </p>
+
           </div>
+
         </div>
+
       </div>
+
     </div>
+
   </div>
+
 </section>
 
-<!-- Vente -->
-<section id="vente" class="relative md:py-24 py-16 bg-gray-50 dark:bg-slate-800">
+
+<!-- ===================================================== -->
+<!-- 2 - RECOMMANDATION IA -->
+<!-- ===================================================== -->
+<section
+  id="ia"
+  class="relative md:py-24 py-16 bg-gray-50 dark:bg-slate-800">
+
   <div class="container">
+
     <div class="grid lg:grid-cols-12 gap-[30px] items-center">
+
+
+      <!-- GAUCHE -->
       <div class="lg:col-span-5 order-2 lg:order-1">
-        <div class="rounded-2xl bg-blue-50 dark:bg-blue-900/20 p-8 shadow-md border border-blue-100 dark:border-blue-900/20">
+
+        <div
+          class="rounded-2xl bg-blue-50 dark:bg-blue-900/20
+                 p-8 shadow-md border border-blue-100
+                 dark:border-blue-900/20">
+
           <div class="text-center">
-            <div class="size-20 rounded-full bg-white dark:bg-slate-800 flex items-center justify-center mx-auto shadow-md">
-              <i class="uil uil-chart-line text-5xl text-blue-600"></i>
+
+            <div
+              class="size-20 rounded-full bg-white dark:bg-slate-800
+                     flex items-center justify-center mx-auto shadow-md">
+
+              <i class="uil uil-brain text-5xl text-blue-600"></i>
+
             </div>
-            <h3 class="text-2xl font-semibold mt-6 mb-3">Conseil d'expert</h3>
+
+            <h3 class="text-2xl font-semibold mt-6 mb-3">
+              Recommandation intelligente
+            </h3>
+
             <p class="text-slate-400">
-              Faites estimer votre bien par plusieurs professionnels afin de
-              fixer un prix réaliste et attractif.
+
+              Le système analyse vos préférences et les caractéristiques
+              des biens disponibles afin de vous proposer les propriétés
+              les plus proches de vos besoins.
+
             </p>
+
           </div>
+
         </div>
+
       </div>
 
+
+      <!-- DROITE -->
       <div class="lg:col-span-7 order-1 lg:order-2">
-        <span class="text-blue-600 font-semibold text-sm uppercase tracking-wider bg-blue-100 dark:bg-blue-900/30 px-3 py-1 rounded-full">
+
+        <span
+          class="text-blue-600 font-semibold text-sm uppercase tracking-wider
+                 bg-blue-100 dark:bg-blue-900/30
+                 px-3 py-1 rounded-full">
+
           Étape 2
+
         </span>
-        <h2 class="text-3xl md:text-4xl font-semibold text-slate-900 dark:text-white mt-4 mb-4">
-          Vendre votre propriété
+
+        <h2
+          class="text-3xl md:text-4xl font-semibold
+                 text-slate-900 dark:text-white mt-4 mb-4">
+
+          Des recommandations adaptées à vos préférences
+
         </h2>
+
         <p class="text-slate-400 mb-8 max-w-2xl">
-          Une bonne stratégie de vente permet d’augmenter la visibilité de votre
-          bien et d’attirer des acheteurs sérieux plus rapidement.
+
+          Définissez vos critères de recherche afin de permettre
+          au système de recommandation de sélectionner les biens
+          les plus proches de vos besoins.
+
         </p>
+
 
         <div class="space-y-4">
-          <div class="flex items-start gap-4 p-4 rounded-xl bg-white dark:bg-slate-900 shadow-sm">
-            <i class="uil uil-check-circle text-2xl text-blue-600"></i>
-            <p class="text-slate-400">Faites une estimation réaliste de votre bien.</p>
+
+          <div
+            class="flex items-start gap-4 p-4 rounded-xl
+                   bg-white dark:bg-slate-900 shadow-sm">
+
+            <span
+              class="size-9 rounded-full bg-blue-100
+                     dark:bg-blue-900/30
+                     text-blue-600 flex items-center
+                     justify-center font-semibold flex-shrink-0">
+              1
+            </span>
+
+            <div>
+
+              <h5 class="font-semibold">
+                Définissez vos préférences
+              </h5>
+
+              <p class="text-slate-400 text-sm mt-1">
+                Indiquez votre budget, la surface souhaitée,
+                la ville et le type de bien recherché.
+              </p>
+
+            </div>
+
           </div>
-          <div class="flex items-start gap-4 p-4 rounded-xl bg-white dark:bg-slate-900 shadow-sm">
-            <i class="uil uil-check-circle text-2xl text-blue-600"></i>
-            <p class="text-slate-400">Préparez votre logement pour les visites.</p>
+
+
+          <div
+            class="flex items-start gap-4 p-4 rounded-xl
+                   bg-white dark:bg-slate-900 shadow-sm">
+
+            <span
+              class="size-9 rounded-full bg-blue-100
+                     dark:bg-blue-900/30
+                     text-blue-600 flex items-center
+                     justify-center font-semibold flex-shrink-0">
+              2
+            </span>
+
+            <div>
+
+              <h5 class="font-semibold">
+                Analyse intelligente
+              </h5>
+
+              <p class="text-slate-400 text-sm mt-1">
+                Le système compare vos préférences
+                aux biens disponibles.
+              </p>
+
+            </div>
+
           </div>
-          <div class="flex items-start gap-4 p-4 rounded-xl bg-white dark:bg-slate-900 shadow-sm">
-            <i class="uil uil-check-circle text-2xl text-blue-600"></i>
-            <p class="text-slate-400">Diffusez une annonce claire avec de belles photos.</p>
+
+
+          <div
+            class="flex items-start gap-4 p-4 rounded-xl
+                   bg-white dark:bg-slate-900 shadow-sm">
+
+            <span
+              class="size-9 rounded-full bg-blue-100
+                     dark:bg-blue-900/30
+                     text-blue-600 flex items-center
+                     justify-center font-semibold flex-shrink-0">
+              3
+            </span>
+
+            <div>
+
+              <h5 class="font-semibold">
+                Découvrez vos recommandations
+              </h5>
+
+              <p class="text-slate-400 text-sm mt-1">
+                Consultez les biens proposés selon leur proximité
+                avec les critères que vous avez renseignés.
+              </p>
+
+            </div>
+
           </div>
-          <div class="flex items-start gap-4 p-4 rounded-xl bg-white dark:bg-slate-900 shadow-sm">
-            <i class="uil uil-check-circle text-2xl text-blue-600"></i>
-            <p class="text-slate-400">Négociez puis finalisez la transaction en sécurité.</p>
+
+
+          <div
+            class="flex items-start gap-4 p-4 rounded-xl
+                   bg-white dark:bg-slate-900 shadow-sm">
+
+            <span
+              class="size-9 rounded-full bg-blue-100
+                     dark:bg-blue-900/30
+                     text-blue-600 flex items-center
+                     justify-center font-semibold flex-shrink-0">
+              4
+            </span>
+
+            <div>
+
+              <h5 class="font-semibold">
+                Consultez le bien
+              </h5>
+
+              <p class="text-slate-400 text-sm mt-1">
+                Ouvrez la fiche détaillée du bien recommandé
+                et contactez son propriétaire.
+              </p>
+
+            </div>
+
           </div>
+
         </div>
+
       </div>
+
     </div>
+
   </div>
+
 </section>
 
-<!-- Location -->
-<section id="location" class="relative md:py-24 py-16">
+
+<!-- ===================================================== -->
+<!-- 3 - FAVORIS -->
+<!-- ===================================================== -->
+<section id="favoris" class="relative md:py-24 py-16">
+
   <div class="container">
+
+    <div class="grid grid-cols-1 pb-8 text-center">
+
+      <span
+        class="text-rose-600 font-semibold text-sm uppercase tracking-wider
+               bg-rose-100 dark:bg-rose-900/30
+               px-3 py-1 rounded-full mx-auto">
+        Étape 3
+      </span>
+
+      <h3
+        class="mb-4 mt-4 md:text-3xl md:leading-normal
+               text-2xl leading-normal font-semibold">
+
+        Gardez vos biens préférés à portée de main
+
+      </h3>
+
+      <p class="text-slate-400 max-w-2xl mx-auto">
+
+        Utilisez les favoris pour conserver les propriétés qui vous
+        intéressent et les retrouver rapidement depuis votre espace client.
+
+      </p>
+
+    </div>
+
+
+    <div
+      class="grid lg:grid-cols-3 md:grid-cols-2
+             grid-cols-1 mt-8 gap-[30px]">
+
+
+      <!-- AJOUTER -->
+      <div
+        class="group rounded-xl bg-white dark:bg-slate-900
+               shadow-sm hover:shadow-md p-8 text-center
+               transition-all duration-500">
+
+        <div
+          class="size-16 bg-rose-100 dark:bg-rose-900/30
+                 rounded-xl flex items-center justify-center mx-auto">
+
+          <i class="uil uil-heart text-3xl text-rose-600"></i>
+
+        </div>
+
+        <div class="mt-6">
+
+          <h5 class="text-xl font-medium">
+            Ajouter un favori
+          </h5>
+
+          <p class="text-slate-400 mt-3">
+            Cliquez sur le cœur présent sur une annonce
+            pour enregistrer le bien.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- RETROUVER -->
+      <div
+        class="group rounded-xl bg-white dark:bg-slate-900
+               shadow-sm hover:shadow-md p-8 text-center
+               transition-all duration-500">
+
+        <div
+          class="size-16 bg-rose-100 dark:bg-rose-900/30
+                 rounded-xl flex items-center justify-center mx-auto">
+
+          <i class="uil uil-bookmark text-3xl text-rose-600"></i>
+
+        </div>
+
+        <div class="mt-6">
+
+          <h5 class="text-xl font-medium">
+            Retrouvez vos favoris
+          </h5>
+
+          <p class="text-slate-400 mt-3">
+            Consultez tous les biens enregistrés
+            depuis votre espace personnel.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- CONSULTER -->
+      <div
+        class="group rounded-xl bg-white dark:bg-slate-900
+               shadow-sm hover:shadow-md p-8 text-center
+               transition-all duration-500">
+
+        <div
+          class="size-16 bg-rose-100 dark:bg-rose-900/30
+                 rounded-xl flex items-center justify-center mx-auto">
+
+          <i class="uil uil-eye text-3xl text-rose-600"></i>
+
+        </div>
+
+        <div class="mt-6">
+
+          <h5 class="text-xl font-medium">
+            Consultez le bien
+          </h5>
+
+          <p class="text-slate-400 mt-3">
+            Accédez directement aux détails
+            d'un bien enregistré dans vos favoris.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- 4 - COMMUNICATION -->
+<!-- ===================================================== -->
+<section
+  id="communication"
+  class="relative md:py-24 py-16 bg-gray-50 dark:bg-slate-800">
+
+  <div class="container">
+
     <div class="grid lg:grid-cols-12 gap-[30px] items-center">
+
       <div class="lg:col-span-7">
-        <span class="text-purple-600 font-semibold text-sm uppercase tracking-wider bg-purple-100 dark:bg-purple-900/30 px-3 py-1 rounded-full">
-          Étape 3
+
+        <span
+          class="text-purple-600 font-semibold text-sm uppercase tracking-wider
+                 bg-purple-100 dark:bg-purple-900/30
+                 px-3 py-1 rounded-full">
+
+          Étape 4
+
         </span>
-        <h2 class="text-3xl md:text-4xl font-semibold text-slate-900 dark:text-white mt-4 mb-4">
-          Louer un bien immobilier
+
+        <h2
+          class="text-3xl md:text-4xl font-semibold
+                 text-slate-900 dark:text-white mt-4 mb-4">
+
+          Échangez directement avec le propriétaire
+
         </h2>
+
         <p class="text-slate-400 mb-8 max-w-2xl">
-          Que vous soyez locataire ou propriétaire bailleur, il est essentiel de
-          bien préparer la location pour éviter les litiges.
+
+          Lorsqu'un bien vous intéresse, utilisez la messagerie
+          pour communiquer directement avec son propriétaire,
+          obtenir davantage d'informations et organiser une visite.
+
         </p>
 
+
         <div class="grid md:grid-cols-3 gap-5">
-          <div class="bg-white dark:bg-slate-900 p-6 rounded-xl shadow-sm text-center">
-            <div class="size-14 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center mx-auto mb-4">
-              <i class="uil uil-folder text-2xl text-purple-600"></i>
+
+          <div
+            class="bg-white dark:bg-slate-900
+                   p-6 rounded-xl shadow-sm text-center">
+
+            <div
+              class="size-14 rounded-full bg-purple-100
+                     dark:bg-purple-900/30
+                     flex items-center justify-center mx-auto mb-4">
+
+              <i class="uil uil-comment-message text-2xl text-purple-600"></i>
+
             </div>
-            <h5 class="font-semibold">Dossier complet</h5>
-            <p class="text-slate-400 text-sm mt-2">Préparez tous les justificatifs nécessaires.</p>
+
+            <h5 class="font-semibold">
+              Démarrer une conversation
+            </h5>
+
+            <p class="text-slate-400 text-sm mt-2">
+              Contactez directement le propriétaire depuis le bien.
+            </p>
+
           </div>
 
-          <div class="bg-white dark:bg-slate-900 p-6 rounded-xl shadow-sm text-center">
-            <div class="size-14 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center mx-auto mb-4">
-              <i class="uil uil-building text-2xl text-purple-600"></i>
+
+          <div
+            class="bg-white dark:bg-slate-900
+                   p-6 rounded-xl shadow-sm text-center">
+
+            <div
+              class="size-14 rounded-full bg-purple-100
+                     dark:bg-purple-900/30
+                     flex items-center justify-center mx-auto mb-4">
+
+              <i class="uil uil-comments text-2xl text-purple-600"></i>
+
             </div>
-            <h5 class="font-semibold">Visites</h5>
-            <p class="text-slate-400 text-sm mt-2">Comparez les logements avant de décider.</p>
+
+            <h5 class="font-semibold">
+              Échanger
+            </h5>
+
+            <p class="text-slate-400 text-sm mt-2">
+              Posez vos questions sur le bien et sa disponibilité.
+            </p>
+
           </div>
 
-          <div class="bg-white dark:bg-slate-900 p-6 rounded-xl shadow-sm text-center">
-            <div class="size-14 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center mx-auto mb-4">
-              <i class="uil uil-key-skeleton text-2xl text-purple-600"></i>
+
+          <div
+            class="bg-white dark:bg-slate-900
+                   p-6 rounded-xl shadow-sm text-center">
+
+            <div
+              class="size-14 rounded-full bg-purple-100
+                     dark:bg-purple-900/30
+                     flex items-center justify-center mx-auto mb-4">
+
+              <i class="uil uil-calendar-alt text-2xl text-purple-600"></i>
+
             </div>
-            <h5 class="font-semibold">Signature du bail</h5>
-            <p class="text-slate-400 text-sm mt-2">Validez l’état des lieux et les conditions du bail.</p>
+
+            <h5 class="font-semibold">
+              Organiser une visite
+            </h5>
+
+            <p class="text-slate-400 text-sm mt-2">
+              Convenez avec le propriétaire d'une date
+              pour visiter le bien.
+            </p>
+
           </div>
+
         </div>
+
       </div>
+
 
       <div class="lg:col-span-5">
-        <div class="rounded-2xl bg-purple-50 dark:bg-purple-900/20 p-8 shadow-md border border-purple-100 dark:border-purple-900/20">
+
+        <div
+          class="rounded-2xl bg-purple-50 dark:bg-purple-900/20
+                 p-8 shadow-md border border-purple-100
+                 dark:border-purple-900/20">
+
           <div class="text-center">
-            <div class="size-20 rounded-full bg-white dark:bg-slate-800 flex items-center justify-center mx-auto shadow-md">
-              <i class="uil uil-file-check-alt text-5xl text-purple-600"></i>
+
+            <div
+              class="size-20 rounded-full bg-white dark:bg-slate-800
+                     flex items-center justify-center mx-auto shadow-md">
+
+              <i class="uil uil-comments-alt text-5xl text-purple-600"></i>
+
             </div>
-            <h3 class="text-2xl font-semibold mt-6 mb-3">Documents à fournir</h3>
+
+            <h3 class="text-2xl font-semibold mt-6 mb-3">
+              Communication directe
+            </h3>
+
             <p class="text-slate-400">
-              Pièce d’identité, justificatif de revenus, garant éventuel,
-              caution et documents du bail.
+
+              La messagerie facilite les échanges entre
+              les clients et les propriétaires directement
+              depuis la plateforme.
+
             </p>
+
           </div>
+
         </div>
+
       </div>
+
     </div>
+
   </div>
+
 </section>
 
-<!-- Financement -->
-<section id="financement" class="relative md:py-24 py-16 bg-gray-50 dark:bg-slate-800">
-  <div class="container">
-    <div class="grid grid-cols-1 pb-8 text-center">
-      <span class="text-orange-600 font-semibold text-sm uppercase tracking-wider bg-orange-100 dark:bg-orange-900/30 px-3 py-1 rounded-full mx-auto">
-        Étape 4
-      </span>
-      <h3 class="mb-4 mt-4 md:text-3xl md:leading-normal text-2xl leading-normal font-semibold">
-        Financement et prêt immobilier
-      </h3>
-      <p class="text-slate-400 max-w-2xl mx-auto">
-        Obtenez les meilleures conditions de financement pour concrétiser votre projet.
-      </p>
-    </div>
 
-    <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-8 gap-[30px]">
-      <div class="group rounded-xl bg-white dark:bg-slate-900 shadow-sm hover:shadow-md p-8 text-center transition-all duration-500">
-        <div class="size-16 bg-orange-100 dark:bg-orange-900/30 rounded-xl flex items-center justify-center mx-auto">
-          <i class="uil uil-calculator-alt text-3xl text-orange-600"></i>
-        </div>
-        <div class="mt-6">
-          <h5 class="text-xl font-medium">Calculez votre budget</h5>
-          <p class="text-slate-400 mt-3">Estimez votre capacité d’emprunt selon vos revenus et vos charges.</p>
-        </div>
-      </div>
-
-      <div class="group rounded-xl bg-white dark:bg-slate-900 shadow-sm hover:shadow-md p-8 text-center transition-all duration-500">
-        <div class="size-16 bg-orange-100 dark:bg-orange-900/30 rounded-xl flex items-center justify-center mx-auto">
-          <i class="uil uil-compare text-3xl text-orange-600"></i>
-        </div>
-        <div class="mt-6">
-          <h5 class="text-xl font-medium">Comparez les offres</h5>
-          <p class="text-slate-400 mt-3">Analysez plusieurs banques pour trouver le meilleur taux.</p>
-        </div>
-      </div>
-
-      <div class="group rounded-xl bg-white dark:bg-slate-900 shadow-sm hover:shadow-md p-8 text-center transition-all duration-500">
-        <div class="size-16 bg-orange-100 dark:bg-orange-900/30 rounded-xl flex items-center justify-center mx-auto">
-          <i class="uil uil-file-check-alt text-3xl text-orange-600"></i>
-        </div>
-        <div class="mt-6">
-          <h5 class="text-xl font-medium">Montez votre dossier</h5>
-          <p class="text-slate-400 mt-3">Préparez tous les justificatifs demandés par votre banque.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Contrat -->
+<!-- ===================================================== -->
+<!-- 5 - CONTRAT ET SIGNATURE -->
+<!-- ===================================================== -->
 <section id="contrat" class="relative md:py-24 py-16">
+
   <div class="container">
+
     <div class="grid grid-cols-1 pb-8 text-center">
-      <span class="text-red-600 font-semibold text-sm uppercase tracking-wider bg-red-100 dark:bg-red-900/30 px-3 py-1 rounded-full mx-auto">
-        Étape 5 - Important
+
+      <span
+        class="text-green-600 font-semibold text-sm uppercase tracking-wider
+               bg-green-100 dark:bg-green-900/30
+               px-3 py-1 rounded-full mx-auto">
+
+        Étape 5
+
       </span>
-      <h3 class="mb-4 mt-4 md:text-3xl md:leading-normal text-2xl leading-normal font-semibold">
-        Contrat et documents juridiques
+
+      <h3
+        class="mb-4 mt-4 md:text-3xl md:leading-normal
+               text-2xl leading-normal font-semibold">
+
+        Contrat et signature
+
       </h3>
+
       <p class="text-slate-400 max-w-2xl mx-auto">
-        La signature du contrat est possible uniquement après validation complète du dossier juridique.
+
+        Le propriétaire peut créer un contrat pour un client.
+        Le client reçoit ensuite un lien personnel lui permettant
+        de consulter et signer son contrat.
+
       </p>
+
     </div>
 
-    <div class="bg-red-50 dark:bg-red-900/20 border-s-4 border-red-500 rounded-xl p-6 mb-10 shadow-sm">
+
+    <!-- INFO -->
+    <div
+      class="bg-green-50 dark:bg-green-900/20
+             border-s-4 border-green-500
+             rounded-xl p-6 mb-10 shadow-sm">
+
       <div class="flex items-start gap-4">
-        <i class="uil uil-info-circle text-3xl text-red-600"></i>
+
+        <i class="uil uil-shield-check text-3xl text-green-600"></i>
+
         <div>
-          <h4 class="text-lg font-semibold text-red-700 dark:text-red-400 mb-2">
-            Important : Signature du contrat
+
+          <h4
+            class="text-lg font-semibold
+                   text-green-700 dark:text-green-400 mb-2">
+
+            Signature du contrat
+
           </h4>
-          <p class="text-red-600/90 dark:text-red-300">
-            Aucun contrat ne peut être signé tant que tous les documents requis
-            ne sont pas fournis, vérifiés et validés par l’équipe juridique.
+
+          <p class="text-green-600/90 dark:text-green-300">
+
+            Lorsqu'un contrat est créé, un lien de signature
+            est envoyé au client par e-mail afin qu'il puisse
+            consulter et signer son contrat.
+
           </p>
+
         </div>
+
       </div>
+
     </div>
 
-    <div class="grid lg:grid-cols-12 gap-[30px]">
-      <div class="lg:col-span-7 bg-white dark:bg-slate-800 rounded-2xl shadow-md overflow-hidden">
-        <div class="p-6 border-b border-gray-200 dark:border-gray-700 bg-green-50 dark:bg-green-900/20">
-          <h4 class="text-xl font-semibold">
-            <i class="uil uil-file-alt text-green-600 me-2"></i>
-            Documents juridiques obligatoires
-          </h4>
-          <p class="text-sm text-slate-400 mt-2">
-            Ces documents sont indispensables pour finaliser votre contrat.
-          </p>
-        </div>
 
-        <div class="divide-y divide-gray-200 dark:divide-gray-700">
-          <div class="p-5 hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-all duration-300">
-            <h5 class="font-semibold">Pièce d'identité valide</h5>
-            <p class="text-sm text-slate-400 mt-1">CNI ou passeport en cours de validité.</p>
-          </div>
+    <!-- TIMELINE -->
+    <div
+      class="bg-white dark:bg-slate-800
+             rounded-2xl shadow-md p-8">
 
-          <div class="p-5 hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-all duration-300">
-            <h5 class="font-semibold">Justificatif de domicile</h5>
-            <p class="text-sm text-slate-400 mt-1">Facture récente ou attestation officielle.</p>
-          </div>
-
-          <div class="p-5 hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-all duration-300">
-            <h5 class="font-semibold">Attestation de revenus</h5>
-            <p class="text-sm text-slate-400 mt-1">Bulletins de salaire ou documents équivalents.</p>
-          </div>
-
-          <div class="p-5 hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-all duration-300">
-            <h5 class="font-semibold">Titre de propriété</h5>
-            <p class="text-sm text-slate-400 mt-1">Document officiel du propriétaire vendeur.</p>
-          </div>
-
-          <div class="p-5 hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-all duration-300">
-            <h5 class="font-semibold">Certificat de situation juridique</h5>
-            <p class="text-sm text-slate-400 mt-1">Pour garantir l’absence de litige ou d’anomalie.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="lg:col-span-5 space-y-6">
-        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-md p-6">
-          <h4 class="text-lg font-semibold mb-4">État d’avancement du dossier</h4>
-          <div class="mb-4">
-            <div class="flex justify-between text-sm mb-2">
-              <span class="text-slate-400">Dossier complété</span>
-              <span class="font-semibold text-yellow-600">0%</span>
-            </div>
-            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-              <div class="bg-yellow-500 h-2 rounded-full" style="width: 0%"></div>
-            </div>
-          </div>
-
-          <div class="space-y-2 text-sm">
-            <div class="flex justify-between">
-              <span class="text-slate-400">Documents fournis</span>
-              <span class="font-medium">0/5</span>
-            </div>
-            <div class="flex justify-between">
-              <span class="text-slate-400">Documents vérifiés</span>
-              <span class="font-medium">0/5</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-gray-50 dark:bg-slate-700/50 rounded-2xl p-6 text-center shadow-sm">
-          <i class="uil uil-signature text-5xl text-gray-400 mb-4"></i>
-          <h4 class="text-lg font-semibold mb-2">Signature du contrat</h4>
-          <p class="text-sm text-slate-400 mb-5">
-            La signature électronique sera disponible une fois le dossier complet.
-          </p>
-          <button
-            disabled
-            class="bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 px-6 py-3 rounded-lg cursor-not-allowed w-full"
-          >
-            <i class="uil uil-lock me-2"></i>
-            Signature bloquée - Dossier incomplet
-          </button>
-        </div>
-
-        <div class="bg-blue-50 dark:bg-blue-900/20 rounded-2xl p-5 shadow-sm">
-          <div class="flex gap-3">
-            <i class="uil uil-shield-check text-2xl text-blue-600 flex-shrink-0"></i>
-            <div>
-              <h5 class="font-semibold text-blue-700 dark:text-blue-400 mb-1">Sécurité juridique</h5>
-              <p class="text-sm text-blue-600/90 dark:text-blue-300">
-                Tous les documents sont vérifiés avant validation finale du contrat.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Timeline -->
-    <div class="mt-12 bg-white dark:bg-slate-800 rounded-2xl shadow-md p-8">
-      <h4 class="text-xl font-semibold text-center mb-8">
-        Processus de signature de contrat
+      <h4 class="text-xl font-semibold text-center mb-10">
+        Processus de signature
       </h4>
 
-      <div class="grid md:grid-cols-4 gap-6 text-center">
+
+      <div class="grid md:grid-cols-4 gap-8 text-center">
+
+
+        <!-- 1 -->
         <div>
-          <div class="size-14 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-3">
-            <span class="font-bold">1</span>
+
+          <div
+            class="size-14 bg-green-100 dark:bg-green-900/30
+                   text-green-600 rounded-full
+                   flex items-center justify-center mx-auto mb-4">
+
+            <span class="font-bold">
+              1
+            </span>
+
           </div>
-          <h5 class="font-medium text-sm">Dépôt des documents</h5>
+
+          <h5 class="font-semibold">
+            Création du contrat
+          </h5>
+
+          <p class="text-slate-400 text-sm mt-2">
+            Le propriétaire crée le contrat associé
+            au bien et au client.
+          </p>
+
         </div>
 
+
+        <!-- 2 -->
         <div>
-          <div class="size-14 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-3">
-            <span class="font-bold">2</span>
+
+          <div
+            class="size-14 bg-green-100 dark:bg-green-900/30
+                   text-green-600 rounded-full
+                   flex items-center justify-center mx-auto mb-4">
+
+            <span class="font-bold">
+              2
+            </span>
+
           </div>
-          <h5 class="font-medium text-sm">Vérification juridique</h5>
+
+          <h5 class="font-semibold">
+            Envoi au client
+          </h5>
+
+          <p class="text-slate-400 text-sm mt-2">
+            Un lien personnel de signature
+            est envoyé au client par e-mail.
+          </p>
+
         </div>
 
+
+        <!-- 3 -->
         <div>
-          <div class="size-14 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-3">
-            <span class="font-bold">3</span>
+
+          <div
+            class="size-14 bg-green-100 dark:bg-green-900/30
+                   text-green-600 rounded-full
+                   flex items-center justify-center mx-auto mb-4">
+
+            <span class="font-bold">
+              3
+            </span>
+
           </div>
-          <h5 class="font-medium text-sm">Validation du dossier</h5>
+
+          <h5 class="font-semibold">
+            Consultation
+          </h5>
+
+          <p class="text-slate-400 text-sm mt-2">
+            Le client consulte les informations
+            de son contrat avant la signature.
+          </p>
+
         </div>
 
+
+        <!-- 4 -->
         <div>
-          <div class="size-14 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-3">
+
+          <div
+            class="size-14 bg-green-600 rounded-full
+                   flex items-center justify-center mx-auto mb-4">
+
             <i class="uil uil-signature text-white text-xl"></i>
+
           </div>
-          <h5 class="font-medium text-sm">Signature contrat</h5>
+
+          <h5 class="font-semibold">
+            Signature
+          </h5>
+
+          <p class="text-slate-400 text-sm mt-2">
+            Le client signe son contrat,
+            qui devient ensuite actif.
+          </p>
+
         </div>
+
       </div>
+
     </div>
+
   </div>
+
 </section>
 
-<!-- FAQ -->
-<section class="relative md:py-24 py-16 bg-gray-50 dark:bg-slate-800">
+
+<!-- ===================================================== -->
+<!-- 6 - ESPACE PROPRIETAIRE -->
+<!-- ===================================================== -->
+<section
+  id="proprietaire"
+  class="relative md:py-24 py-16 bg-gray-50 dark:bg-slate-800">
+
   <div class="container">
+
     <div class="grid grid-cols-1 pb-8 text-center">
-      <h3 class="mb-4 md:text-3xl md:leading-normal text-2xl leading-normal font-semibold">
-        Questions fréquentes
+
+      <span
+        class="text-orange-600 font-semibold text-sm uppercase tracking-wider
+               bg-orange-100 dark:bg-orange-900/30
+               px-3 py-1 rounded-full mx-auto">
+
+        Espace propriétaire
+
+      </span>
+
+      <h3
+        class="mb-4 mt-4 md:text-3xl md:leading-normal
+               text-2xl leading-normal font-semibold">
+
+        Gérez vos biens simplement
+
       </h3>
-      <p class="text-slate-400 max-w-xl mx-auto">
-        Retrouvez rapidement les réponses aux questions les plus fréquentes.
+
+      <p class="text-slate-400 max-w-2xl mx-auto">
+
+        Les propriétaires disposent d'un espace dédié
+        pour publier leurs biens, gérer leurs annonces,
+        communiquer avec les clients et gérer leurs contrats.
+
       </p>
+
     </div>
 
-    <div class="grid md:grid-cols-2 gap-[30px] mt-8 max-w-5xl mx-auto">
-      <div class="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300">
-        <h5 class="font-semibold text-lg mb-3">Pourquoi le dossier doit être complet avant signature ?</h5>
-        <p class="text-slate-400 text-sm">Pour garantir la sécurité juridique de toutes les parties et éviter tout litige futur.</p>
+
+    <div
+      class="grid lg:grid-cols-4 md:grid-cols-2
+             grid-cols-1 mt-8 gap-[30px]">
+
+
+      <!-- PUBLIER -->
+      <div
+        class="group rounded-xl bg-white dark:bg-slate-900
+               shadow-sm hover:shadow-md p-8 text-center
+               transition-all duration-500">
+
+        <div
+          class="size-16 bg-orange-100 dark:bg-orange-900/30
+                 rounded-xl flex items-center justify-center mx-auto">
+
+          <i class="uil uil-plus-circle text-3xl text-orange-600"></i>
+
+        </div>
+
+        <div class="mt-6">
+
+          <h5 class="text-xl font-medium">
+            Publier un bien
+          </h5>
+
+          <p class="text-slate-400 mt-3">
+            Ajoutez les informations, la localisation
+            et les photos de votre propriété.
+          </p>
+
+        </div>
+
       </div>
 
-      <div class="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300">
-        <h5 class="font-semibold text-lg mb-3">Combien de temps prend la vérification ?</h5>
-        <p class="text-slate-400 text-sm">En moyenne 48 à 72 heures après réception de tous les documents.</p>
+
+      <!-- GERER -->
+      <div
+        class="group rounded-xl bg-white dark:bg-slate-900
+               shadow-sm hover:shadow-md p-8 text-center
+               transition-all duration-500">
+
+        <div
+          class="size-16 bg-orange-100 dark:bg-orange-900/30
+                 rounded-xl flex items-center justify-center mx-auto">
+
+          <i class="uil uil-estate text-3xl text-orange-600"></i>
+
+        </div>
+
+        <div class="mt-6">
+
+          <h5 class="text-xl font-medium">
+            Gérer vos annonces
+          </h5>
+
+          <p class="text-slate-400 mt-3">
+            Retrouvez et gérez les biens publiés
+            depuis votre espace propriétaire.
+          </p>
+
+        </div>
+
       </div>
 
-      <div class="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300">
-        <h5 class="font-semibold text-lg mb-3">Que faire si un document manque ?</h5>
-        <p class="text-slate-400 text-sm">Notre équipe vous accompagne pour compléter votre dossier rapidement.</p>
+
+      <!-- MESSAGES -->
+      <div
+        class="group rounded-xl bg-white dark:bg-slate-900
+               shadow-sm hover:shadow-md p-8 text-center
+               transition-all duration-500">
+
+        <div
+          class="size-16 bg-orange-100 dark:bg-orange-900/30
+                 rounded-xl flex items-center justify-center mx-auto">
+
+          <i class="uil uil-comments text-3xl text-orange-600"></i>
+
+        </div>
+
+        <div class="mt-6">
+
+          <h5 class="text-xl font-medium">
+            Échanger avec les clients
+          </h5>
+
+          <p class="text-slate-400 mt-3">
+            Répondez directement aux personnes
+            intéressées par vos biens.
+          </p>
+
+        </div>
+
       </div>
 
-      <div class="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300">
-        <h5 class="font-semibold text-lg mb-3">La signature électronique est-elle légale ?</h5>
-        <p class="text-slate-400 text-sm">Oui, elle possède une valeur juridique lorsqu’elle respecte les exigences légales.</p>
+
+      <!-- CONTRATS -->
+      <div
+        class="group rounded-xl bg-white dark:bg-slate-900
+               shadow-sm hover:shadow-md p-8 text-center
+               transition-all duration-500">
+
+        <div
+          class="size-16 bg-orange-100 dark:bg-orange-900/30
+                 rounded-xl flex items-center justify-center mx-auto">
+
+          <i class="uil uil-file-contract text-3xl text-orange-600"></i>
+
+        </div>
+
+        <div class="mt-6">
+
+          <h5 class="text-xl font-medium">
+            Gérer les contrats
+          </h5>
+
+          <p class="text-slate-400 mt-3">
+            Créez et suivez les contrats associés
+            à vos biens et à vos clients.
+          </p>
+
+        </div>
+
       </div>
+
     </div>
+
   </div>
+
 </section>
 
-<!-- CTA -->
-<section class="relative md:pb-24 pb-16">
+
+<!-- ===================================================== -->
+<!-- FAQ -->
+<!-- ===================================================== -->
+<section class="relative md:py-24 py-16">
+
   <div class="container">
-    <div class="bg-green-600 rounded-3xl p-10 md:p-16 text-center shadow-lg">
-      <h3 class="text-3xl md:text-4xl font-semibold text-white mb-4">
-        Besoin d’accompagnement pour votre projet ?
+
+    <div class="grid grid-cols-1 pb-8 text-center">
+
+      <h3
+        class="mb-4 md:text-3xl md:leading-normal
+               text-2xl leading-normal font-semibold">
+
+        Questions fréquentes
+
       </h3>
-      <p class="text-white/80 max-w-2xl mx-auto mb-8">
-        Notre plateforme vous aide à acheter, vendre, louer et sécuriser vos démarches immobilières.
+
+      <p class="text-slate-400 max-w-xl mx-auto">
+
+        Retrouvez rapidement les réponses aux questions
+        concernant l'utilisation de la plateforme.
+
       </p>
-      <a
-        routerLink="/contact"
-        class="btn bg-white text-green-600 hover:bg-slate-100 rounded-md px-8 py-3 font-medium"
-      >
-        Nous contacter
-      </a>
+
     </div>
+
+
+    <div
+      class="grid md:grid-cols-2 gap-[30px]
+             mt-8 max-w-5xl mx-auto">
+
+
+      <div
+        class="bg-white dark:bg-slate-900 rounded-xl
+               p-6 shadow-sm hover:shadow-md
+               transition-all duration-300">
+
+        <h5 class="font-semibold text-lg mb-3">
+          Comment obtenir des recommandations personnalisées ?
+        </h5>
+
+        <p class="text-slate-400 text-sm">
+
+          Renseignez vos préférences de recherche afin que
+          le système puisse identifier les biens les plus
+          proches de vos critères.
+
+        </p>
+
+      </div>
+
+
+      <div
+        class="bg-white dark:bg-slate-900 rounded-xl
+               p-6 shadow-sm hover:shadow-md
+               transition-all duration-300">
+
+        <h5 class="font-semibold text-lg mb-3">
+          Comment enregistrer un bien qui m'intéresse ?
+        </h5>
+
+        <p class="text-slate-400 text-sm">
+
+          Cliquez sur l'icône cœur présente sur le bien
+          pour l'ajouter à vos favoris et le retrouver
+          dans votre espace client.
+
+        </p>
+
+      </div>
+
+
+      <div
+        class="bg-white dark:bg-slate-900 rounded-xl
+               p-6 shadow-sm hover:shadow-md
+               transition-all duration-300">
+
+        <h5 class="font-semibold text-lg mb-3">
+          Comment contacter un propriétaire ?
+        </h5>
+
+        <p class="text-slate-400 text-sm">
+
+          Utilisez le bouton « Contacter le propriétaire »
+          présent sur le bien pour démarrer une conversation.
+
+        </p>
+
+      </div>
+
+
+      <div
+        class="bg-white dark:bg-slate-900 rounded-xl
+               p-6 shadow-sm hover:shadow-md
+               transition-all duration-300">
+
+        <h5 class="font-semibold text-lg mb-3">
+          Comment signer mon contrat ?
+        </h5>
+
+        <p class="text-slate-400 text-sm">
+
+          Lorsqu'un propriétaire crée votre contrat,
+          un lien personnel de signature vous est envoyé
+          par e-mail afin de consulter et signer le contrat.
+
+        </p>
+
+      </div>
+
+    </div>
+
   </div>
+
 </section>
+
+
+<!-- ===================================================== -->
+<!-- CTA -->
+<!-- ===================================================== -->
+<section class="relative md:pb-24 pb-16">
+
+  <div class="container">
+
+    <div
+      class="bg-green-600 rounded-3xl
+             p-10 md:p-16 text-center shadow-lg">
+
+      <h3
+        class="text-3xl md:text-4xl
+               font-semibold text-white mb-4">
+
+        Prêt à trouver le bien qui vous correspond ?
+
+      </h3>
+
+      <p class="text-white/80 max-w-2xl mx-auto mb-8">
+
+        Explorez les biens disponibles, définissez vos préférences
+        et découvrez les recommandations adaptées à votre recherche.
+
+      </p>
+
+      <a
+        routerLink="/property"
+        class="btn bg-white text-green-600
+               hover:bg-slate-100 rounded-md
+               px-8 py-3 font-medium">
+
+        Découvrir les biens
+
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
 
 <app-footer></app-footer>
 <app-switcher></app-switcher>

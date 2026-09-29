@@ -1,103 +1,4 @@
-<!--<nav id="sidebar" class="sidebar-wrapper sidebar-dark">-->
-<!--    <div class="sidebar-content">-->
-<!--        <div class="sidebar-brand">-->
-<!--            <a [routerLink]="'/'"><img [src]="'/assets/images/logo-light.png'" alt=""></a>-->
-<!--        </div>-->
 
-<!--        <ul class="sidebar-menu border-t border-white/10" data-simplebar style="height: calc(100% - 70px);">-->
-<!--            <li [ngClass]="activeManu === '/' ? 'active ms-0' : ''">-->
-<!--                <a [routerLink]="'/'"><i class="mdi mdi-chart-bell-curve-cumulative me-2"></i>Dashboard</a>-->
-<!--            </li>-->
-
-<!--            <li [ngClass]="activeManu === '/explore-property' ? 'active ms-0' : ''">-->
-<!--                <a [routerLink]="'/explore-property'"><i class="mdi mdi-home-city me-2"></i>Explore Properties</a>-->
-<!--            </li>-->
-
-<!--            <li [ngClass]="activeManu === '/favorite-property' ? 'active ms-0' : ''">-->
-<!--                <a [routerLink]="'/favorite-property'"><i class="mdi mdi-home-heart me-2"></i>Favorite Properties</a>-->
-<!--            </li>-->
-
-<!--            <li [ngClass]="activeManu === '/add-property' ? 'active ms-0' : ''">-->
-<!--                <a [routerLink]="'/add-property'"><i class="mdi mdi-home-plus me-2"></i>Add Properties</a>-->
-<!--            </li>-->
-
-<!--            <li [ngClass]="activeManu === '/chat' ? 'active ms-0' : ''">-->
-<!--                <a [routerLink]="'/chat'"><i class="mdi mdi-chat-outline me-2"></i>Chat</a>-->
-<!--            </li>-->
-
-<!--            <li class="sidebar-dropdown" [ngClass]="['/profile-item','/profile','/profile-setting' ].includes(activeManu) ? 'active ms-0' : '' ">-->
-<!--                <a [routerLink]="[]" (click)="subManu('/profile-item')"><i class="mdi mdi-account-edit me-2"></i>User Profile</a>-->
-<!--                <div class="sidebar-submenu" [ngClass]="['/profile-item','/profile','/profile-setting'].includes(manuOpen) ? 'block ms-0' : '' ">-->
-<!--                    <ul>-->
-<!--                        <li [ngClass]="activeManu === '/profile' ? 'active ms-0' : ''"><a [routerLink]="'/profile'">Profile</a></li>-->
-<!--                        <li [ngClass]="activeManu === '/profile-setting' ? 'active ms-0' : ''"><a [routerLink]="'/profile-setting'">Profile Settings</a></li>-->
-<!--                    </ul>-->
-<!--                </div>-->
-<!--            </li>-->
-
-<!--            <li class="sidebar-dropdown" [ngClass]="['/blog-item','/blog','/blog-detail' ].includes(activeManu) ? 'active ms-0' : '' ">-->
-<!--                <a [routerLink]="[]" (click)="subManu('/blog-item')"><i class="mdi mdi-post-outline me-2"></i>Blog</a>-->
-<!--                <div class="sidebar-submenu" [ngClass]="['/blog-item','/blog','/blog-detail'].includes(manuOpen) ? 'block ms-0' : '' ">-->
-<!--                    <ul>-->
-<!--                        <li [ngClass]="activeManu === '/blog' ? 'active ms-0' : ''"><a [routerLink]="'/blog'">Blogs</a></li>-->
-<!--                        <li [ngClass]="activeManu === '/blog-detail' ? 'active ms-0' : ''"><a [routerLink]="'/blog-detail'">Blog Detail</a></li>-->
-<!--                    </ul>-->
-<!--                </div>-->
-<!--            </li>-->
-
-<!--            <li class="sidebar-dropdown" [ngClass]="['/page-item','/starter','/faqs','/pricing', '/review','/privacy','/terms'].includes(activeManu) ? 'active ms-0' : '' ">-->
-<!--                <a [routerLink]="[]" (click)="subManu('/page-item')"><i class="mdi mdi-file-document-outline me-2"></i>Pages</a>-->
-<!--                <div class="sidebar-submenu" [ngClass]="['/page-item','/starter','/faqs','/pricing', '/review','/privacy','/terms'].includes(manuOpen) ? 'block ms-0' : '' ">-->
-<!--                    <ul>-->
-<!--                        <li [ngClass]="activeManu === '/starter' ? 'active ms-0' : ''"><a [routerLink]="'/starter'">Starter</a></li>-->
-<!--                        <li [ngClass]="activeManu === '/faqs' ? 'active ms-0' : ''"><a [routerLink]="'/faqs'">FAQs</a></li>-->
-<!--                        <li [ngClass]="activeManu === '/pricing' ? 'active ms-0' : ''"><a [routerLink]="'/pricing'">Pricing</a></li>-->
-<!--                        <li [ngClass]="activeManu === '/review' ? 'active ms-0' : ''"><a [routerLink]="'/review'">Review</a></li>-->
-<!--                        <li [ngClass]="activeManu === '/privacy' ? 'active ms-0' : ''"><a [routerLink]="'/privacy'">Privacy Policy</a></li>-->
-<!--                        <li [ngClass]="activeManu === '/terms' ? 'active ms-0' : ''"><a [routerLink]="'/terms'">Term & Condition</a></li>-->
-<!--                    </ul>-->
-<!--                </div>-->
-<!--            </li>-->
-
-<!--            <li class="sidebar-dropdown" [ngClass]="['/auth-item','/login','/signup','/signup-success', '/reset-password','/lock-screen'].includes(activeManu) ? 'active ms-0' : '' ">-->
-<!--                <a [routerLink]="[]" (click)="subManu('/auth-item')"><i class="mdi mdi-login me-2"></i>Authentication</a>-->
-<!--                <div class="sidebar-submenu" [ngClass]="['/auth-item','/login','/signup','/signup-success', '/reset-password','/lock-screen'].includes(manuOpen) ? 'block ms-0' : '' ">-->
-<!--                    <ul>-->
-<!--                        <li [ngClass]="activeManu === '/login' ? 'active ms-0' : ''"><a [routerLink]="'/login'">Login</a></li>-->
-<!--                        <li [ngClass]="activeManu === '/signup' ? 'active ms-0' : ''"><a [routerLink]="'/signup'">Signup</a></li>-->
-<!--                        <li [ngClass]="activeManu === '/signup-success' ? 'active ms-0' : ''"><a [routerLink]="'/signup-success'">Signup Success</a></li>-->
-<!--                        <li [ngClass]="activeManu === '/reset-password' ? 'active ms-0' : ''"><a [routerLink]="'/reset-password'">Reset Password</a></li>-->
-<!--                        <li [ngClass]="activeManu === '/lock-screen' ? 'active ms-0' : ''"><a [routerLink]="'/lock-screen'">Lockscreen</a></li>-->
-<!--                    </ul>-->
-<!--                </div>-->
-<!--            </li>-->
-
-<!--            <li class="sidebar-dropdown" [ngClass]="['/special-item','/comingsoon','/maintenance','/error', '/thankyou'].includes(activeManu) ? 'active ms-0' : '' ">-->
-<!--                <a [routerLink]="[]" (click)="subManu('/special-item')"><i class="mdi mdi-layers me-2"></i>Miscellaneous</a>-->
-<!--                <div class="sidebar-submenu" [ngClass]="['/special-item','/comingsoon','/maintenance','/error', '/thankyou'].includes(manuOpen) ? 'block ms-0' : '' ">-->
-<!--                    <ul>-->
-<!--                        <li [ngClass]="activeManu === '/comingsoon' ? 'active ms-0' : ''"><a [routerLink]="'/comingsoon'">Comingsoon</a></li>-->
-<!--                        <li [ngClass]="activeManu === '/maintenance' ? 'active ms-0' : ''"><a [routerLink]="'/maintenance'">Maintenance</a></li>-->
-<!--                        <li [ngClass]="activeManu === '/error' ? 'active ms-0' : ''"><a [routerLink]="'/error'">Error</a></li>-->
-<!--                        <li [ngClass]="activeManu === '/thankyou' ? 'active ms-0' : ''"><a [routerLink]="'/thankyou'">Thank You</a></li>-->
-<!--                    </ul>-->
-<!--                </div>-->
-<!--            </li>-->
-
-<!--&lt;!&ndash;            <li class="relative lg:m-8 m-6 px-8 py-10 rounded-lg bg-gradient-to-b to-transparent from-slate-800 text-center">&ndash;&gt;-->
-<!--&lt;!&ndash;                <span class="relative z-10">&ndash;&gt;-->
-<!--&lt;!&ndash;                    <span class="text-xl font-medium h5 text-white">Upgrade to Pro</span>&ndash;&gt;-->
-
-<!--&lt;!&ndash;                    <span class="text-slate-400 mt-3 mb-5 block">Get one month free and subscribe to pro</span>&ndash;&gt;-->
-
-<!--&lt;!&ndash;                    <a href="https://1.envato.market/hously-angular" target="_blank" class="py-2 px-5 inline-block font-semibold tracking-wide border align-middle transition duration-500 ease-in-out text-base text-center bg-gray-500/5 hover:bg-gray-500 border-gray-500/10 hover:border-gray-500 text-white rounded-md">Subscribe</a>&ndash;&gt;-->
-<!--&lt;!&ndash;                </span>&ndash;&gt;-->
-
-<!--&lt;!&ndash;                <span class="mdi mdi-home-city-outline text-[160px] absolute top-1/2 -translate-y-1/2 start-0 end-0 mx-auto text-center opacity-[0.02] text-white z-0"></span>&ndash;&gt;-->
-<!--&lt;!&ndash;            </li>&ndash;&gt;-->
-<!--        </ul>-->
-<!--    </div>-->
-<!--</nav>-->
 <nav id="sidebar" class="sidebar-wrapper sidebar-dark">
   <div class="sidebar-content">
     <div class="sidebar-brand">
@@ -121,20 +22,13 @@
         <a [routerLink]="'/add-property'"><i class="mdi mdi-home-plus me-2"></i>Ajouter un bien</a>
       </li>
 
-      <!-- Mes locations -->
-      <li [ngClass]="activeManu === '/mes-locations' ? 'active ms-0' : ''">
-        <a [routerLink]="'/mes-locations'"><i class="mdi mdi-handshake me-2"></i>Mes locations</a>
-      </li>
 
       <!-- Messages -->
       <li [ngClass]="activeManu === '/messages' ? 'active ms-0' : ''">
-        <a [routerLink]="'/messages'"><i class="mdi mdi-chat-outline me-2"></i>Messages</a>
+        <a [routerLink]="'/chat'"><i class="mdi mdi-chat-outline me-2"></i>Messages</a>
       </li>
 
-      <!-- Favoris -->
-      <li [ngClass]="activeManu === '/favoris' ? 'active ms-0' : ''">
-        <a [routerLink]="'/favoris'"><i class="mdi mdi-home-heart me-2"></i>Propriétés favorites</a>
-      </li>
+
 
       <!-- Profil -->
       <li class="sidebar-dropdown" [ngClass]="['/profile-item','/profile','/profile-setting' ].includes(activeManu) ? 'active ms-0' : '' ">
@@ -162,32 +56,9 @@
         </div>
       </li>
 
-      <!-- Paiements -->
-      <li class="sidebar-dropdown" [ngClass]="['/paiements-item','/mes-paiements','/historique-paiements' ].includes(activeManu) ? 'active ms-0' : '' ">
-        <a [routerLink]="[]" (click)="subManu('/paiements-item')"><i class="mdi mdi-credit-card-outline me-2"></i>Paiements</a>
-        <div class="sidebar-submenu" [ngClass]="['/paiements-item','/mes-paiements','/historique-paiements'].includes(manuOpen) ? 'block ms-0' : '' ">
-          <ul>
-            <li [ngClass]="activeManu === '/mes-paiements' ? 'active ms-0' : ''"><a [routerLink]="'/mes-paiements'">Loyers perçus</a></li>
-            <li [ngClass]="activeManu === '/historique-paiements' ? 'active ms-0' : ''"><a [routerLink]="'/historique-paiements'">Historique</a></li>
-          </ul>
-        </div>
-      </li>
 
-      <!-- Statistiques -->
-      <li [ngClass]="activeManu === '/statistiques' ? 'active ms-0' : ''">
-        <a [routerLink]="'/statistiques'"><i class="mdi mdi-chart-line me-2"></i>Statistiques</a>
-      </li>
 
-      <!-- Aide / Support -->
-      <li class="sidebar-dropdown" [ngClass]="['/support-item','/faq','/contact-support' ].includes(activeManu) ? 'active ms-0' : '' ">
-        <a [routerLink]="[]" (click)="subManu('/support-item')"><i class="mdi mdi-help-circle-outline me-2"></i>Aide & Support</a>
-        <div class="sidebar-submenu" [ngClass]="['/support-item','/faq','/contact-support'].includes(manuOpen) ? 'block ms-0' : '' ">
-          <ul>
-            <li [ngClass]="activeManu === '/faq' ? 'active ms-0' : ''"><a [routerLink]="'/faq'">FAQ</a></li>
-            <li [ngClass]="activeManu === '/contact-support' ? 'active ms-0' : ''"><a [routerLink]="'/contact-support'">Contacter le support</a></li>
-          </ul>
-        </div>
-      </li>
+
     </ul>
   </div>
 </nav>

@@ -1,44 +1,149 @@
 <section class="md:h-screen py-36 flex items-center relative overflow-hidden zoom-image">
-    <div class="absolute inset-0 image-wrap z-1 bg-[url('/assets/images/bg/01.jpg')] bg-no-repeat bg-center bg-cover"></div>
-    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black z-2" id="particles-snow"></div>
-    <div class="container relative z-3">
-        <div class="flex justify-center">
-            <div class="max-w-[400px] w-full m-auto p-6 bg-white dark:bg-slate-900 shadow-md shadow-gyay-200 dark:shadow-gray-700 rounded-md">
-                <a [routerLink]="'/'"><img [src]="'assets/images/logo-icon-64.png'" class="mx-auto" alt=""></a>
-                <h5 class="my-6 text-xl font-semibold">Login</h5>
-                <form class="text-start">
-                    <div class="grid grid-cols-1">
-                        <div class="mb-4">
-                            <label class="font-medium" for="LoginEmail">Email Address:</label>
-                            <input [(ngModel)]="authenticationRequest.email"  [ngModelOptions]="{standalone: true}" id="LoginEmail" type="email" class="form-input border !border-gray-200 dark:!border-gray-800 mt-3" placeholder="name@example.com">
-                        </div>
+  <div class="absolute inset-0 image-wrap z-1 bg-[url('/assets/images/bg/01.jpg')] bg-no-repeat bg-center bg-cover"></div>
+  <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black z-2" id="particles-snow"></div>
 
-                        <div class="mb-4">
-                            <label class="font-medium" for="LoginPassword">Password:</label>
-                            <input [(ngModel)]="authenticationRequest.password"  [ngModelOptions]="{standalone: true}" id="LoginPassword" type="password" class="form-input border !border-gray-200 dark:!border-gray-800 mt-3" placeholder="Password:">
-                        </div>
+  <div class="container relative z-3">
+    <div class="flex justify-center">
 
-                        <div class="flex justify-between mb-4">
-                            <div class="flex items-center mb-0">
-                                <input class="form-checkbox size-4 appearance-none rounded border border-gray-200 dark:border-gray-800 accent-green-600 checked:appearance-auto dark:accent-green-600 focus:border-green-300 focus:ring-0 focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2" type="checkbox" value="" id="RememberMe">
-                                <label class="form-checkbox-label text-slate-400" for="RememberMe">Remember me</label>
-                            </div>
-                            <p class="text-slate-400 mb-0"><a [routerLink]="'/auth-re-password'" class="text-slate-400">Forgot password ?</a></p>
-                        </div>
+      <div class="max-w-[400px] w-full m-auto p-6 bg-white dark:bg-slate-900 shadow-md shadow-gyay-200 dark:shadow-gray-700 rounded-md">
 
-                        <div class="mb-4">
-                            <a [routerLink]="[]" (click)="loginUser()" class="btn bg-green-600 hover:bg-green-700 text-white rounded-md w-full">Login / Sign in</a>
-                        </div>
+        <a [routerLink]="'/'">
+          <img [src]="'assets/images/logo-icon-64.png'" class="mx-auto" alt="">
+        </a>
 
-                        <div class="text-center">
-                            <span class="text-slate-400 me-2">Don't have an account ?</span> <a [routerLink]="'/auth-signup'" class="text-black dark:text-white font-bold">Sign Up</a>
-                        </div>
-                    </div>
-                </form>
+        <h5 class="my-6 text-xl font-semibold">
+          Connexion
+        </h5>
+
+        <form class="text-start">
+
+          <div class="grid grid-cols-1">
+
+            <!-- EMAIL -->
+            <div class="mb-4">
+
+              <label class="font-medium" for="LoginEmail">
+                Adresse e-mail :
+              </label>
+
+              <input
+                [(ngModel)]="authenticationRequest.email"
+                [ngModelOptions]="{standalone: true}"
+                id="LoginEmail"
+                type="email"
+                class="form-input border !border-gray-200 dark:!border-gray-800 mt-3"
+                placeholder="nom@exemple.com">
+
             </div>
-        </div>
+
+
+            <!-- MOT DE PASSE -->
+            <div class="mb-4">
+
+              <label class="font-medium" for="LoginPassword">
+                Mot de passe :
+              </label>
+
+              <input
+                [(ngModel)]="authenticationRequest.password"
+                [ngModelOptions]="{standalone: true}"
+                id="LoginPassword"
+                type="password"
+                class="form-input border !border-gray-200 dark:!border-gray-800 mt-3"
+                placeholder="Mot de passe">
+
+            </div>
+
+
+            <!-- SE SOUVENIR / MOT DE PASSE OUBLIÉ -->
+            <div class="flex justify-between mb-4">
+
+              <div class="flex items-center mb-0">
+
+                <input
+                  class="form-checkbox size-4 appearance-none rounded border border-gray-200 dark:border-gray-800 accent-green-600 checked:appearance-auto dark:accent-green-600 focus:border-green-300 focus:ring-0 focus:ring-offset-0 focus:ring-green-200 focus:ring-opacity-50 me-2"
+                  type="checkbox"
+                  value=""
+                  id="RememberMe">
+
+                <label
+                  class="form-checkbox-label text-slate-400"
+                  for="RememberMe">
+
+                  Se souvenir de moi
+
+                </label>
+
+              </div>
+
+
+              <p class="text-slate-400 mb-0">
+
+                <a
+                  [routerLink]="'/auth-re-password'"
+                  class="text-slate-400">
+
+                  Mot de passe oublié ?
+
+                </a>
+
+              </p>
+
+            </div>
+
+
+            <!-- CONNEXION -->
+            <div class="mb-4">
+
+              <a
+                [routerLink]="[]"
+                (click)="loginUser()"
+                class="btn bg-green-600 hover:bg-green-700 text-white rounded-md w-full">
+
+                Se connecter
+
+              </a>
+
+            </div>
+
+
+            <!-- INSCRIPTION -->
+            <div class="text-center">
+
+                            <span class="text-slate-400 me-2">
+                                Vous n'avez pas de compte ?
+                            </span>
+
+              <a
+                [routerLink]="'/auth-signup'"
+                class="text-black dark:text-white font-bold">
+
+                S'inscrire
+
+              </a>
+
+            </div>
+
+          </div>
+
+        </form>
+
+      </div>
+
     </div>
+  </div>
+
 </section>
+
+
 <div class="fixed bottom-3 end-3 z-10">
-    <a [routerLink]="'/'" class="back-button btn btn-icon bg-green-600 hover:bg-green-700 text-white !rounded-full"><i data-feather="arrow-left" class="size-4"></i></a>
+
+  <a
+    [routerLink]="'/'"
+    class="back-button btn btn-icon bg-green-600 hover:bg-green-700 text-white !rounded-full">
+
+    <i data-feather="arrow-left" class="size-4"></i>
+
+  </a>
+
 </div>

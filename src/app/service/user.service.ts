@@ -21,8 +21,6 @@ export class UserService {
       token = localStorage.getItem('token'); // Use lowercase 'token'
     }
 
-
-
     if (token) {
       const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set("Content-Type", "application/json; charset=utf8");
       return this.http.get<RegisterRequest>(`${this.apiUrl}/users/current-user`, { headers });
@@ -33,6 +31,24 @@ export class UserService {
   }
 
 
+  changePassword(data: any): Observable<any> {
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({Authorization: `Bearer ${token}`});
+
+    return this.http.put<any>(
+      `${this.apiUrl}/users/change-password`,
+      data,
+      { headers }
+    );
+  }
+
+  getDashboardClient() {
+    return this.http.get(`${environment.apiUrl}/api/dashboard`);
+  }
+  retirerFavori(id: number) {
+    return this.http.delete(`/api/favoris/${id}`);
+  }
 
 
 }

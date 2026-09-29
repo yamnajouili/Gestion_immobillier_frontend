@@ -64,7 +64,32 @@ export class FavorisService {
   }
 
 
+  getMesFavoris(): Observable<any[]> {
+    const token = localStorage.getItem('token');
 
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http.get<any[]>(
+      `${this.apiUrl}/favoris/mes-favoris`,
+      { headers }
+    );
+  }
+
+
+  deleteFavoris(id: number): Observable<void> {
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http.delete<void>(
+      `${this.apiUrl}/favoris/delete/${id}`,
+      { headers }
+    );
+  }
 
 
 }

@@ -1,4 +1,6 @@
 @use 'ngx-toastr/toastr';
-
 @import url('https://cdn.jsdelivr.net/npm/lightgallery@2.0.0-beta.4/css/lightgallery.css');
 
+.ngx-simplebar .simplebar-content {
+  padding: 8px !important; // ou la valeur que tu souhaites
+}

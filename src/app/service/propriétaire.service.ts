@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {environment} from '../environments/environment';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {Client} from '../Models/client';
 import {Observable} from 'rxjs';
@@ -21,4 +21,31 @@ export class PropriétaireService {
   register(request: Propriétaire): Observable<AuthenticationResponse> {
     return this.http.post<AuthenticationResponse>(`${this.apiUrl}/proprietaires/register`, request);
   }
+
+
+  updateProfile(data: any): Observable<any> {
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({Authorization: `Bearer ${token}`});
+
+    return this.http.put<any>(
+      `${this.apiUrl}/proprietaires/profile`,
+      data,
+      { headers }
+    );
+  }
+  getProprietaireById(id: number): Observable<any> {
+
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http.get<any>(
+      `${this.apiUrl}/proprietaires/${id}`,
+      { headers }
+    );
+  }
+
 }

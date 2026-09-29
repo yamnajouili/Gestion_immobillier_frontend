@@ -64,34 +64,77 @@ proprietaire: Propriétaire = new Propriétaire();
 
 
   register(): void {
-    // Appel au service avec les données + rôle CLIENT
+
     this.clientservice.register(this.client).subscribe({
-      next: (response) => {
-        console.log('Inscription réussie', response);
+
+      next: (response: any) => {
+
+        console.log('Inscription client réussie', response);
+
+        // Enregistrer les tokens
+        localStorage.setItem('token', response.access_token);
+        localStorage.setItem('refresh_token', response.refresh_token);
+
+        console.log(
+          'TOKEN CLIENT =',
+          localStorage.getItem('token')
+        );
+
+        // Redirection
         this.router.navigate(['/success-client']);
       },
+
       error: (error) => {
         console.error('Erreur', error);
         alert('❌ Erreur lors de l\'inscription');
       }
+
     });
   }
-
-
 
   registerProprietaires(): void {
-    // Appel au service avec les données + rôle proprietaire
+
     this.proprietaireservice.register(this.proprietaire).subscribe({
-      next: (response) => {
-        console.log('Inscription réussie', response);
+
+      next: (response: any) => {
+
+        console.log('REPONSE COMPLETE =', response);
+
+        // Enregistrer le JWT
+        localStorage.setItem('token', response.access_token);
+        localStorage.setItem('refresh_token', response.refresh_token);
+
+        console.log(
+          'TOKEN APRES SAVE =',
+          localStorage.getItem('token')
+        );
+
+        // Redirection
         this.router.navigate(['/success']);
       },
+
       error: (error) => {
         console.error('Erreur', error);
         alert('❌ Erreur lors de l\'inscription');
       }
+
     });
   }
+
+
+  // registerProprietaires(): void {
+  //   // Appel au service avec les données + rôle proprietaire
+  //   this.proprietaireservice.register(this.proprietaire).subscribe({
+  //     next: (response) => {
+  //       console.log('Inscription réussie', response);
+  //       this.router.navigate(['/success']);
+  //     },
+  //     error: (error) => {
+  //       console.error('Erreur', error);
+  //       alert('❌ Erreur lors de l\'inscription');
+  //     }
+  //   });
+  // }
   ngOnInit(): void {
   }
 

@@ -55,4 +55,50 @@ export class ContratService {
     );
 
   }
+
+
+  getMesContrats(): Observable<any[]> {
+
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http.get<Contrat[]>(
+      `${this.apiUrl}/contrats/mes-contrats`,
+      { headers }
+    );
+  }
+
+  getContratById(id: number): Observable<any> {
+
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http.get<any>(
+      `${this.apiUrl}/contrats/${id}`,
+      { headers }
+    );
+  }
+
+
+  getMesContratsProprietaire(): Observable<any[]> {
+
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http.get<any[]>(
+      `${this.apiUrl}/contrats/mes-contrats-proprietaire`,
+      { headers }
+    );
+  }
+
+
 }

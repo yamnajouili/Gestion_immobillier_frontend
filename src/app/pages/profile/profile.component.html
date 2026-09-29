@@ -1,174 +1,541 @@
-<div class="page-wrapper toggled" [ngClass]="{ 'toggled': activeSidebar }">
-    <app-sidebar/>
+<div class="page-wrapper toggled"
+     [ngClass]="{ 'toggled': activeSidebar }">
 
-    <main class="page-content bg-gray-50 dark:bg-slate-800">
-        <app-topbar (toggleClass)="toggleClass()"/>
 
-        <div class="container-fluid relative px-3">
-            <div class="layout-specing">
-                <div class="grid grid-cols-1">
-                    <div class="profile-banner relative text-transparent rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 overflow-hidden">
-                        <input id="pro-banner" name="profile-banner" type="file" class="hidden" (change)="handleChange($event)">
-                        <div class="relative shrink-0">
-                            <ng-container *ngIf="setFile; else elseTemplate">
-                                <img [src]="setFile" class="h-80 w-full object-cover" id="profile-banner" alt="">
-                            </ng-container>
-                            <ng-template #elseTemplate>
-                                <img [src]="'assets/images/bg.jpg'" class="h-80 w-full object-cover" id="profile-banner" alt="">
-                            </ng-template>
+  <app-sidebaruser
+    *ngIf="user.role === 'CLIENT'">
+  </app-sidebaruser>
 
-                            <div class="absolute inset-0 bg-slate-900/70"></div>
-                            <label class="absolute inset-0 cursor-pointer" for="pro-banner"></label>
-                        </div>
-                    </div>
-                </div>
+  <app-sidebar
+    *ngIf="user.role !== 'CLIENT'">
+  </app-sidebar>
 
-                <div class="grid md:grid-cols-12 grid-cols-1">
-                    <div class="xl:col-span-3 lg:col-span-4 md:col-span-4 mx-6">
-                        <div class="p-6 relative rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 bg-white dark:bg-slate-900 -mt-48">
-                            <div class="profile-pic text-center mb-5">
-                                <input id="pro-img" name="profile-image" type="file" class="hidden" onchange="loadFile(event)" />
-                                <div>
-                                    <div class="relative size-24 mx-auto">
-                                        <img [src]="'/assets/images/client/07.jpg'" class="rounded-full shadow-sm shadow-gray-200 dark:shadow-gray-700 ring-4 ring-slate-50 dark:ring-slate-800" id="profile-image" alt="">
-                                        <label class="absolute inset-0 cursor-pointer" for="pro-img"></label>
-                                    </div>
+  <main class="page-content bg-gray-50 dark:bg-slate-800">
 
-                                    <div class="mt-4">
-                                        <h5 class="text-lg font-semibold">Calvin Carlo</h5>
-                                        <p class="text-slate-400">calvin&#64;hotmail.com</p>
-                                    </div>
-                                </div>
-                            </div>
+    <app-topbar (toggleClass)="toggleClass()"/>
 
-                            <div class="border-t border-gray-100 dark:border-gray-700">
-                                <h5 class="text-xl font-semibold mt-4">Personal Details :</h5>
-                                <div class="mt-4">
-                                    <div class="flex items-center">
-                                        <i data-feather="mail" class="fea icon-ex-md text-slate-400 me-3"></i>
-                                        <div class="flex-1">
-                                            <h6 class="text-green-600 dark:text-white font-medium mb-0">Email :</h6>
-                                            <a [routerLink]="[]" (click)="$event.preventDefault()" class="text-slate-400">calvin&#64;hotmail.com</a>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center mt-3">
-                                        <i data-feather="bookmark" class="fea icon-ex-md text-slate-400 me-3"></i>
-                                        <div class="flex-1">
-                                            <h6 class="text-green-600 dark:text-white font-medium mb-0">Skills :</h6>
-                                            <a [routerLink]="[]" (click)="$event.preventDefault()" class="text-slate-400">html</a>, <a href="" class="text-slate-400">css</a>, <a href="" class="text-slate-400">js</a>, <a href="" class="text-slate-400">mysql</a>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center mt-3">
-                                        <i data-feather="italic" class="fea icon-ex-md text-slate-400 me-3"></i>
-                                        <div class="flex-1">
-                                            <h6 class="text-green-600 dark:text-white font-medium mb-0">Language :</h6>
-                                            <a [routerLink]="[]" (click)="$event.preventDefault()" class="text-slate-400">English</a>, <a href="" class="text-slate-400">Japanese</a>, <a href="" class="text-slate-400">Chinese</a>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center mt-3">
-                                        <i data-feather="globe" class="fea icon-ex-md text-slate-400 me-3"></i>
-                                        <div class="flex-1">
-                                            <h6 class="text-green-600 dark:text-white font-medium mb-0">Website :</h6>
-                                            <a [routerLink]="[]" (click)="$event.preventDefault()" class="text-slate-400">www.cristina.com</a>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center mt-3">
-                                        <i data-feather="gift" class="fea icon-ex-md text-slate-400 me-3"></i>
-                                        <div class="flex-1">
-                                            <h6 class="text-green-600 dark:text-white font-medium mb-0">Birthday :</h6>
-                                            <p class="text-slate-400 mb-0">2nd March, 1996</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center mt-3">
-                                        <i data-feather="map-pin" class="fea icon-ex-md text-slate-400 me-3"></i>
-                                        <div class="flex-1">
-                                            <h6 class="text-green-600 dark:text-white font-medium mb-0">Location :</h6>
-                                            <a [routerLink]="[]" (click)="$event.preventDefault()" class="text-slate-400">Beijing, China</a>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center mt-3">
-                                        <i data-feather="phone" class="fea icon-ex-md text-slate-400 me-3"></i>
-                                        <div class="flex-1">
-                                            <h6 class="text-green-600 dark:text-white font-medium mb-0">Cell No :</h6>
-                                            <a [routerLink]="[]" (click)="$event.preventDefault()" class="text-slate-400">(+12) 1254-56-4896</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <div class="container-fluid relative px-3">
 
-                    <div class="xl:col-span-9 lg:col-span-8 md:col-span-8 mt-6">
-                        <div class="grid grid-cols-1 gap-6">
-                            <div class="p-6 relative rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 bg-white dark:bg-slate-900">
-                                <h5 class="text-xl font-semibold">Calvin Carlo</h5>
+      <div class="layout-specing">
 
-                                <p class="text-slate-400 mt-3">I have started my career as a trainee and prove my self and achieve all the milestone with good guidance and reach up to the project manager. In this journey, I understand all the procedure which make me a good developer, team leader, and a project manager.</p>
-                            </div>
+        <!-- ========================= -->
+        <!-- BANNIERE -->
+        <!-- ========================= -->
 
-                            <div class="p-6 relative rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 bg-white dark:bg-slate-900">
-                                <h5 class="text-xl font-semibold">My Property :</h5>
+        <div class="grid grid-cols-1">
 
-                                <div class="grid lg:grid-cols-3 md:grid-cols-2 mt-6 gap-6">
-                                    <div   class="group rounded-xl bg-white dark:bg-slate-900 shadow-sm hover:shadow-xl dark:hover:shadow-xl shadow-gray-200 dark:shadow-gray-700 dark:hover:shadow-gray-700 overflow-hidden ease-in-out duration-500">
-                                        <div class="relative">
-                                            <img [src]="" alt="">
+          <div
+            class="profile-banner relative text-transparent rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 overflow-hidden">
 
-                                            <div class="absolute top-4 end-4">
-                                                <a [routerLink]="[]" (click)="$event.preventDefault()" class="btn btn-icon bg-white dark:bg-slate-900 shadow-sm shadow-gray-200 dark:shadow-gray-700 !rounded-full text-slate-100 dark:text-slate-700 focus:text-red-600 dark:focus:text-red-600 hover:text-red-600 dark:hover:text-red-600"><i class="mdi mdi-heart text-[20px]"></i></a>
-                                            </div>
-                                        </div>
+            <input
+              id="pro-banner"
+              name="profile-banner"
+              type="file"
+              class="hidden"
+              (change)="handleChange($event)">
 
-                                        <div class="p-6">
-                                            <div class="pb-6">
-                                                <a [routerLink]="['/property-detail']" class="text-lg hover:text-green-600 font-medium ease-in-out duration-500"></a>
-                                            </div>
+            <div class="relative shrink-0">
 
-                                            <ul class="py-6 border-y border-slate-100 dark:border-gray-800 flex items-center list-none">
-                                                <li class="flex items-center me-4">
-                                                    <i class="mdi mdi-arrow-expand-all text-2xl me-2 text-green-600"></i>
-                                                    <span></span>
-                                                </li>
+              <ng-container *ngIf="setFile; else elseTemplate">
 
-                                                <li class="flex items-center me-4">
-                                                    <i class="mdi mdi-bed text-2xl me-2 text-green-600"></i>
-                                                    <span></span>
-                                                </li>
+                <img
+                  [src]="setFile"
+                  class="h-80 w-full object-cover"
+                  id="profile-banner"
+                  alt="">
 
-                                                <li class="flex items-center">
-                                                    <i class="mdi mdi-shower text-2xl me-2 text-green-600"></i>
-                                                    <span></span>
-                                                </li>
-                                            </ul>
+              </ng-container>
 
-                                            <ul class="pt-6 flex justify-between items-center list-none">
-                                                <li>
-                                                    <span class="text-slate-400">Price</span>
-                                                    <p class="text-lg font-medium"></p>
-                                                </li>
+              <ng-template #elseTemplate>
 
-                                                <li>
-                                                    <span class="text-slate-400">Rating</span>
-                                                    <ul class="text-lg font-medium text-amber-400 list-none">
-                                                        <li class="inline"><i class="mdi mdi-star"></i></li>
-                                                        <li class="inline"><i class="mdi mdi-star"></i></li>
-                                                        <li class="inline"><i class="mdi mdi-star"></i></li>
-                                                        <li class="inline"><i class="mdi mdi-star"></i></li>
-                                                        <li class="inline"><i class="mdi mdi-star"></i></li>
-                                                        <li class="inline text-black dark:text-white">5.0(30)</li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <img
+                  [src]="'assets/images/bg.jpg'"
+                  class="h-80 w-full object-cover"
+                  id="profile-banner"
+                  alt="">
+
+              </ng-template>
+
+              <div class="absolute inset-0 bg-slate-900/70">
+              </div>
+
+              <label
+                class="absolute inset-0 cursor-pointer"
+                for="pro-banner">
+              </label>
+
             </div>
+
+          </div>
+
         </div>
 
-        <app-footer/>
-    </main>
+
+        <!-- ========================= -->
+        <!-- PROFIL -->
+        <!-- ========================= -->
+
+        <div class="grid md:grid-cols-12 grid-cols-1">
+
+
+          <!-- ========================= -->
+          <!-- PARTIE GAUCHE -->
+          <!-- ========================= -->
+
+          <div class="xl:col-span-3 lg:col-span-4 md:col-span-4 mx-6">
+
+            <div
+              class="p-6 relative rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 bg-white dark:bg-slate-900 -mt-48">
+
+
+              <!-- PHOTO -->
+
+              <div class="profile-pic text-center mb-5">
+
+                <div>
+
+                  <div class="relative size-24 mx-auto">
+
+                    <img
+                      [src]="'/assets/images/client/07.jpg'"
+                      class="rounded-full shadow-sm shadow-gray-200 dark:shadow-gray-700 ring-4 ring-slate-50 dark:ring-slate-800"
+                      id="profile-image"
+                      alt="">
+
+                  </div>
+
+
+                  <!-- NOM + EMAIL -->
+
+                  <div class="mt-4">
+
+                    <h5 class="text-lg font-semibold">
+
+                      {{ user.nom }}
+
+                    </h5>
+
+                    <p class="text-slate-400">
+
+                      {{ user.email }}
+
+                    </p>
+
+
+                    <!-- ROLE -->
+
+                    <span
+                      *ngIf="user.role === 'CLIENT'"
+                      class="inline-block mt-2 px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-600">
+
+                                            Client
+
+                                        </span>
+
+                    <span
+                      *ngIf="user.role === 'PROPRIETAIRE'"
+                      class="inline-block mt-2 px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-600">
+
+                                            Propriétaire
+
+                                        </span>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <!-- ========================= -->
+              <!-- DETAILS -->
+              <!-- ========================= -->
+
+              <div
+                class="border-t border-gray-100 dark:border-gray-700">
+
+                <h5 class="text-lg font-semibold mt-4 whitespace-nowrap">
+
+                  Informations personnelles :
+
+                </h5>
+
+
+                <div class="mt-4">
+
+
+                  <!-- EMAIL -->
+
+                  <div class="flex items-center">
+
+                    <i
+                      data-feather="mail"
+                      class="fea icon-ex-md text-slate-400 me-3">
+                    </i>
+
+                    <div class="flex-1">
+
+                      <h6
+                        class="text-green-600 dark:text-white font-medium mb-0">
+
+                        Email :
+
+                      </h6>
+
+                      <p class="text-slate-400 mb-0 break-all">
+
+                        {{ user.email }}
+
+                      </p>
+
+                    </div>
+
+                  </div>
+
+
+                  <!-- TELEPHONE -->
+
+                  <div class="flex items-center mt-3">
+
+                    <i
+                      data-feather="phone"
+                      class="fea icon-ex-md text-slate-400 me-3">
+                    </i>
+
+                    <div class="flex-1">
+
+                      <h6
+                        class="text-green-600 dark:text-white font-medium mb-0">
+
+                        Téléphone :
+
+                      </h6>
+
+                      <p class="text-slate-400 mb-0">
+
+                        {{ user.telephone || 'Non renseigné' }}
+
+                      </p>
+
+                    </div>
+
+                  </div>
+
+
+                  <!-- POSTE -->
+
+                  <div class="flex items-center mt-3">
+
+                    <i
+                      data-feather="briefcase"
+                      class="fea icon-ex-md text-slate-400 me-3">
+                    </i>
+
+                    <div class="flex-1">
+
+                      <h6
+                        class="text-green-600 dark:text-white font-medium mb-0">
+
+                        Poste :
+
+                      </h6>
+
+                      <p class="text-slate-400 mb-0">
+
+                        {{ user.poste || 'Non renseigné' }}
+
+                      </p>
+
+                    </div>
+
+                  </div>
+
+
+                  <!-- ROLE -->
+
+                  <div class="flex items-center mt-3">
+
+                    <i
+                      data-feather="user"
+                      class="fea icon-ex-md text-slate-400 me-3">
+                    </i>
+
+                    <div class="flex-1">
+
+                      <h6
+                        class="text-green-600 dark:text-white font-medium mb-0">
+
+                        Type de compte :
+
+                      </h6>
+
+                      <p class="text-slate-400 mb-0">
+
+                        {{
+                        user.role === 'CLIENT'
+                          ? 'Client'
+                          : user.role === 'PROPRIETAIRE'
+                            ? 'Propriétaire'
+                            : user.role
+                        }}
+
+                      </p>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- ========================= -->
+          <!-- PARTIE DROITE -->
+          <!-- ========================= -->
+
+          <div class="xl:col-span-9 lg:col-span-8 md:col-span-8 mt-6">
+
+            <div class="grid grid-cols-1 gap-6">
+
+
+              <!-- ========================= -->
+              <!-- PRESENTATION -->
+              <!-- ========================= -->
+
+              <div
+                class="p-6 relative rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 bg-white dark:bg-slate-900">
+
+                <h5 class="text-xl font-semibold">
+
+                  {{ user.nom }}
+
+                </h5>
+
+
+                <p class="text-slate-400 mt-3">
+
+                  Bienvenue dans votre espace personnel.
+                  Vous pouvez consulter vos informations
+                  et gérer votre compte depuis votre tableau de bord.
+
+                </p>
+
+              </div>
+
+
+              <!-- ========================= -->
+              <!-- INFORMATIONS COMPTE -->
+              <!-- ========================= -->
+
+              <div
+                class="p-6 relative rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 bg-white dark:bg-slate-900">
+
+
+                <h5 class="text-xl font-semibold mb-6">
+
+                  Informations du compte
+
+                </h5>
+
+
+                <div class="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-6">
+
+
+                  <!-- NOM -->
+
+                  <div
+                    class="p-5 rounded-md border border-gray-100 dark:border-gray-800">
+
+                    <div class="flex items-center">
+
+                      <i
+                        class="mdi mdi-account-outline text-2xl text-green-600 me-3">
+                      </i>
+
+                      <div>
+
+                                                <span class="text-slate-400 text-sm">
+
+                                                    Nom
+
+                                                </span>
+
+                        <p class="font-medium mt-1">
+
+                          {{ user.nom }}
+
+                        </p>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+
+                  <!-- EMAIL -->
+
+                  <div
+                    class="p-5 rounded-md border border-gray-100 dark:border-gray-800">
+
+                    <div class="flex items-center">
+
+                      <i
+                        class="mdi mdi-email-outline text-2xl text-green-600 me-3">
+                      </i>
+
+                      <div>
+
+                                                <span class="text-slate-400 text-sm">
+
+                                                    Email
+
+                                                </span>
+
+                        <p class="font-medium mt-1 break-all">
+
+                          {{ user.email }}
+
+                        </p>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+
+                  <!-- TELEPHONE -->
+
+                  <div
+                    class="p-5 rounded-md border border-gray-100 dark:border-gray-800">
+
+                    <div class="flex items-center">
+
+                      <i
+                        class="mdi mdi-phone-outline text-2xl text-green-600 me-3">
+                      </i>
+
+                      <div>
+
+                                                <span class="text-slate-400 text-sm">
+
+                                                    Téléphone
+
+                                                </span>
+
+                        <p class="font-medium mt-1">
+
+                          {{
+                          user.telephone
+                          || 'Non renseigné'
+                          }}
+
+                        </p>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+
+                  <!-- POSTE -->
+
+                  <div
+                    class="p-5 rounded-md border border-gray-100 dark:border-gray-800">
+
+                    <div class="flex items-center">
+
+                      <i
+                        class="mdi mdi-briefcase-outline text-2xl text-green-600 me-3">
+                      </i>
+
+                      <div>
+
+                                                <span class="text-slate-400 text-sm">
+
+                                                    Poste
+
+                                                </span>
+
+                        <p class="font-medium mt-1">
+
+                          {{
+                          user.poste
+                          || 'Non renseigné'
+                          }}
+
+                        </p>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+
+                  <!-- ROLE -->
+
+                  <div
+                    class="p-5 rounded-md border border-gray-100 dark:border-gray-800">
+
+                    <div class="flex items-center">
+
+                      <i
+                        class="mdi mdi-account-key-outline text-2xl text-green-600 me-3">
+                      </i>
+
+                      <div>
+
+                                                <span class="text-slate-400 text-sm">
+
+                                                    Type de compte
+
+                                                </span>
+
+                        <p class="font-medium mt-1">
+
+                          {{
+                          user.role === 'CLIENT'
+                            ? 'Client'
+                            : user.role === 'PROPRIETAIRE'
+                              ? 'Propriétaire'
+                              : user.role
+                          }}
+
+                        </p>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+
+                </div>
+
+              </div>
+
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <app-footer-admin/>
+
+  </main>
+
 </div>

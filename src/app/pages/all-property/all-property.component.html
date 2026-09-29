@@ -38,11 +38,12 @@
                     <th class="text-start font-semibold text-[15px] px-4 py-3">Adresse</th>
                     <th class="text-start font-semibold text-[15px] px-4 py-3">Ville</th>
                     <th class="text-end font-semibold text-[15px] px-4 py-3 min-w-[70px]">Status</th>
+                    <th class="text-center font-semibold text-[15px] px-4 py-3 min-w-[150px]">Actions</th>
                   </tr>
                   </thead>
 
                   <tbody>
-                  <tr *ngFor="let bien of biens">
+                  <tr *ngFor="let bien of biensPagines">
                     <th class="text-start border-t border-gray-100 dark:border-gray-800 px-4 py-3 font-semibold">
                       <div class="relative md:shrink-0">
                         <img *ngIf="bien.images?.length" [src]="bien.images[0].url" class="object-cover size-12 min-w-[48px] rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700" alt="">
@@ -63,6 +64,7 @@
                     <td class="text-start border-t border-gray-100 dark:border-gray-800 px-4 py-3">
                       <span class="text-slate-400">{{bien.ville}}</span>
                     </td>
+
                     <ng-container *ngIf="bien.disponible == true; else elseTemplate">
                       <td class="text-end border-t border-gray-100 dark:border-gray-800 px-4 py-3">
                         <span class="bg-emerald-600/10 dark:bg-emerald-600/20 border border-emerald-600/10 dark:border-emerald-600/20 text-emerald-600 text-[15px] font-medium px-2.5 py-0.5 rounded h-5 ms-1">Disponible</span>
@@ -73,7 +75,45 @@
                         <span class="bg-red-600/10 dark:bg-red-600/20 border border-red-600/10 dark:border-red-600/20 text-red-600 text-[15px] font-medium px-2.5 py-0.5 rounded h-5 ms-1">Indisponible</span>
                       </td>
                     </ng-template>
-                  </tr>
+                    <td class="text-center border-t border-gray-100 dark:border-gray-800 px-4 py-3">
+                      <div class="flex items-center justify-center gap-2">
+
+                        <!-- Voir -->
+                        <a
+                          [routerLink]="['/property-detail-two', bien.id]"
+                          title="Voir"
+                          class="size-8 inline-flex items-center justify-center
+             bg-cyan-600 text-white
+             rounded-md hover:bg-cyan-500
+             transition">
+                          <i class="mdi mdi-eye-outline"></i>
+                        </a>
+
+                        <!-- Modifier -->
+                        <a
+                          [routerLink]="['/edit-property', bien.id]"
+                          title="Modifier"
+                          class="size-8 inline-flex items-center justify-center
+             bg-orange-400 text-white
+             rounded-md hover:bg-orange-500
+             transition">
+                          <i class="mdi mdi-pencil-outline"></i>
+                        </a>
+
+                        <!-- Supprimer -->
+                        <button
+                          type="button"
+                          (click)="deleteBien(bien.id)"
+                          title="Supprimer"
+                          class="size-8 inline-flex items-center justify-center
+             bg-red-600 text-white
+             rounded-md hover:bg-red-700
+             transition">
+                          <i class="mdi mdi-delete-outline"></i>
+                        </button>
+
+                      </div>
+                    </td>                  </tr>
                   </tbody>
                 </table>
               </div>
@@ -85,28 +125,54 @@
           <div class="md:col-span-12 text-center">
             <nav>
               <ul class="inline-flex items-center -space-x-px">
+
+                <!-- Précédent -->
                 <li>
-                  <a [routerLink]="[]" (click)="$event.preventDefault()" class="size-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 bg-white dark:bg-slate-900 hover:text-white shadow-xs shadow-gray-200 dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">
+                  <button
+                    type="button"
+                    (click)="pagePrecedente()"
+                    [disabled]="pageActuelle === 1"
+                    class="size-10 inline-flex justify-center items-center mx-1 rounded-full
+                   text-slate-400 bg-white dark:bg-slate-900
+                   hover:text-white shadow-xs shadow-gray-200 dark:shadow-gray-700
+                   hover:bg-green-600
+                   disabled:opacity-40 disabled:cursor-not-allowed">
+
                     <i class="mdi mdi-chevron-left text-[20px]"></i>
-                  </a>
+                  </button>
                 </li>
-                <li>
-                  <a [routerLink]="[]" (click)="$event.preventDefault()" class="size-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 hover:text-white bg-white dark:bg-slate-900 shadow-xs shadow-gray-200 dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">1</a>
+
+                <!-- Numéros -->
+                <li *ngFor="let page of pages">
+                  <button
+                    type="button"
+                    (click)="changerPage(page)"
+                    class="size-10 inline-flex justify-center items-center mx-1 rounded-full
+                   shadow-xs shadow-gray-200 dark:shadow-gray-700"
+                    [ngClass]="pageActuelle === page
+              ? 'text-white bg-green-600'
+              : 'text-slate-400 bg-white dark:bg-slate-900 hover:text-white hover:bg-green-600'">
+
+                    {{ page }}
+                  </button>
                 </li>
+
+                <!-- Suivant -->
                 <li>
-                  <a [routerLink]="[]" (click)="$event.preventDefault()" class="size-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 hover:text-white bg-white dark:bg-slate-900 shadow-xs shadow-gray-200 dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">2</a>
-                </li>
-                <li>
-                  <a [routerLink]="[]" (click)="$event.preventDefault()" aria-current="page" class="z-10 size-10 inline-flex justify-center items-center mx-1 rounded-full text-white bg-green-600 shadow-xs shadow-gray-200 dark:shadow-gray-700">3</a>
-                </li>
-                <li>
-                  <a [routerLink]="[]" (click)="$event.preventDefault()" class="size-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 hover:text-white bg-white dark:bg-slate-900 shadow-xs shadow-gray-200 dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">4</a>
-                </li>
-                <li>
-                  <a [routerLink]="[]" (click)="$event.preventDefault()" class="size-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 bg-white dark:bg-slate-900 hover:text-white shadow-xs shadow-gray-200 dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600">
+                  <button
+                    type="button"
+                    (click)="pageSuivante()"
+                    [disabled]="pageActuelle === nombrePages"
+                    class="size-10 inline-flex justify-center items-center mx-1 rounded-full
+                   text-slate-400 bg-white dark:bg-slate-900
+                   hover:text-white shadow-xs shadow-gray-200 dark:shadow-gray-700
+                   hover:bg-green-600
+                   disabled:opacity-40 disabled:cursor-not-allowed">
+
                     <i class="mdi mdi-chevron-right text-[20px]"></i>
-                  </a>
+                  </button>
                 </li>
+
               </ul>
             </nav>
           </div>

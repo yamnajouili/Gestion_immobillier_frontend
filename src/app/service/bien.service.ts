@@ -3,6 +3,7 @@ import {environment} from '../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
+import {Bien} from '../Models/bien';
 
 @Injectable({
   providedIn: 'root'
@@ -47,7 +48,12 @@ export class BienService {
     );
   }
 
+  getBiens(): Observable<any[]> {
 
+
+    return this.http.get<any[]>(
+      `${this.apiUrl}/biens/read`);
+  }
 
 
   getMyBiens(): Observable<any[]> {
@@ -64,6 +70,69 @@ export class BienService {
     );
   }
 
+  getBienById(id: number): Observable<any> {
+
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http.get<any>(
+      `${this.apiUrl}/biens/${id}`,
+      { headers }
+    );
+  }
+
+
+  updateBien(bien: Bien): Observable<Bien> {
+    return this.http.put<Bien>(
+      `${this.apiUrl}/biens/update`,
+      bien
+    );
+  }
+  deleteBien(id: number): Observable<void> {
+    return this.http.delete<void>(
+      `${this.apiUrl}/biens/delete/${id}`
+    );
+  }
+
+
+
+
+
+  deleteImage(id: number): Observable<any> {
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http.delete(
+      `${this.apiUrl}/api/images/${id}`,
+      {
+        headers,
+        responseType: 'text'
+      }
+    );
+  }
+
+  uploadImages(bienId: number, files: File[]): Observable<any> {
+
+    const formData = new FormData();
+
+    files.forEach(file => {
+      formData.append('files', file);
+    });
+
+    return this.http.post(
+      `${this.apiUrl}/api/upload/multiple/${bienId}`,
+      formData,
+      {
+        responseType: 'text'
+      }
+    );
+  }
 
 
 }

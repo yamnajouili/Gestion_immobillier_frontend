@@ -36,54 +36,217 @@
 
                     <div id="StarterContent" class="p-6 bg-white dark:bg-slate-900 rounded-ss-none rounded-se-none md:rounded-se-xl rounded-xl shadow-md shadow-gyay-200 dark:shadow-gray-700">
 
-                        <div [ngClass]="activeindex===1 ? '' : 'hidden' " id="buy-home" role="tabpanel" aria-labelledby="buy-home-tab">
-                            <form action="#">
-                                <div class="registration-form text-dark text-start">
-                                    <div class="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 lg:gap-0 gap-6">
-                                        <div>
-                                            <label class="form-label font-medium text-slate-900 dark:text-white">Rechercher : <span class="text-red-600">*</span></label>
-                                            <div class="filter-search-form relative filter-border mt-2">
-                                                <i class="uil uil-search icons"></i>
-                                                <input name="name" type="text" id="job-keyword" class="form-input filter-input-box !bg-gray-50 dark:!bg-slate-800 border-0" placeholder="Recherchez vos mots-clés">
-                                            </div>
-                                        </div>
+<!--                        <div [ngClass]="activeindex===1 ? '' : 'hidden' " id="buy-home" role="tabpanel" aria-labelledby="buy-home-tab">-->
+<!--                            <form (ngSubmit)="rechercher()">-->
+<!--                                <div class="registration-form text-dark text-start">-->
+<!--                                    <div class="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 lg:gap-0 gap-6">-->
+<!--                                        <div>-->
+<!--                                            <label class="form-label font-medium text-slate-900 dark:text-white">Rechercher : <span class="text-red-600">*</span></label>-->
+<!--                                            <div class="filter-search-form relative filter-border mt-2">-->
+<!--                                                <i class="uil uil-search icons"></i>-->
+<!--                                                <input name="name" type="text" id="job-keyword" class="form-input filter-input-box !bg-gray-50 dark:!bg-slate-800 border-0" placeholder="Recherchez vos mots-clés">-->
+<!--                                            </div>-->
+<!--                                        </div>-->
 
 
-                                        <div>
-                                            <label for="buy-properties" class="form-label font-medium text-slate-900 dark:text-white">Sélectionnez catégories:</label>
-                                            <div class="filter-search-form relative filter-border mt-2">
-                                                <i class="uil uil-estate icons"></i>
-                                                <ng-select class="form-input w-full filter-input-box !bg-gray-50 h-[60px] dark:!bg-slate-800 border-0 focus:ring-0 ps-10" [items]="property" bindLabel="name" bindValue="id" placeholder="maison">
-                                                </ng-select>
-                                            </div>
-                                        </div>
+<!--                                        <div>-->
+<!--                                            <label for="buy-properties" class="form-label font-medium text-slate-900 dark:text-white">Sélectionnez catégories:</label>-->
+<!--                                            <div class="filter-search-form relative filter-border mt-2">-->
+<!--                                                <i class="uil uil-estate icons"></i>-->
+<!--                                                <ng-select class="form-input w-full filter-input-box !bg-gray-50 h-[60px] dark:!bg-slate-800 border-0 focus:ring-0 ps-10" [items]="propertylist" bindLabel="name" bindValue="id" placeholder="maison">-->
+<!--                                                </ng-select>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
 
-                                        <div>
-                                            <label for="buy-min-price" class="form-label font-medium text-slate-900 dark:text-white">Prix Min:</label>
-                                            <div class="filter-search-form relative filter-border mt-2">
-                                                <i class="uil uil-usd-circle icons"></i>
-                                                <ng-select class="form-input w-full filter-input-box !bg-gray-50 h-[60px] dark:!bg-slate-800 border-0 focus:ring-0 ps-10" [items]="minPrice" bindLabel="name" bindValue="id" placeholder="500">
-                                                </ng-select>
-                                            </div>
-                                        </div>
+<!--                                        <div>-->
+<!--                                            <label for="buy-min-price" class="form-label font-medium text-slate-900 dark:text-white">Prix Min:</label>-->
+<!--                                            <div class="filter-search-form relative filter-border mt-2">-->
+<!--                                                <i class="uil uil-usd-circle icons"></i>-->
+<!--                                                <ng-select class="form-input w-full filter-input-box !bg-gray-50 h-[60px] dark:!bg-slate-800 border-0 focus:ring-0 ps-10" [items]="minPrice" bindLabel="name" bindValue="id" placeholder="500">-->
+<!--                                                </ng-select>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
 
-                                        <div>
-                                            <label for="buy-max-price" class="form-label font-medium text-slate-900 dark:text-white">Prix Max :</label>
-                                            <div class="filter-search-form relative mt-2">
-                                                <i class="uil uil-usd-circle icons"></i>
-                                                <ng-select class="form-input w-full filter-input-box !bg-gray-50 h-[60px] dark:!bg-slate-800 border-0 focus:ring-0 ps-10" [items]="maxPrice" bindLabel="name" bindValue="id" placeholder="6000">
-                                                </ng-select>
-                                            </div>
-                                        </div>
+<!--                                        <div>-->
+<!--                                            <label for="buy-max-price" class="form-label font-medium text-slate-900 dark:text-white">Prix Max :</label>-->
+<!--                                            <div class="filter-search-form relative mt-2">-->
+<!--                                                <i class="uil uil-usd-circle icons"></i>-->
+<!--                                                <ng-select class="form-input w-full filter-input-box !bg-gray-50 h-[60px] dark:!bg-slate-800 border-0 focus:ring-0 ps-10" [items]="maxPrice" bindLabel="name" bindValue="id" placeholder="6000">-->
+<!--                                                </ng-select>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
 
-                                        <div class="lg:mt-6">
-                                            <input type="submit" id="search-buy" name="search" class="btn bg-green-600 hover:bg-green-700 border-green-600 hover:border-green-700 text-white searchbtn submit-btn w-full !h-12 rounded" value="Rechercher">
-                                        </div>
-                                    </div>
+<!--                                        <div class="lg:mt-6">-->
+<!--                                            <input type="submit" id="search-buy" name="search" class="btn bg-green-600 hover:bg-green-700 border-green-600 hover:border-green-700 text-white searchbtn submit-btn w-full !h-12 rounded" value="Rechercher">-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </form>-->
+<!--                        </div>-->
+                      <div [ngClass]="activeindex === 1 ? '' : 'hidden'"
+                           id="buy-home"
+                           role="tabpanel"
+                           aria-labelledby="buy-home-tab">
+
+                        <form (ngSubmit)="rechercher()">
+
+                          <div class="registration-form text-dark text-start">
+
+                            <div class="grid lg:grid-cols-5 md:grid-cols-2 grid-cols-1 lg:gap-0 gap-4">
+
+
+                              <!-- ==================== TYPE DE BIEN ==================== -->
+                              <div>
+
+                                <label class="form-label font-medium text-slate-900 dark:text-white">
+                                  Type de bien :
+                                  <span class="text-red-600">*</span>
+                                </label>
+
+                                <div class="filter-search-form relative filter-border mt-2">
+
+                                  <i class="uil uil-estate icons"></i>
+
+                                  <ng-select
+                                    name="typeBienPref"
+                                    [(ngModel)]="preference.typeBienPref"
+                                    class="form-input w-full filter-input-box !bg-gray-50 h-[60px] dark:!bg-slate-800 border-0 focus:ring-0 ps-10"
+                                    [items]="propertyliste"
+                                    bindLabel="name"
+                                    bindValue="value"
+                                    placeholder="Appartement">
+                                  </ng-select>
+
                                 </div>
-                            </form>
-                        </div>
 
+                              </div>
+
+
+                              <!-- ==================== PRIX MIN ==================== -->
+                              <div>
+
+                                <label class="form-label font-medium text-slate-900 dark:text-white">
+                                  Prix Min :
+                                </label>
+
+                                <div class="filter-search-form relative filter-border mt-2">
+
+                                  <i class="uil uil-usd-circle icons"></i>
+
+                                  <ng-select
+                                    name="prixMin"
+                                    [(ngModel)]="preference.prixMin"
+                                    class="form-input w-full filter-input-box !bg-gray-50 h-[60px] dark:!bg-slate-800 border-0 focus:ring-0 ps-10"
+                                    [items]="minPrice"
+                                    bindLabel="name"
+                                    bindValue="id"
+                                    placeholder="800">
+                                  </ng-select>
+
+                                </div>
+
+                              </div>
+
+
+                              <!-- ==================== PRIX MAX ==================== -->
+                              <div>
+
+                                <label class="form-label font-medium text-slate-900 dark:text-white">
+                                  Prix Max :
+                                </label>
+
+                                <div class="filter-search-form relative mt-2">
+
+                                  <i class="uil uil-usd-circle icons"></i>
+
+                                  <ng-select
+                                    name="prixMax"
+                                    [(ngModel)]="preference.prixMax"
+                                    class="form-input w-full filter-input-box !bg-gray-50 h-[60px] dark:!bg-slate-800 border-0 focus:ring-0 ps-10"
+                                    [items]="maxPrice"
+                                    bindLabel="name"
+                                    bindValue="id"
+                                    placeholder="1500">
+                                  </ng-select>
+
+                                </div>
+
+                              </div>
+
+
+                              <!-- ==================== SURFACE MIN ==================== -->
+                              <div>
+
+                                <label class="form-label font-medium text-slate-900 dark:text-white">
+                                  Surface min :
+                                </label>
+
+                                <div class="filter-search-form relative mt-2">
+
+                                  <i class="uil uil-ruler icons"></i>
+
+                                  <!-- ✅ AJOUT de [items]="surfaceList" -->
+                                  <ng-select
+                                    name="surfaceMin"
+                                    [(ngModel)]="preference.surfaceMin"
+                                    class="form-input w-full filter-input-box !bg-gray-50 h-[60px] dark:!bg-slate-800 border-0 focus:ring-0 ps-10"
+                                    [items]="surfaceList"
+                                    bindLabel="name"
+                                    bindValue="id"
+                                    placeholder="70 m²">
+                                  </ng-select>
+
+                                </div>
+
+                              </div>
+
+
+                              <!-- ==================== VILLE ==================== -->
+                              <div>
+
+                                <label class="form-label font-medium text-slate-900 dark:text-white">
+                                  Ville :
+                                </label>
+
+                                <div class="filter-search-form relative mt-2">
+
+                                  <i class="uil uil-map-marker icons"></i>
+
+                                  <!-- ✅ AJOUT de [items]="villes" -->
+                                  <ng-select
+                                    name="villePrefere"
+                                    [(ngModel)]="preference.villePrefere"
+                                    class="form-input w-full filter-input-box !bg-gray-50 h-[60px] dark:!bg-slate-800 border-0 focus:ring-0 ps-10"
+                                    [items]="villes"
+                                    bindLabel="name"
+                                    bindValue="name"
+                                    placeholder="Tunis">
+                                  </ng-select>
+
+                                </div>
+
+                              </div>
+
+
+                              <!-- ==================== BOUTON ==================== -->
+                              <div class="lg:mt-6 col-5">
+
+                                <input
+                                  type="submit"
+                                  id="search-buy"
+                                  name="search"
+                                  class="btn bg-green-600 hover:bg-green-700 border-green-600 hover:border-green-700 text-white searchbtn submit-btn w-full !h-12 rounded"
+                                  value="Rechercher">
+
+                              </div>
+
+                            </div>
+
+                          </div>
+
+                        </form>
+
+                      </div>
                         <div [ngClass]="activeindex===2 ? '' : 'hidden' " id="sell-home" role="tabpanel" aria-labelledby="sell-home-tab">
                             <form action="#">
                                 <div class="registration-form text-dark ltr:text-start rtl:text-end">
@@ -100,7 +263,7 @@
                                             <label for="buy-properties" class="form-label font-medium text-slate-900 dark:text-white">Select Categories:</label>
                                             <div class="filter-search-form relative filter-border mt-2">
                                                 <i class="uil uil-estate icons"></i>
-                                                <ng-select class="form-input w-full filter-input-box !bg-gray-50 h-[60px] dark:!bg-slate-800 border-0 focus:ring-0 ps-10" [items]="property" bindLabel="name" bindValue="id" placeholder="maison">
+                                                <ng-select class="form-input w-full filter-input-box !bg-gray-50 h-[60px] dark:!bg-slate-800 border-0 focus:ring-0 ps-10" [items]="propertylist" bindLabel="name" bindValue="id" placeholder="maison">
                                                 </ng-select>
                                             </div>
                                         </div>
@@ -147,7 +310,7 @@
                                             <label for="buy-properties" class="form-label font-medium text-slate-900 dark:text-white">Select Categories:</label>
                                             <div class="filter-search-form relative filter-border mt-2">
                                                 <i class="uil uil-estate icons"></i>
-                                                <ng-select class="form-input w-full filter-input-box !bg-gray-50 h-[60px] dark:!bg-slate-800 border-0 focus:ring-0 ps-10" [items]="property" bindLabel="name" bindValue="id" placeholder="House">
+                                                <ng-select class="form-input w-full filter-input-box !bg-gray-50 h-[60px] dark:!bg-slate-800 border-0 focus:ring-0 ps-10" [items]="propertylist" bindLabel="name" bindValue="id" placeholder="House">
                                                 </ng-select>
                                             </div>
                                         </div>
