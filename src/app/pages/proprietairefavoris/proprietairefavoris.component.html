@@ -1,0 +1,188 @@
+<div class="page-wrapper" [ngClass]="{ 'toggled': activeSidebar }">
+
+  <app-sidebaruser></app-sidebaruser>
+
+  <main class="page-content bg-gray-50 dark:bg-slate-800">
+
+    <app-topbar (toggleClass)="toggleClass()"/>
+
+    <div class="container-fluid relative px-3">
+
+      <div class="layout-specing">
+
+        <!-- Titre -->
+        <div class="md:flex justify-between items-center">
+          <div>
+            <h5 class="text-lg font-semibold">
+              Mes favoris
+            </h5>
+
+            <p class="text-slate-400 mt-1">
+              Retrouvez tous les biens que vous avez ajoutés à vos favoris.
+            </p>
+          </div>
+
+          <!-- Nombre de favoris -->
+          <div class="mt-4 md:mt-0">
+            <span class="bg-rose-100 text-rose-600 text-sm font-semibold px-3 py-2 rounded-lg">
+              <i class="mdi mdi-heart me-1"></i>
+              {{ totalFavoris }} favoris
+            </span>
+          </div>
+        </div>
+
+
+        <!-- Liste des favoris -->
+        <div
+          *ngIf="favorisRecents.length > 0"
+          class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 mt-6">
+
+          <div
+            *ngFor="let fav of favorisRecents"
+            class="group rounded-xl bg-white dark:bg-slate-900 shadow-md hover:shadow-xl transition overflow-hidden">
+
+            <!-- Image -->
+            <div class="relative">
+
+              <img
+                *ngIf="fav.bien?.images?.length > 0"
+                [src]="fav.bien.images[0].url"
+                [alt]="fav.bien?.titre"
+                class="w-full h-52 object-cover">
+
+              <!-- Pas d'image -->
+              <div
+                *ngIf="!fav.bien?.images?.length"
+                class="w-full h-52 bg-gray-100 dark:bg-slate-800 flex items-center justify-center">
+
+                <i class="mdi mdi-home-outline text-5xl text-slate-400"></i>
+
+              </div>
+
+              <!-- Coeur -->
+              <div
+                class="absolute top-3 right-3 size-9 rounded-full bg-white shadow flex items-center justify-center">
+
+                <i class="mdi mdi-heart text-rose-500 text-xl"></i>
+
+              </div>
+
+            </div>
+
+
+            <!-- Informations -->
+            <div class="p-4">
+
+              <h5 class="font-semibold text-lg">
+                {{ fav.bien?.titre }}
+              </h5>
+
+              <!-- Ville -->
+              <p class="text-slate-400 text-sm mt-2">
+
+                <i class="mdi mdi-map-marker-outline me-1"></i>
+
+                {{ fav.bien?.ville }}
+
+              </p>
+
+
+              <!-- Surface / Type -->
+              <div class="flex items-center gap-4 text-sm text-slate-500 mt-3">
+
+                <span>
+                  <i class="mdi mdi-arrow-expand-all me-1"></i>
+                  {{ fav.bien?.surface }} m²
+                </span>
+
+                <span>
+                  <i class="mdi mdi-home-outline me-1"></i>
+                  {{ fav.bien?.type }}
+                </span>
+
+              </div>
+
+
+              <!-- Prix -->
+              <div class="mt-4">
+
+                <span class="text-green-600 font-semibold text-lg">
+                  {{ fav.bien?.prix }} TND
+                </span>
+
+              </div>
+
+
+              <!-- Actions -->
+              <div class="border-t border-gray-100 dark:border-gray-700 mt-4 pt-4 flex justify-between items-center">
+
+                <!-- Voir détail -->
+                <a
+                  [routerLink]="['/property-detail-two', fav.bien?.id]"
+                  class="text-green-600 text-sm font-medium hover:underline">
+
+                  <i class="mdi mdi-eye-outline me-1"></i>
+                  Voir détails
+
+                </a>
+
+
+                <!-- Supprimer favori -->
+                <button
+                  type="button"
+                  (click)="supprimerFavori(fav.id)"
+                  class="text-rose-500 hover:text-rose-700 text-sm">
+
+                  <i class="mdi mdi-heart-remove-outline me-1"></i>
+                  Retirer
+
+                </button>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- Aucun favori -->
+        <div
+          *ngIf="favorisRecents.length === 0"
+          class="rounded-xl shadow-md bg-white dark:bg-slate-900 p-10 mt-6 text-center">
+
+          <div
+            class="size-16 mx-auto rounded-full bg-rose-100 text-rose-500 flex items-center justify-center">
+
+            <i class="mdi mdi-heart-outline text-3xl"></i>
+
+          </div>
+
+          <h5 class="font-semibold text-lg mt-4">
+            Aucun favori
+          </h5>
+
+          <p class="text-slate-400 mt-2">
+            Vous n'avez ajouté aucun bien à vos favoris pour le moment.
+          </p>
+
+          <a
+            routerLink="/property"
+            class="inline-block mt-5 py-2 px-4 bg-green-600 hover:bg-green-700 text-white rounded-md">
+
+            Découvrir les biens
+
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <app-footer-admin/>
+
+  </main>
+
+</div>

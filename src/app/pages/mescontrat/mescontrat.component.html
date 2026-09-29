@@ -1,0 +1,166 @@
+<div class="page-wrapper" [ngClass]="{ 'toggled': activeSidebar }">
+
+  <app-sidebaruser></app-sidebaruser>
+
+  <main class="page-content bg-gray-50 dark:bg-slate-800">
+
+    <app-topbar (toggleClass)="toggleClass()"/>
+
+    <!-- CONTENU -->
+    <div class="container-fluid relative px-3">
+
+      <div class="layout-specing">
+
+        <!-- TITRE -->
+        <div class="md:flex justify-between items-center">
+          <div>
+            <h5 class="text-lg font-semibold">
+              Contrats signés
+            </h5>
+
+            <p class="text-slate-400 mt-1">
+              Consultez vos contrats déjà signés.
+            </p>
+          </div>
+        </div>
+
+
+        <!-- LISTE DES CONTRATS -->
+        <div class="grid grid-cols-1 gap-6 mt-6">
+
+          <div
+            *ngFor="let contrat of contratsSignes"
+            class="bg-white dark:bg-slate-900 rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 p-6">
+
+            <div class="md:flex justify-between items-start">
+
+              <!-- INFORMATIONS -->
+              <div>
+
+                <div class="flex items-center gap-3">
+
+                  <div class="size-12 bg-green-600/10 text-green-600 rounded-md flex items-center justify-center">
+                    <i class="mdi mdi-file-document-check-outline text-2xl"></i>
+                  </div>
+
+                  <div>
+                    <h5 class="text-lg font-semibold">
+                      {{ contrat.titre }}
+                    </h5>
+
+                    <p class="text-slate-400 text-sm">
+                      {{ contrat.bien?.titre }}
+                    </p>
+                  </div>
+
+                </div>
+
+
+                <!-- DETAILS -->
+                <div class="grid md:grid-cols-3 grid-cols-1 gap-4 mt-6">
+
+                  <div>
+                    <p class="text-slate-400 text-sm">
+                      Propriétaire
+                    </p>
+
+                    <p class="font-medium mt-1">
+                      {{ contrat.bien?.proprietaire?.nom }}
+                    </p>
+                  </div>
+
+
+                  <div>
+                    <p class="text-slate-400 text-sm">
+                      Montant
+                    </p>
+
+                    <p class="font-medium mt-1">
+                      {{ contrat.montantLoyer }} DT
+                    </p>
+                  </div>
+
+
+                  <div>
+                    <p class="text-slate-400 text-sm">
+                      Période
+                    </p>
+
+                    <p class="font-medium mt-1">
+                      {{ contrat.dateDebut | date:'dd/MM/yyyy' }}
+                      -
+                      {{ contrat.dateFin | date:'dd/MM/yyyy' }}
+                    </p>
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <!-- STATUT -->
+              <div class="mt-4 md:mt-0">
+
+                <span class="bg-green-600/10 text-green-600 text-sm font-medium px-3 py-1.5 rounded-md">
+                  <i class="mdi mdi-check-circle-outline me-1"></i>
+                  Signé
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <!-- BAS DE CARD -->
+            <div class="border-t border-gray-100 dark:border-gray-800 mt-6 pt-4 flex justify-between items-center">
+
+              <div class="text-sm text-slate-400">
+
+                <i class="mdi mdi-map-marker-outline me-1"></i>
+
+                {{ contrat.bien?.ville }}
+
+              </div>
+
+              <a
+                [routerLink]="['/contrat-detail', contrat.id]"
+                class="btn bg-green-600 hover:bg-green-700 border-green-600 text-white rounded-md">
+
+                <i class="mdi mdi-eye-outline me-1"></i>
+                Voir le contrat
+
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- AUCUN CONTRAT -->
+        <div
+          *ngIf="contratsSignes.length === 0"
+          class="bg-white dark:bg-slate-900 rounded-md shadow-sm p-10 mt-6 text-center">
+
+          <i class="mdi mdi-file-document-outline text-5xl text-slate-400"></i>
+
+          <h5 class="text-lg font-semibold mt-4">
+            Aucun contrat signé
+          </h5>
+
+          <p class="text-slate-400 mt-2">
+            Vos contrats signés apparaîtront ici.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <app-footer-admin/>
+
+  </main>
+
+</div>

@@ -1,0 +1,472 @@
+
+<div class="grid xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6 mt-6">
+
+  <!-- Favoris -->
+  <div class="relative overflow-hidden rounded-xl shadow-lg bg-white dark:bg-slate-900 border-l-4 border-rose-500 transition hover:shadow-xl">
+    <div class="p-5 flex items-center justify-between">
+      <div>
+        <p class="text-sm text-slate-400">Mes favoris</p>
+        <p class="text-2xl font-bold mt-1">{{ totalFavoris }}</p>
+        <p class="text-xs text-rose-500 mt-1">Biens enregistrés</p>
+      </div>
+
+      <div class="w-12 h-12 rounded-full bg-rose-100 dark:bg-rose-900/30 flex items-center justify-center">
+        <i class="mdi mdi-heart text-rose-500 text-2xl"></i>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Messages -->
+  <div class="relative overflow-hidden rounded-xl shadow-lg bg-white dark:bg-slate-900 border-l-4 border-blue-500 transition hover:shadow-xl">
+    <div class="p-5 flex items-center justify-between">
+      <div>
+        <p class="text-sm text-slate-400">Mes messages</p>
+        <p class="text-2xl font-bold mt-1">{{ totalMessages }}</p>
+        <p class="text-xs text-blue-500 mt-1">Conversations</p>
+      </div>
+
+      <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+        <i class="mdi mdi-chat-outline text-blue-500 text-2xl"></i>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Contrats -->
+  <div class="relative overflow-hidden rounded-xl shadow-lg bg-white dark:bg-slate-900 border-l-4 border-emerald-500 transition hover:shadow-xl">
+    <div class="p-5 flex items-center justify-between">
+      <div>
+        <p class="text-sm text-slate-400">Mes contrats</p>
+        <p class="text-2xl font-bold mt-1">{{ totalContrats }}</p>
+        <p class="text-xs text-emerald-500 mt-1">Tous mes contrats</p>
+      </div>
+
+      <div class="w-12 h-12 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center">
+        <i class="mdi mdi-file-document-outline text-emerald-500 text-2xl"></i>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Contrats à signer -->
+  <div class="relative overflow-hidden rounded-xl shadow-lg bg-white dark:bg-slate-900 border-l-4 border-amber-500 transition hover:shadow-xl">
+    <div class="p-5 flex items-center justify-between">
+      <div>
+        <p class="text-sm text-slate-400">À signer</p>
+        <p class="text-2xl font-bold mt-1">{{ contratsASigner }}</p>
+        <p class="text-xs text-amber-500 mt-1">Contrats en attente</p>
+      </div>
+
+      <div class="w-12 h-12 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center">
+        <i class="mdi mdi-file-sign text-amber-500 text-2xl"></i>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Deux colonnes : favoris récents + visites/messages -->
+<div class="grid lg:grid-cols-2 gap-6 mt-8">
+
+  <!-- Derniers favoris -->
+  <div class="rounded-xl shadow-md bg-white dark:bg-slate-900 p-5">
+
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-lg font-semibold flex items-center gap-2">
+        <i class="mdi mdi-heart text-rose-500"></i>
+        Mes favoris récents
+      </h3>
+
+      <a routerLink="/proprietaire-favoris"
+         class="text-sm text-green-600 hover:underline">
+        Tous les favoris →
+      </a>
+    </div>
+
+    <div class="space-y-3">
+
+      <div *ngFor="let fav of favorisRecents"
+           class="flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-slate-800 rounded-lg transition">
+
+        <img
+          *ngIf="fav.bien?.images?.length > 0"
+          [src]="fav.bien.images[0].url"
+          class="w-12 h-12 rounded-lg object-cover shadow-sm"
+          [alt]="fav.bien?.titre">
+
+        <div class="flex-1">
+
+          <p class="font-medium">
+            {{ fav.bien?.titre }}
+          </p>
+
+          <p class="text-sm text-slate-400">
+            {{ fav.bien?.ville }} · {{ fav.bien?.prix }} TND
+          </p>
+
+        </div>
+
+        <a
+          [routerLink]="['/property-detail-two', fav.bien?.id]"
+          class="p-2 text-green-500 hover:text-green-700 transition">
+
+          <i class="mdi mdi-eye-outline"></i>
+
+        </a>
+
+      </div>
+
+      <!-- Aucun favori -->
+      <div *ngIf="favorisRecents.length === 0"
+           class="text-center py-6 text-slate-400">
+
+        Aucun favori pour l'instant
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!--  messages récents -->
+  <!-- Conversations récentes -->
+  <div class="rounded-xl shadow-md bg-white dark:bg-slate-900 p-5">
+
+    <div class="flex justify-between items-center mb-4">
+
+      <h3 class="text-lg font-semibold flex items-center gap-2">
+        <i class="mdi mdi-chat-outline text-blue-500"></i>
+        Conversations récentes
+      </h3>
+
+      <a routerLink="/chat"
+         class="text-sm text-green-600 hover:underline">
+        Voir tout →
+      </a>
+
+    </div>
+
+    <div class="space-y-3">
+
+      <div *ngFor="let msg of messagesRecents"
+           class="flex items-center gap-3 p-2 hover:bg-gray-50 dark:hover:bg-slate-800 rounded-lg transition">
+
+        <!-- Photo -->
+        <img
+                *ngIf="msg.image"
+                [src]="msg.image"
+                class="w-10 h-10 rounded-full object-cover"
+                [alt]="msg.name">
+
+        <!-- Avatar si aucune photo -->
+        <div
+                *ngIf="!msg.image"
+                class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-semibold">
+
+          {{ msg.name?.charAt(0) }}
+
+        </div>
+
+        <!-- Informations -->
+        <div class="flex-1 min-w-0">
+
+          <div class="flex items-center gap-2">
+
+            <p class="font-medium">
+              {{ msg.name }}
+            </p>
+
+            <span
+                    class="w-2 h-2 rounded-full"
+                    [ngClass]="msg.status === 'online'
+              ? 'bg-green-500'
+              : 'bg-slate-300'">
+          </span>
+
+          </div>
+
+          <p class="text-sm text-slate-400 truncate">
+            {{ msg.lastMessage }}
+          </p>
+
+        </div>
+
+        <!-- Ouvrir conversation -->
+        <a
+                [routerLink]="['/messages']"
+                class="p-2 text-blue-500 hover:text-blue-700 transition">
+
+          <i class="mdi mdi-message-outline"></i>
+
+        </a>
+
+      </div>
+
+
+      <!-- Aucune conversation -->
+      <div *ngIf="messagesRecents.length === 0"
+           class="text-center py-6 text-slate-400">
+
+        <i class="mdi mdi-chat-outline text-3xl"></i>
+
+        <p class="mt-2">
+          Aucune conversation pour le moment
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+<!-- Contrats récents + Contrats à signer -->
+<div class="grid lg:grid-cols-2 gap-6 mt-8">
+
+  <!-- Mes contrats récents -->
+  <div class="rounded-xl shadow-md bg-white dark:bg-slate-900 p-5">
+
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-lg font-semibold flex items-center gap-2">
+        <i class="mdi mdi-file-document-outline text-purple-500"></i>
+        Mes contrats récents
+      </h3>
+
+      <a routerLink="/mes-contrat"
+         class="text-sm text-green-600 hover:underline">
+        Voir tous →
+      </a>
+    </div>
+
+    <!-- Liste des contrats -->
+    <div *ngFor="let contrat of contratsRecents"
+         class="border-b border-gray-100 dark:border-gray-700 py-3 last:border-0">
+
+      <div class="flex justify-between items-start">
+
+        <div>
+          <p class="font-medium">
+            {{ contrat.titre }}
+          </p>
+
+          <p class="text-sm text-slate-400">
+            {{ contrat.bien?.titre }}
+          </p>
+        </div>
+
+        <!-- Statut -->
+        <span
+                class="text-xs font-semibold px-2 py-1 rounded-full"
+                [ngClass]="contrat.statut === 'EN_COURS'
+            ? 'bg-emerald-100 text-emerald-600'
+            : contrat.statut === 'EN_ATTENTE'
+            ? 'bg-amber-100 text-amber-600'
+            : 'bg-gray-100 text-gray-600'">
+
+          {{
+          contrat.statut === 'EN_COURS'
+                  ? 'Signé'
+                  : contrat.statut === 'EN_ATTENTE'
+                          ? 'À signer'
+                          : 'Terminé'
+          }}
+
+        </span>
+
+      </div>
+
+      <div class="flex justify-between items-center mt-2">
+
+        <div class="text-sm text-slate-500">
+          {{ contrat.dateDebut | date:'dd/MM/yyyy' }}
+          -
+          {{ contrat.dateFin | date:'dd/MM/yyyy' }}
+        </div>
+
+        <a
+                [routerLink]="['/contrat-detail', contrat.id]"
+                class="text-green-600 text-sm hover:underline">
+          Voir
+        </a>
+
+      </div>
+
+    </div>
+
+    <!-- Aucun contrat -->
+    <div *ngIf="contratsRecents.length === 0"
+         class="text-center py-6 text-slate-400">
+
+      <i class="mdi mdi-file-document-outline text-3xl"></i>
+
+      <p class="mt-2">
+        Aucun contrat pour le moment
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- Contrats à signer -->
+  <div class="rounded-xl shadow-md bg-white dark:bg-slate-900 p-5">
+
+    <div class="flex justify-between items-center mb-4">
+
+      <h3 class="text-lg font-semibold flex items-center gap-2">
+        <i class="mdi mdi-file-sign text-amber-500"></i>
+        Contrats à signer
+      </h3>
+
+      <a routerLink="/mes-contrats"
+         class="text-sm text-green-600 hover:underline">
+        Voir tous →
+      </a>
+
+    </div>
+
+    <!-- Liste -->
+    <div *ngFor="let contrat of contratsEnAttente"
+         class="border-b border-gray-100 dark:border-gray-700 py-3 last:border-0">
+
+      <div class="flex justify-between items-start">
+
+        <div>
+
+          <p class="font-medium">
+            {{ contrat.titre }}
+          </p>
+
+          <p class="text-sm text-slate-400">
+            {{ contrat.bien?.titre }}
+          </p>
+
+        </div>
+
+        <span class="bg-amber-100 text-amber-600 text-xs font-semibold px-2 py-1 rounded-full">
+          À signer
+        </span>
+
+      </div>
+
+      <div class="flex justify-between items-center mt-2">
+
+        <span class="text-sm font-semibold">
+          {{ contrat.montantLoyer }} TND
+        </span>
+
+        <a routerLink="/mes-contrats"
+           class="text-amber-600 text-sm hover:underline">
+          Consulter
+        </a>
+
+      </div>
+
+    </div>
+
+    <!-- Aucun contrat à signer -->
+    <div *ngIf="contratsEnAttente.length === 0"
+         class="text-center py-6 text-slate-400">
+
+      <i class="mdi mdi-check-circle-outline text-3xl text-emerald-500"></i>
+
+      <p class="mt-2">
+        Aucun contrat en attente de signature
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Recommandations personnalisées (IA) -->
+<div class="rounded-xl shadow-md bg-white dark:bg-slate-900 p-5 mt-8">
+
+  <div class="flex items-center justify-between mb-4">
+
+    <h3 class="text-lg font-semibold flex items-center gap-2">
+      <i class="mdi mdi-robot text-indigo-500"></i>
+      Recommandations IA pour vous
+    </h3>
+
+    <a routerLink="/recommandation"
+       class="text-sm text-green-600">
+      Plus de suggestions →
+    </a>
+
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+    <div
+            *ngFor="let rec of recommandations"
+            class="rounded-lg border border-gray-100 dark:border-gray-700 hover:shadow transition group">
+
+      <!-- Image -->
+      <div class="relative">
+
+        <img
+                *ngIf="rec.bien?.images?.length > 0"
+                [src]="rec.bien.images[0].url"
+                class="w-full h-40 object-cover rounded-t-lg"
+                [alt]="rec.bien?.titre">
+
+        <!-- Pas d'image -->
+        <div
+                *ngIf="!rec.bien?.images?.length"
+                class="w-full h-40 bg-gray-100 dark:bg-slate-800 rounded-t-lg flex items-center justify-center">
+
+          <i class="mdi mdi-home-outline text-4xl text-slate-400"></i>
+
+        </div>
+
+      </div>
+
+      <!-- Informations -->
+      <div class="p-3">
+
+        <p class="font-semibold">
+          {{ rec.bien?.titre }}
+        </p>
+
+        <p class="text-sm text-slate-400">
+          {{ rec.bien?.ville }} · {{ rec.bien?.prix }} TND
+        </p>
+
+        <p class="text-xs text-slate-400 mt-1">
+          {{ rec.bien?.surface }} m² · {{ rec.bien?.type }}
+        </p>
+
+        <button
+                (click)="voirBien(rec.bien.id)"
+                class="mt-2 text-green-600 text-sm hover:underline w-full text-center py-1 border-t border-gray-100 dark:border-gray-700 group-hover:bg-green-50 transition">
+
+          Voir détails
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Aucune recommandation -->
+  <div
+          *ngIf="recommandations.length === 0"
+          class="text-center py-8 text-slate-400">
+
+    <i class="mdi mdi-robot-outline text-4xl"></i>
+
+    <p class="mt-2">
+      Aucune recommandation disponible pour le moment
+    </p>
+
+  </div>
+
+</div>
+
+

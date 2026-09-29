@@ -1,0 +1,176 @@
+<div class="container relative lg:mt-24 mt-16">
+  <div class="grid grid-cols-1 pb-8 text-center">
+    <h3 class="mb-4 md:text-3xl md:leading-normal text-2xl leading-normal font-semibold">Biens Sélectionnés</h3>
+    <p class="text-slate-400 max-w-xl mx-auto">
+      Découvrez une sélection de biens immobiliers adaptés à vos besoins grâce à une plateforme intelligente de recherche et de recommandation.
+    </p>
+  </div>
+
+    <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-8 gap-[30px]">
+        <div *ngFor="let item of propertylistPaged" class="group rounded-xl bg-white dark:bg-slate-900 shadow-sm hover:shadow-xl dark:hover:shadow-xl shadow-gyay-200 dark:shadow-gray-700 dark:hover:shadow-gray-700 overflow-hidden ease-in-out duration-500">
+
+          <div class="relative">
+
+            <img
+              [src]="item.images[0].url"
+              alt=""
+              class="w-full h-[250px] object-cover"
+            >
+
+            <!-- Favori -->
+            <div class="absolute top-4 end-4 z-20">
+
+              <button
+                type="button"
+                (click)="toggleFavori(item, $event)"
+                class="size-10 flex items-center justify-center
+           bg-white dark:bg-slate-900
+           shadow-md rounded-full
+           hover:scale-110
+           transition duration-300">
+
+                <i
+                  class="mdi text-[22px]"
+                  [ngClass]="{
+        'mdi-heart text-red-500': isFavori(item.id),
+        'mdi-heart-outline text-slate-500 hover:text-red-500': !isFavori(item.id)
+      }">
+                </i>
+
+              </button>
+
+            </div>
+
+            <!-- CONTACTER -->
+            <div
+              class="absolute inset-0 flex items-center justify-center
+               opacity-0 group-hover:opacity-100
+               transition-opacity duration-300">
+
+              <button
+                type="button"
+                (click)="contacterProprietaire(item); $event.stopPropagation()"
+                class="px-5 py-3 rounded-lg
+                   bg-white/80
+                   backdrop-blur-sm
+                   text-slate-900
+                   font-medium
+                   shadow-lg
+                   hover:bg-white
+                   transition duration-300">
+
+                <i class="mdi mdi-message-outline me-2"></i>
+
+                Contacter le propriétaire
+
+              </button>
+
+            </div>
+
+          </div>
+            <div class="p-6">
+                <div class="pb-6">
+                    <a [routerLink]="'/property-detail'" class="text-lg hover:text-green-600 font-medium ease-in-out duration-500">{{item.titre}}</a>
+                </div>
+
+                <ul class="py-6 border-y border-slate-100 dark:border-gray-800 flex items-center list-none">
+                    <li class="flex items-center me-4">
+                        <i class="uil uil-compress-arrows text-2xl me-2 text-green-600"></i>
+                        <span>{{item.surface}}</span>
+                    </li>
+
+<!--                    <li class="flex items-center me-4">-->
+<!--                        <i class="uil uil-bed-double text-2xl me-2 text-green-600"></i>-->
+<!--                        <span>{{item.beds}}</span>-->
+<!--                    </li>-->
+
+<!--                    <li class="flex items-center">-->
+<!--                        <i class="uil uil-bath text-2xl me-2 text-green-600"></i>-->
+<!--                        <span>{{item.baths}}</span>-->
+<!--                    </li>-->
+                </ul>
+
+                <ul class="pt-6 flex justify-between items-center list-none">
+                    <li>
+                        <span class="text-slate-400">Price</span>
+                        <p class="text-lg font-medium">{{item.prix}}</p>
+                    </li>
+                  <li class="text-end">
+
+  <span class="text-slate-400 text-sm">
+    Détails
+  </span>
+
+                    <a
+                      [routerLink]="['/property-detail-two', item.id]"
+                      class="mt-1 flex items-center justify-end gap-2
+           text-green-600 font-semibold
+           hover:gap-3
+           transition-all duration-300">
+
+                      <i class="mdi mdi-eye-outline text-xl"></i>
+
+                      <span>Voir le bien</span>
+
+                      <i class="mdi mdi-arrow-right text-lg"></i>
+
+                    </a>
+
+                  </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+<!--    <div *ngIf="moreOption === true" class="md:flex justify-center text-center mt-6">-->
+<!--        <div class="md:w-full">-->
+<!--            <a [routerLink]="'/grid'" class="btn btn-link text-green-600 hover:text-green-600 after:bg-green-600 transition duration-500">View More Properties <i class="uil uil-arrow-right ms-1"></i></a>-->
+<!--        </div>-->
+<!--    </div>-->
+  <!-- ===== PAGINATION ===== -->
+  <div class="grid md:grid-cols-12 grid-cols-1 mt-6" *ngIf="totalPages > 1">
+    <div class="md:col-span-12 text-center">
+      <nav>
+        <ul class="inline-flex items-center -space-x-px">
+
+          <!-- PRÉCÉDENT -->
+          <li>
+            <a [routerLink]="[]"
+               (click)="$event.preventDefault(); previousPage()"
+               [class.opacity-40]="currentPage === 1"
+               [class.pointer-events-none]="currentPage === 1"
+               class="size-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 bg-white dark:bg-slate-900 hover:text-white shadow-xs shadow-gray-200 dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600 transition">
+              <i class="mdi mdi-chevron-left text-[20px]"></i>
+            </a>
+          </li>
+
+          <!-- NUMÉROS -->
+          <li *ngFor="let p of pages">
+            <a [routerLink]="[]"
+               (click)="$event.preventDefault(); goToPage(p)"
+               [ngClass]="{
+               'z-10 text-white bg-green-600 shadow-xs shadow-gray-200 dark:shadow-gray-700': p === currentPage,
+               'text-slate-400 bg-white dark:bg-slate-900 hover:text-white shadow-xs shadow-gray-200 dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600': p !== currentPage
+             }"
+               class="size-10 inline-flex justify-center items-center mx-1 rounded-full transition">
+              {{ p }}
+            </a>
+          </li>
+
+          <!-- SUIVANT -->
+          <li>
+            <a [routerLink]="[]"
+               (click)="$event.preventDefault(); nextPage()"
+               [class.opacity-40]="currentPage === totalPages"
+               [class.pointer-events-none]="currentPage === totalPages"
+               class="size-10 inline-flex justify-center items-center mx-1 rounded-full text-slate-400 bg-white dark:bg-slate-900 hover:text-white shadow-xs shadow-gray-200 dark:shadow-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600 transition">
+              <i class="mdi mdi-chevron-right text-[20px]"></i>
+            </a>
+          </li>
+
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>

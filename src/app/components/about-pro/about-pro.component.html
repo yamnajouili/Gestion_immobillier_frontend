@@ -1,0 +1,438 @@
+<!-- ============================= -->
+<!-- STATISTIQUES -->
+<!-- ============================= -->
+
+<div class="grid xl:grid-cols-4 md:grid-cols-2 grid-cols-1 mt-6 gap-6">
+
+  <!-- MES BIENS -->
+  <div class="relative overflow-hidden rounded-md shadow-sm shadow-gray-200
+              dark:shadow-gray-700 bg-white dark:bg-slate-900">
+
+    <div class="p-5 flex items-center justify-between">
+
+      <span class="me-3">
+        <span class="text-slate-400 block">Mes biens</span>
+
+        <span class="flex items-center justify-between mt-1">
+          <span class="text-2xl font-medium">
+            {{ totalBiens }}
+          </span>
+        </span>
+      </span>
+
+      <span class="flex justify-center items-center rounded-md size-12
+                   min-w-[48px] bg-slate-50 dark:bg-slate-800
+                   shadow-sm shadow-gray-100 dark:shadow-gray-700
+                   text-green-600">
+
+        <i class="mdi mdi-home-city-outline text-[28px]"></i>
+
+      </span>
+
+    </div>
+  </div>
+
+
+  <!-- BIENS DISPONIBLES -->
+  <div class="relative overflow-hidden rounded-md shadow-sm shadow-gray-200
+              dark:shadow-gray-700 bg-white dark:bg-slate-900">
+
+    <div class="p-5 flex items-center justify-between">
+
+      <span class="me-3">
+
+        <span class="text-slate-400 block">
+          Biens disponibles
+        </span>
+
+        <span class="flex items-center justify-between mt-1">
+
+          <span class="text-2xl font-medium">
+            {{ biensDisponibles }}
+          </span>
+
+        </span>
+
+      </span>
+
+      <span class="flex justify-center items-center rounded-md size-12
+                   min-w-[48px] bg-slate-50 dark:bg-slate-800
+                   shadow-sm shadow-gray-100 dark:shadow-gray-700
+                   text-blue-600">
+
+        <i class="mdi mdi-home-variant-outline text-[28px]"></i>
+
+      </span>
+
+    </div>
+  </div>
+
+
+  <!-- CONTRATS -->
+  <div class="relative overflow-hidden rounded-md shadow-sm shadow-gray-200
+              dark:shadow-gray-700 bg-white dark:bg-slate-900">
+
+    <div class="p-5 flex items-center justify-between">
+
+      <span class="me-3">
+
+        <span class="text-slate-400 block">
+          Mes contrats
+        </span>
+
+        <span class="flex items-center justify-between mt-1">
+
+          <span class="text-2xl font-medium">
+            {{ totalContrats }}
+          </span>
+
+        </span>
+
+      </span>
+
+      <span class="flex justify-center items-center rounded-md size-12
+                   min-w-[48px] bg-slate-50 dark:bg-slate-800
+                   shadow-sm shadow-gray-100 dark:shadow-gray-700
+                   text-purple-600">
+
+        <i class="mdi mdi-file-sign text-[28px]"></i>
+
+      </span>
+
+    </div>
+  </div>
+
+
+  <!-- MESSAGES -->
+  <div class="relative overflow-hidden rounded-md shadow-sm shadow-gray-200
+              dark:shadow-gray-700 bg-white dark:bg-slate-900">
+
+    <div class="p-5 flex items-center justify-between">
+
+      <span class="me-3">
+
+        <span class="text-slate-400 block">
+          Conversations
+        </span>
+
+        <span class="flex items-center justify-between mt-1">
+
+          <span class="text-2xl font-medium">
+            {{ totalMessages }}
+          </span>
+
+        </span>
+
+      </span>
+
+      <span class="flex justify-center items-center rounded-md size-12
+                   min-w-[48px] bg-slate-50 dark:bg-slate-800
+                   shadow-sm shadow-gray-100 dark:shadow-gray-700
+                   text-amber-600">
+
+        <i class="mdi mdi-message-text-outline text-[28px]"></i>
+
+      </span>
+
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ============================= -->
+<!-- BIENS + MESSAGES -->
+<!-- ============================= -->
+
+<div class="grid xl:grid-cols-2 grid-cols-1 mt-6 gap-6">
+
+
+  <!-- MES BIENS -->
+  <div class="relative overflow-hidden rounded-md shadow-sm shadow-gray-200
+              dark:shadow-gray-700 bg-white dark:bg-slate-900">
+
+    <div class="p-6">
+
+      <div class="flex items-center justify-between mb-4">
+
+        <h6 class="text-lg font-semibold">
+          Mes biens récents
+        </h6>
+
+        <a
+          routerLink="/all-property"
+          class="text-sm text-green-600 underline  hover:text-green-700 cursor-pointer">
+
+          Voir tout
+
+        </a>
+
+      </div>
+
+
+      <div
+        *ngFor="let bien of biensRecents"
+        class="flex items-center justify-between py-3
+               border-b border-gray-100 dark:border-gray-700
+               last:border-0">
+
+        <div>
+
+          <p class="font-medium">
+            {{ bien.titre }}
+          </p>
+
+          <p class="text-sm text-slate-400">
+
+            {{ bien.type }}
+            ·
+            {{ bien.surface }} m²
+            ·
+            {{ bien.ville }}
+
+          </p>
+
+        </div>
+
+
+        <span
+          class="text-xs font-semibold px-2.5 py-1 rounded-full"
+          [ngClass]="{
+            'bg-emerald-100 text-emerald-600': bien.disponible,
+            'bg-red-100 text-red-600': !bien.disponible
+          }">
+
+          {{ bien.disponible ? 'Disponible' : 'Indisponible' }}
+
+        </span>
+
+      </div>
+
+
+      <!-- AUCUN BIEN -->
+
+      <div
+        *ngIf="biensRecents.length === 0"
+        class="text-center py-6 text-slate-400">
+
+        <i class="mdi mdi-home-outline text-3xl"></i>
+
+        <p class="mt-2">
+          Aucun bien ajouté.
+        </p>
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- CONVERSATIONS -->
+  <div class="relative overflow-hidden rounded-md shadow-sm shadow-gray-200
+              dark:shadow-gray-700 bg-white dark:bg-slate-900">
+
+    <div class="p-6">
+
+      <div class="flex items-center justify-between mb-4">
+
+        <h6 class="text-lg font-semibold">
+          Conversations récentes
+        </h6>
+
+        <a
+          routerLink="/chat"
+          class="text-sm text-green-600  underline  hover:text-green-700 cursor-pointer">
+
+          Voir tout
+
+        </a>
+
+      </div>
+
+
+      <div
+        *ngFor="let contact of messagesRecents"
+        class="flex items-center gap-3 py-3
+         border-b border-gray-100 dark:border-gray-700
+         last:border-0">
+
+        <!-- AVATAR -->
+        <div
+          class="size-10 min-w-[40px] rounded-full
+           bg-green-100 dark:bg-green-900
+           flex items-center justify-center
+           text-green-600 font-semibold">
+
+          {{ contact.name?.charAt(0)?.toUpperCase() }}
+
+        </div>
+
+        <!-- CONTACT -->
+        <div class="flex-1 min-w-0">
+
+          <div class="flex items-center justify-between">
+
+            <!-- NOM -->
+            <p class="font-medium">
+              {{ contact.name }}
+            </p>
+
+            <!-- STATUT -->
+            <span
+              class="text-xs"
+              [ngClass]="{
+          'text-green-600': contact.status === 'online',
+          'text-slate-400': contact.status === 'offline'
+        }">
+
+        {{ contact.status === 'online' ? 'En ligne' : 'Hors ligne' }}
+
+      </span>
+
+          </div>
+
+          <!-- DERNIER MESSAGE -->
+          <p class="text-sm text-slate-400 truncate">
+            {{ contact.lastMessage || 'Aucun message' }}
+          </p>
+
+        </div>
+
+      </div>
+
+      <!-- AUCUN MESSAGE -->
+
+      <div
+        *ngIf="messagesRecents.length === 0"
+        class="text-center py-6 text-slate-400">
+
+        <i class="mdi mdi-message-outline text-3xl"></i>
+
+        <p class="mt-2">
+          Aucune conversation.
+        </p>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ============================= -->
+<!-- CONTRATS -->
+<!-- ============================= -->
+
+<div
+  class="relative overflow-hidden rounded-md shadow-sm shadow-gray-200
+         dark:shadow-gray-700 bg-white dark:bg-slate-900 mt-6">
+
+  <div class="p-6">
+
+    <div class="flex items-center justify-between mb-4">
+
+      <h6 class="text-lg font-semibold">
+        Contrats récents
+      </h6>
+
+      <a
+        routerLink="/all-contracts"
+        class="text-sm text-green-600 underline  hover:text-green-700 cursor-pointer">
+
+        Voir tout
+
+      </a>
+
+    </div>
+
+
+    <div
+      *ngFor="let contrat of contratsRecents"
+      class="flex items-center justify-between py-3
+             border-b border-gray-100 dark:border-gray-700
+             last:border-0">
+
+      <div>
+
+        <p class="font-medium">
+          {{ contrat.titre }}
+        </p>
+
+        <p class="text-sm text-slate-400">
+
+          {{ contrat.dateDebut | date }}
+          →
+          {{ contrat.dateFin | date }}
+
+        </p>
+
+      </div>
+
+
+      <div class="text-right">
+
+        <p class="font-semibold text-sm mb-1">
+
+          {{ contrat.montantLoyer }} TND/mois
+
+        </p>
+
+
+        <!-- EN ATTENTE -->
+
+        <span
+          *ngIf="contrat.statut === 'EN_ATTENTE'"
+          class="text-xs font-semibold px-2.5 py-1 rounded-full
+                 bg-amber-100 text-amber-600">
+
+          En attente
+
+        </span>
+
+
+        <!-- EN COURS -->
+
+        <span
+          *ngIf="contrat.statut === 'EN_COURS'"
+          class="text-xs font-semibold px-2.5 py-1 rounded-full
+                 bg-emerald-100 text-emerald-600">
+
+          Signé
+
+        </span>
+
+
+        <!-- TERMINE -->
+
+        <span
+          *ngIf="contrat.statut === 'TERMINE'"
+          class="text-xs font-semibold px-2.5 py-1 rounded-full
+                 bg-slate-100 text-slate-600">
+
+          Terminé
+
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- AUCUN CONTRAT -->
+
+    <div
+      *ngIf="contratsRecents.length === 0"
+      class="text-center py-6 text-slate-400">
+
+      <i class="mdi mdi-file-document-outline text-3xl"></i>
+
+      <p class="mt-2">
+        Aucun contrat.
+      </p>
+
+    </div>
+
+  </div>
+
+</div>

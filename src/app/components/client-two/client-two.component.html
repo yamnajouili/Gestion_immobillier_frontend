@@ -1,0 +1,36 @@
+<div class="container relative">
+  <div class="grid grid-cols-1 pb-8 text-center">
+    <h3 class="mb-4 md:text-3xl md:leading-normal text-2xl leading-normal font-semibold">
+      Avis de nos utilisateurs
+    </h3>
+    <p class="text-slate-400 max-w-xl mx-auto">
+      Découvrez les retours de nos utilisateurs sur leur expérience avec notre plateforme intelligente de gestion immobilière.
+    </p>
+  </div>
+
+    <div class="flex justify-center relative mt-8">
+        <div class="relative w-full">
+            <div class="tiny-three-item">
+                <div *ngFor="let item of clientData" class="tiny-slide">
+                    <div class="text-center mx-3">
+                        <p class="text-lg text-slate-400 italic">{{item.desc}}</p>
+
+                        <div class="text-center mt-5">
+                            <ul class="text-xl font-medium text-amber-400 list-none mb-2">
+                                <li class="inline mx-0.5"><i class="mdi mdi-star"></i></li>
+                                <li class="inline mx-0.5"><i class="mdi mdi-star"></i></li>
+                                <li class="inline mx-0.5"><i class="mdi mdi-star"></i></li>
+                                <li class="inline mx-0.5"><i class="mdi mdi-star"></i></li>
+                                <li class="inline mx-0.5"><i class="mdi mdi-star"></i></li>
+                            </ul>
+
+                            <img [src]="item.image" class="size-14 !rounded-full shadow-md shadow-gyay-200 dark:shadow-gray-700 mx-auto" alt="">
+                            <h6 class="mt-2 fw-semibold">{{item.name}}</h6>
+                            <span class="text-slate-400 text-sm">{{item.title}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+export enum Typebien {
+  APPARTEMENT,
+  MAISON,
+  VILLA,
+  STUDIO,
+  DUPLEX,
+  TERRAIN,
+  LOCAL_COMMERCIAL,
+  BUREAU,
+  ENTREPOT,
+  IMMEUBLE
+}

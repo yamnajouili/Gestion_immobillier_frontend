@@ -1,0 +1,79 @@
+<div class="min-h-screen bg-gray-50 dark:bg-slate-800 flex items-center justify-center px-4">
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="text-center">
+    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto"></div>
+    <p class="text-slate-400 mt-4">Chargement du contrat...</p>
+  </div>
+
+  <!-- Erreur -->
+  <div *ngIf="!loading && error"
+       class="max-w-md w-full bg-white dark:bg-slate-900 rounded-md shadow-sm p-8 text-center">
+    <h5 class="text-xl font-semibold text-red-600 mb-2">Lien invalide</h5>
+    <p class="text-slate-400">{{ error }}</p>
+  </div>
+
+  <!-- Succès -->
+  <div *ngIf="!loading && signed"
+       class="max-w-md w-full bg-white dark:bg-slate-900 rounded-md shadow-sm p-8 text-center">
+    <h5 class="text-xl font-semibold text-green-600 mb-2">Contrat signé ✔</h5>
+    <p class="text-slate-400">Le propriétaire a été notifié.</p>
+  </div>
+
+  <!-- Contrat -->
+  <div *ngIf="!loading && !error && !signed && contrat"
+       class="max-w-2xl w-full bg-white dark:bg-slate-900 rounded-md shadow-sm">
+
+    <!-- Header -->
+    <div class="p-6 border-b">
+      <h5 class="text-xl font-semibold text-slate-800 dark:text-white">
+        {{ contrat.titre }}
+      </h5>
+      <span class="text-xs text-amber-600">En attente de signature</span>
+    </div>
+
+    <!-- Bien -->
+    <div class="p-6 border-b">
+      <h6 class="font-semibold mb-2">Bien</h6>
+
+      <p><strong>Titre :</strong> {{ contrat.bien.titre }}</p>
+      <p><strong>Adresse :</strong> {{ contrat.bien.adresse }}, {{ contrat.bien.ville }}</p>
+      <p><strong>Surface :</strong> {{ contrat.bien.surface }} m²</p>
+      <p><strong>Type :</strong> {{ contrat.bien.type }}</p>
+    </div>
+
+    <!-- Financier -->
+    <div class="p-6 border-b">
+      <h6 class="font-semibold mb-2">Financier</h6>
+
+      <p><strong>Loyer :</strong> {{ contrat.montantLoyer }} TND</p>
+      <p><strong>Caution :</strong> {{ contrat.caution }} TND</p>
+    </div>
+
+    <!-- Dates -->
+    <div class="p-6 border-b">
+      <h6 class="font-semibold mb-2">Période</h6>
+
+      <p><strong>Début :</strong> {{ contrat.dateDebut | date:'dd/MM/yyyy' }}</p>
+      <p><strong>Fin :</strong> {{ contrat.dateFin | date:'dd/MM/yyyy' }}</p>
+    </div>
+
+    <!-- Bouton -->
+    <div class="p-6">
+      <button
+        (click)="signerContrat()"
+        [disabled]="signing"
+        class="w-full py-3 rounded-md text-white"
+        [ngClass]="{
+          'bg-green-600 hover:bg-green-700': !signing,
+          'bg-gray-400': signing
+        }">
+
+        {{ signing ? 'Signature en cours...' : 'Signer le contrat' }}
+
+      </button>
+    </div>
+
+  </div>
+
+</div>

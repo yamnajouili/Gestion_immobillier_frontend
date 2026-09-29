@@ -1,0 +1,956 @@
+<div
+  class="page-wrapper toggled overflow-hidden"
+  [ngClass]="{ 'toggled': activeSidebar }">
+
+  <!-- SIDEBAR -->
+  <app-sidebar />
+
+  <main class="page-content bg-gray-50 dark:bg-slate-800">
+
+    <!-- TOPBAR -->
+    <app-topbar (toggleClass)="toggleClass()" />
+
+    <div class="container-fluid relative px-2">
+
+      <div class="layout-specing">
+
+        <!-- ========================================= -->
+        <!-- HEADER -->
+        <!-- ========================================= -->
+
+        <div class="md:flex justify-between items-center">
+
+          <h5 class="text-lg font-semibold">
+            Modifier le bien
+          </h5>
+
+          <ul class="tracking-[0.5px] inline-block sm:mt-0 mt-3">
+
+            <li
+              class="inline-block capitalize text-[16px] font-medium
+                     duration-500 dark:text-white/70
+                     hover:text-green-600 dark:hover:text-white">
+
+              <a [routerLink]="'/'">
+                Hously
+              </a>
+
+            </li>
+
+            <li
+              class="inline-block text-base text-slate-950
+                     dark:text-white/70 mx-0.5
+                     ltr:rotate-0 rtl:rotate-180">
+
+              <i class="mdi mdi-chevron-right align-middle"></i>
+
+            </li>
+
+            <li
+              class="inline-block capitalize text-[16px]
+                     font-medium text-green-600 dark:text-white"
+              aria-current="page">
+
+              Modifier le bien
+
+            </li>
+
+          </ul>
+
+        </div>
+
+
+        <!-- ========================================= -->
+        <!-- LOADING -->
+        <!-- ========================================= -->
+
+        <div
+          *ngIf="isLoadingBien"
+          class="flex items-center justify-center py-20">
+
+          <div class="text-center">
+
+            <i
+              class="mdi mdi-loading mdi-spin
+                     text-4xl text-green-600">
+            </i>
+
+            <p class="text-slate-400 mt-3">
+              Chargement du bien...
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- ========================================= -->
+        <!-- CONTENT -->
+        <!-- ========================================= -->
+
+        <div
+          *ngIf="!isLoadingBien"
+          class="container relative">
+
+          <div class="grid md:grid-cols-2 grid-cols-1 gap-6 mt-6">
+
+
+            <!-- ===================================== -->
+            <!-- PARTIE GAUCHE : IMAGES EXISTANTES -->
+            <!-- ===================================== -->
+
+            <div
+              class="rounded-md shadow-sm shadow-gray-200
+         dark:shadow-gray-700 p-6
+         bg-white dark:bg-slate-900 h-fit">
+
+              <div>
+
+                <h6 class="font-semibold text-lg mb-2">
+                  Images du bien
+                </h6>
+
+                <p class="text-slate-400 text-sm mb-5">
+                  Images actuellement associées à ce bien.
+                </p>
+
+
+                <!-- ===================================== -->
+                <!-- IMAGE PRINCIPALE -->
+                <!-- ===================================== -->
+
+                <div
+                  *ngIf="bien.images && bien.images.length > 0"
+                  class="relative rounded-md overflow-hidden
+             bg-gray-50 dark:bg-slate-800">
+
+                  <img
+                    [src]="bien.images[0].url"
+                    [alt]="bien.titre"
+                    class="w-full h-64 object-cover rounded-md">
+
+                  <!-- Badge principale -->
+                  <span
+                    class="absolute top-3 left-3
+               bg-green-600 text-white
+               text-xs font-medium
+               px-3 py-1 rounded-full shadow">
+
+        Image principale
+
+      </span>
+
+                  <!-- Supprimer -->
+                  <button
+                    type="button"
+                    (click)="supprimerImage(bien.images[0])"
+                    title="Supprimer l'image"
+                    class="absolute top-3 right-3
+               size-9 flex items-center justify-center
+               bg-red-600 hover:bg-red-700
+               text-white rounded-full
+               shadow-md transition">
+
+                    <i class="mdi mdi-delete-outline text-lg"></i>
+
+                  </button>
+
+                </div>
+
+
+                <!-- ===================================== -->
+                <!-- PAS D'IMAGE -->
+                <!-- ===================================== -->
+
+                <div
+                  *ngIf="!bien.images || bien.images.length === 0"
+                  class="flex flex-col items-center justify-center
+             bg-gray-50 dark:bg-slate-800
+             rounded-md py-12 text-slate-400">
+
+                  <i class="mdi mdi-image-off-outline text-5xl mb-2"></i>
+
+                  <span class="text-sm">
+        Aucune image disponible
+      </span>
+
+                </div>
+
+
+                <!-- ===================================== -->
+                <!-- AUTRES IMAGES -->
+                <div
+                  *ngIf="bien.images && bien.images.length > 1"
+                  class="grid grid-cols-3 gap-3 mt-4">
+
+                  <!-- tes images existantes -->
+
+                </div>
+
+
+                <!-- ===================================== -->
+                <!-- AJOUTER DE NOUVELLES IMAGES -->
+                <!-- ===================================== -->
+
+                <!-- ===================================== -->
+                <!-- AJOUTER DE NOUVELLES IMAGES -->
+                <!-- ===================================== -->
+
+                <div class="mt-5">
+
+                  <label class="font-medium block mb-3">
+                    Ajouter de nouvelles images
+                  </label>
+
+
+                  <!-- APERÇU DES NOUVELLES IMAGES -->
+                  <div
+                    *ngIf="previewUrls.length > 0"
+                    class="grid grid-cols-3 gap-3 mb-4">
+
+                    <div
+                      *ngFor="let preview of previewUrls; let i = index"
+                      class="relative rounded-md overflow-hidden
+             border border-gray-200
+             dark:border-gray-700">
+
+                      <img
+                        [src]="preview"
+                        class="w-full h-28 object-cover"
+                        alt="Nouvelle image">
+
+
+                      <!-- CROIX ROUGE -->
+                      <button
+                        type="button"
+                        (click)="supprimerNouvelleImage(i)"
+                        class="absolute top-1 right-1
+               w-7 h-7
+               flex items-center justify-center
+               bg-red-600 hover:bg-red-700
+               text-white
+               rounded-full
+               shadow-md
+               transition">
+
+                        <i class="mdi mdi-close text-lg"></i>
+
+                      </button>
+
+                    </div>
+
+                  </div>
+
+
+                  <!-- BOUTON AJOUTER -->
+                  <label
+                    class="inline-flex items-center gap-2
+           bg-green-600 hover:bg-green-700
+           text-white font-medium
+           px-4 py-2
+           rounded-md
+           cursor-pointer
+           transition">
+
+                    <i class="mdi mdi-plus"></i>
+
+                    Ajouter des images
+
+                    <input
+                      type="file"
+                      multiple
+                      accept="image/*"
+                      (change)="onFilesSelected($event)"
+                      class="hidden">
+
+                  </label>
+
+
+                  <p class="text-xs text-slate-400 mt-2">
+                    Vous pouvez ajouter plusieurs images.
+                  </p>
+
+                </div>
+
+
+                <!-- INFORMATION -->
+                <div
+                  *ngIf="bien.images && bien.images.length > 0"
+                  class="mt-3 p-2 rounded-md
+         bg-green-600/10
+         text-green-700 dark:text-green-400
+         text-sm">
+
+                  <i class="mdi mdi-information-outline me-1"></i>
+
+                  Les images non supprimées seront conservées.
+
+                </div>
+
+
+                <!-- ===================================== -->
+                <!-- INFORMATION -->
+                <!-- ===================================== -->
+
+                <div
+                  *ngIf="bien.images && bien.images.length > 0"
+                  class="mt-3 p-2 rounded-md
+             bg-green-600/10
+             text-green-700 dark:text-green-400
+             text-sm">
+
+                  <i class="mdi mdi-information-outline me-1"></i>
+
+                  Les images non supprimées seront conservées.
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- ===================================== -->
+            <!-- PARTIE DROITE : FORMULAIRE -->
+            <!-- ===================================== -->
+
+            <div
+              class="rounded-md shadow-sm shadow-gray-200
+                     dark:shadow-gray-700
+                     p-3 mb-3
+                     bg-white dark:bg-slate-900 h-fit">
+
+
+              <!-- =================================== -->
+              <!-- INDICATEUR ÉTAPES -->
+              <!-- =================================== -->
+
+              <div
+                class="flex justify-between mb-3
+                       border-b border-gray-300
+                       dark:border-gray-700 pb-2">
+
+
+                <!-- ETAPE 1 -->
+
+                <div class="text-center flex-1">
+
+                  <div
+                    class="w-8 h-8 rounded-full mx-auto
+                           flex items-center justify-center"
+                    [ngClass]="{
+                      'bg-green-600 text-white': etape >= 1,
+                      'bg-gray-200 text-gray-600': etape < 1
+                    }">
+
+                    1
+
+                  </div>
+
+                  <span class="text-xs mt-1 block">
+                    Informations
+                  </span>
+
+                </div>
+
+
+                <!-- ETAPE 2 -->
+
+                <div class="text-center flex-1">
+
+                  <div
+                    class="w-8 h-8 rounded-full mx-auto
+                           flex items-center justify-center"
+                    [ngClass]="{
+                      'bg-green-600 text-white': etape >= 2,
+                      'bg-gray-200 text-gray-600': etape < 2
+                    }">
+
+                    2
+
+                  </div>
+
+                  <span class="text-xs mt-1 block">
+                    Caractéristiques
+                  </span>
+
+                </div>
+
+
+                <!-- ETAPE 3 -->
+
+                <div class="text-center flex-1">
+
+                  <div
+                    class="w-8 h-8 rounded-full mx-auto
+                           flex items-center justify-center"
+                    [ngClass]="{
+                      'bg-green-600 text-white': etape >= 3,
+                      'bg-gray-200 text-gray-600': etape < 3
+                    }">
+
+                    3
+
+                  </div>
+
+                  <span class="text-xs mt-1 block">
+                    Localisation
+                  </span>
+
+                </div>
+
+
+                <!-- ETAPE 4 -->
+
+                <div class="text-center flex-1">
+
+                  <div
+                    class="w-8 h-8 rounded-full mx-auto
+                           flex items-center justify-center"
+                    [ngClass]="{
+                      'bg-green-600 text-white': etape >= 4,
+                      'bg-gray-200 text-gray-600': etape < 4
+                    }">
+
+                    4
+
+                  </div>
+
+                  <span class="text-xs mt-1 block">
+                    Confirmation
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <!-- =================================== -->
+              <!-- FORM -->
+              <!-- =================================== -->
+
+              <form>
+
+
+                <!-- ================================= -->
+                <!-- ETAPE 1 -->
+                <!-- ================================= -->
+
+                <div *ngIf="etape === 1">
+
+                  <div class="grid grid-cols-12 gap-5">
+
+
+                    <!-- TITRE -->
+
+                    <div class="col-span-12">
+
+                      <label
+                        for="titre"
+                        class="font-medium">
+
+                        Titre
+
+                        <span class="text-red-500">
+                          *
+                        </span>
+
+                      </label>
+
+                      <input
+                        name="titre"
+                        id="titre"
+                        type="text"
+                        class="form-input border
+                               !border-gray-200
+                               dark:!border-gray-800
+                               mt-2 w-full"
+                        placeholder="Ex : Appartement moderne avec vue"
+                        [(ngModel)]="bien.titre">
+
+                    </div>
+
+
+                    <!-- PRIX -->
+
+                    <div class="col-span-12">
+
+                      <label
+                        for="prix"
+                        class="font-medium">
+
+                        Prix (DT)
+
+                        <span class="text-red-500">
+                          *
+                        </span>
+
+                      </label>
+
+                      <div class="form-icon relative mt-2">
+
+                        <i
+                          class="mdi mdi-currency-usd
+                                 absolute top-2 start-4
+                                 text-green-600">
+                        </i>
+
+                        <input
+                          name="prix"
+                          id="prix"
+                          type="number"
+                          step="0.01"
+                          class="form-input border
+                                 !border-gray-200
+                                 dark:!border-gray-800
+                                 !ps-11 w-full"
+                          placeholder="Prix"
+                          [(ngModel)]="bien.prix">
+
+                      </div>
+
+                    </div>
+
+
+                    <!-- SURFACE -->
+
+                    <div class="md:col-span-6 col-span-12">
+
+                      <label
+                        for="surface"
+                        class="font-medium">
+
+                        Surface (m²)
+
+                        <span class="text-red-500">
+                          *
+                        </span>
+
+                      </label>
+
+                      <div class="form-icon relative mt-2">
+
+                        <i
+                          class="mdi mdi-arrow-expand-all
+                                 absolute top-2 start-4
+                                 text-green-600">
+                        </i>
+
+                        <input
+                          name="surface"
+                          id="surface"
+                          type="number"
+                          step="0.01"
+                          class="form-input border
+                                 !border-gray-200
+                                 dark:!border-gray-800
+                                 !ps-11 w-full"
+                          placeholder="Surface"
+                          [(ngModel)]="bien.surface">
+
+                      </div>
+
+                    </div>
+
+
+                    <!-- TYPE -->
+
+                    <div class="md:col-span-6 col-span-12">
+
+                      <label
+                        for="type"
+                        class="font-medium">
+
+                        Type de bien
+
+                        <span class="text-red-500">
+                          *
+                        </span>
+
+                      </label>
+
+                      <select
+                        name="type"
+                        id="type"
+                        class="form-select form-input border
+                               !border-gray-200
+                               dark:!border-gray-800
+                               mt-1 w-full"
+                        [(ngModel)]="bien.type">
+
+                        <option value="">
+                          Sélectionner
+                        </option>
+
+                        <option value="APPARTEMENT">
+                          🏢 Appartement
+                        </option>
+
+                        <option value="MAISON">
+                          🏠 Maison
+                        </option>
+
+                        <option value="VILLA">
+                          🏰 Villa
+                        </option>
+
+                        <option value="TERRAIN">
+                          🌿 Terrain
+                        </option>
+
+                        <option value="BUREAU">
+                          💼 Bureau
+                        </option>
+
+                        <option value="STUDIO">
+                          🏪 Studio
+                        </option>
+
+                        <option value="LOCAL_COMMERCIAL">
+                          🏪 Local Commercial
+                        </option>
+
+                        <option value="IMMEUBLE">
+                          🏢 Immeuble
+                        </option>
+
+                      </select>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+                <!-- ================================= -->
+                <!-- ETAPE 2 -->
+                <!-- ================================= -->
+
+                <div *ngIf="etape === 2">
+
+                  <div class="grid grid-cols-12 gap-5">
+
+                    <div class="col-span-12">
+
+                      <label
+                        for="description"
+                        class="font-medium">
+
+                        Description
+
+                        <span class="text-red-500">
+                          *
+                        </span>
+
+                      </label>
+
+                      <textarea
+                        name="description"
+                        id="description"
+                        rows="8"
+                        class="form-input border
+                               !border-gray-200
+                               dark:!border-gray-800
+                               mt-2 w-full"
+                        placeholder="Description détaillée du bien..."
+                        [(ngModel)]="bien.description">
+                      </textarea>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+                <!-- ================================= -->
+                <!-- ETAPE 3 -->
+                <!-- ================================= -->
+
+                <div *ngIf="etape === 3">
+
+                  <div class="grid grid-cols-12 gap-5">
+
+
+                    <!-- ADRESSE -->
+
+                    <div class="col-span-12">
+
+                      <label
+                        for="adresse"
+                        class="font-medium">
+
+                        Adresse
+
+                        <span class="text-red-500">
+                          *
+                        </span>
+
+                      </label>
+
+                      <input
+                        name="adresse"
+                        id="adresse"
+                        type="text"
+                        class="form-input border
+                               !border-gray-200
+                               dark:!border-gray-800
+                               mt-2 w-full"
+                        placeholder="Numéro, rue, quartier"
+                        [(ngModel)]="bien.adresse">
+
+                    </div>
+
+
+                    <!-- VILLE -->
+
+                    <div class="md:col-span-6 col-span-12">
+
+                      <label
+                        for="ville"
+                        class="font-medium">
+
+                        Ville
+
+                        <span class="text-red-500">
+                          *
+                        </span>
+
+                      </label>
+
+                      <input
+                        name="ville"
+                        id="ville"
+                        type="text"
+                        class="form-input border
+                               !border-gray-200
+                               dark:!border-gray-800
+                               mt-2 w-full"
+                        placeholder="Ville"
+                        [(ngModel)]="bien.ville">
+
+                    </div>
+
+
+                    <!-- DISPONIBILITE -->
+
+                    <div class="col-span-12">
+
+                      <label
+                        for="disponible"
+                        class="flex items-center gap-2 cursor-pointer">
+
+                        <input
+                          id="disponible"
+                          name="disponible"
+                          type="checkbox"
+                          class="w-4 h-4 text-green-600"
+                          [(ngModel)]="bien.disponible">
+
+                        <span class="font-medium">
+                          Disponible immédiatement
+                        </span>
+
+                      </label>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+                <!-- ================================= -->
+                <!-- ETAPE 4 : CONFIRMATION -->
+                <!-- ================================= -->
+
+                <div *ngIf="etape === 4">
+
+                  <div class="text-center py-1">
+
+                    <i
+                      class="mdi mdi-check-circle
+                             text-4xl text-green-600 mb-1">
+                    </i>
+
+                    <h3 class="text-xl font-semibold mb-2">
+                      Prêt à enregistrer !
+                    </h3>
+
+                    <p class="text-gray-500 mb-2">
+                      Vérifiez les informations avant
+                      d'enregistrer les modifications.
+                    </p>
+
+
+                    <!-- RECAP -->
+
+                    <div
+                      class="bg-gray-50 dark:bg-slate-800
+                             p-3 rounded-lg text-left
+                             space-y-2">
+
+                      <p>
+                        <strong>Titre :</strong>
+                        {{ bien.titre || '-' }}
+                      </p>
+
+                      <p>
+                        <strong>Prix :</strong>
+                        {{ bien.prix || '-' }} DT
+                      </p>
+
+                      <p>
+                        <strong>Surface :</strong>
+                        {{ bien.surface || '-' }} m²
+                      </p>
+
+                      <p>
+                        <strong>Type :</strong>
+                        {{ bien.type || '-' }}
+                      </p>
+
+                      <p>
+                        <strong>Adresse :</strong>
+                        {{ bien.adresse || '-' }}
+                      </p>
+
+                      <p>
+                        <strong>Ville :</strong>
+                        {{ bien.ville || '-' }}
+                      </p>
+
+                      <p>
+                        <strong>Statut :</strong>
+
+                        <span
+                          *ngIf="bien.disponible"
+                          class="text-green-600 font-medium">
+
+                          Disponible
+
+                        </span>
+
+                        <span
+                          *ngIf="!bien.disponible"
+                          class="text-red-600 font-medium">
+
+                          Indisponible
+
+                        </span>
+
+                      </p>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+                <!-- ================================= -->
+                <!-- NAVIGATION -->
+                <!-- ================================= -->
+
+                <div
+                  class="flex justify-between mt-3 pt-3
+                         border-t border-gray-300
+                         dark:border-gray-700">
+
+
+                  <!-- PRECEDENT -->
+
+                  <button
+                    type="button"
+                    (click)="prevStep()"
+                    *ngIf="etape > 1"
+                    class="btn bg-gray-500
+                           hover:bg-gray-600
+                           border-gray-500
+                           hover:border-gray-600
+                           text-white rounded-md
+                           px-6 py-2">
+
+                    ← Précédent
+
+                  </button>
+
+
+                  <div class="flex-grow"></div>
+
+
+                  <!-- SUIVANT -->
+
+                  <button
+                    type="button"
+                    (click)="nextStep()"
+                    *ngIf="etape < 4"
+                    class="btn bg-green-600
+                           hover:bg-green-700
+                           border-green-600
+                           hover:border-green-700
+                           text-white rounded-md
+                           px-6 py-2">
+
+                    Suivant →
+
+                  </button>
+
+
+                  <!-- MODIFIER -->
+
+                  <button
+                    type="button"
+                    (click)="update()"
+                    [disabled]="isLoading"
+                    *ngIf="etape === 4"
+                    class="btn bg-green-600
+                           hover:bg-green-700
+                           border-green-600
+                           hover:border-green-700
+                           text-white rounded-md
+                           px-6 py-2
+                           disabled:opacity-50
+                           disabled:cursor-not-allowed">
+
+
+                    <ng-container *ngIf="!isLoading">
+
+                      <i class="mdi mdi-content-save-outline me-1"></i>
+
+                      Enregistrer les modifications
+
+                    </ng-container>
+
+
+                    <ng-container *ngIf="isLoading">
+
+                      <i class="mdi mdi-loading mdi-spin me-1"></i>
+
+                      Modification...
+
+                    </ng-container>
+
+                  </button>
+
+                </div>
+
+              </form>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <app-footer-admin />
+
+  </main>
+
+</div>

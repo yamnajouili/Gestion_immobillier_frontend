@@ -1,0 +1,320 @@
+<div class="page-wrapper" [ngClass]="{ 'toggled': activeSidebar }">
+
+  <app-sidebaruser></app-sidebaruser>
+
+  <main class="page-content bg-gray-50 dark:bg-slate-800">
+
+    <app-topbar (toggleClass)="toggleClass()"/>
+
+    <div class="container-fluid relative px-4 md:px-8">
+
+      <div class="layout-specing">
+
+        <!-- HEADER -->
+        <div
+          class="bg-white dark:bg-slate-900
+                 rounded-2xl p-6 md:p-8
+                 shadow-sm border border-gray-100
+                 dark:border-slate-700">
+
+          <div class="flex items-center gap-4">
+
+            <div
+              class="w-12 h-12 rounded-xl
+                     bg-green-50 dark:bg-green-900/30
+                     flex items-center justify-center">
+
+              <i class="mdi mdi-creation text-2xl text-green-600"></i>
+
+            </div>
+
+            <div>
+
+              <h4
+                class="text-2xl font-semibold
+                       text-slate-900 dark:text-white">
+
+                Recommandations pour vous
+
+              </h4>
+
+              <p class="text-slate-500 mt-1">
+
+                Des biens sélectionnés intelligemment
+                selon vos préférences.
+
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- LOADING -->
+        <div
+          *ngIf="loading"
+          class="flex justify-center items-center py-20">
+
+          <div class="text-center">
+
+            <i
+              class="mdi mdi-loading mdi-spin
+                     text-4xl text-green-600">
+            </i>
+
+            <p class="text-slate-500 mt-3">
+              Recherche des meilleurs biens...
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- AUCUN RESULTAT -->
+        <div
+          *ngIf="!loading && recommandations.length === 0"
+          class="bg-white dark:bg-slate-900
+                 rounded-2xl mt-6 p-12
+                 text-center shadow-sm">
+
+          <i
+            class="mdi mdi-home-search-outline
+                   text-6xl text-slate-300">
+          </i>
+
+          <h5
+            class="text-xl font-semibold
+                   text-slate-800 dark:text-white mt-4">
+
+            Aucune recommandation
+
+          </h5>
+
+          <p class="text-slate-500 mt-2">
+
+            Aucun bien ne correspond actuellement
+            à vos préférences.
+
+          </p>
+
+        </div>
+
+
+        <!-- RECOMMANDATIONS -->
+        <div
+          *ngIf="!loading && recommandations.length > 0"
+          class="grid xl:grid-cols-3 md:grid-cols-2
+                 grid-cols-1 gap-6 mt-8">
+
+
+          <!-- CARD -->
+          <div
+            *ngFor="let item of recommandations"
+            class="group bg-white dark:bg-slate-900
+                   rounded-2xl overflow-hidden
+                   border border-gray-100 dark:border-slate-700
+                   shadow-sm hover:shadow-xl
+                   transition-all duration-300" >
+
+
+            <!-- IMAGE -->
+            <div class="relative overflow-hidden">
+
+              <img
+                [src]="item.bien.images?.[0]?.url || 'assets/images/property/1.jpg'"
+                [alt]="item.bien.typeBien"
+                class="w-full h-[230px] object-cover
+         group-hover:scale-105
+         transition-transform duration-500"
+              />
+
+
+              <!-- BADGE -->
+              <div class="absolute top-4 left-4">
+
+                <span
+                  class="flex items-center
+                         bg-white/95
+                         text-green-700
+                         text-xs font-semibold
+                         px-3 py-2 rounded-full
+                         shadow">
+
+                  <i class="mdi mdi-creation me-1"></i>
+
+                  Sélection IA
+
+                </span>
+
+              </div>
+
+
+              <!-- FAVORI -->
+              <button
+                type="button"
+                class="absolute top-4 right-4
+                       w-10 h-10
+                       bg-white/95
+                       rounded-full shadow
+                       flex items-center justify-center
+                       text-slate-500
+                       hover:text-red-500
+                       transition">
+
+                <i class="mdi mdi-heart-outline text-xl"></i>
+
+              </button>
+
+            </div>
+
+
+            <!-- CONTENT -->
+            <div class="p-5">
+
+
+              <!-- TYPE + VILLE -->
+              <div class="mb-5">
+
+                <div class="flex justify-between items-start gap-3">
+
+                  <h5
+                    class="text-lg font-semibold
+                           text-slate-900 dark:text-white">
+
+                    {{ item.bien.typeBien }}
+
+                  </h5>
+
+                  <span
+                    class="text-xs
+                           bg-green-50 dark:bg-green-900/30
+                           text-green-700 dark:text-green-400
+                           px-3 py-1 rounded-full">
+
+                    Disponible
+
+                  </span>
+
+                </div>
+
+
+                <p
+                  class="text-slate-500
+                         flex items-center mt-2">
+
+                  <i
+                    class="mdi mdi-map-marker-outline
+                           text-green-600 me-1">
+                  </i>
+
+                  {{ item.bien.ville }}
+
+                </p>
+
+              </div>
+
+
+              <!-- INFORMATIONS -->
+              <div
+                class="flex items-center gap-6
+                       py-4
+                       border-y border-gray-100
+                       dark:border-slate-700">
+
+                <div class="flex items-center">
+
+                  <div
+                    class="w-9 h-9
+                           bg-gray-50 dark:bg-slate-800
+                           rounded-lg
+                           flex items-center justify-center
+                           me-2">
+
+                    <i
+                      class="uil uil-compress-arrows
+                             text-green-600 text-lg">
+                    </i>
+
+                  </div>
+
+                  <div>
+
+                    <span
+                      class="text-xs text-slate-400 block">
+                      Surface
+                    </span>
+
+                    <span
+                      class="font-medium
+                             text-slate-800 dark:text-white">
+
+                      {{ item.bien.surface }} m²
+
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <!-- PRIX -->
+              <div
+                class="flex justify-between
+                       items-center mt-5">
+
+                <div>
+
+                  <span
+                    class="text-xs text-slate-400">
+                    Prix
+                  </span>
+
+                  <p
+                    class="text-xl font-bold
+                           text-slate-900 dark:text-white">
+
+                    {{ item.bien.prix }}
+                    <span
+                      class="text-sm font-medium
+                             text-slate-500">
+                      DT
+                    </span>
+
+                  </p>
+
+                </div>
+
+
+                <button
+                  type="button"
+                  (click)="voirBien(item.bien.id)"
+                  class="bg-green-600 hover:bg-green-700 text-white
+         px-4 py-2.5 rounded-xl font-medium transition">
+
+                  Voir le bien
+
+                  <i class="mdi mdi-arrow-right ms-1"></i>
+                </button>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <app-footer-admin/>
+
+  </main>
+
+</div>
