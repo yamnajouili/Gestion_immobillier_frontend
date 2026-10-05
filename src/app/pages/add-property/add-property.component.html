@@ -1,5 +1,4 @@
-<div class="page-wrapper toggled overflow-hidden" [ngClass]="{ 'toggled': activeSidebar }">
-    <app-sidebar/>
+<div class="page-wrapper toggled overflow-y-auto" [ngClass]="{ 'toggled': activeSidebar }">    <app-sidebar/>
 
     <main class="page-content bg-gray-50 dark:bg-slate-800">
         <app-topbar (toggleClass)="toggleClass()"/>
@@ -20,7 +19,7 @@
                 <div class="grid md:grid-cols-2 grid-cols-1 gap-6 mt-6">
 
                   <!-- Partie Gauche : Upload Image -->
-                  <div class="rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 p-6 bg-white dark:bg-slate-900 h-fit">
+                  <div class="rounded-md  shadow-sm shadow-gray-200 dark:shadow-gray-700 p-6 bg-white dark:bg-slate-900 h-fit">
                     <div>
                       <p class="font-medium mb-4">Téléchargez l’image de votre bien ici, veuillez cliquer sur le bouton « Upload Image ».</p>
                       <ng-container *ngIf="setFile; else elseTemplate">
@@ -67,7 +66,7 @@
                   </div>
 
                   <!-- Partie Droite : Formulaire à étapes -->
-                  <div class="rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 p-4 mb-4 bg-white dark:bg-slate-900 h-fit">
+                  <div class="rounded-md overflow-hidden shadow-sm shadow-gray-200 dark:shadow-gray-700 p-4 mb-4 bg-white dark:bg-slate-900 h-fit">
 
                     <!-- Indicateur d'étape -->
                     <div class="flex justify-between mb-4 border-b  border-gray-300  pb-4">
@@ -144,30 +143,92 @@
                       <!-- ÉTAPE 3 : Localisation -->
                       <div *ngIf="etape === 3">
                         <div class="grid grid-cols-12 gap-5">
+
+                          <!-- Adresse -->
                           <div class="col-span-12">
-                            <label for="adresse" class="font-medium">Adresse <span class="text-red-500">*</span></label>
-                            <input name="adresse" id="adresse" type="text" class="form-input border !border-gray-200 dark:!border-gray-800 mt-2 w-full" placeholder="Numéro, rue, quartier" [(ngModel)]="bien.adresse">
-                          </div>
+                            <label for="adresse" class="font-medium">
+                              Adresse <span class="text-red-500">*</span>
+                            </label>
 
+                            <!-- Adresse -->
+                            <input
+                              name="adresse"
+                              id="adresse"
+                              type="text"
+                              class="form-input border !border-gray-200 dark:!border-gray-800 mt-2 w-full"
+                              placeholder="Numéro, rue, quartier"
+                              [(ngModel)]="bien.adresse"></div>
+
+                          <!-- Ville -->
                           <div class="md:col-span-6 col-span-12">
-                            <label for="ville" class="font-medium">Ville <span class="text-red-500">*</span></label>
-                            <input name="ville" id="ville" type="text" class="form-input border !border-gray-200 dark:!border-gray-800 mt-2 w-full" placeholder="Ville" [(ngModel)]="bien.ville">
+                            <label for="ville" class="font-medium">
+                              Ville <span class="text-red-500">*</span>
+                            </label>
+
+                            <input
+                              name="ville"
+                              id="ville"
+                              type="text"
+                              class="form-input border !border-gray-200 dark:!border-gray-800 mt-2 w-full"
+                              placeholder="Ville"
+                              [(ngModel)]="bien.ville">
                           </div>
 
+                          <!-- Code postal -->
                           <div class="md:col-span-6 col-span-12">
-                            <label for="codePostal" class="font-medium">Code postal</label>
-                            <input name="codePostal" id="codePostal" type="text" class="form-input border !border-gray-200 dark:!border-gray-800 mt-2 w-full" placeholder="Code postal">
+                            <label for="codePostal" class="font-medium">
+                              Code postal
+                            </label>
+
+                            <input
+                              name="codePostal"
+                              id="codePostal"
+                              type="text"
+                              class="form-input border !border-gray-200 dark:!border-gray-800 mt-2 w-full"
+                              placeholder="Code postal">
                           </div>
 
+                          <!-- Carte -->
                           <div class="col-span-12">
-                            <label for="disponible" class="flex items-center gap-2 cursor-pointer">
-                              <input name="disponible" type="checkbox" value="true" checked class="w-4 h-4 text-green-600" [(ngModel)]="bien.disponible">
-                              <span class="font-medium">Disponible immédiatement</span>
+
+                            <label class="font-medium">
+                              Localisation sur la carte
+                              <span class="text-red-500">*</span>
+                            </label>
+
+                            <p class="text-sm text-gray-500 mt-1 mb-2">
+                              Cliquez sur la carte pour sélectionner la position du bien.
+                            </p>
+
+                            <div
+                              id="map"
+                              class="w-full h-[350px] rounded-md border border-gray-200 dark:border-gray-800 overflow-hidden">
+                            </div>
+
+                          </div>
+
+                          <!-- Disponible -->
+                          <div class="col-span-12">
+                            <label
+                              class="flex items-center gap-2 cursor-pointer">
+
+                              <input
+                                name="disponible"
+                                type="checkbox"
+                                value="true"
+                                checked
+                                class="w-4 h-4 text-green-600"
+                                [(ngModel)]="bien.disponible">
+
+                              <span class="font-medium">
+          Disponible immédiatement
+        </span>
+
                             </label>
                           </div>
+
                         </div>
                       </div>
-
                       <!-- ÉTAPE 4 : Confirmation -->
                       <div *ngIf="etape === 4">
                         <div class="text-center py-2 ">

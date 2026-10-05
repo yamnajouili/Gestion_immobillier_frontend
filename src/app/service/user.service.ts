@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {RegisterRequest} from '../Models/register-request';
 import {environment} from '../environments/environment';
+import {User} from '../Models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -50,5 +51,24 @@ export class UserService {
     return this.http.delete(`/api/favoris/${id}`);
   }
 
+
+  getAllUsers(): Observable<User[]> {
+
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http.get<User[]>(
+      `${this.apiUrl}/users`,
+      { headers }
+    );
+  }
+  deleteUser(id: number): Observable<void> {
+    return this.http.delete<void>(
+      `${this.apiUrl}/users/${id}`
+    );
+  }
 
 }

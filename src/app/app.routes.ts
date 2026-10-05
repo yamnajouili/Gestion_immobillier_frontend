@@ -58,8 +58,26 @@ import {MescontratComponent} from './pages/mescontrat/mescontrat.component';
 import {DetailContratComponent} from './pages/detail-contrat/detail-contrat.component';
 import {ProprietairefavorisComponent} from './pages/proprietairefavoris/proprietairefavoris.component';
 import {PropertyeditComponent} from './pages/propertyedit/propertyedit.component';
+import {DashboardAdminComponent} from './pages/dashboard-admin/dashboard-admin.component';
+import {AuthLoginAdminComponent} from './pages/auth/auth-login-admin/auth-login-admin.component';
+import {AllUsersComponent} from './pages/all-users/all-users.component';
+import {AllclientComponent} from './pages/allclient/allclient.component';
+import {AllProprietaireComponent} from './pages/all-proprietaire/all-proprietaire.component';
+import {AllBiensComponent} from './pages/all-biens/all-biens.component';
+import {ALLcontratAdminComponent} from './pages/allcontrat-admin/allcontrat-admin.component';
+import {SettingAdminComponent} from './pages/setting-admin/setting-admin.component';
+import {ProfileAdminComponent} from './pages/profile-admin/profile-admin.component';
 
 export const routes: Routes = [
+    {'path':'setting-admin', component:SettingAdminComponent},
+    {'path':'profile-admin', component:ProfileAdminComponent},
+    {'path':'admin/All-Contrats', component:ALLcontratAdminComponent},
+    {'path':'All-biens', component:AllBiensComponent},
+    {'path':'All-proprietaire', component:AllProprietaireComponent},
+    {'path':'All-clients', component:AllclientComponent},
+    {'path':'All-users', component:AllUsersComponent},
+    {'path':'auth-login-admin', component:AuthLoginAdminComponent},
+    {'path':'dashboard-admin', component:DashboardAdminComponent},
     {'path':'edit-property/:id', component:PropertyeditComponent},
     {'path':'proprietaire-favoris', component:ProprietairefavorisComponent},
     {'path':'contrat-detail/:id', component:DetailContratComponent},

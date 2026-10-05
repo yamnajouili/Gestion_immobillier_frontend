@@ -1,7 +1,9 @@
-import {Typebien} from '../Enum/typebien';
-import {Imagefile} from './imagefile';
-import {Propriétaire} from './propriétaire';
+import { Typebien } from '../Enum/typebien';
+import { Imagefile } from './imagefile';
+import { Propriétaire } from './propriétaire';
+
 export class Bien {
+
   id: number;
   titre: string;
   description: string;
@@ -10,12 +12,32 @@ export class Bien {
   type: Typebien;
   adresse: string;
   ville: string;
+
+  // 📍 Position sur la carte
+  latitude: number;
+  longitude: number;
+  isFavori: boolean ;
   disponible: boolean;
   images: Imagefile[] = [];
-  proprietaire:Propriétaire;
+  proprietaire: Propriétaire;
 
+  constructor(
+    id: number = 0,
+    titre: string = "",
+    description: string = "",
+    prix: number = 0,
+    surface: number = 0,
+    type: Typebien = Typebien.APPARTEMENT,
+    adresse: string = "",
+    ville: string = "",
+    latitude: number = 0,
+    longitude: number = 0,
+    isFavori: boolean = false,
+    disponible: boolean = true,
+    images: Imagefile[] = [],
+    proprietaire: Propriétaire = new Propriétaire()
+  ) {
 
-  constructor(id: number=0, titre: string="", description: string="", prix: number=0, surface: number=0,type: Typebien = Typebien.APPARTEMENT, adresse: string="", ville: string="", disponible: boolean=true, images: Imagefile[] = [],proprietaire: Propriétaire=new Propriétaire()) {
     this.id = id;
     this.titre = titre;
     this.description = description;
@@ -24,8 +46,11 @@ export class Bien {
     this.type = type;
     this.adresse = adresse;
     this.ville = ville;
+    this.latitude = latitude;
+    this.longitude = longitude;
+    this.isFavori=isFavori;
     this.disponible = disponible;
     this.images = images;
-    this.proprietaire=proprietaire;
+    this.proprietaire = proprietaire;
   }
 }

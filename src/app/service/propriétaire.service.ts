@@ -48,4 +48,14 @@ export class PropriétaireService {
     );
   }
 
+  getAllProprietaires(): Observable<Propriétaire[]> {
+    return this.http.get<Propriétaire[]>(
+      `${this.apiUrl}/proprietaires/all`
+    );
+  }
+  deleteProprietaire(id: number): Observable<void> {
+    return this.http.delete<void>(
+      `${this.apiUrl}/proprietaires/${id}`
+    );
+  }
 }

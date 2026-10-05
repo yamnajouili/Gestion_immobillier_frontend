@@ -1,0 +1,1100 @@
+<div class="page-wrapper" [ngClass]="{ 'toggled': activeSidebar }">
+
+  <app-sidebar-admin/>
+
+  <main class="page-content bg-gray-50 dark:bg-slate-800">
+
+    <app-topbar (toggleClass)="toggleClass()" />
+
+    <div class="container-fluid relative px-3">
+      <div class="layout-specing">
+
+        <!-- ================= HEADER ================= -->
+        <div class="flex justify-between items-center">
+          <div>
+            <h5 class="text-xl font-semibold">
+              Bonjour,Admin
+            </h5>
+
+
+          </div>
+        </div>
+
+
+        <!-- ================= STATISTIQUES ================= -->
+
+        <div class="grid xl:grid-cols-5 md:grid-cols-2 grid-cols-1 mt-6 gap-6">
+
+          <!-- Tous les utilisateurs -->
+          <div
+            class="relative overflow-hidden rounded-md shadow-sm
+                               shadow-gray-200 dark:shadow-gray-700
+                               bg-white dark:bg-slate-900 p-6">
+
+            <div class="flex items-center justify-between">
+
+              <div>
+                                <span class="text-slate-400">
+                                    Tous les utilisateurs
+                                </span>
+
+                <h3 class="text-2xl font-semibold mt-2">
+                  48
+                </h3>
+              </div>
+
+              <div
+                class="size-12 flex items-center justify-center
+                                       bg-green-600/10 text-green-600 rounded-md">
+
+                <i class="mdi mdi-account-group text-2xl"></i>
+
+              </div>
+
+            </div>
+
+            <div class="mt-4">
+                            <span class="text-green-600 text-sm">
+                                Utilisateurs inscrits
+                            </span>
+            </div>
+
+          </div>
+
+
+          <!-- Clients -->
+          <div
+            class="relative overflow-hidden rounded-md shadow-sm
+                               shadow-gray-200 dark:shadow-gray-700
+                               bg-white dark:bg-slate-900 p-6">
+
+            <div class="flex items-center justify-between">
+
+              <div>
+                                <span class="text-slate-400">
+                                    Clients
+                                </span>
+
+                <h3 class="text-2xl font-semibold mt-2">
+                  30
+                </h3>
+              </div>
+
+              <div
+                class="size-12 flex items-center justify-center
+                                       bg-green-600/10 text-green-600 rounded-md">
+
+                <i class="mdi mdi-account text-2xl"></i>
+
+              </div>
+
+            </div>
+
+            <div class="mt-4">
+                            <span class="text-slate-400 text-sm">
+                                Comptes clients
+                            </span>
+            </div>
+
+          </div>
+
+
+          <!-- Propriétaires -->
+          <div
+            class="relative overflow-hidden rounded-md shadow-sm
+                               shadow-gray-200 dark:shadow-gray-700
+                               bg-white dark:bg-slate-900 p-6">
+
+            <div class="flex items-center justify-between">
+
+              <div>
+                                <span class="text-slate-400">
+                                    Propriétaires
+                                </span>
+
+                <h3 class="text-2xl font-semibold mt-2">
+                  17
+                </h3>
+              </div>
+
+              <div
+                class="size-12 flex items-center justify-center
+                                       bg-green-600/10 text-green-600 rounded-md">
+
+                <i class="mdi mdi-account-tie text-2xl"></i>
+
+              </div>
+
+            </div>
+
+            <div class="mt-4">
+                            <span class="text-slate-400 text-sm">
+                                Comptes propriétaires
+                            </span>
+            </div>
+
+          </div>
+
+
+          <!-- Biens -->
+          <div
+            class="relative overflow-hidden rounded-md shadow-sm
+                               shadow-gray-200 dark:shadow-gray-700
+                               bg-white dark:bg-slate-900 p-6">
+
+            <div class="flex items-center justify-between">
+
+              <div>
+                                <span class="text-slate-400">
+                                    Biens immobiliers
+                                </span>
+
+                <h3 class="text-2xl font-semibold mt-2">
+                  35
+                </h3>
+              </div>
+
+              <div
+                class="size-12 flex items-center justify-center
+                                       bg-green-600/10 text-green-600 rounded-md">
+
+                <i class="mdi mdi-home-city text-2xl"></i>
+
+              </div>
+
+            </div>
+
+            <div class="mt-4">
+                            <span class="text-slate-400 text-sm">
+                                Biens publiés
+                            </span>
+            </div>
+
+          </div>
+
+
+          <!-- Contrats -->
+          <div
+            class="relative overflow-hidden rounded-md shadow-sm
+                               shadow-gray-200 dark:shadow-gray-700
+                               bg-white dark:bg-slate-900 p-6">
+
+            <div class="flex items-center justify-between">
+
+              <div>
+                                <span class="text-slate-400">
+                                    Contrats
+                                </span>
+
+                <h3 class="text-2xl font-semibold mt-2">
+                  12
+                </h3>
+              </div>
+
+              <div
+                class="size-12 flex items-center justify-center
+                                       bg-green-600/10 text-green-600 rounded-md">
+
+                <i class="mdi mdi-file-document-outline text-2xl"></i>
+
+              </div>
+
+            </div>
+
+            <div class="mt-4">
+                            <span class="text-slate-400 text-sm">
+                                Contrats enregistrés
+                            </span>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ===================================================== -->
+        <!-- GRAPHIQUE + REPARTITION -->
+        <!-- ===================================================== -->
+
+        <div class="grid lg:grid-cols-12 grid-cols-1 mt-6 gap-6">
+
+
+          <!-- Évolution utilisateurs -->
+          <div class="lg:col-span-8">
+
+            <div
+              class="relative overflow-hidden rounded-md shadow-sm
+                                   shadow-gray-200 dark:shadow-gray-700
+                                   bg-white dark:bg-slate-900">
+
+              <div
+                class="p-6 flex items-center justify-between
+                                       border-b border-gray-100 dark:border-gray-800">
+
+                <div>
+                  <h6 class="text-lg font-semibold">
+                    Évolution des utilisateurs
+                  </h6>
+
+                  <p class="text-slate-400 text-sm mt-1">
+                    Inscriptions sur la plateforme
+                  </p>
+                </div>
+
+                <select
+                  class="form-select form-input py-2 h-10
+                                           bg-white dark:bg-slate-900
+                                           dark:text-slate-200 rounded
+                                           outline-none border
+                                           !border-gray-200
+                                           dark:!border-gray-800">
+
+                  <option>Cette année</option>
+                  <option>Ce mois</option>
+                  <option>Cette semaine</option>
+
+                </select>
+
+              </div>
+
+
+              <!-- Graphique statique -->
+
+              <div class="p-6">
+
+                <div class="flex items-end justify-between h-[250px] gap-4">
+
+                  <!-- Jan -->
+                  <div class="flex flex-col items-center flex-1">
+                    <span class="text-xs text-slate-400 mb-2">4</span>
+
+                    <div class="w-full bg-green-600 rounded-t-md"
+                         style="height: 50px;">
+                    </div>
+
+                    <span class="text-xs text-slate-400 mt-2">
+                                            Jan
+                                        </span>
+                  </div>
+
+
+                  <!-- Fev -->
+                  <div class="flex flex-col items-center flex-1">
+                    <span class="text-xs text-slate-400 mb-2">7</span>
+
+                    <div class="w-full bg-green-600 rounded-t-md"
+                         style="height: 85px;">
+                    </div>
+
+                    <span class="text-xs text-slate-400 mt-2">
+                                            Fév
+                                        </span>
+                  </div>
+
+
+                  <!-- Mars -->
+                  <div class="flex flex-col items-center flex-1">
+                    <span class="text-xs text-slate-400 mb-2">5</span>
+
+                    <div class="w-full bg-green-600 rounded-t-md"
+                         style="height: 65px;">
+                    </div>
+
+                    <span class="text-xs text-slate-400 mt-2">
+                                            Mar
+                                        </span>
+                  </div>
+
+
+                  <!-- Avril -->
+                  <div class="flex flex-col items-center flex-1">
+                    <span class="text-xs text-slate-400 mb-2">9</span>
+
+                    <div class="w-full bg-green-600 rounded-t-md"
+                         style="height: 110px;">
+                    </div>
+
+                    <span class="text-xs text-slate-400 mt-2">
+                                            Avr
+                                        </span>
+                  </div>
+
+
+                  <!-- Mai -->
+                  <div class="flex flex-col items-center flex-1">
+                    <span class="text-xs text-slate-400 mb-2">11</span>
+
+                    <div class="w-full bg-green-600 rounded-t-md"
+                         style="height: 145px;">
+                    </div>
+
+                    <span class="text-xs text-slate-400 mt-2">
+                                            Mai
+                                        </span>
+                  </div>
+
+
+                  <!-- Juin -->
+                  <div class="flex flex-col items-center flex-1">
+                    <span class="text-xs text-slate-400 mb-2">12</span>
+
+                    <div class="w-full bg-green-600 rounded-t-md"
+                         style="height: 170px;">
+                    </div>
+
+                    <span class="text-xs text-slate-400 mt-2">
+                                            Juin
+                                        </span>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- Répartition -->
+          <div class="lg:col-span-4">
+
+            <div
+              class="relative overflow-hidden rounded-md shadow-sm
+                                   shadow-gray-200 dark:shadow-gray-700
+                                   bg-white dark:bg-slate-900">
+
+              <div
+                class="p-6 border-b
+                                       border-gray-100 dark:border-gray-800">
+
+                <h6 class="text-lg font-semibold">
+                  Répartition des utilisateurs
+                </h6>
+
+              </div>
+
+
+              <div class="p-6">
+
+                <!-- Client -->
+
+                <div class="mt-3">
+
+                  <div class="flex justify-between mb-2">
+
+                                        <span class="text-slate-400">
+                                            Clients
+                                        </span>
+
+                    <span class="font-medium">
+                                            63%
+                                        </span>
+
+                  </div>
+
+                  <div class="w-full bg-gray-100 dark:bg-gray-800
+                                                rounded-full h-[8px]">
+
+                    <div
+                      class="bg-green-600 h-[8px] rounded-full"
+                      style="width: 63%">
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+                <!-- Propriétaire -->
+
+                <div class="mt-7">
+
+                  <div class="flex justify-between mb-2">
+
+                                        <span class="text-slate-400">
+                                            Propriétaires
+                                        </span>
+
+                    <span class="font-medium">
+                                            35%
+                                        </span>
+
+                  </div>
+
+                  <div class="w-full bg-gray-100 dark:bg-gray-800
+                                                rounded-full h-[8px]">
+
+                    <div
+                      class="bg-green-600 h-[8px] rounded-full"
+                      style="width: 35%">
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+                <!-- Admin -->
+
+                <div class="mt-7">
+
+                  <div class="flex justify-between mb-2">
+
+                                        <span class="text-slate-400">
+                                            Administrateurs
+                                        </span>
+
+                    <span class="font-medium">
+                                            2%
+                                        </span>
+
+                  </div>
+
+                  <div class="w-full bg-gray-100 dark:bg-gray-800
+                                                rounded-full h-[8px]">
+
+                    <div
+                      class="bg-green-600 h-[8px] rounded-full"
+                      style="width: 2%">
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+                <!-- résumé -->
+
+                <div
+                  class="mt-8 p-4 bg-gray-50
+                                           dark:bg-slate-800 rounded-md">
+
+                  <div class="flex justify-between">
+
+                                        <span class="text-slate-400">
+                                            Total
+                                        </span>
+
+                    <span class="font-semibold text-green-600">
+                                            48 utilisateurs
+                                        </span>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ===================================================== -->
+        <!-- UTILISATEURS RECENTS -->
+        <!-- ===================================================== -->
+
+        <div class="grid lg:grid-cols-12 grid-cols-1 mt-6 gap-6">
+
+
+          <div class="lg:col-span-8">
+
+            <div
+              class="relative overflow-hidden rounded-md shadow-sm
+                                   shadow-gray-200 dark:shadow-gray-700
+                                   bg-white dark:bg-slate-900">
+
+              <div
+                class="p-6 flex justify-between items-center
+                                       border-b border-gray-100 dark:border-gray-800">
+
+                <div>
+                  <h6 class="text-lg font-semibold">
+                    Utilisateurs récents
+                  </h6>
+
+                  <p class="text-sm text-slate-400 mt-1">
+                    Dernières inscriptions
+                  </p>
+                </div>
+
+                <a
+                  [routerLink]="[]"
+                  class="text-slate-400 hover:text-green-600
+                                           transition duration-500">
+
+                  Voir tous
+
+                  <i class="mdi mdi-arrow-right ms-1"></i>
+
+                </a>
+
+              </div>
+
+
+              <div class="relative overflow-x-auto">
+
+                <table class="w-full text-start">
+
+                  <thead>
+
+                  <tr>
+
+                    <th class="text-start font-semibold
+                                                       text-[15px] px-4 py-3">
+                      Utilisateur
+                    </th>
+
+                    <th class="text-start font-semibold
+                                                       text-[15px] px-4 py-3">
+                      Email
+                    </th>
+
+                    <th class="text-start font-semibold
+                                                       text-[15px] px-4 py-3">
+                      Rôle
+                    </th>
+
+                    <th class="text-start font-semibold
+                                                       text-[15px] px-4 py-3">
+                      Statut
+                    </th>
+
+                  </tr>
+
+                  </thead>
+
+
+                  <tbody>
+
+                  <!-- USER 1 -->
+
+                  <tr>
+
+                    <td
+                      class="border-t border-gray-100
+                                                       dark:border-gray-800
+                                                       px-4 py-4">
+
+                      <div class="flex items-center">
+
+                        <div
+                          class="size-10 bg-green-600/10
+                                                               text-green-600 rounded-full
+                                                               flex items-center
+                                                               justify-center">
+
+                          <i class="mdi mdi-account"></i>
+
+                        </div>
+
+                        <div class="ms-3">
+
+                                                        <span class="font-semibold">
+                                                            Ahmed Ben Ali
+                                                        </span>
+
+                        </div>
+
+                      </div>
+
+                    </td>
+
+
+                    <td
+                      class="border-t border-gray-100
+                                                       dark:border-gray-800
+                                                       px-4 py-4">
+
+                                                <span class="text-slate-400">
+                                                    ahmedgmail.com
+                                                </span>
+
+                    </td>
+
+
+                    <td
+                      class="border-t border-gray-100
+                                                       dark:border-gray-800
+                                                       px-4 py-4">
+
+                                                <span
+                                                  class="bg-green-600/10
+                                                           text-green-600
+                                                           px-3 py-1 rounded">
+
+                                                    CLIENT
+
+                                                </span>
+
+                    </td>
+
+
+                    <td
+                      class="border-t border-gray-100
+                                                       dark:border-gray-800
+                                                       px-4 py-4">
+
+                                                <span class="text-green-600">
+                                                    Actif
+                                                </span>
+
+                    </td>
+
+                  </tr>
+
+
+                  <!-- USER 2 -->
+
+                  <tr>
+
+                    <td
+                      class="border-t border-gray-100
+                                                       dark:border-gray-800
+                                                       px-4 py-4">
+
+                      <div class="flex items-center">
+
+                        <div
+                          class="size-10 bg-green-600/10
+                                                               text-green-600 rounded-full
+                                                               flex items-center
+                                                               justify-center">
+
+                          <i class="mdi mdi-account-tie"></i>
+
+                        </div>
+
+                        <div class="ms-3">
+
+                                                        <span class="font-semibold">
+                                                            Sami Trabelsi
+                                                        </span>
+
+                        </div>
+
+                      </div>
+
+                    </td>
+
+
+                    <td
+                      class="border-t border-gray-100
+                                                       dark:border-gray-800
+                                                       px-4 py-4">
+
+                                                <span class="text-slate-400">
+                                                    samigmail.com
+                                                </span>
+
+                    </td>
+
+
+                    <td
+                      class="border-t border-gray-100
+                                                       dark:border-gray-800
+                                                       px-4 py-4">
+
+                                                <span
+                                                  class="bg-green-600/10
+                                                           text-green-600
+                                                           px-3 py-1 rounded">
+
+                                                    PROPRIÉTAIRE
+
+                                                </span>
+
+                    </td>
+
+
+                    <td
+                      class="border-t border-gray-100
+                                                       dark:border-gray-800
+                                                       px-4 py-4">
+
+                                                <span class="text-green-600">
+                                                    Actif
+                                                </span>
+
+                    </td>
+
+                  </tr>
+
+
+                  <!-- USER 3 -->
+
+                  <tr>
+
+                    <td
+                      class="border-t border-gray-100
+                                                       dark:border-gray-800
+                                                       px-4 py-4">
+
+                      <div class="flex items-center">
+
+                        <div
+                          class="size-10 bg-green-600/10
+                                                               text-green-600 rounded-full
+                                                               flex items-center
+                                                               justify-center">
+
+                          <i class="mdi mdi-account"></i>
+
+                        </div>
+
+                        <div class="ms-3">
+
+                                                        <span class="font-semibold">
+                                                            Mariem Gharbi
+                                                        </span>
+
+                        </div>
+
+                      </div>
+
+                    </td>
+
+
+                    <td
+                      class="border-t border-gray-100
+                                                       dark:border-gray-800
+                                                       px-4 py-4">
+
+                                                <span class="text-slate-400">
+                                                    mariemgmail.com
+                                                </span>
+
+                    </td>
+
+
+                    <td
+                      class="border-t border-gray-100
+                                                       dark:border-gray-800
+                                                       px-4 py-4">
+
+                                                <span
+                                                  class="bg-green-600/10
+                                                           text-green-600
+                                                           px-3 py-1 rounded">
+
+                                                    CLIENT
+
+                                                </span>
+
+                    </td>
+
+
+                    <td
+                      class="border-t border-gray-100
+                                                       dark:border-gray-800
+                                                       px-4 py-4">
+
+                                                <span class="text-green-600">
+                                                    Actif
+                                                </span>
+
+                    </td>
+
+                  </tr>
+
+                  </tbody>
+
+                </table>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- ================================================= -->
+          <!-- BIENS -->
+          <!-- ================================================= -->
+
+          <div class="lg:col-span-4">
+
+            <div
+              class="relative overflow-hidden rounded-md shadow-sm
+                                   shadow-gray-200 dark:shadow-gray-700
+                                   bg-white dark:bg-slate-900">
+
+              <div
+                class="p-6 flex justify-between items-center
+                                       border-b border-gray-100 dark:border-gray-800">
+
+                <h6 class="text-lg font-semibold">
+                  Biens récents
+                </h6>
+
+                <a
+                  [routerLink]="[]"
+                  class="text-slate-400 hover:text-green-600">
+
+                  Voir tous
+
+                </a>
+
+              </div>
+
+
+              <div class="p-6">
+
+
+                <!-- Bien 1 -->
+
+                <div class="flex items-center justify-between">
+
+                  <div class="flex items-center">
+
+                    <div
+                      class="size-14 bg-green-600/10
+                                                   rounded-md flex items-center
+                                                   justify-center text-green-600">
+
+                      <i class="mdi mdi-home-city text-2xl"></i>
+
+                    </div>
+
+
+                    <div class="ms-3">
+
+                      <h6 class="font-semibold">
+                        Appartement Lac 2
+                      </h6>
+
+                      <span class="text-sm text-slate-400">
+                                                Tunis
+                                            </span>
+
+                    </div>
+
+                  </div>
+
+                  <span class="text-green-600 font-medium">
+                                        1 200 DT
+                                    </span>
+
+                </div>
+
+
+                <!-- Bien 2 -->
+
+                <div
+                  class="flex items-center justify-between
+                                           mt-5 pt-5 border-t
+                                           border-gray-100 dark:border-gray-800">
+
+                  <div class="flex items-center">
+
+                    <div
+                      class="size-14 bg-green-600/10
+                                                   rounded-md flex items-center
+                                                   justify-center text-green-600">
+
+                      <i class="mdi mdi-home-outline text-2xl"></i>
+
+                    </div>
+
+
+                    <div class="ms-3">
+
+                      <h6 class="font-semibold">
+                        Villa Sidi Bou Saïd
+                      </h6>
+
+                      <span class="text-sm text-slate-400">
+                                                Sidi Bou Saïd
+                                            </span>
+
+                    </div>
+
+                  </div>
+
+                  <span class="text-green-600 font-medium">
+                                        850 000 DT
+                                    </span>
+
+                </div>
+
+
+                <!-- Bien 3 -->
+
+                <div
+                  class="flex items-center justify-between
+                                           mt-5 pt-5 border-t
+                                           border-gray-100 dark:border-gray-800">
+
+                  <div class="flex items-center">
+
+                    <div
+                      class="size-14 bg-green-600/10
+                                                   rounded-md flex items-center
+                                                   justify-center text-green-600">
+
+                      <i class="mdi mdi-office-building text-2xl"></i>
+
+                    </div>
+
+
+                    <div class="ms-3">
+
+                      <h6 class="font-semibold">
+                        Bureau Centre Urbain
+                      </h6>
+
+                      <span class="text-sm text-slate-400">
+                                                Tunis
+                                            </span>
+
+                    </div>
+
+                  </div>
+
+                  <span class="text-green-600 font-medium">
+                                        2 000 DT
+                                    </span>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ===================================================== -->
+        <!-- ETAT DES CONTRATS -->
+        <!-- ===================================================== -->
+
+        <div class="mt-6">
+
+          <div
+            class="relative overflow-hidden rounded-md shadow-sm
+                               shadow-gray-200 dark:shadow-gray-700
+                               bg-white dark:bg-slate-900">
+
+            <div
+              class="p-6 border-b
+                                   border-gray-100 dark:border-gray-800">
+
+              <h6 class="text-lg font-semibold">
+                État des contrats
+              </h6>
+
+            </div>
+
+
+            <div class="grid md:grid-cols-3 grid-cols-1 gap-6 p-6">
+
+
+              <!-- En attente -->
+
+              <div
+                class="p-5 border border-gray-100
+                                       dark:border-gray-800 rounded-md">
+
+                <div class="flex items-center justify-between">
+
+                  <div>
+
+                                        <span class="text-slate-400">
+                                            En attente
+                                        </span>
+
+                    <h4 class="text-2xl font-semibold mt-2">
+                      4
+                    </h4>
+
+                  </div>
+
+                  <i
+                    class="mdi mdi-clock-outline
+                                               text-3xl text-slate-400">
+                  </i>
+
+                </div>
+
+              </div>
+
+
+              <!-- En cours -->
+
+              <div
+                class="p-5 border border-gray-100
+                                       dark:border-gray-800 rounded-md">
+
+                <div class="flex items-center justify-between">
+
+                  <div>
+
+                                        <span class="text-slate-400">
+                                            En cours
+                                        </span>
+
+                    <h4 class="text-2xl font-semibold
+                                                   text-green-600 mt-2">
+                      6
+                    </h4>
+
+                  </div>
+
+                  <i
+                    class="mdi mdi-file-check-outline
+                                               text-3xl text-green-600">
+                  </i>
+
+                </div>
+
+              </div>
+
+
+              <!-- Terminés -->
+
+              <div
+                class="p-5 border border-gray-100
+                                       dark:border-gray-800 rounded-md">
+
+                <div class="flex items-center justify-between">
+
+                  <div>
+
+                                        <span class="text-slate-400">
+                                            Terminés
+                                        </span>
+
+                    <h4 class="text-2xl font-semibold mt-2">
+                      2
+                    </h4>
+
+                  </div>
+
+                  <i
+                    class="mdi mdi-check-circle-outline
+                                               text-3xl text-green-600">
+                  </i>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <app-footer-admin/>
+
+  </main>
+
+</div>

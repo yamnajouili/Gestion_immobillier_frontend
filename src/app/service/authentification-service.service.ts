@@ -299,4 +299,92 @@ export class AuthentificationServiceService {
     this.router.navigate(['/']);
   }
 
+
+  loggedInAdmin(request: AuthenticationRequest): void {
+
+    this.http.post<AuthenticationResponse>(
+      `${this.api}/users/auth/authenticate`,
+      request
+    ).subscribe({
+
+      next: (response: AuthenticationResponse) => {
+
+        localStorage.setItem(
+          this.tokenKey,
+          response.access_token
+        );
+
+        this.userservice.getUserConnecte().subscribe({
+
+          next: (user) => {
+
+            if (user.role === Role.ADMIN) {
+
+              this.toastr.success(
+                'Bienvenue dans votre espace administrateur',
+                'Connexion réussie !',
+                {
+                  timeOut: 3000,
+                  progressBar: true,
+                  closeButton: true,
+                  positionClass: 'toast-top-right'
+                }
+              );
+
+              this.router.navigate(['/dashboard-admin']);
+
+            } else {
+
+              // Ce compte n'est pas ADMIN
+              localStorage.removeItem(this.tokenKey);
+
+              this.toastr.error(
+                'Accès réservé aux administrateurs',
+                'Accès refusé'
+              );
+
+              this.router.navigate(['/auth-login-admin']);
+            }
+
+          },
+
+          error: (err) => {
+
+            console.error('Erreur current-user:', err);
+
+            localStorage.removeItem(this.tokenKey);
+
+            this.router.navigate(['/auth-login-admin']);
+          }
+
+        });
+
+      },
+
+      error: (error) => {
+
+        console.error(
+          'Erreur authentification admin:',
+          error
+        );
+
+        localStorage.removeItem(this.tokenKey);
+
+        this.toastr.error(
+          'Email ou mot de passe incorrect',
+          'Erreur d\'authentification',
+          {
+            timeOut: 3000,
+            progressBar: true,
+            closeButton: true,
+            positionClass: 'toast-top-center'
+          }
+        );
+
+      }
+
+    });
+  }
+
+
 }

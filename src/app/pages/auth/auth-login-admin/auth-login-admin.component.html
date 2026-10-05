@@ -1,0 +1,162 @@
+<section class="md:h-screen py-36 flex items-center relative overflow-hidden zoom-image">
+
+  <div
+    class="absolute inset-0 image-wrap z-1 bg-[url('/assets/images/bg/01.jpg')] bg-no-repeat bg-center bg-cover">
+  </div>
+
+  <div
+    class="absolute inset-0 bg-gradient-to-b from-transparent to-black z-2">
+  </div>
+
+  <div class="container relative z-3">
+
+    <div class="flex justify-center">
+
+      <div
+        class="max-w-[400px] w-full m-auto p-6 bg-white dark:bg-slate-900 shadow-md shadow-gray-200 dark:shadow-gray-700 rounded-md">
+
+        <!-- LOGO -->
+        <a [routerLink]="'/'">
+          <img
+            src="assets/images/logo-icon-64.png"
+            class="mx-auto"
+            alt="Logo">
+        </a>
+
+        <!-- TITRE ADMIN -->
+        <div class="text-center my-6">
+
+          <div
+            class="size-14 bg-green-600/10 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+
+            <i class="mdi mdi-shield-account-outline text-3xl"></i>
+
+          </div>
+
+          <h5 class="text-xl font-semibold">
+            Administration
+          </h5>
+
+          <p class="text-slate-400 text-sm mt-2">
+            Connectez-vous à votre espace administrateur
+          </p>
+
+        </div>
+
+        <form class="text-start" (ngSubmit)="loginAdmin()">
+
+          <div class="grid grid-cols-1">
+
+            <!-- EMAIL -->
+            <div class="mb-4">
+
+              <label
+                class="font-medium"
+                for="AdminEmail">
+
+                Adresse e-mail :
+
+              </label>
+
+              <input
+                [(ngModel)]="authenticationRequest.email"
+                name="email"
+                id="AdminEmail"
+                type="email"
+                class="form-input border !border-gray-200 dark:!border-gray-800 mt-3"
+                placeholder="admin@exemple.com"
+                required>
+
+            </div>
+
+
+            <!-- PASSWORD -->
+            <div class="mb-4">
+
+              <label
+                class="font-medium"
+                for="AdminPassword">
+
+                Mot de passe :
+
+              </label>
+
+              <input
+                [(ngModel)]="authenticationRequest.password"
+                name="password"
+                id="AdminPassword"
+                type="password"
+                class="form-input border !border-gray-200 dark:!border-gray-800 mt-3"
+                placeholder="Mot de passe"
+                required>
+
+            </div>
+
+
+            <!-- MESSAGE ERREUR -->
+            <div
+              *ngIf="errorMessage"
+              class="mb-4 p-3 bg-red-50 text-red-600 text-sm rounded-md">
+
+              <i class="mdi mdi-alert-circle-outline me-1"></i>
+
+              {{ errorMessage }}
+
+            </div>
+
+
+            <!-- CONNEXION -->
+            <div class="mb-4">
+
+              <button
+                type="submit"
+                [disabled]="isLoading"
+                class="btn bg-green-600 hover:bg-green-700 text-white rounded-md w-full disabled:opacity-60">
+
+                <span *ngIf="!isLoading">
+                  <i class="mdi mdi-login me-1"></i>
+                  Se connecter
+                </span>
+
+                <span *ngIf="isLoading">
+                  Connexion...
+                </span>
+
+              </button>
+
+            </div>
+
+          </div>
+
+        </form>
+
+        <!-- PAS D'INSCRIPTION ADMIN -->
+        <div class="text-center border-t border-gray-100 dark:border-gray-800 pt-4 mt-2">
+
+          <p class="text-slate-400 text-sm">
+            Accès réservé aux administrateurs
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- RETOUR SITE -->
+<div class="fixed bottom-3 end-3 z-10">
+
+  <a
+    [routerLink]="'/'"
+    class="back-button btn btn-icon bg-green-600 hover:bg-green-700 text-white !rounded-full">
+
+    <i data-feather="arrow-left" class="size-4"></i>
+
+  </a>
+
+</div>

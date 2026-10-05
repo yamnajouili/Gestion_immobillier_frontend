@@ -65,6 +65,7 @@ export class IndexComponent{
     { name: 'Bizerte' },
   ];
   ngOnInit(): void {
+
     this.getUserConnecte();
     this.loadProperties();
   }

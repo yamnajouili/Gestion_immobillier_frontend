@@ -27,12 +27,19 @@ export class NavbarComponent implements
       next: (user) => {
 
         if (user.role === Role.CLIENT) {
+
           this.router.navigate(['/dhashboard']);
 
         } else if (user.role === Role.PROPRIETAIRE) {
+
           this.router.navigate(['/dhashboard-pro']);
 
+        } else if (user.role === Role.ADMIN) {
+
+          this.router.navigate(['/dashboard-admin']);
+
         } else {
+
           this.router.navigate(['/']);
         }
       },
@@ -42,8 +49,7 @@ export class NavbarComponent implements
         this.router.navigate(['/auth-login']);
       }
     });
-  }
-  ngOnInit(): void {
+  }  ngOnInit(): void {
       console.log(this.router.url);
       window.scrollTo(0, 0);
   }

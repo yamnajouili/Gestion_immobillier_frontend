@@ -32,4 +32,19 @@ export class ClientService {
     );
   }
 
+
+
+  getAllClients(): Observable<Client[]> {
+    return this.http.get<Client[]>(
+      `${this.apiUrl}/cliens/all`
+    );
+  }
+
+
+
+  deleteClient(id: number): Observable<void> {
+    return this.http.delete<void>(
+      `${this.apiUrl}/cliens/${id}`
+    );
+  }
 }

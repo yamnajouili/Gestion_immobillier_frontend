@@ -122,12 +122,35 @@ export class PropertiesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getUserConnecte();
+
     this.loadProperties();
+
     const token = localStorage.getItem('token');
 
     if (token) {
-      this.getMesFavoris();
+
+      this.userService.getUserConnecte().subscribe({
+
+        next: (user) => {
+
+          this.user = user;
+
+          // Les favoris sont uniquement pour CLIENT
+          if (user.role === 'CLIENT') {
+            this.getMesFavoris();
+          }
+
+        },
+
+        error: (error) => {
+          console.error(
+            'Erreur récupération utilisateur connecté :',
+            error
+          );
+        }
+
+      });
+
     }
   }
 
