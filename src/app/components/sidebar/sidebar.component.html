@@ -28,7 +28,13 @@
         <a [routerLink]="'/chat'"><i class="mdi mdi-chat-outline me-2"></i>Messages</a>
       </li>
 
-
+      <!-- Propositions reçues -->
+      <li [ngClass]="activeManu === '/propositions-recues' ? 'active ms-0' : ''">
+        <a [routerLink]="'/proposition-recues'">
+          <i class="mdi mdi-email-outline me-2"></i>
+          Propositions reçues
+        </a>
+      </li>
 
       <!-- Profil -->
       <li class="sidebar-dropdown" [ngClass]="['/profile-item','/profile','/profile-setting' ].includes(activeManu) ? 'active ms-0' : '' ">

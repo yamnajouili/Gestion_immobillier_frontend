@@ -5,8 +5,8 @@ import {Bien} from '../../Models/bien';
 import {RouterLink} from '@angular/router';
 import {NgClass, NgFor, NgIf} from '@angular/common';
 import {SidebarAdminComponent} from '../../components/sidebar-admin/sidebar-admin.component';
-import {TopbarComponent} from '../../components/topbar/topbar.component';
 import {FooterAdminComponent} from '../../components/footer-admin/footer-admin.component';
+import {TopBarAdminComponent} from '../../components/top-bar-admin/top-bar-admin.component';
 
 @Component({
   selector: 'app-all-biens',
@@ -15,7 +15,7 @@ import {FooterAdminComponent} from '../../components/footer-admin/footer-admin.c
     NgClass,
     DecimalPipe,
     SidebarAdminComponent ,
-    TopbarComponent,
+    TopBarAdminComponent,
     FooterAdminComponent,
     NgFor,
     NgIf],

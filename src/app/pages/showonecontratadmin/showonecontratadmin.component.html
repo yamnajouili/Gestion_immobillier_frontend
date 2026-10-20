@@ -1,0 +1,289 @@
+
+<div class="page-wrapper" [ngClass]="{ 'toggled': activeSidebar }">
+
+  <app-sidebar-admin />
+
+  <main class="page-content bg-gray-50 dark:bg-slate-800">
+
+    <app-top-bar-admin (toggleClass)="toggleClass()" />
+
+    <div class="container-fluid relative px-3">
+      <div class="layout-specing">
+
+        <!-- TITRE ET RETOUR -->
+        <div class="flex flex-wrap justify-between items-center gap-4 mt-6 mb-6">
+
+          <div>
+            <h5 class="text-xl font-semibold text-slate-900 dark:text-white">
+              Détails du contrat
+            </h5>
+
+            <p class="text-slate-400 text-sm mt-1">
+              Informations du contrat sur la plateforme
+            </p>
+          </div>
+
+          <a routerLink="/admin/All-Contrats"
+             class="inline-flex items-center gap-2 px-4 py-2
+                    bg-white dark:bg-slate-900 border border-gray-200
+                    dark:border-gray-700 rounded-md
+                    text-slate-600 dark:text-slate-200
+                    hover:bg-gray-50 transition">
+
+            <i class="mdi mdi-arrow-left"></i>
+            Retour
+          </a>
+
+        </div>
+
+        <!-- CHARGEMENT -->
+        <div *ngIf="chargement"
+             class="bg-white dark:bg-slate-900 rounded-md
+                    p-10 text-center text-slate-400">
+          Chargement du contrat...
+        </div>
+
+        <!-- ERREUR -->
+        <div *ngIf="erreur && !chargement"
+             class="bg-red-50 text-red-600 rounded-md p-5">
+          {{ erreur }}
+        </div>
+
+        <!-- CONTENU DU CONTRAT -->
+        <div *ngIf="contrat as c">
+
+          <!-- EN-TÊTE CONTRAT -->
+          <div class="bg-white dark:bg-slate-900 rounded-md
+                      shadow-sm shadow-gray-200 dark:shadow-gray-700">
+
+            <div class="p-6 flex flex-wrap items-center
+                        justify-between gap-4">
+
+              <div class="flex items-center gap-4">
+
+                <div class="size-14 bg-green-600/10 text-green-600
+                            rounded-md flex items-center justify-center">
+                  <i class="mdi mdi-file-document-check-outline text-3xl"></i>
+                </div>
+
+                <div>
+                  <h4 class="text-xl font-semibold text-slate-900 dark:text-white">
+                    {{ c.titre }}
+                  </h4>
+
+                  <p class="text-slate-400 text-sm mt-1">
+                    Contrat n° {{ c.id }}
+                  </p>
+                </div>
+
+              </div>
+
+              <!-- STATUT -->
+              <span
+                class="px-3 py-1.5 rounded-md text-sm font-medium"
+                [ngClass]="{
+                  'bg-green-600/10 text-green-600': c.statut === 'EN_COURS',
+                  'bg-yellow-500/10 text-yellow-600': c.statut === 'EN_ATTENTE',
+                  'bg-slate-500/10 text-slate-500': c.statut === 'TERMINE'
+                }">
+
+                <i class="mdi mdi-circle-medium me-1"></i>
+
+                {{
+                c.statut === 'EN_COURS' ? 'Signé' :
+                  c.statut === 'EN_ATTENTE' ? 'En attente' :
+                    c.statut === 'TERMINE' ? 'Terminé' : c.statut
+                }}
+
+              </span>
+
+            </div>
+          </div>
+
+          <!-- INFORMATIONS CONTRAT -->
+          <div class="bg-white dark:bg-slate-900 rounded-md
+                      shadow-sm shadow-gray-200 dark:shadow-gray-700 mt-6">
+
+            <div class="p-6 border-b border-gray-100 dark:border-gray-800">
+              <h6 class="text-lg font-semibold dark:text-white">
+                <i class="mdi mdi-file-document-outline text-green-600 me-2"></i>
+                Informations du contrat
+              </h6>
+            </div>
+
+            <div class="p-6 grid md:grid-cols-2 grid-cols-1 gap-6">
+
+              <div>
+                <p class="text-slate-400 text-sm mb-2">
+                  <i class="mdi mdi-calendar-start me-2"></i>
+                  Date de début
+                </p>
+                <p class="font-medium dark:text-white">
+                  {{ c.dateDebut ? (c.dateDebut | date:'dd/MM/yyyy') : '-' }}
+                </p>
+              </div>
+
+              <div>
+                <p class="text-slate-400 text-sm mb-2">
+                  <i class="mdi mdi-calendar-end me-2"></i>
+                  Date de fin
+                </p>
+                <p class="font-medium dark:text-white">
+                  {{ c.dateFin ? (c.dateFin | date:'dd/MM/yyyy') : '-' }}
+                </p>
+              </div>
+
+              <div>
+                <p class="text-slate-400 text-sm mb-2">
+                  <i class="mdi mdi-cash me-2"></i>
+                  Montant du loyer
+                </p>
+                <p class="font-semibold text-lg dark:text-white">
+                  {{ c.montantLoyer | number:'1.0-2' }} DT
+                </p>
+              </div>
+
+              <div>
+                <p class="text-slate-400 text-sm mb-2">
+                  <i class="mdi mdi-wallet-outline me-2"></i>
+                  Caution
+                </p>
+                <p class="font-semibold text-lg dark:text-white">
+                  {{ c.caution | number:'1.0-2' }} DT
+                </p>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- BIEN IMMOBILIER -->
+          <div class="bg-white dark:bg-slate-900 rounded-md
+                      shadow-sm shadow-gray-200 dark:shadow-gray-700 mt-6">
+
+            <div class="p-6 border-b border-gray-100 dark:border-gray-800">
+              <h6 class="text-lg font-semibold dark:text-white">
+                <i class="mdi mdi-home-outline text-green-600 me-2"></i>
+                Bien immobilier
+              </h6>
+            </div>
+
+            <div class="p-6">
+
+              <div class="flex flex-wrap items-center gap-5">
+
+                <div class="size-20 bg-green-600/10 text-green-600
+                            rounded-md flex items-center justify-center">
+                  <i class="mdi mdi-home-city-outline text-4xl"></i>
+                </div>
+
+                <div>
+                  <h5 class="font-semibold text-lg dark:text-white">
+                    {{ c.bien?.titre || '-' }}
+                  </h5>
+
+                  <p class="text-slate-400 text-sm mt-1">
+                    <i class="mdi mdi-map-marker-outline me-1"></i>
+                    {{ c.bien?.adresse || '-' }},
+                    {{ c.bien?.ville || '-' }}
+                  </p>
+
+                  <p class="text-slate-400 text-sm mt-1">
+                    {{ c.bien?.type || '-' }}
+                    • {{ c.bien?.surface || 0 }} m²
+                  </p>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+          <!-- CLIENT ET PROPRIÉTAIRE -->
+          <div class="grid lg:grid-cols-2 grid-cols-1 gap-6 mt-6">
+
+            <!-- CLIENT -->
+            <div class="bg-white dark:bg-slate-900 rounded-md
+                        shadow-sm shadow-gray-200 dark:shadow-gray-700">
+
+              <div class="p-6 border-b border-gray-100 dark:border-gray-800">
+                <h6 class="text-lg font-semibold dark:text-white">
+                  <i class="mdi mdi-account-outline text-cyan-600 me-2"></i>
+                  Client
+                </h6>
+              </div>
+
+              <div class="p-6">
+
+                <div class="flex items-center gap-3 mb-4">
+                  <div class="size-12 rounded-full bg-cyan-600/10
+                              text-cyan-600 flex items-center justify-center">
+                    <i class="mdi mdi-account-outline text-2xl"></i>
+                  </div>
+
+                  <div>
+                    <p class="text-slate-400 text-xs">Adresse email</p>
+                    <p class="font-medium dark:text-white break-all">
+                      {{ c.clientEmail || '-' }}
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- PROPRIÉTAIRE -->
+            <div class="bg-white dark:bg-slate-900 rounded-md
+                        shadow-sm shadow-gray-200 dark:shadow-gray-700">
+
+              <div class="p-6 border-b border-gray-100 dark:border-gray-800">
+                <h6 class="text-lg font-semibold dark:text-white">
+                  <i class="mdi mdi-account-tie-outline text-orange-600 me-2"></i>
+                  Propriétaire
+                </h6>
+              </div>
+
+              <div class="p-6">
+
+                <div class="flex items-center gap-3 mb-4">
+
+                  <div class="size-12 rounded-full bg-orange-600/10
+                              text-orange-600 flex items-center justify-center">
+                    <i class="mdi mdi-account-tie-outline text-2xl"></i>
+                  </div>
+
+                  <div>
+                    <p class="font-semibold dark:text-white">
+                      {{ c.nomProprietaire || '-' }}
+                    </p>
+
+                    <p class="text-slate-400 text-sm">
+                      Propriétaire du bien
+                    </p>
+                  </div>
+
+                </div>
+
+                <div class="border-t border-gray-100 dark:border-gray-800 pt-4">
+                  <p class="text-slate-400 text-sm">
+                   Numero télephone
+                  </p>
+
+                  <p class="font-medium mt-1 dark:text-white">
+                    {{ c.telephoneProprietaire || '-' }}
+                  </p>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <app-footer-admin />
+
+  </main>
+</div>

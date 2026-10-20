@@ -1,0 +1,324 @@
+
+<div class="page-wrapper overflow-hidden"
+     [ngClass]="{'toggled': activeSidebar}">
+
+  <app-sidebar/>
+
+  <main class="page-content bg-gray-50 dark:bg-slate-800">
+
+    <app-topbar (toggleClass)="toggleClass()"></app-topbar>
+
+    <div class="container-fluid relative px-3">
+      <div class="layout-specing">
+
+        <!-- TITRE -->
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+          <div>
+            <h5 class="text-xl font-semibold text-slate-900 dark:text-white">
+              Propositions reçues
+            </h5>
+            <p class="text-slate-400 text-sm mt-1">
+              Consultez et gérez les offres d'achat reçues pour vos biens.
+            </p>
+          </div>
+
+
+        </div>
+
+        <!-- STATISTIQUES -->
+        <div class="grid lg:grid-cols-12 grid-cols-1 gap-6">
+
+          <div class="lg:col-span-4">
+            <div class="bg-white dark:bg-slate-900 rounded-md p-4
+                        shadow-sm shadow-gray-200 dark:shadow-gray-700">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="text-slate-400 text-sm">En attente</p>
+                  <h3 class="text-2xl font-semibold mt-2">
+                    {{ compterStatut('EN_ATTENTE') }}
+                  </h3>
+                </div>
+                <div class="size-12 bg-yellow-500/10 text-yellow-600
+                            rounded-md flex items-center justify-center">
+                  <i class="mdi mdi-clock-outline text-2xl"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-4">
+            <div class="bg-white dark:bg-slate-900 rounded-md p-4
+                        shadow-sm shadow-gray-200 dark:shadow-gray-700">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="text-slate-400 text-sm">Acceptées</p>
+                  <h3 class="text-2xl font-semibold mt-2">
+                    {{ compterStatut('ACCEPTEE') }}
+                  </h3>
+                </div>
+                <div class="size-12 bg-green-600/10 text-green-600
+                            rounded-md flex items-center justify-center">
+                  <i class="mdi mdi-check-circle-outline text-2xl"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-4">
+            <div class="bg-white dark:bg-slate-900 rounded-md p-4
+                        shadow-sm shadow-gray-200 dark:shadow-gray-700">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="text-slate-400 text-sm">Refusées</p>
+                  <h3 class="text-2xl font-semibold mt-2">
+                    {{ compterStatut('REFUSEE') }}
+                  </h3>
+                </div>
+                <div class="size-12 bg-red-600/10 text-red-600
+                            rounded-md flex items-center justify-center">
+                  <i class="mdi mdi-close-circle-outline text-2xl"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- TABLEAU -->
+        <div class="grid lg:grid-cols-12 grid-cols-1 mt-6 gap-6">
+          <div class="lg:col-span-12">
+
+            <div class="relative overflow-hidden rounded-md
+                        shadow-sm shadow-gray-200 dark:shadow-gray-700
+                        bg-white dark:bg-slate-900">
+
+              <div class="p-6 border-b border-gray-100 dark:border-gray-800">
+                <h6 class="text-lg font-semibold">
+                  Liste des propositions d'achat
+                </h6>
+                <p class="text-slate-400 text-sm mt-1">
+                  {{ propositions.length }} proposition(s) reçue(s)
+                </p>
+              </div>
+
+              <!-- CHARGEMENT -->
+              <div *ngIf="loading" class="text-center py-12">
+                <i class="mdi mdi-loading mdi-spin text-3xl text-green-600"></i>
+                <p class="text-slate-400 mt-3">Chargement...</p>
+              </div>
+
+              <!-- ERREUR -->
+              <div *ngIf="!loading && errorMessage"
+                   class="text-center py-10 px-4">
+                <i class="mdi mdi-alert-circle-outline text-4xl text-red-600"></i>
+                <p class="text-red-600 mt-3">{{ errorMessage }}</p>
+                <button type="button"
+                        (click)="chargerPropositions()"
+                        class="mt-4 px-4 py-2 bg-green-600
+                               text-white rounded-md">
+                  Réessayer
+                </button>
+              </div>
+
+              <!-- LISTE VIDE -->
+              <div *ngIf="!loading && !errorMessage && propositions.length === 0"
+                   class="text-center py-12">
+                <i class="mdi mdi-email-outline text-5xl text-slate-300"></i>
+                <p class="text-slate-400 mt-3">
+                  Aucune proposition d'achat reçue.
+                </p>
+              </div>
+
+              <!-- TABLE -->
+              <div *ngIf="!loading && !errorMessage && propositions.length > 0"
+                   class="relative overflow-x-auto block w-full">
+
+                <table class="w-full text-start">
+                  <thead class="text-base">
+                  <tr>
+                    <th class="text-start font-semibold text-[15px] px-4 py-3 min-w-[150px]">
+                      Bien
+                    </th>
+                    <th class="text-start font-semibold text-[15px] px-4 py-3 min-w-[120px]">
+                      Client
+                    </th>
+                    <th class="text-start font-semibold text-[15px] px-4 py-3 min-w-[150px]">
+                      Montant proposé
+                    </th>
+                    <th class="text-start font-semibold text-[15px] px-4 py-3 min-w-[160px]">
+                      Date
+                    </th>
+                    <th class="text-start font-semibold text-[15px] px-4 py-3 min-w-[130px]">
+                      Statut
+                    </th>
+                    <th class="text-center font-semibold text-[15px] px-4 py-3 min-w-[170px]">
+                      Actions
+                    </th>
+                  </tr>
+                  </thead>
+
+                  <tbody>
+                  <tr *ngFor="let proposition of propositions"
+                      class="border-t border-gray-100 dark:border-gray-800">
+
+                    <!-- BIEN -->
+                    <td class="px-4 py-4">
+                      <div class="flex items-center gap-3">
+                        <div class="size-10 min-w-[40px] bg-green-600/10
+                                      text-green-600 rounded-full
+                                      flex items-center justify-center">
+                          <i class="mdi mdi-home-outline text-xl"></i>
+                        </div>
+                        <span class="font-semibold">
+                            Bien n°{{ proposition.bienId }}
+                          </span>
+                      </div>
+                    </td>
+
+                    <!-- CLIENT -->
+                    <td class="px-4 py-4 text-slate-400">
+                      Client n°{{ proposition.clientId }}
+                    </td>
+
+                    <!-- MONTANT -->
+                    <td class="px-4 py-4">
+                        <span class="font-semibold text-green-600">
+                          {{ proposition.montantPropose | number:'1.0-0' }} DT
+                        </span>
+                    </td>
+
+                    <!-- DATE -->
+                    <td class="px-4 py-4 text-slate-400">
+                      {{ proposition.dateProposition | date:'dd/MM/yyyy HH:mm' }}
+                    </td>
+
+                    <!-- STATUT -->
+                    <td class="px-4 py-4">
+                        <span class="text-[14px] font-medium px-2.5 py-1 rounded"
+                              [ngClass]="{
+                                'bg-yellow-600/10 text-yellow-600':
+                                  proposition.statut === 'EN_ATTENTE',
+                                'bg-green-600/10 text-green-600':
+                                  proposition.statut === 'ACCEPTEE',
+                                'bg-red-600/10 text-red-600':
+                                  proposition.statut === 'REFUSEE'
+                              }">
+                          {{ libelleStatut(proposition.statut) }}
+                        </span>
+                    </td>
+
+                    <!-- ACTIONS -->
+                    <td class="px-4 py-4 text-center">
+                      <div *ngIf="proposition.statut === 'EN_ATTENTE'"
+                           class="flex items-center justify-center gap-2">
+
+                        <button type="button"
+                                (click)="ouvrirConfirmation(proposition, 'accepter')"
+                                [disabled]="actionEnCours"
+                                title="Accepter"
+                                class="size-9 inline-flex items-center
+                                         justify-center bg-green-600 text-white
+                                         rounded-md hover:bg-green-700
+                                         disabled:opacity-50 transition">
+                          <i class="mdi mdi-check text-xl"></i>
+                        </button>
+
+                        <button type="button"
+                                (click)="ouvrirConfirmation(proposition, 'refuser')"
+                                [disabled]="actionEnCours"
+                                title="Refuser"
+                                class="size-9 inline-flex items-center
+                                         justify-center bg-red-600 text-white
+                                         rounded-md hover:bg-red-700
+                                         disabled:opacity-50 transition">
+                          <i class="mdi mdi-close text-xl"></i>
+                        </button>
+
+                      </div>
+
+                      <span *ngIf="proposition.statut !== 'EN_ATTENTE'"
+                            class="text-slate-400 text-sm">
+                          Traitée
+                        </span>
+                    </td>
+
+                  </tr>
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <app-footer-admin></app-footer-admin>
+
+  </main>
+</div>
+
+<!-- MODAL DE CONFIRMATION -->
+<div *ngIf="propositionSelectionnee && actionSelectionnee"
+     class="fixed inset-0 z-50 flex items-center justify-center
+            bg-black/50 px-4">
+
+  <div class="bg-white dark:bg-slate-900 rounded-lg shadow-xl
+              w-full max-w-md p-6">
+
+    <div class="flex justify-center mb-4">
+      <div class="size-14 rounded-full flex items-center justify-center"
+           [ngClass]="actionSelectionnee === 'accepter'
+             ? 'bg-green-600/10 text-green-600'
+             : 'bg-red-600/10 text-red-600'">
+        <i class="mdi text-3xl"
+           [ngClass]="actionSelectionnee === 'accepter'
+             ? 'mdi-check-circle-outline'
+             : 'mdi-close-circle-outline'"></i>
+      </div>
+    </div>
+
+    <h5 class="text-lg font-semibold text-center mb-2">
+      {{ actionSelectionnee === 'accepter'
+      ? 'Accepter la proposition ?'
+      : 'Refuser la proposition ?' }}
+    </h5>
+
+    <p class="text-slate-400 text-sm text-center">
+      Voulez-vous
+      {{ actionSelectionnee === 'accepter' ? 'accepter' : 'refuser' }}
+      l'offre de
+      <strong>{{ propositionSelectionnee.montantPropose | number:'1.0-0' }} DT</strong>
+      pour le bien n°{{ propositionSelectionnee?.bienId }} ?    </p>
+
+    <p *ngIf="erreurAction"
+       class="text-red-600 text-sm text-center mt-4">
+      {{ erreurAction }}
+    </p>
+
+    <div class="flex justify-center gap-3 mt-6">
+      <button type="button"
+              (click)="fermerConfirmation()"
+              [disabled]="actionEnCours"
+              class="px-5 py-2 border border-gray-200
+                     text-slate-500 rounded-md">
+        Annuler
+      </button>
+
+      <button type="button"
+              (click)="confirmerAction()"
+              [disabled]="actionEnCours"
+              class="px-5 py-2 text-white rounded-md
+                     disabled:opacity-50"
+              [ngClass]="actionSelectionnee === 'accepter'
+                ? 'bg-green-600 hover:bg-green-700'
+                : 'bg-red-600 hover:bg-red-700'">
+        {{ actionEnCours ? 'Traitement...' :
+        (actionSelectionnee === 'accepter' ? 'Accepter' : 'Refuser') }}
+      </button>
+    </div>
+
+  </div>
+</div>

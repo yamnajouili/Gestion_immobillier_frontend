@@ -1,6 +1,7 @@
-import { Typebien } from '../Enum/typebien';
-import { Imagefile } from './imagefile';
-import { Propriétaire } from './propriétaire';
+import {Typebien} from '../Enum/typebien';
+import {Imagefile} from './imagefile';
+import {Propriétaire} from './propriétaire';
+import {Typetransaction} from '../Enum/typetransaction';
 
 export class Bien {
 
@@ -10,6 +11,7 @@ export class Bien {
   prix: number;
   surface: number;
   type: Typebien;
+  typeTransaction:Typetransaction;
   adresse: string;
   ville: string;
 
@@ -28,6 +30,7 @@ export class Bien {
     prix: number = 0,
     surface: number = 0,
     type: Typebien = Typebien.APPARTEMENT,
+    typeTransaction:Typetransaction=Typetransaction.LOCATION,
     adresse: string = "",
     ville: string = "",
     latitude: number = 0,
@@ -44,6 +47,7 @@ export class Bien {
     this.prix = prix;
     this.surface = surface;
     this.type = type;
+    this.typeTransaction=typeTransaction;
     this.adresse = adresse;
     this.ville = ville;
     this.latitude = latitude;

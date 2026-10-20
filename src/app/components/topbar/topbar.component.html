@@ -116,7 +116,7 @@
           <li class="dropdown inline-block relative" (clickOutside)="onClickedOutside3($event)">
             <button class="dropdown-toggle items-center" type="button" (click)="userDropdown()">
         <span class="size-8 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-[20px] text-center bg-gray-50 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 border border-gray-100 dark:border-gray-800 text-slate-900 dark:text-white rounded-md">
-            <img [src]="'/assets/images/client/07.jpg'" class="rounded-md" alt="">
+            <img  [src]="user.photoProfil ? apiUrl + user.photoProfil : '/assets/images/client/user.jpg'" class="rounded-md" alt="">
         </span>
             </button>
 

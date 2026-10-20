@@ -1,0 +1,257 @@
+
+<div class="page-wrapper" [ngClass]="{ 'toggled': activeSidebar }">
+
+  <app-sidebar-admin />
+
+  <main class="page-content bg-gray-50 dark:bg-slate-800">
+
+    <app-top-bar-admin (toggleClass)="toggleClass()" />
+
+    <div class="container-fluid relative px-3">
+      <div class="layout-specing">
+
+        <!-- En-tête -->
+        <div class="flex items-center justify-between mt-6 mb-6">
+
+          <div>
+            <h5 class="text-xl font-semibold text-slate-900 dark:text-white">
+              Détails du propriétaire
+            </h5>
+
+            <p class="text-slate-400 text-sm mt-1">
+              Informations personnelles et professionnelles
+            </p>
+          </div>
+
+          <a routerLink="/All-proprietaire"
+             class="inline-flex items-center gap-2 px-4 py-2
+                    bg-white dark:bg-slate-900 border border-gray-200
+                    dark:border-gray-700 rounded-md
+                    text-slate-600 dark:text-slate-200
+                    hover:bg-gray-50 transition">
+
+            <i class="mdi mdi-arrow-left"></i>
+            Retour
+          </a>
+        </div>
+
+        <!-- Chargement -->
+        <div *ngIf="chargement"
+             class="bg-white dark:bg-slate-900 rounded-md
+                    p-10 text-center text-slate-400">
+          Chargement des informations...
+        </div>
+
+        <!-- Erreur -->
+        <div *ngIf="erreur && !chargement"
+             class="bg-red-50 text-red-600 rounded-md p-5">
+          {{ erreur }}
+        </div>
+
+        <!-- Détails du propriétaire -->
+        <div *ngIf="proprietaire && !chargement"
+             class="grid lg:grid-cols-12 grid-cols-1 gap-6">
+
+          <!-- Carte profil -->
+          <div class="lg:col-span-4">
+
+            <div class="bg-white dark:bg-slate-900 rounded-md
+                        shadow-sm shadow-gray-200 dark:shadow-gray-700
+                        p-6 text-center">
+
+              <!-- Photo -->
+              <div class="size-24 mx-auto rounded-full
+                          bg-green-600/10 text-green-600
+                          flex items-center justify-center
+                          overflow-hidden mb-4">
+
+                <img
+                  *ngIf="proprietaire.photoProfil && !photoErreur; else defaultAvatar"
+                  [src]="apiUrl + proprietaire.photoProfil"
+                  (error)="photoErreur = true"
+                  alt="Photo du propriétaire"
+                  class="w-full h-full object-cover"
+                />
+
+                <ng-template #defaultAvatar>
+                  <i class="mdi mdi-account-outline text-5xl"></i>
+                </ng-template>
+
+              </div>
+
+              <h5 class="text-xl font-semibold text-slate-900 dark:text-white">
+                {{ proprietaire.nom }}
+              </h5>
+
+              <p class="text-slate-400 text-sm mt-1">
+                {{ proprietaire.email }}
+              </p>
+
+              <div class="mt-4">
+                <span class="px-3 py-1 rounded-md
+                             bg-orange-600/10 text-orange-600
+                             text-sm font-medium">
+                  Propriétaire
+                </span>
+              </div>
+
+
+
+            </div>
+          </div>
+
+          <!-- Informations -->
+          <div class="lg:col-span-8">
+
+            <!-- Informations personnelles -->
+            <div class="bg-white dark:bg-slate-900 rounded-md
+                        shadow-sm shadow-gray-200 dark:shadow-gray-700">
+
+              <div class="p-6 border-b border-gray-100 dark:border-gray-800">
+                <h6 class="text-lg font-semibold dark:text-white">
+                  Informations personnelles
+                </h6>
+
+                <p class="text-slate-400 text-sm mt-1">
+                  Coordonnées et informations du compte
+                </p>
+              </div>
+
+              <div class="p-6 grid md:grid-cols-2 grid-cols-1 gap-6">
+
+                <div>
+                  <p class="text-slate-400 text-sm mb-2">
+                    <i class="mdi mdi-account-outline me-2"></i>
+                    Nom complet
+                  </p>
+                  <p class="font-medium dark:text-white">
+                    {{ proprietaire.nom || '-' }}
+                  </p>
+                </div>
+
+                <div>
+                  <p class="text-slate-400 text-sm mb-2">
+                    <i class="mdi mdi-email-outline me-2"></i>
+                    Adresse email
+                  </p>
+                  <p class="font-medium break-all dark:text-white">
+                    {{ proprietaire.email || '-' }}
+                  </p>
+                </div>
+
+                <div>
+                  <p class="text-slate-400 text-sm mb-2">
+                    <i class="mdi mdi-phone-outline me-2"></i>
+                    Téléphone
+                  </p>
+                  <p class="font-medium dark:text-white">
+                    {{ proprietaire.telephone || '-' }}
+                  </p>
+                </div>
+
+                <div>
+                  <p class="text-slate-400 text-sm mb-2">
+                    <i class="mdi mdi-briefcase-outline me-2"></i>
+                    Poste
+                  </p>
+                  <p class="font-medium dark:text-white">
+                    {{ proprietaire.poste || '-' }}
+                  </p>
+                </div>
+
+                <div>
+                  <p class="text-slate-400 text-sm mb-2">
+                    <i class="mdi mdi-shield-account-outline me-2"></i>
+                    Rôle
+                  </p>
+                  <p class="font-medium dark:text-white">
+                    {{ proprietaire.role }}
+                  </p>
+                </div>
+
+                <div>
+                  <p class="text-slate-400 text-sm mb-2">
+                    <i class="mdi mdi-calendar-outline me-2"></i>
+                    Date d'inscription
+                  </p>
+                  <p class="font-medium dark:text-white">
+                    {{ proprietaire.creationDate
+                    ? (proprietaire.creationDate | date:'dd/MM/yyyy')
+                    : '-' }}
+                  </p>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Informations professionnelles -->
+            <div class="bg-white dark:bg-slate-900 rounded-md
+                        shadow-sm shadow-gray-200 dark:shadow-gray-700
+                        mt-6">
+
+              <div class="p-6 border-b border-gray-100 dark:border-gray-800">
+                <h6 class="text-lg font-semibold dark:text-white">
+                  Informations professionnelles
+                </h6>
+                <p class="text-slate-400 text-sm mt-1">
+                  Informations spécifiques au propriétaire
+                </p>
+              </div>
+
+              <div class="p-6 grid md:grid-cols-2 grid-cols-1 gap-6">
+
+                <div>
+                  <p class="text-slate-400 text-sm mb-2">
+                    <i class="mdi mdi-account-tie-outline me-2"></i>
+                    Type de propriétaire
+                  </p>
+                  <p class="font-medium dark:text-white">
+                    {{ proprietaire.typeProprietaire || '-' }}
+                  </p>
+                </div>
+
+                <div>
+                  <p class="text-slate-400 text-sm mb-2">
+                    <i class="mdi mdi-office-building-outline me-2"></i>
+                    Nom de l'agence
+                  </p>
+                  <p class="font-medium dark:text-white">
+                    {{ proprietaire.nomAgence || '-' }}
+                  </p>
+                </div>
+
+                <div>
+                  <p class="text-slate-400 text-sm mb-2">
+                    <i class="mdi mdi-identifier me-2"></i>
+                    Numéro SIRET
+                  </p>
+                  <p class="font-medium dark:text-white">
+                    {{ proprietaire.numeroSiret || '-' }}
+                  </p>
+                </div>
+
+                <div>
+                  <p class="text-slate-400 text-sm mb-2">
+                    <i class="mdi mdi-map-marker-outline me-2"></i>
+                    Adresse professionnelle
+                  </p>
+                  <p class="font-medium dark:text-white">
+                    {{ proprietaire.adresseProfessionnelle || '-' }}
+                  </p>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <app-footer-admin />
+
+  </main>
+</div>
+

@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {NgClass, NgFor, NgIf} from '@angular/common';
-import {SidebarComponent} from '../../components/sidebar/sidebar.component';
-import {TopbarComponent} from '../../components/topbar/topbar.component';
 import {FooterAdminComponent} from '../../components/footer-admin/footer-admin.component';
 import {SidebarAdminComponent} from '../../components/sidebar-admin/sidebar-admin.component';
 import {UserService} from '../../service/user.service';
+import {TopBarAdminComponent} from '../../components/top-bar-admin/top-bar-admin.component';
 
 @Component({
   selector: 'app-all-users',
@@ -13,7 +12,7 @@ import {UserService} from '../../service/user.service';
     RouterLink,
     NgClass,
     SidebarAdminComponent ,
-    TopbarComponent,
+    TopBarAdminComponent,
     FooterAdminComponent,
     NgFor,
     NgIf],
@@ -21,15 +20,17 @@ import {UserService} from '../../service/user.service';
   styleUrl: './all-users.component.scss'
 })
 export class AllUsersComponent {
-  activeSidebar:boolean = true;
+  activeSidebar: boolean = true;
   utilisateurs: any[] = [];
 
   pageActuelle: number = 1;
   elementsParPage: number = 5;
   userIdASupprimer: number | null = null;
   modalSuppression = false;
-constructor(private userService:UserService ) {
-}
+  erreurSuppression: string = '';
+
+  constructor(private userService: UserService) {
+  }
 
   ngOnInit(): void {
 
@@ -48,8 +49,6 @@ constructor(private userService:UserService ) {
 
     });
   }
-
-
 
 
   get nombrePages(): number {
@@ -74,7 +73,7 @@ constructor(private userService:UserService ) {
   get pages(): number[] {
 
     return Array.from(
-      { length: this.nombrePages },
+      {length: this.nombrePages},
       (_, i) => i + 1
     );
 
@@ -115,27 +114,42 @@ constructor(private userService:UserService ) {
 
   ouvrirModalSuppression(id: number): void {
     this.userIdASupprimer = id;
+    this.erreurSuppression = '';
     this.modalSuppression = true;
   }
 
   fermerModalSuppression(): void {
     this.modalSuppression = false;
     this.userIdASupprimer = null;
+    this.erreurSuppression = '';
   }
 
   confirmerSuppression(): void {
+
     if (this.userIdASupprimer === null) return;
 
-    this.userService.deleteUser(this.userIdASupprimer).subscribe({
+    const id = this.userIdASupprimer;
+
+    this.erreurSuppression = '';
+
+    this.userService.deleteUser(id).subscribe({
+
       next: () => {
+
         this.utilisateurs = this.utilisateurs.filter(
-          user => user.id !== this.userIdASupprimer
+          user => user.id !== id
         );
 
         this.fermerModalSuppression();
       },
+
       error: (err) => {
+
         console.error('Erreur suppression utilisateur :', err);
+
+        this.erreurSuppression =
+          err.error?.error ||
+          'Impossible de supprimer cet utilisateur.';
       }
     });
   }

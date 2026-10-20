@@ -298,6 +298,19 @@ export class AuthentificationServiceService {
     // Retour accueil
     this.router.navigate(['/']);
   }
+  logoutAdmin(): void {
+
+    // Supprimer le JWT
+    localStorage.removeItem(this.tokenKey);
+
+    // Nettoyer les anciennes valeurs
+    localStorage.removeItem('isUserLoggedIn');
+    localStorage.removeItem('loggedIn');
+    localStorage.removeItem('user');
+
+    // Retour accueil
+    this.router.navigate(['/auth-login-admin']);
+  }
 
 
   loggedInAdmin(request: AuthenticationRequest): void {

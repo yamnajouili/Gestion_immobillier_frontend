@@ -36,8 +36,7 @@
             <div class="relative shrink-0">
 
               <img
-                [src]="'/assets/images/bg.jpg'"
-                class="h-80 w-full object-cover"
+                [src]="'/assets/images/bg.jpg'" class="h-80 w-full object-cover"
                 alt="">
 
               <div
@@ -64,141 +63,130 @@
           <!-- CARTE GAUCHE -->
           <!-- ================================= -->
 
-          <div
-            class="xl:col-span-3 lg:col-span-4 md:col-span-4">
 
-            <div
-              class="p-6 relative rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 bg-white dark:bg-slate-900">
+          <div class="xl:col-span-3 lg:col-span-4 md:col-span-4">
 
+            <div class="p-6 relative rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-700 bg-white dark:bg-slate-900">
 
               <div class="profile-pic text-center">
 
                 <div class="relative size-24 mx-auto">
 
+                  <!-- PHOTO DE PROFIL -->
                   <img
-                    [src]="'/assets/images/client/07.jpg'"
-                    class="rounded-full shadow-sm shadow-gray-200 dark:shadow-gray-700 ring-4 ring-slate-50 dark:ring-slate-800"
-                    alt="">
+                    [src]="photoPreview || (user.photoProfil ? apiUrl + user.photoProfil : '/assets/images/client/07.jpg')"
+                    class="w-24 h-24 rounded-full object-cover shadow-sm shadow-gray-200 dark:shadow-gray-700 ring-4 ring-slate-50 dark:ring-slate-800"
+                    alt="Photo de profil">
+
+                  <!-- BOUTON MODIFIER PHOTO -->
+                  <label
+                    for="photoProfil"
+                    class="absolute bottom-0 right-0 flex items-center justify-center w-8 h-8 bg-green-600 hover:bg-green-700 text-white rounded-full cursor-pointer shadow-md">
+
+                    <i class="mdi mdi-camera text-lg"></i>
+
+                  </label>
+
+                  <!-- INPUT FILE -->
+                  <input
+                    id="photoProfil"
+                    type="file"
+                    accept="image/jpeg,image/png"
+                    (change)="selectionnerPhoto($event)"
+                    class="hidden">
 
                 </div>
 
+                <!-- ENREGISTRER PHOTO -->
+                <div *ngIf="photoSelectionnee" class="mt-4">
 
+                  <button
+                    type="button"
+                    (click)="enregistrerPhoto()"
+                    [disabled]="chargementPhoto"
+                    class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-md disabled:opacity-50">
+
+                    <i class="mdi mdi-content-save-outline me-1"></i>
+
+                    {{ chargementPhoto ? 'Enregistrement...' : 'Enregistrer la photo' }}
+
+                  </button>
+
+                </div>
+
+                <!-- NOM ET EMAIL -->
                 <div class="mt-4">
 
                   <h5 class="text-lg font-semibold">
-
                     {{ user.nom }}
-
                   </h5>
 
-
                   <p class="text-slate-400">
-
                     {{ user.email }}
-
                   </p>
-
 
                   <span
                     *ngIf="user.role === 'CLIENT'"
                     class="inline-block mt-3 px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-600">
-
-                    Client
-
-                  </span>
-
+          Client
+        </span>
 
                   <span
                     *ngIf="user.role === 'PROPRIETAIRE'"
                     class="inline-block mt-3 px-3 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-600">
-
-                    Propriétaire
-
-                  </span>
+          Propriétaire
+        </span>
 
                 </div>
 
               </div>
 
-
               <!-- INFORMATIONS -->
-
-              <div
-                class="border-t border-gray-100 dark:border-gray-700 mt-6 pt-5">
-
+              <div class="border-t border-gray-100 dark:border-gray-700 mt-6 pt-5">
 
                 <!-- TELEPHONE -->
-
                 <div class="flex items-center mb-4">
 
-                  <i
-                    class="mdi mdi-phone-outline text-xl text-green-600 me-3">
-                  </i>
+                  <i class="mdi mdi-phone-outline text-xl text-green-600 me-3"></i>
 
                   <div>
-
-                    <h6 class="font-medium">
-                      Téléphone
-                    </h6>
+                    <h6 class="font-medium">Téléphone</h6>
 
                     <p class="text-slate-400 text-sm">
-
                       {{ user.telephone || 'Non renseigné' }}
-
                     </p>
-
                   </div>
 
                 </div>
-
 
                 <!-- POSTE -->
-
                 <div class="flex items-center mb-4">
 
-                  <i
-                    class="mdi mdi-briefcase-outline text-xl text-green-600 me-3">
-                  </i>
+                  <i class="mdi mdi-briefcase-outline text-xl text-green-600 me-3"></i>
 
                   <div>
-
-                    <h6 class="font-medium">
-                      Poste
-                    </h6>
+                    <h6 class="font-medium">Poste</h6>
 
                     <p class="text-slate-400 text-sm">
-
                       {{ user.poste || 'Non renseigné' }}
-
                     </p>
-
                   </div>
 
                 </div>
 
-
                 <!-- AGENCE -->
-
                 <div
                   *ngIf="user.role === 'PROPRIETAIRE'"
                   class="flex items-center">
 
-                  <i
-                    class="mdi mdi-office-building-outline text-xl text-green-600 me-3">
-                  </i>
+                  <i class="mdi mdi-office-building-outline text-xl text-green-600 me-3"></i>
 
                   <div>
-
-                    <h6 class="font-medium">
-                      Agence
-                    </h6>
+                    <h6 class="font-medium">Agence</h6>
 
                     <p class="text-slate-400 text-sm">
-
                       {{ user.nomAgence || 'Non renseignée' }}
-
                     </p>
-
                   </div>
 
                 </div>

@@ -16,9 +16,11 @@ export class Contrat {
   clientEmail:string;
   proprietaireId: number;
   nomProprietaire :string;
+ telephoneProprietaire:string;
 
 
-  constructor(id: number=0, titre: string="", dateDebut: Date=new Date(), dateFin: Date=new Date(), montantLoyer: number=0, caution: number=0, statut: Statutcontrat=Statutcontrat.EN_ATTENTE, tokenSignature: string="", bien: Bien=new Bien(), bienId: number=0, clientId: number=0, proprietaireId: number=0, clientEmail:string="", nomProprietaire :string="") {
+
+  constructor(id: number=0, titre: string="", dateDebut: Date=new Date(), dateFin: Date=new Date(), montantLoyer: number=0, caution: number=0, statut: Statutcontrat=Statutcontrat.EN_ATTENTE, tokenSignature: string="", bien: Bien=new Bien(), bienId: number=0, clientId: number=0, proprietaireId: number=0, clientEmail:string="", nomProprietaire :string="",telephoneProprietaire:string="") {
     this.id = id;
     this.titre = titre;
     this.dateDebut = dateDebut;
@@ -32,5 +34,6 @@ export class Contrat {
     this. clientEmail =  clientEmail;
     this.proprietaireId = proprietaireId;
     this.nomProprietaire=nomProprietaire;
+    this.telephoneProprietaire=telephoneProprietaire;
   }
 }

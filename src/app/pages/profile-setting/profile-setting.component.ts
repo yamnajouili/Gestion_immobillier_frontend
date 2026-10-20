@@ -13,16 +13,17 @@ import {ClientService} from '../../service/client.service';
 import {PropriétaireService} from '../../service/propriétaire.service';
 import {FormsModule} from '@angular/forms';
 import {SidebaruserComponent} from '../../components/sidebaruser/sidebaruser.component';
+import {environment} from '../../environments/environment';
 @Component({
   selector: 'app-profile-setting',
   standalone: true,
   imports: [
     FormsModule,
     CommonModule,
-    RouterLink,
     SidebarComponent,
     TopbarComponent,
-    FooterAdminComponent ,SidebaruserComponent ],
+    FooterAdminComponent ,
+    SidebaruserComponent ],
   templateUrl: './profile-setting.component.html',
   styleUrl: './profile-setting.component.scss'
 })
@@ -33,24 +34,92 @@ export class ProfileSettingComponent {
 
   loadingProfile: boolean = false;
   loadingPassword: boolean = false;
-
   successProfile: string = '';
   errorProfile: string = '';
-
   successPassword: string = '';
   errorPassword: string = '';
+  photoPreview: string | null = null;
+  photoSelectionnee: File | null = null;
+  chargementPhoto = false;
+  apiUrl = environment.apiUrl;
 
-
-  constructor(
-    private userService: UserService,
-    private clientService: ClientService,
-    private proprietaireService:PropriétaireService
-  ) {}
+  constructor(private userService: UserService, private clientService: ClientService, private proprietaireService:PropriétaireService) {}
 
 
   ngOnInit(): void {
     this.getUserConnecte();
   }
+
+
+
+
+
+
+
+  selectionnerPhoto(event: Event): void {
+
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+
+    if (!file) return;
+
+    if (!['image/jpeg', 'image/png'].includes(file.type)) {
+      alert('Choisissez une image JPG ou PNG.');
+      input.value = '';
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      alert('La taille maximale est de 5 Mo.');
+      input.value = '';
+      return;
+    }
+
+    this.photoSelectionnee = file;
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      this.photoPreview = reader.result as string;
+    };
+
+    reader.readAsDataURL(file);
+  }
+
+  enregistrerPhoto(): void {
+
+    if (!this.photoSelectionnee || this.chargementPhoto) return;
+
+    this.chargementPhoto = true;
+
+    this.userService.modifierPhotoProfil(this.photoSelectionnee)
+      .subscribe({
+
+        next: (response) => {
+
+          console.log('Photo enregistrée :', response);
+
+          // Actualiser la photo dans le profil
+          this.user.photoProfil = response.photoProfil;
+
+          this.photoSelectionnee = null;
+          this.photoPreview = null;
+          this.chargementPhoto = false;
+
+          alert('Photo de profil modifiée avec succès !');
+        },
+
+        error: (error) => {
+
+          console.error('Erreur modification photo :', error);
+
+          this.chargementPhoto = false;
+
+          alert('Impossible de modifier la photo.');
+        }
+      });
+  }
+
 
 
 

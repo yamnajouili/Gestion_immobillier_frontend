@@ -1,10 +1,8 @@
 import { Component , OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {NavbarComponent} from '../../components/navbar/navbar.component';
 import {SidebaruserComponent} from '../../components/sidebaruser/sidebaruser.component';
 import {TopbarComponent} from '../../components/topbar/topbar.component';
-import {AboutUserComponent} from '../../components/about-user/about-user.component';
 import {FooterAdminComponent} from '../../components/footer-admin/footer-admin.component';
 import {RouterModule} from '@angular/router';
 import {FavorisService} from '../../service/favoris.service';
@@ -12,7 +10,7 @@ import {BienService} from '../../service/bien.service';
 
 @Component({
   selector: 'app-proprietairefavoris',
-  imports: [CommonModule, FormsModule, NavbarComponent,SidebaruserComponent, TopbarComponent,AboutUserComponent,FooterAdminComponent,RouterModule                                 // ← Nécessaire pour routerLink
+  imports: [CommonModule, FormsModule,SidebaruserComponent, TopbarComponent,FooterAdminComponent,RouterModule                                 // ← Nécessaire pour routerLink
   ],
   templateUrl: './proprietairefavoris.component.html',
   styleUrl: './proprietairefavoris.component.scss'

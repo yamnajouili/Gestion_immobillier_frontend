@@ -6,6 +6,7 @@ import {NgClass, NgFor, NgIf} from '@angular/common';
 import {TopbarComponent} from '../../components/topbar/topbar.component';
 import {FooterAdminComponent} from '../../components/footer-admin/footer-admin.component';
 import {SidebarAdminComponent} from '../../components/sidebar-admin/sidebar-admin.component';
+import {TopBarAdminComponent} from '../../components/top-bar-admin/top-bar-admin.component';
 
 @Component({
   selector: 'app-all-proprietaire',
@@ -13,7 +14,7 @@ import {SidebarAdminComponent} from '../../components/sidebar-admin/sidebar-admi
     RouterLink,
     NgClass,
     SidebarAdminComponent ,
-    TopbarComponent,
+    TopBarAdminComponent,
     FooterAdminComponent,
     NgFor,
     NgIf],

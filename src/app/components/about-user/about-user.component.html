@@ -155,7 +155,7 @@
         <!-- Photo -->
         <img
                 *ngIf="msg.image"
-                [src]="msg.image"
+                [src]=" apiUrl + msg.image"
                 class="w-10 h-10 rounded-full object-cover"
                 [alt]="msg.name">
 

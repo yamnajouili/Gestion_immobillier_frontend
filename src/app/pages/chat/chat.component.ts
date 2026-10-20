@@ -15,6 +15,7 @@ import { User } from '../../Models/user';
 import { Contactdto } from '../../Models/contactdto';
 import {SidebaruserComponent} from '../../components/sidebaruser/sidebaruser.component';
 import {PropriétaireService} from '../../service/propriétaire.service';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-chat',
@@ -31,7 +32,7 @@ import {PropriétaireService} from '../../service/propriétaire.service';
   styleUrl: './chat.component.scss'
 })
 export class ChatComponent implements OnInit {
-
+  apiUrl = environment.apiUrl;
   activeSidebar: boolean = true;
   showEmojiPicker: boolean = false;
   emojis: string[] = [
@@ -425,6 +426,6 @@ export class ChatComponent implements OnInit {
   }
 
   removeSelectedFile(i: number) {
-    
+
   }
 }

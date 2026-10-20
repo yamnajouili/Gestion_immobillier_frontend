@@ -72,15 +72,11 @@ export class BienService {
 
   getBienById(id: number): Observable<any> {
 
-    const token = localStorage.getItem('token');
 
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`
-    });
 
     return this.http.get<any>(
-      `${this.apiUrl}/biens/${id}`,
-      { headers }
+      `${this.apiUrl}/biens/${id}`
+
     );
   }
 

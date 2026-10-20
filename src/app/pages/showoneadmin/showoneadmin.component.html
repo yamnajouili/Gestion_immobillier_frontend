@@ -1,0 +1,259 @@
+
+<div class="page-wrapper "
+     [ngClass]="{ 'toggled': activeSidebar }">
+
+  <app-sidebar-admin />
+
+  <main class="page-content bg-gray-50 dark:bg-slate-800">
+
+    <app-top-bar-admin (toggleClass)="toggleClass()" />
+
+    <div class="container-fluid relative px-3">
+      <div class="layout-specing">
+
+        <!-- Retour -->
+        <div class="flex items-center justify-between mt-6 mb-6">
+          <div>
+            <h5 class="text-xl font-semibold text-slate-900 dark:text-white">
+              Détails de l'utilisateur
+            </h5>
+            <p class="text-slate-400 text-sm mt-1">
+              Informations du compte utilisateur
+            </p>
+          </div>
+
+          <a routerLink="/All-users"
+             class="inline-flex items-center gap-2 px-4 py-2
+                    bg-white dark:bg-slate-900 border border-gray-200
+                    dark:border-gray-700 rounded-md
+                    text-slate-600 dark:text-slate-200
+                    hover:bg-gray-50 transition">
+            <i class="mdi mdi-arrow-left"></i>
+            Retour
+          </a>
+        </div>
+
+        <!-- Chargement -->
+        <div *ngIf="chargement"
+             class="bg-white dark:bg-slate-900 rounded-md p-10
+                    text-center text-slate-400">
+          Chargement des informations...
+        </div>
+
+        <!-- Erreur -->
+        <div *ngIf="erreur && !chargement"
+             class="bg-red-50 text-red-600 rounded-md p-5">
+          {{ erreur }}
+        </div>
+
+        <!-- Détails utilisateur -->
+        <div *ngIf="utilisateur && !chargement"
+             class="grid lg:grid-cols-12 grid-cols-1 gap-6">
+
+          <!-- Profil -->
+          <div class="lg:col-span-4">
+            <div class="bg-white dark:bg-slate-900 rounded-md
+                        shadow-sm shadow-gray-200 dark:shadow-gray-700
+                        p-6 text-center">
+
+              <div class="size-24 mx-auto rounded-full
+            bg-green-600/10 text-green-600
+            flex items-center justify-center
+            overflow-hidden mb-4">
+
+                <!-- Si l'utilisateur possède une photo -->
+                <img
+                  *ngIf="utilisateur?.photoProfil; else defaultAvatar"
+                  [src]="apiUrl + utilisateur?.photoProfil"
+                  alt="Photo de profil"
+                  class="w-full h-full object-cover"
+                  (error)="($any($event.target)).style.display = 'none'"
+                />
+
+                <!-- Sinon afficher l'icône -->
+                <ng-template #defaultAvatar>
+                  <i class="mdi mdi-account-outline text-5xl"></i>
+                </ng-template>
+
+              </div>
+
+              <h5 class="text-xl font-semibold text-slate-900
+                         dark:text-white">
+                {{ utilisateur.nom }}
+              </h5>
+
+              <p class="text-slate-400 text-sm mt-1">
+                {{ utilisateur.email }}
+              </p>
+
+              <div class="mt-4">
+                <span *ngIf="utilisateur.role === 'CLIENT'"
+                      class="px-3 py-1 rounded-md bg-cyan-600/10
+                             text-cyan-600 text-sm font-medium">
+                  Client
+                </span>
+
+                <span *ngIf="utilisateur.role === 'PROPRIETAIRE'"
+                      class="px-3 py-1 rounded-md bg-orange-600/10
+                             text-orange-600 text-sm font-medium">
+                  Propriétaire
+                </span>
+
+                <span *ngIf="utilisateur.role === 'ADMIN'"
+                      class="px-3 py-1 rounded-md bg-green-600/10
+                             text-green-600 text-sm font-medium">
+                  Administrateur
+                </span>
+              </div>
+
+
+
+            </div>
+          </div>
+
+          <!-- Informations -->
+          <div class="lg:col-span-8">
+            <div class="bg-white dark:bg-slate-900 rounded-md
+                        shadow-sm shadow-gray-200 dark:shadow-gray-700">
+
+              <div class="p-6 border-b border-gray-100
+                          dark:border-gray-800">
+                <h6 class="text-lg font-semibold">
+                  Informations personnelles
+                </h6>
+                <p class="text-slate-400 text-sm mt-1">
+                  Coordonnées et informations du compte
+                </p>
+              </div>
+
+              <div class="p-6 grid md:grid-cols-2 grid-cols-1 gap-6">
+
+                <div>
+                  <p class="text-slate-400 text-sm mb-2">
+                    <i class="mdi mdi-account-outline me-2"></i>
+                    Nom complet
+                  </p>
+                  <p class="font-medium">
+                    {{ utilisateur.nom || '-' }}
+                  </p>
+                </div>
+
+                <div>
+                  <p class="text-slate-400 text-sm mb-2">
+                    <i class="mdi mdi-email-outline me-2"></i>
+                    Adresse email
+                  </p>
+                  <p class="font-medium break-all">
+                    {{ utilisateur.email || '-' }}
+                  </p>
+                </div>
+
+                <div>
+                  <p class="text-slate-400 text-sm mb-2">
+                    <i class="mdi mdi-phone-outline me-2"></i>
+                    Téléphone
+                  </p>
+                  <p class="font-medium">
+                    {{ utilisateur.telephone || '-' }}
+                  </p>
+                </div>
+
+                <div>
+                  <p class="text-slate-400 text-sm mb-2">
+                    <i class="mdi mdi-briefcase-outline me-2"></i>
+                    Poste
+                  </p>
+                  <p class="font-medium">
+                    {{ utilisateur.poste || '-' }}
+                  </p>
+                </div>
+
+                <div>
+                  <p class="text-slate-400 text-sm mb-2">
+                    <i class="mdi mdi-shield-account-outline me-2"></i>
+                    Rôle
+                  </p>
+                  <p class="font-medium">
+                    {{ utilisateur.role }}
+                  </p>
+                </div>
+
+                <div>
+                  <p class="text-slate-400 text-sm mb-2">
+                    <i class="mdi mdi-calendar-outline me-2"></i>
+                    Date d'inscription
+                  </p>
+                  <p class="font-medium">
+                    {{ utilisateur.creationDate
+                    ? (utilisateur.creationDate | date:'dd/MM/yyyy')
+                    : '-' }}
+                  </p>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Informations propriétaire -->
+            <div *ngIf="utilisateur.role === 'PROPRIETAIRE'"
+                 class="bg-white dark:bg-slate-900 rounded-md
+                        shadow-sm shadow-gray-200 dark:shadow-gray-700
+                        mt-6">
+
+              <div class="p-6 border-b border-gray-100
+                          dark:border-gray-800">
+                <h6 class="text-lg font-semibold">
+                  Informations professionnelles
+                </h6>
+              </div>
+
+              <div class="p-6 grid md:grid-cols-2 grid-cols-1 gap-6">
+
+                <div>
+                  <p class="text-slate-400 text-sm mb-2">
+                    Type de propriétaire
+                  </p>
+                  <p class="font-medium">
+                    {{ utilisateur.typeProprietaire || '-' }}
+                  </p>
+                </div>
+
+                <div>
+                  <p class="text-slate-400 text-sm mb-2">
+                    Nom de l'agence
+                  </p>
+                  <p class="font-medium">
+                    {{ utilisateur.nomAgence || '-' }}
+                  </p>
+                </div>
+
+                <div>
+                  <p class="text-slate-400 text-sm mb-2">
+                    Numéro SIRET
+                  </p>
+                  <p class="font-medium">
+                    {{ utilisateur.numeroSiret || '-' }}
+                  </p>
+                </div>
+
+                <div>
+                  <p class="text-slate-400 text-sm mb-2">
+                    Adresse professionnelle
+                  </p>
+                  <p class="font-medium">
+                    {{ utilisateur.adresseProfessionnelle || '-' }}
+                  </p>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <app-footer-admin />
+
+  </main>
+</div>

@@ -15,7 +15,7 @@ import {SidebaruserComponent} from "../../components/sidebaruser/sidebaruser.com
 @Component({
   selector: 'app-dhashboard-user',
   standalone: true,
-  imports: [CommonModule, FormsModule, NavbarComponent,SidebaruserComponent, TopbarComponent,AboutUserComponent,FooterAdminComponent,RouterModule                                 // ← Nécessaire pour routerLink
+  imports: [CommonModule, FormsModule,SidebaruserComponent, TopbarComponent,AboutUserComponent,FooterAdminComponent,RouterModule                                 // ← Nécessaire pour routerLink
   ],
   templateUrl: './dhashboard-user.component.html',
   styleUrl: './dhashboard-user.component.scss'

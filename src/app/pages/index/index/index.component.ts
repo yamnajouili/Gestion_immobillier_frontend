@@ -18,6 +18,7 @@ import { UserService } from '../../../service/user.service';
 import { Router } from '@angular/router';
 import {PreferenceService} from '../../../service/preference.service';
 import {Preutilisateur} from '../../../Models/preutilisateur';
+import {Typetransaction} from '../../../Enum/typetransaction';
 @Component({
   selector: 'app-index',
   standalone: true,
@@ -49,6 +50,7 @@ export class IndexComponent{
     { id: 50,  name: '50 m²' },
     { id: 70,  name: '70 m²' },
     { id: 80,  name: '80 m²' },
+    { id: 90,  name: '90 m²' },
     { id: 100, name: '100 m²' },
     { id: 150, name: '150 m²' },
     { id: 200, name: '200 m²' },
@@ -58,6 +60,7 @@ export class IndexComponent{
     { name: 'Tunis' },
     { name: 'Ariana' },
     { name: 'Ben Arous' },
+    { name: 'Zarzis' },
     { name: 'Manouba' },
     { name: 'Sousse' },
     { name: 'Sfax' },
@@ -83,37 +86,76 @@ export class IndexComponent{
 
 
 
-
   rechercher(): void {
 
-    console.log('Préférence envoyée :', this.preference);
+    // 1. Vérifier si le client est connecté
+    const token = localStorage.getItem('token');
 
+    if (!token) {
+      // Sauvegarder les préférences temporairement
+      sessionStorage.setItem(
+        'preferencesEnAttente',
+        JSON.stringify(this.preference)
+      );
+
+      // Rediriger vers la connexion
+      this.router.navigate(['/auth-login'], {
+        queryParams: { returnUrl: '/recommandation' }
+      });
+
+      return;
+    }
+
+    // 2. Client connecté : enregistrer ses préférences
     this.preferenceService
-        .createPreference(this.preference)
-        .subscribe({
+      .createPreference(this.preference)
+      .subscribe({
+        next: (response) => {
+          console.log('Préférence enregistrée :', response);
 
-          next: (response) => {
+          this.router.navigate(['/recommandation']);
+        },
 
-            console.log(
-                'Préférence enregistrée :',
-                response
-            );
-
-            // Redirection vers la page recommandation
-            this.router.navigate(['/recommandation']);
-          },
-
-          error: (error) => {
-
-            console.error(
-                'Erreur lors de la création de la préférence :',
-                error
-            );
-
-          }
-
-        });
+        error: (error) => {
+          console.error(
+            'Erreur lors de la création de la préférence :',
+            error
+          );
+        }
+      });
   }
+
+
+  // rechercher(): void {
+  //
+  //   console.log('Préférence envoyée :', this.preference);
+  //
+  //   this.preferenceService
+  //       .createPreference(this.preference)
+  //       .subscribe({
+  //
+  //         next: (response) => {
+  //
+  //           console.log(
+  //               'Préférence enregistrée :',
+  //               response
+  //           );
+  //
+  //           // Redirection vers la page recommandation
+  //           this.router.navigate(['/recommandation']);
+  //         },
+  //
+  //         error: (error) => {
+  //
+  //           console.error(
+  //               'Erreur lors de la création de la préférence :',
+  //               error
+  //           );
+  //
+  //         }
+  //
+  //       });
+  // }
 
   loadProperties(): void {
     this.bienService.getBiens().subscribe({
@@ -199,8 +241,18 @@ export class IndexComponent{
 
   activeindex:number = 1
 
-  formTab(index:number) {
-   this.activeindex = index
+  formTab(index: number): void {
+    this.activeindex = index;
+
+    if (index === 1) {
+      // Acheter : rechercher les biens en vente
+      this.preference.typeTransaction = Typetransaction.VENTE;
+    }
+
+    else if (index === 3) {
+      // Louer : rechercher les biens en location
+      this.preference.typeTransaction = Typetransaction.LOCATION;
+    }
   }
 
 }

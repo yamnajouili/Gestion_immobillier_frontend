@@ -7,6 +7,7 @@ import {SidebarAdminComponent} from '../../components/sidebar-admin/sidebar-admi
 import {TopbarComponent} from '../../components/topbar/topbar.component';
 import {FooterAdminComponent} from '../../components/footer-admin/footer-admin.component';
 import { CommonModule, DatePipe, SlicePipe  } from '@angular/common';
+import {TopBarAdminComponent} from '../../components/top-bar-admin/top-bar-admin.component';
 @Component({
   selector: 'app-allcontrat-admin',
   imports: [
@@ -14,7 +15,7 @@ import { CommonModule, DatePipe, SlicePipe  } from '@angular/common';
     NgClass,
     DecimalPipe,
     SidebarAdminComponent ,
-    TopbarComponent,
+    TopBarAdminComponent,
     FooterAdminComponent,
     CommonModule,
     DatePipe,

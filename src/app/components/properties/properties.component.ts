@@ -88,6 +88,7 @@ import { UserService } from '../../service/user.service';
 import { Bien } from '../../Models/bien';
 import {FavorisService} from '../../service/favoris.service';
 import {Favoris} from '../../Models/favoris';
+import {AuthentificationServiceService} from '../../service/authentification-service.service';
 
 @Component({
   selector: 'app-properties',
@@ -118,7 +119,7 @@ export class PropertiesComponent implements OnInit {
     private bienService: BienService,
     private userService: UserService,
     private router: Router,
-    private favorisService:FavorisService
+    private favorisService:FavorisService,public authService:AuthentificationServiceService
   ) {}
 
   ngOnInit(): void {

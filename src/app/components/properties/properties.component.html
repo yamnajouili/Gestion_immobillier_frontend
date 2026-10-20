@@ -18,7 +18,7 @@
             >
 
             <!-- Favori -->
-            <div *ngIf="user.role==='CLIENT'" class="absolute top-4 end-4 z-20">
+            <div *ngIf="authService.isAuthenticated() && user.role==='CLIENT'" class="absolute top-4 end-4 z-20">
 
               <button
                 type="button"
@@ -42,11 +42,11 @@
             </div>
 
             <!-- CONTACTER -->
-            <div *ngIf="user.role==='CLIENT'"  class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100
+            <div   class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100
                transition-opacity duration-300">
 
-              <button
-                type="button"
+              <button *ngIf="authService.isAuthenticated() && user.role==='CLIENT'"
+                      type="button"
                 (click)="contacterProprietaire(item); $event.stopPropagation()"
                 class="px-5 py-3 rounded-lg
                    bg-white/80

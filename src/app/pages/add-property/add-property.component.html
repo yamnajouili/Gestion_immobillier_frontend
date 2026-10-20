@@ -21,7 +21,7 @@
                   <!-- Partie Gauche : Upload Image -->
                   <div class="rounded-md  shadow-sm shadow-gray-200 dark:shadow-gray-700 p-6 bg-white dark:bg-slate-900 h-fit">
                     <div>
-                      <p class="font-medium mb-4">Téléchargez l’image de votre bien ici, veuillez cliquer sur le bouton « Upload Image ».</p>
+                      <p class="font-medium mb-4">Téléchargez les fichiers de votre bien ici, veuillez cliquer sur le bouton « Upload Image ».</p>
                       <ng-container *ngIf="setFile; else elseTemplate">
                         <div class="preview-box flex justify-center rounded-md shadow-sm dark:shadow-gray-800 overflow-hidden bg-gray-50 dark:bg-slate-800 text-slate-400 p-2 text-center small w-auto max-h-60">
                           <img [src]="setFile" alt="">
@@ -41,10 +41,8 @@
                       />
 
                       <label
-                        class="btn-upload btn bg-green-600 hover:bg-green-700 text-white rounded-md mt-6 cursor-pointer"
-                        for="input-file"
-                      >
-                        Upload Images
+                        class="btn-upload btn bg-green-600 hover:bg-green-700 text-white rounded-md mt-6 cursor-pointer" for="input-file">
+                        Ajouter des fichiers
                       </label>
 
                       <!-- PREVIEW LIST -->

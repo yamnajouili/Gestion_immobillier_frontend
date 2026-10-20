@@ -10,9 +10,12 @@ export class User {
   password: string;
   confirmPassword:string;
   role: Role;
+  creationDate:Date;
+  photoProfil:string;
 
 
-  constructor(id: number=0, nom: string="", telephone: string="", poste: string="", email: string="", password: string="",confirmPassword:string="", role: Role=Role.CLIENT) {
+
+  constructor(id: number=0, nom: string="", telephone: string="", poste: string="", email: string="", password: string="",confirmPassword:string="", role: Role=Role.CLIENT,creationDate:Date=new Date(),photoProfil:string="") {
     this.id = id;
     this.nom = nom;
     this.telephone = telephone;
@@ -21,5 +24,7 @@ export class User {
     this.password = password;
     this.confirmPassword=confirmPassword;
     this.role = role;
+    this.creationDate=creationDate;
+    this.photoProfil=photoProfil;
   }
 }

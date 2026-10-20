@@ -5,7 +5,7 @@
 
   <main class="page-content bg-gray-50 dark:bg-slate-800">
 
-    <app-topbar (toggleClass)="toggleClass()" />
+    <app-top-bar-admin (toggleClass)="toggleClass()" />
 
     <div class="container-fluid relative px-3">
 
@@ -188,7 +188,7 @@
 
                         <!-- VOIR -->
                         <a
-                          [routerLink]="['/admin/clients', client.id]"
+                          [routerLink]="['/show-one-client', client.id]"
                           title="Voir"
                           class="size-8 inline-flex items-center
                                  justify-center
@@ -343,32 +343,51 @@
         </div>
 
       </div>
-      <div
-        *ngIf="modalSuppression"
-        class="fixed inset-0 z-50 flex items-center justify-center
-         bg-black/50 px-4">
+      <div *ngIf="modalSuppression"
+           class="fixed inset-0 z-50 flex items-center justify-center
+            bg-black/50 px-4">
 
         <div class="bg-white dark:bg-slate-900
               rounded-lg shadow-xl
               w-full max-w-md p-6">
 
+          <!-- ICONE -->
           <div class="flex justify-center mb-4">
             <div class="size-14 rounded-full
                   bg-red-100 text-red-600
                   flex items-center justify-center">
+
               <i class="mdi mdi-delete-outline text-3xl"></i>
+
             </div>
           </div>
 
+          <!-- TITRE -->
           <h5 class="text-lg font-semibold text-center mb-2">
             Supprimer le client ?
           </h5>
 
+          <!-- MESSAGE -->
           <p class="text-slate-400 text-sm text-center">
             Êtes-vous sûr de vouloir supprimer ce client ?
             Cette action est irréversible.
           </p>
 
+          <!-- MESSAGE D'ERREUR -->
+          <div
+            *ngIf="erreurSuppression"
+            class="mt-4 p-3 rounded-md
+             bg-red-50 dark:bg-red-600/10
+             border border-red-200 dark:border-red-600/20
+             text-red-600 text-sm text-center">
+
+            <i class="mdi mdi-alert-circle-outline me-1"></i>
+
+            {{ erreurSuppression }}
+
+          </div>
+
+          <!-- BOUTONS -->
           <div class="flex justify-center gap-3 mt-6">
 
             <button
@@ -378,6 +397,7 @@
                border border-gray-200
                text-slate-500
                hover:bg-gray-50 transition">
+
               Annuler
             </button>
 
@@ -390,13 +410,13 @@
 
               <i class="mdi mdi-delete-outline me-1"></i>
               Supprimer
+
             </button>
 
           </div>
 
         </div>
       </div>
-
     </div>
 
     <app-footer-admin />

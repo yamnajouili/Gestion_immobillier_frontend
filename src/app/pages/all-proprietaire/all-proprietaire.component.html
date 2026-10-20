@@ -5,7 +5,7 @@
 
   <main class="page-content bg-gray-50 dark:bg-slate-800">
 
-    <app-topbar (toggleClass)="toggleClass()" />
+    <app-top-bar-admin (toggleClass)="toggleClass()" />
 
     <div class="container-fluid relative px-3">
 
@@ -195,10 +195,7 @@
 
                         <!-- VOIR -->
                         <a
-                          [routerLink]="[
-                              '/admin/proprietaires',
-                              proprietaire.id
-                            ]"
+                          [routerLink]="['/show-one-propritaire',proprietaire.id ]"
                           title="Voir"
                           class="size-8 inline-flex items-center
                                    justify-center

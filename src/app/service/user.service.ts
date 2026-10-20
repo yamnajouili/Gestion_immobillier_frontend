@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {RegisterRequest} from '../Models/register-request';
 import {environment} from '../environments/environment';
 import {User} from '../Models/user';
+import {UserDetail} from '../Models/user-detail';
 
 @Injectable({
   providedIn: 'root'
@@ -68,6 +69,27 @@ export class UserService {
   deleteUser(id: number): Observable<void> {
     return this.http.delete<void>(
       `${this.apiUrl}/users/${id}`
+    );
+  }
+
+  getUserById(id: number): Observable<UserDetail> {
+    return this.http.get<UserDetail>(`${this.apiUrl}/users/${id}`);
+  }
+  modifierPhotoProfil(file: File): Observable<any> {
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.http.post<any>(
+      `${this.apiUrl}/api/profil/photo`,
+      formData,
+      { headers }
     );
   }
 

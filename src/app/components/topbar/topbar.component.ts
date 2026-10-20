@@ -3,6 +3,9 @@ import {  Component, EventEmitter, Output  } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {AuthentificationServiceService} from '../../service/authentification-service.service';
 import {ContratService} from '../../service/contrat.service';
+import {UserService} from '../../service/user.service';
+import {User} from '../../Models/user';
+import {environment} from '../../environments/environment';
 // import {NgClickOutsideDirective} from 'ng-click-outside2';
 
 @Component({
@@ -17,13 +20,39 @@ import {ContratService} from '../../service/contrat.service';
   styleUrl: './topbar.component.scss'
 })
 export class TopbarComponent {
+  apiUrl = environment.apiUrl;
   nombreNotifications: number = 0;
   contratsEnAttente: any[] = [];
-  constructor(private authService:AuthentificationServiceService,private contratService:ContratService) {
+  user:User=new User();
+  constructor(private authService:AuthentificationServiceService,private contratService:ContratService,private userservice:UserService) {
   }
   ngOnInit(): void {
     this.getNotificationsContrats();
+    this. getUserConnecte();
   }
+
+
+
+
+
+  getUserConnecte() {
+    this.userservice.getUserConnecte().subscribe(
+      value => {
+        this.user = value;
+
+        console.log("récupération de utilisateur connecté avec succes******************** : " + JSON.stringify(value));
+      },
+      error => {
+        console.error('Erreur lors de la récupération de utilisateur connecté', error);
+      }
+    );
+  }
+
+
+
+
+
+
   @Output() toggleClass = new EventEmitter<void>();
 
   emitToggleClassEvent() {

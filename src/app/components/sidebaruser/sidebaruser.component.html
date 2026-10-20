@@ -19,6 +19,13 @@
         <a [routerLink]="'/recommandation'"><i class="mdi mdi-star-outline me-2"></i>Recommandation</a>
       </li>
 
+      <li [ngClass]="activeManu === '/mes-propositions' ? 'active ms-0' : ''">
+        <a [routerLink]="'/mes-propositions'">
+          <i class="mdi mdi-file-document-outline me-2"></i>
+          Mes propositions
+        </a>
+      </li>
+
       <!-- Ajouter un bien -->
 <!--      <li [ngClass]="activeManu === '/add-property' ? 'active ms-0' : ''">-->
 <!--        <a [routerLink]="'/add-property'"><i class="mdi mdi-home-plus me-2"></i>AjouterRRRRRRRR un bien</a>-->

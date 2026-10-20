@@ -10,7 +10,8 @@ import {BienService} from '../../service/bien.service';
 import { Router } from '@angular/router';
 import {FavorisService} from '../../service/favoris.service';
 import {ChatService} from '../../service/chat.service';
-import {PreferenceService} from "../../service/preference.service";  // ← AJOUTE CETTE LIGNE !
+import {PreferenceService} from "../../service/preference.service";
+import {environment} from '../../environments/environment';  // ← AJOUTE CETTE LIGNE !
 
 
 @Component({
@@ -38,6 +39,7 @@ export class AboutUserComponent {
   prochainEcheance: any = { bienTitre: '', montant: 0, dateLimite: '' };
 
   // Injection des dépendances
+  apiUrl = environment.apiUrl;
   constructor(
     private http: HttpClient, private userservice:UserService,private contratService:ContratService,private favorisService: FavorisService,
     private chatService:ChatService,private bienService:BienService,private  preferenceService:PreferenceService,

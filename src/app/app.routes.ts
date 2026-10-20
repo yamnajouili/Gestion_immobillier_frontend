@@ -67,8 +67,20 @@ import {AllBiensComponent} from './pages/all-biens/all-biens.component';
 import {ALLcontratAdminComponent} from './pages/allcontrat-admin/allcontrat-admin.component';
 import {SettingAdminComponent} from './pages/setting-admin/setting-admin.component';
 import {ProfileAdminComponent} from './pages/profile-admin/profile-admin.component';
+import {MespropositionsComponent} from './pages/mespropositions/mespropositions.component';
+import {PropositionsRecuesComponent} from './pages/propositions-recues/propositions-recues.component';
+import {ShowoneadminComponent} from './pages/showoneadmin/showoneadmin.component';
+import {ShowoneclientComponent} from './pages/showoneclient/showoneclient.component';
+import {ShowoneproprietaireComponent} from './pages/showoneproprietaire/showoneproprietaire.component';
+import {ShowonecontratadminComponent} from './pages/showonecontratadmin/showonecontratadmin.component';
 
 export const routes: Routes = [
+    {'path':'show-one-contrat-admin/:id', component:ShowonecontratadminComponent},
+    {'path':'show-one-propritaire/:id', component:ShowoneproprietaireComponent},
+    {'path':'show-one-client/:id', component:ShowoneclientComponent},
+    {'path':'show-one-user/:id', component:ShowoneadminComponent},
+    {'path':'proposition-recues', component:PropositionsRecuesComponent},
+    {'path':'mes-propositions', component:MespropositionsComponent},
     {'path':'setting-admin', component:SettingAdminComponent},
     {'path':'profile-admin', component:ProfileAdminComponent},
     {'path':'admin/All-Contrats', component:ALLcontratAdminComponent},

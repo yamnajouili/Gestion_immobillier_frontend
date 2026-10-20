@@ -10,10 +10,14 @@ import {FooterAdminComponent} from '../../../../components/footer-admin/footer-a
 import * as L from 'leaflet';
 import {UserService} from '../../../../service/user.service';
 import {User} from '../../../../Models/user';
+import {Propositionachat} from '../../../../Models/propositionachat';
+import {PropositionAchatService} from '../../../../service/proposition-achat.service';
+import {FormsModule} from '@angular/forms';
 @Component({
   selector: 'app-property-detail-two',
   standalone: true,
   imports: [
+    FormsModule,
     CommonModule,
     RouterLink,
     NavbarComponent,
@@ -26,11 +30,16 @@ export class PropertyDetailTwoComponent implements OnInit{
   slider: any;
 
   bien: Bien=new Bien();
-  imageActive: number = 0;
   propertyMap!: L.Map;
   propertyMarker!: L.Marker;
   user:User=new User();
-  constructor(private route: ActivatedRoute,  private bienService: BienService,private router:Router,private userService:UserService)
+  afficherModalProposition = false;
+  erreurProposition = '';
+  envoiProposition = false;
+  proposition: Propositionachat = new Propositionachat();
+
+  constructor(private route: ActivatedRoute,  private bienService: BienService,private router:Router,private userService:UserService
+  ,private propositionAchatService:PropositionAchatService)
   {}
   ngOnInit(): void {
 
@@ -54,18 +63,6 @@ export class PropertyDetailTwoComponent implements OnInit{
       }
     });
   }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -196,5 +193,53 @@ export class PropertyDetailTwoComponent implements OnInit{
       });
 
     }, 100);
+  }
+
+
+//   ************************************* proposition d'achat*******************************************
+
+  ouvrirProposition(): void {
+    this.proposition.montantPropose = 0;
+    this.erreurProposition = '';
+    this.afficherModalProposition = true;
+  }
+
+  fermerProposition(): void {
+    if (this.envoiProposition) return;
+
+    this.afficherModalProposition = false;
+    this.erreurProposition = '';
+  }
+
+  envoyerProposition(): void {
+
+    if (
+      !this.bien?.id ||
+      this.bien.typeTransaction !== 'VENTE' ||
+      this.user?.role !== 'CLIENT' ||
+      this.proposition.montantPropose <= 0
+    ) {
+      this.erreurProposition = 'Veuillez saisir un montant valide.';
+      return;
+    }
+
+    this.proposition.bienId = this.bien.id;
+
+    this.envoiProposition = true;
+    this.erreurProposition = '';
+
+    this.propositionAchatService.ajouter(this.proposition).subscribe({
+      next: () => {
+        this.envoiProposition = false;
+        this.fermerProposition();
+
+        alert('Votre proposition a été envoyée avec succès.');
+      },
+      error: (error) => {
+        console.error('Erreur ajout proposition :', error);
+        this.erreurProposition = "Impossible d'envoyer votre proposition.";
+        this.envoiProposition = false;
+      }
+    });
   }
 }

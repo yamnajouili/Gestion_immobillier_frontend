@@ -4,8 +4,8 @@ import {ClientService} from '../../service/client.service';
 import {RouterLink} from '@angular/router';
 import {NgClass, NgFor, NgIf} from '@angular/common';
 import {SidebarAdminComponent} from '../../components/sidebar-admin/sidebar-admin.component';
-import {TopbarComponent} from '../../components/topbar/topbar.component';
 import {FooterAdminComponent} from '../../components/footer-admin/footer-admin.component';
+import {TopBarAdminComponent} from '../../components/top-bar-admin/top-bar-admin.component';
 
 @Component({
   selector: 'app-allclient',
@@ -13,7 +13,7 @@ import {FooterAdminComponent} from '../../components/footer-admin/footer-admin.c
     RouterLink,
     NgClass,
     SidebarAdminComponent ,
-    TopbarComponent,
+    TopBarAdminComponent,
     FooterAdminComponent,
     NgFor,
     NgIf],
@@ -28,36 +28,52 @@ export class AllclientComponent implements OnInit{
   activeSidebar:boolean = true;
   clientIdASupprimer: number | null = null;
   modalSuppression = false;
+  erreurSuppression: string = '';
   constructor(
     private clientService: ClientService
   ) {}
 
 
-
   ouvrirModalSuppression(id: number): void {
     this.clientIdASupprimer = id;
+    this.erreurSuppression = '';
     this.modalSuppression = true;
   }
 
   fermerModalSuppression(): void {
     this.modalSuppression = false;
     this.clientIdASupprimer = null;
+    this.erreurSuppression = '';
   }
 
   confirmerSuppression(): void {
+
     if (this.clientIdASupprimer === null) return;
 
-    this.clientService.deleteClient(this.clientIdASupprimer).subscribe({
+    const id = this.clientIdASupprimer;
+
+    this.erreurSuppression = '';
+
+    this.clientService.deleteClient(id).subscribe({
+
       next: () => {
+
         this.clients = this.clients.filter(
-          client => client.id !== this.clientIdASupprimer
+          client => client.id !== id
         );
 
         this.fermerModalSuppression();
       },
+
       error: (err) => {
+
         console.error('Erreur suppression client :', err);
+
+        this.erreurSuppression =
+          err.error?.error ||
+          'Impossible de supprimer ce client.';
       }
+
     });
   }
 

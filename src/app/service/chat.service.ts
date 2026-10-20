@@ -1,33 +1,4 @@
-// import { Injectable } from '@angular/core';
-// import {HttpClient} from '@angular/common/http';
-// import {environment} from '../environments/environment';
-// import {Observable} from 'rxjs';
-// import {Chatmessage} from '../Models/chatmessage';
-//
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class ChatService {
-//   apiUrl = environment.apiUrl
-//   constructor(private http: HttpClient) {}
-//
-//   getMessages(
-//     senderId: number,
-//     recipientId: number
-//   ): Observable<Chatmessage[]> {
-//
-//     return this.http.get<Chatmessage[]>(
-//       `${this.apiUrl}/messages/${senderId}/${recipientId}`
-//     );
-//   }
-//
-//   sendMessage(message: Chatmessage): Observable<Chatmessage> {
-//     return this.http.post<Chatmessage>(
-//       `${this.apiUrl}/send`,
-//       message
-//     );
-//   }
-// }
+
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from '../environments/environment';
@@ -62,10 +33,27 @@ export class ChatService {
   // Connexion WebSocket
   connect(onMessage: (message: Chatmessage) => void): void {
 
+    // Éviter plusieurs connexions WebSocket
+    if (this.stompClient?.active) {
+      console.log('WebSocket déjà actif');
+      return;
+    }
+
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      console.error('Token JWT introuvable');
+      return;
+    }
+
     this.stompClient = new Client({
 
       webSocketFactory: () =>
         new SockJS('http://localhost:8081/ws'),
+
+      connectHeaders: {
+        Authorization: `Bearer ${token}`
+      },
 
       reconnectDelay: 5000,
 
@@ -76,7 +64,7 @@ export class ChatService {
 
     this.stompClient.onConnect = () => {
 
-      console.log('✅ WebSocket connecté');
+      console.log('✅ WebSocket connecté avec STOMP');
 
       this.stompClient.subscribe(
         '/user/queue/messages',
@@ -93,7 +81,7 @@ export class ChatService {
     };
 
     this.stompClient.onStompError = (error) => {
-      console.error('❌ Erreur WebSocket :', error);
+      console.error('❌ Erreur STOMP :', error);
     };
 
     this.stompClient.activate();

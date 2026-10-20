@@ -10,6 +10,7 @@ import {UserService} from '../../service/user.service';
 import {User} from '../../Models/user';
 import {SidebaruserComponent} from '../../components/sidebaruser/sidebaruser.component';
 import {FooterAdminComponent} from '../../components/footer-admin/footer-admin.component';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-profile',
@@ -18,8 +19,6 @@ import {FooterAdminComponent} from '../../components/footer-admin/footer-admin.c
     CommonModule,
     SidebarComponent,
     TopbarComponent,
-    FooterComponent,
-    RouterLink,
     SidebaruserComponent,FooterAdminComponent
   ],
 
@@ -29,6 +28,9 @@ import {FooterAdminComponent} from '../../components/footer-admin/footer-admin.c
 export class ProfileComponent {
   activeSidebar:boolean = true
   user:User=new User();
+  apiUrl = environment.apiUrl;
+
+
   constructor(
     private userservice: UserService
   ) {}
@@ -86,6 +88,7 @@ export class ProfileComponent {
   // propertyData = PropertyData
 
   setFile:any;
+
   handleChange(e:any){
     this.setFile = URL.createObjectURL(e.target.files[0])
   }

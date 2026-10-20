@@ -96,7 +96,7 @@
                   <div class="relative size-24 mx-auto">
 
                     <img
-                      [src]="'/assets/images/client/07.jpg'"
+                      [src]="user.photoProfil ? apiUrl + user.photoProfil : '/assets/images/client/user.jpg'"
                       class="rounded-full shadow-sm shadow-gray-200 dark:shadow-gray-700 ring-4 ring-slate-50 dark:ring-slate-800"
                       id="profile-image"
                       alt="">
